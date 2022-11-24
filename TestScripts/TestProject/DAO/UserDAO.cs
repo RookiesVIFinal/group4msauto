@@ -1,4 +1,7 @@
-﻿namespace TestProject.DAO;
+﻿using CoreFramework.DriverCore;
+using OpenQA.Selenium;
+
+namespace TestProject.DAO;
 
 public class UserDAO
 {
@@ -22,4 +25,6 @@ public class UserDAO
         this.gender = gender;
         this.type = type;
     }
+
+
 }

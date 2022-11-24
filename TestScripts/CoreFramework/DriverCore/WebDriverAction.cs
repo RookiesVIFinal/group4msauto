@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using CoreFramework.Reporter;
 using SeleniumExtras.WaitHelpers;
 using OpenQA.Selenium.Interactions;
+using Newtonsoft.Json;
 
 
 // KEYWORD-DRIVEN
@@ -29,13 +30,13 @@ public class WebDriverAction
 
     public void MoveForward()
     {
-            // Capture Screenshot fail?
-            driver.Navigate().Forward();
+        // Capture Screenshot fail?
+        driver.Navigate().Forward();
 
     }
     public void MoveBackward()
     {
-            driver.Navigate().Back();
+        driver.Navigate().Back();
 
     }
     public void ScrollToBottomOfPage()
@@ -207,6 +208,20 @@ public class WebDriverAction
             throw excep;
         }
     }
+    public void ReplaceKey(string locator, string key)
+    {
+        try
+        {
+            Clear(locator);
+            SendKeys_(locator, key);
+            HtmlReport.Pass("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] passed", TakeScreenShot());
+        }
+        catch (Exception excep)
+        {
+            HtmlReport.Fail("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] failed", TakeScreenShot());
+            throw excep;
+        }
+    }
 
     public IWebElement HighlightElem(IWebElement e)
     {
@@ -336,7 +351,7 @@ public class WebDriverAction
     }
     // ------------------------------- VERIFYING AND COMPARING  -------------------------------
 
-    public bool IsElementDisplay (string locator)
+    public bool IsElementDisplay(string locator)
     {
         IWebElement e = driver.FindElement(GetXpath(locator));
 
@@ -353,7 +368,7 @@ public class WebDriverAction
         }
     }
 
-    public void CompareTitles (string expectedTitle)
+    public void CompareTitles(string expectedTitle)
     {
         try
         {
@@ -382,19 +397,40 @@ public class WebDriverAction
             throw excep;
         }
     }
-    public void ReplaceKey(string locator, string key)
+    // ------------------------------- DEALING WITH GRID  -------------------------------
+    public string GetRowIndex(string rowLocator, string cellLocator, int index)
     {
-        try
-        {
-            Clear(locator);
-            SendKeys_(locator, key);
-            HtmlReport.Pass("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] passed", TakeScreenShot());
-        }
-        catch(Exception excep)
-        {
-            HtmlReport.Fail("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] failed", TakeScreenShot());
-            throw excep;
-        }
+        // return an indexed row
+        return rowLocator + "[" + index + "]" + cellLocator;
     }
 
+    public IList<IWebElement> GetAllRows(string rowLocator)
+    {
+        IList<IWebElement> allRows = FindElementsByXpath(rowLocator);
+        return allRows;
+    }
+    public IList<IWebElement> GetAllCellsFromOneRow(string rowLocator, string cellLocator, int index)
+    {
+        string indexRow = GetRowIndex(rowLocator, cellLocator, index);
+        IList<IWebElement> allCellsInOneRow = FindElementsByXpath(indexRow);
+        return allCellsInOneRow;
+    }
+    public List<string> GetInfoFromGrid(string rowLocator, string cellLocator, int index)
+    {
+        List<string> valuesFromCells = new List<string>();
+        IList<IWebElement> allCells = FindElementsByXpath
+            (GetRowIndex(rowLocator, cellLocator, index));
+        foreach (IWebElement cell in allCells)
+        {
+            // go through each cell and add text values to a list of string
+            valuesFromCells.Add(cell.ToString());
+
+        }
+        return valuesFromCells;
+    }
+    public object ConvertToJson(object obj)
+    {
+        var list = JsonConvert.SerializeObject(obj);
+        return list;
+    }
 }
