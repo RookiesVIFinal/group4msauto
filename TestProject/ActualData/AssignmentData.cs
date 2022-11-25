@@ -9,21 +9,21 @@ using TestProject.DAO;
 
 namespace TestProject.TestData;
 
-public class AssignmentTestData : WebDriverAction
+public class AssignmentData : WebDriverAction
 {
 
-    public AssignmentTestData(IWebDriver driver) : base(driver)
+    public AssignmentData(IWebDriver driver) : base(driver)
     {
     }
     public string rowLocator = "";
     public string cellLocator = "";
 
 
-    public AssignmentDAO GetInfoFromGrid(int index)
+    public AssignmentDAO GetAssignmentInfoFromGrid(int index)
     {
         List<string> valuesFromCells = GetInfoFromGrid
             (rowLocator, cellLocator, index);
-        // assign each value from cell to an EmployeeInfo object
+
         AssignmentDAO assignment = new AssignmentDAO(
             valuesFromCells[0],
             valuesFromCells[1],
@@ -43,23 +43,9 @@ public class AssignmentTestData : WebDriverAction
 
         foreach (IWebElement row in allRows)
         {
-            AssignmentDAO assignment = GetInfoFromGrid(i + 1);
+            AssignmentDAO assignment = GetAssignmentInfoFromGrid(i + 1);
             listOfAssignments.Add(assignment);
             i++;
-        }
-
-        // Probably no empty row - Consider delete?
-        foreach (AssignmentDAO assignment in listOfAssignments.ToList())
-        {
-            // remove list elements from empty rows
-            if (assignment.assetCode.Contains(" "))
-            {
-                listOfAssignments.Remove(assignment);
-            }
-            else
-            {
-                continue;
-            }
         }
         string assignmentList = (string)ConvertToJson(listOfAssignments);
         return assignmentList;

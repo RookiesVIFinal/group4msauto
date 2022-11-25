@@ -2,23 +2,23 @@
 using OpenQA.Selenium;
 using TestProject.DAO;
 
-namespace TestProject.TestData;
+namespace TestProject.ActualData;
 
-public class AssetTestData : WebDriverAction
+public class AssetData : WebDriverAction
 {
 
-    public AssetTestData(IWebDriver driver) : base(driver)
+    public AssetData(IWebDriver driver) : base(driver)
     {
     }
     public string rowLocator = "";
     public string cellLocator = "";
 
 
-    public AssetDAO GetInfoFromGrid(int index)
+    public AssetDAO GetAssetInfoFromGrid(int index)
     {
         List<string> valuesFromCells = GetInfoFromGrid
             (rowLocator, cellLocator, index);
-        // assign each value from cell to an EmployeeInfo object
+
         AssetDAO asset = new AssetDAO(
             valuesFromCells[0],
             valuesFromCells[1],
@@ -32,29 +32,15 @@ public class AssetTestData : WebDriverAction
     }
     public string ReturnAssetList()
     {
-        int i = 0;
+        int i = 0; // clean up this?
         List<AssetDAO> listOfAsset = new List<AssetDAO>();
         IList<IWebElement> allRows = GetAllRows(rowLocator);
 
         foreach (IWebElement row in allRows)
         {
-            AssetDAO asset = GetInfoFromGrid(i + 1);
+            AssetDAO asset = GetAssetInfoFromGrid(i + 1);
             listOfAsset.Add(asset);
             i++;
-        }
-
-        // Probably no empty row - Consider delete?
-        foreach (AssetDAO asset in listOfAsset.ToList())
-        {
-            // remove list elements from empty rows
-            if (asset.assetCode.Contains(" "))
-            {
-                listOfAsset.Remove(asset);
-            }
-            else
-            {
-                continue;
-            }
         }
         string assetList = (string)ConvertToJson(listOfAsset);
         return assetList;
