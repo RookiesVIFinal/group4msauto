@@ -17,21 +17,4 @@ public class UserListDAO
         this.JoinedDate = joinedDate;
         this.Type = type;
     }
-
-    public sealed class RecordRowComparator : Comparer<UserListDAO>
-    {
-        public override int Compare(UserListDAO? x, UserListDAO? y)
-        {
-            var compareResult = String.Equals(x?.StaffCode, y?.StaffCode) &&
-                String.Equals(x?.FullName, y?.FullName) &&
-                String.Equals(x?.UserName, y?.UserName) &&
-                String.Equals(x?.JoinedDate, y?.JoinedDate) &&
-                String.Equals(x?.Type, y?.Type);
-            if (compareResult)
-            {
-                return 0;
-            }
-            return 1;
-        }
-    }
 }

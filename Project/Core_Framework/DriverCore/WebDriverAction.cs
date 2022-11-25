@@ -1,4 +1,5 @@
 ﻿using Core_Framework.Reporter;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -270,7 +271,7 @@ public class WebDriverAction
 
     public string TakeScreenShot()
     {
-        // new version (Yes HtmlReporter)
+
         try
         {
 
@@ -297,7 +298,29 @@ public class WebDriverAction
         }
         TakeScreenShot();
     }
-    // ------------------------------- NAMING  -------------------------------
+    // ------------------------------- WAIT TIME  -------------------------------
+    public IWebElement WaitToBeVisible(string locator)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var btnToClick = wait.Until(
+            ExpectedConditions.ElementIsVisible(GetXpath(locator)));
+        return btnToClick;
+    }
+    public IWebElement WaitToBeClickable(string locator)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var btnToClick = wait.Until(
+            ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
+        return btnToClick;
+    }
+    public bool WaitToBeSelected(string locator)
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var btnToClick = wait.Until(
+            ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
+        return btnToClick;
+    }
+    // ------------------------------- ADDING TIMESPAN  -------------------------------
     public string GetDateTimeStamp()
     {
         // Get creation time for photos in VN time zone
@@ -311,7 +334,7 @@ public class WebDriverAction
         //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
-    // ------------------------------- VERIFYING  -------------------------------
+    // ------------------------------- VERIFYING AND COMPARING  -------------------------------
 
     public bool IsElementDisplay(string locator)
     {
@@ -345,5 +368,72 @@ public class WebDriverAction
             HtmlReport.Pass("Popup displays", TakeScreenShot());
             return true;
         }
+    }
+
+    public void CompareTitles(string expectedTitle)
+    {
+        try
+        {
+            string actualTitle = GetTitle();
+            Assert.That(actualTitle, Is.EqualTo(expectedTitle));
+            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", TakeScreenShot());
+        }
+        catch (Exception)
+        {
+            HtmlReport.Fail("Titles do not match", TakeScreenShot());
+            throw;
+        }
+    }
+
+    public void CompareUrls(string expectedUrl)
+    {
+        try
+        {
+            string actualUrl = GetUrl();
+            Assert.That(actualUrl, Is.EqualTo(expectedUrl));
+            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", TakeScreenShot());
+        }
+        catch (Exception)
+        {
+            HtmlReport.Fail("Urls do not match", TakeScreenShot());
+            throw;
+        }
+    }
+
+    // ------------------------------- DEALING WITH GRID  -------------------------------
+    public string GetRowIndex(string rowLocator, string cellLocator, int index)
+    {
+        // return an indexed row
+        return rowLocator + "[" + index + "]" + cellLocator;
+    }
+
+    public IList<IWebElement> GetAllRows(string rowLocator)
+    {
+        IList<IWebElement> allRows = FindElementsByXPath(rowLocator);
+        return allRows;
+    }
+    public IList<IWebElement> GetAllCellsFromOneRow(string rowLocator, string cellLocator, int index)
+    {
+        string indexRow = GetRowIndex(rowLocator, cellLocator, index);
+        IList<IWebElement> allCellsInOneRow = FindElementsByXPath(indexRow);
+        return allCellsInOneRow;
+    }
+    public List<string> GetInfoFromGrid(string rowLocator, string cellLocator, int index)
+    {
+        List<string> valuesFromCells = new List<string>();
+        IList<IWebElement> allCells = FindElementsByXPath
+            (GetRowIndex(rowLocator, cellLocator, index));
+        foreach (IWebElement cell in allCells)
+        {
+            // go through each cell and add text values to a list of string
+            valuesFromCells.Add(cell.ToString());
+
+        }
+        return valuesFromCells;
+    }
+    public static object ConvertToJson(object obj)
+    {
+        var list = JsonConvert.SerializeObject(obj);
+        return list;
     }
 }

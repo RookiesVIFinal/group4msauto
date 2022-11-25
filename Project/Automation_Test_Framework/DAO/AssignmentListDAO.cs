@@ -20,22 +20,4 @@ public class AssignmentListDAO
         this.AssignedDate = assigneddate;
         this.State = state;
     }
-
-    public sealed class RecordRowComparator : Comparer<AssignmentListDAO>
-    {
-        public override int Compare(AssignmentListDAO? x, AssignmentListDAO? y)
-        {
-            var compareResult = String.Equals(x?.AssetCode, y?.AssetCode) &&
-                String.Equals(x?.AssetName, y?.AssetName) &&
-                String.Equals(x?.Assignedto, y?.Assignedto) &&
-                String.Equals(x?.Assignedby, y?.Assignedby) &&
-                String.Equals(x?.AssignedDate, y?.AssignedDate) &&
-                String.Equals(x?.State, y?.State);
-            if (compareResult)
-            {
-                return 0;
-            }
-            return 1;
-        }
-    }
 }

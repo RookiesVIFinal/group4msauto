@@ -14,20 +14,4 @@ public class AssetListDAO
         this.Category = category;
         this.State = state;
     }
-
-    public sealed class RecordRowComparator : Comparer<AssetListDAO>
-    {
-        public override int Compare(AssetListDAO? x, AssetListDAO? y)
-        {
-            var compareResult = String.Equals(x?.AssetCode, y?.AssetCode) &&
-                String.Equals(x?.AssetName, y?.AssetName) &&
-                String.Equals(x?.Category, y?.Category) &&
-                String.Equals(x?.State, y?.State);
-            if (compareResult)
-            {
-                return 0;
-            }
-            return 1;
-        }
-    }
 }
