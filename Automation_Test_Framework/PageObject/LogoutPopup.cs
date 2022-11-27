@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.PageObject;
 
-public class ManageAssetPage : WebDriverBase
+public class LogoutPopup : WebDriverBase
 {
-    public ManageAssetPage(IWebDriver driver) : base(driver)
+    public LogoutPopup(IWebDriver driver) : base(driver)
     {
 
     }

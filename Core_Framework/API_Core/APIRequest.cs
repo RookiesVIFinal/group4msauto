@@ -9,7 +9,7 @@ public class APIRequest
 
     // ------------------------------- WORKING WITH URL -------------------------------
 
-    public HttpWebRequest request;
+    public HttpWebRequest Request;
     public string Url { get; set; }
     public string? RequestBody { get; set; }
     public string FormData { get; set; }
@@ -22,6 +22,7 @@ public class APIRequest
         RequestBody = "";
         FormData = "";
     }
+
     public APIRequest(string baseUrl)
     {
         Url = baseUrl;
@@ -34,7 +35,7 @@ public class APIRequest
     /////// ADD
     public APIRequest AddHeader(string key, string value)
     {
-        request.Headers.Add(key, value);
+        Request.Headers.Add(key, value);
         return this;
     }
 
@@ -57,10 +58,11 @@ public class APIRequest
         RequestBody = body;
         return this;
     }
+
     public APIRequest SetURL(string url)
     {
         this.Url = url;
-        request = (HttpWebRequest)WebRequest.Create(url);
+        Request = (HttpWebRequest)WebRequest.Create(url);
         return this;
     }
 
@@ -77,29 +79,30 @@ public class APIRequest
         }
         return this;
     }
+
     public string SetMethod(string method)
     {
         switch (method)
         {
             case "GET":
-                request.Method = "GET";
+                Request.Method = "GET";
                 break;
             case "POST":
-                request.Method = "POST";
+                Request.Method = "POST";
                 break;
             case "PUT":
-                request.Method = "PUT";
+                Request.Method = "PUT";
                 break;
             case "DELETE":
-                request.Method = "DELETE";
+                Request.Method = "DELETE";
                 break;
         }
-        return request.Method;
+        return Request.Method;
 
     }
     public APIResponse SendRequest()
     {
-        if (request.Method == "GET")
+        if (Request.Method == "GET")
         {
             RequestBody = null;
         }
@@ -108,8 +111,8 @@ public class APIRequest
             if (RequestBody != null)
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(RequestBody);
-                request.ContentLength = byteArray.Length;
-                using (Stream dataStream = request.GetRequestStream())
+                Request.ContentLength = byteArray.Length;
+                using (Stream dataStream = Request.GetRequestStream())
                 {
                     dataStream.Write(byteArray, 0, byteArray.Length);
                     dataStream.Flush();
@@ -119,8 +122,8 @@ public class APIRequest
             if (!FormData.Equals(""))
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(FormData);
-                request.ContentLength = byteArray.Length;
-                using (Stream dataStream = request.GetRequestStream())
+                Request.ContentLength = byteArray.Length;
+                using (Stream dataStream = Request.GetRequestStream())
                 {
                     dataStream.Write(byteArray, 0, byteArray.Length);
                     dataStream.Flush();
@@ -130,11 +133,11 @@ public class APIRequest
         }
         try
         {
-            IAsyncResult asyncResult = request.BeginGetResponse(null, null);
+            IAsyncResult asyncResult = Request.BeginGetResponse(null, null);
             asyncResult.AsyncWaitHandle.WaitOne();
 
             
-            var httpResponse = (HttpWebResponse)request.EndGetResponse(asyncResult);
+            var httpResponse = (HttpWebResponse)Request.EndGetResponse(asyncResult);
             APIResponse response = new(httpResponse);
             HtmlReport.CreateAPIRequestLog(this, response);
             HtmlReport.MarkUpJson(response.ResponseBody);
@@ -146,28 +149,33 @@ public class APIRequest
             throw;
         }
     }
+
     public APIResponse Get()
     {
-        request.Method = "GET";
+        Request.Method = "GET";
         APIResponse response = SendRequest();
         return response;
     }
+
     public APIResponse Post()
     {
-        request.Method = "POST";
+        Request.Method = "POST";
         APIResponse response = SendRequest();
         return response;
     }
+
     public APIResponse Put()
     {
-        request.Method = "PUT";
+        Request.Method = "PUT";
         APIResponse response = SendRequest();
         return response;
     }
+
     public APIResponse Delete()
     {
-        request.Method = "DELETE";
+        Request.Method = "DELETE";
         APIResponse response = SendRequest();
         return response;
     }
+
 }

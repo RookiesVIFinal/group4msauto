@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.PageObject;
 
-public class ManageAssetPage : WebDriverBase
+public class CreateUserPage : WebDriverBase
 {
-    public ManageAssetPage(IWebDriver driver) : base(driver)
+    public CreateUserPage(IWebDriver driver) : base(driver)
     {
 
     }

@@ -7,11 +7,12 @@ public class AssetListDAO
     public string? Category { get; set; }
     public string? State { get; set; }
 
-    public AssetListDAO(string assetcode, string assetname, string category, string state)
+    public AssetListDAO(string assetCode, string assetName, string category, string state)
     {
-        this.AssetCode = assetcode;
-        this.AssetName = assetname;
+        this.AssetCode = assetCode;
+        this.AssetName = assetName;
         this.Category = category;
         this.State = state;
     }
+
 }

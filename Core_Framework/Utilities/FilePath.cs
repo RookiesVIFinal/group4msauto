@@ -14,10 +14,12 @@ internal class FilePath
     {
         Directory.Delete(path);
     }
+
     public static void CreateFile(string path)
     {
         File.Create(path);
     }
+
     public static void DeleteFile(string path)
     {
         File.Delete(path);
@@ -36,5 +38,7 @@ internal class FilePath
         {
             Directory.CreateDirectory(path);
         }
+
     }
+
 }

@@ -6,12 +6,12 @@ using NUnit.Framework.Internal;
 namespace Automation_Test_Framework.TestCase;
 
 [TestFixture]
-public class LogoutTest : NUnitWebTestSetUp
+public class LogoutTest : NUnitWebAndAPITestSetUp
 {
     [Test]
     public void ID01Logout()
     {
-        CommonFlow.LoginFlow(_driver);
+        CommonFlow.LoginFlow(Driver);
 
         //Profile_Page profilePage = new Profile_Page(_driver);
         //Assert.IsTrue(profilePage.GetUserName().Equals("tonyautotest"));

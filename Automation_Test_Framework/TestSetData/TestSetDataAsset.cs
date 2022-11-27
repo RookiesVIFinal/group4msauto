@@ -4,18 +4,19 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.TestSetData;
 
-public class TestSetDataAsset : WebDriverAction
+public class TestSetDataAsset : WebDriverBase
 {
     public TestSetDataAsset(IWebDriver driver) : base(driver)
     {
+
     }
-    public string rowLocator = "";
-    public string cellLocator = "";
+    public string RowLocator = "";
+    public string CellLocator = "";
 
 
     public AssetListDAO GetInfoFromGrid(int index)
     {
-        List<string> valuesFromCells = GetInfoFromGrid(rowLocator, cellLocator, index);
+        List<string> valuesFromCells = GetInfoFromGrid(RowLocator, CellLocator, index);
         // assign each value from cell to an EmployeeInfo object
         AssetListDAO asset = new AssetListDAO(
             valuesFromCells[0],
@@ -26,11 +27,12 @@ public class TestSetDataAsset : WebDriverAction
 
         return asset;
     }
+
     public string ReturnAssetList()
     {
         int i = 0;
         List<AssetListDAO> listOfAsset = new List<AssetListDAO>();
-        IList<IWebElement> allRows = GetAllRows(rowLocator);
+        IList<IWebElement> allRows = GetAllRows(RowLocator);
 
         foreach (IWebElement row in allRows)
         {
@@ -51,8 +53,10 @@ public class TestSetDataAsset : WebDriverAction
             {
                 continue;
             }
+
         }
         string assetList = (string)ConvertToJson(listOfAsset);
         return assetList;
     }
+
 }

@@ -4,19 +4,19 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.TestSetData;
 
-public class TestSetDataUser : WebDriverAction
+public class TestSetDataUser : WebDriverBase
 {
     public TestSetDataUser(IWebDriver driver) : base(driver)
     {
     }
-    public string rowLocator = "";
-    public string cellLocator = "";
+    public string RowLocator = "";
+    public string CellLocator = "";
 
 
     public UserListDAO GetInfoFromGrid(int index)
     {
         List<string> valuesFromCells = GetInfoFromGrid
-            (rowLocator, cellLocator, index);
+            (RowLocator, CellLocator, index);
         // assign each value from cell to an EmployeeInfo object
         UserListDAO user = new UserListDAO(
             valuesFromCells[0],
@@ -27,11 +27,12 @@ public class TestSetDataUser : WebDriverAction
             );
         return user;
     }
+
     public string ReturnUserList()
     {
         int i = 0;
         List<UserListDAO> listOfUsers = new List<UserListDAO>();
-        IList<IWebElement> allRows = GetAllRows(rowLocator);
+        IList<IWebElement> allRows = GetAllRows(RowLocator);
 
         foreach (IWebElement row in allRows)
         {
@@ -56,4 +57,5 @@ public class TestSetDataUser : WebDriverAction
         string userList = (string)ConvertToJson(listOfUsers);
         return userList;
     }
+
 }

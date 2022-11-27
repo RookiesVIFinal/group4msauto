@@ -17,4 +17,5 @@ public class UserListDAO
         this.JoinedDate = joinedDate;
         this.Type = type;
     }
+
 }

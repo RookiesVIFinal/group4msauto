@@ -11,8 +11,8 @@ namespace Core_Framework.NUnitTestSetup;
 [TestFixture]
 public class NUnit_Test_Setup
 {
-    public IWebDriver _driver;
-    public WebDriverAction driverBaseAction;
+    protected IWebDriver Driver;
+    protected WebDriverBase DriverBaseAction;
 
     protected ExtentReports? _extentReport;
     protected ExtentTest? _extentSuite;
@@ -34,15 +34,15 @@ public class NUnit_Test_Setup
     {
         HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, TestContext.CurrentContext.Test.Name);
         WebDriverManager.InitDriver("chrome", 1920, 1080);
-        _driver = WebDriverManager.GetCurrentDriver();
-        driverBaseAction = new WebDriverAction(_driver);
+        Driver = WebDriverManager.GetCurrentDriver();
+        DriverBaseAction = new WebDriverBase(Driver);
 
     }
 
     [TearDown]
     public void TearDown()
     {
-        _driver?.Quit();
+        Driver?.Quit();
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
@@ -55,6 +55,7 @@ public class NUnit_Test_Setup
 
         HtmlReport.Flush();
     }
+
 }
 
 

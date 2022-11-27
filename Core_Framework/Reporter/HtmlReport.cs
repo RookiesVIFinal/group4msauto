@@ -10,8 +10,8 @@ namespace Core_Framework.Reporter;
 internal class HtmlReport
 {
     private static ExtentReports? _report;
-    private static ExtentTest? extentTestSuite;
-    private static ExtentTest? extentTestCase;
+    private static ExtentTest? _extentTestSuite;
+    private static ExtentTest? _extentTestCase;
 
     // ------------------------------- CREATE EXTENTREPORT  -------------------------------
 
@@ -52,28 +52,28 @@ internal class HtmlReport
         {
             _report = CreateInstance();
         }
-        extentTestSuite = _report.CreateTest(className, classDescription);
-        return extentTestSuite;
+        _extentTestSuite = _report.CreateTest(className, classDescription);
+        return _extentTestSuite;
     }
 
     public static ExtentTest CreateNode(string className, string testcase, string description = "")
     {
-        if (extentTestSuite == null)
+        if (_extentTestSuite == null)
         {
-            extentTestSuite = CreateTest(className);
+            _extentTestSuite = CreateTest(className);
         }
-        extentTestCase = extentTestSuite.CreateNode(testcase, description);
-        return extentTestCase;
+        _extentTestCase = _extentTestSuite.CreateNode(testcase, description);
+        return _extentTestCase;
     }
 
     public static ExtentTest GetParent()
     {
-        return extentTestSuite;
+        return _extentTestSuite;
     }
 
     public static ExtentTest GetNode()
     {
-        return extentTestCase;
+        return _extentTestCase;
     }
 
     public static ExtentTest GetTest()
@@ -108,12 +108,14 @@ internal class HtmlReport
         GetTest().Fail(des).Fail(ex).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
+
     public static void Fail(string des)
     {
 
         GetTest().Fail(des);
         TestContext.WriteLine(des);
     }
+
     public static void Info(string des)
     {
         GetTest().Info(des);
@@ -148,18 +150,22 @@ internal class HtmlReport
     {
         GetTest().Pass(MarkupHelper.CreateLabel(text, ExtentColor.Green));
     }
+
     public static void MarkupFailLabel(string text)
     {
         GetTest().Fail(MarkupHelper.CreateLabel(text, ExtentColor.Red));
     }
+
     public static void MarkupWarningLabel(string text)
     {
         GetTest().Warning(MarkupHelper.CreateLabel(text, ExtentColor.Orange));
     }
+
     public static void MarkupSkipLabel(string text)
     {
         GetTest().Skip(MarkupHelper.CreateLabel(text, ExtentColor.Blue));
     }
+
     public static void MarkupXML(string code)
     {
         GetTest().Info(MarkupHelper.CreateCodeBlock(code, CodeLanguage.Xml));
@@ -169,4 +175,5 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
+
 }

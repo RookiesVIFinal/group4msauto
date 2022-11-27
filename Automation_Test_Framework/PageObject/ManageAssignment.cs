@@ -1,13 +1,13 @@
-﻿using Automation_Test_Framework.DAO;
-using Core_Framework.DriverCore;
+﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.PageObject;
 
-public class ManageAssignment : WebDriverAction
+public class ManageAssignment : WebDriverBase
 {
     public ManageAssignment(IWebDriver driver) : base(driver)
     {
+
     }
 
     //    public void EditEmployeesInfo(EmployeesDAO employees)

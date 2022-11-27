@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Automation_Test_Framework.TestCase;
 
 [TestFixture]
-public class APITest : NUnitWebTestSetUp
+public class APITest : NUnitWebAndAPITestSetUp
 {
     [Test]
     public void APIResquestTest()

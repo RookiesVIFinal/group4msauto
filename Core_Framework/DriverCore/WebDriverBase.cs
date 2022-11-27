@@ -2,47 +2,65 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System.Globalization;
+using DriverManager = Core_Framework.DriverCore.WebDriverManager;
 
 namespace Core_Framework.DriverCore;
 
-public class WebDriverAction
+public class WebDriverBase
 {
-    public IWebDriver driver;
+    public IWebDriver Driver;
     public IJavaScriptExecutor Javascript { get; set; }
+    private WebDriverWait _explicitWait;
+    private Actions _actions;
+    private int _timeWait = 60;
 
 
-    public WebDriverAction(IWebDriver driver)
+    public WebDriverBase(IWebDriver driver)
     {
-        this.driver = driver;
+        this.Driver = driver;
+    }
+
+    public WebDriverBase(string baseUrl = "")
+    {
+        this.Driver = DriverManager.GetCurrentDriver();
+        Driver.Url = baseUrl;
+        _actions = new Actions(Driver);
+        _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
+
     }
 
     public void GoToUrl(string url)
     {
-        driver.Navigate().GoToUrl(url);
+        Driver.Navigate().GoToUrl(url);
         HtmlReport.Pass("Go to URL" + url);
     }
+
     // ------------------------------- MOVEMENTS -------------------------------
 
     public void MoveForward()
     {
         // Capture Screenshot fail?
-        driver.Navigate().Forward();
+        Driver.Navigate().Forward();
 
     }
+
     public void MoveBackward()
     {
-        driver.Navigate().Back();
+        Driver.Navigate().Back();
 
     }
+
     public void ScrollToBottomOfPage()
     {
         //This will scroll to the bottom of the page and wait for 1 second for the action to finish
         Javascript.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
         Thread.Sleep(1000);
     }
+
     public void ScrollToTopOfPage()
     {
         //This will scroll to the top of the page and wait one second
@@ -51,6 +69,7 @@ public class WebDriverAction
     }
 
     // ------------------------------- INTERACTING WITH ELEMENTS  -------------------------------
+
     public static By GetXpath(string locator)
     {
         return By.XPath(locator);
@@ -58,17 +77,17 @@ public class WebDriverAction
 
     public string GetTitle()
     {
-        return driver.Title;
+        return Driver.Title;
     }
 
     public string GetUrl()
     {
-        return driver.Url;
+        return Driver.Url;
     }
 
     public string GetTextFromElement(string locator)
     {
-        return driver.FindElement(By.XPath(locator)).Text;
+        return Driver.FindElement(By.XPath(locator)).Text;
     }
 
     public static string GetTextFromElement(IWebElement e)
@@ -78,14 +97,14 @@ public class WebDriverAction
 
     public IWebElement FindElementByXpath(string locator)
     {
-        IWebElement e = driver.FindElement(GetXpath(locator));
+        IWebElement e = Driver.FindElement(GetXpath(locator));
         HighlightElement(e);
         return e;
     }
 
     public IList<IWebElement> FindElementsByXPath(string locator)
     {
-        return driver.FindElements(GetXpath(locator));
+        return Driver.FindElements(GetXpath(locator));
     }
 
     public void PressEnter(string locator)
@@ -101,11 +120,12 @@ public class WebDriverAction
             HtmlReport.Fail("Press enter on element [" + locator + "] failed");
             throw;
         }
+
     }
 
     public IWebElement HighlightElement(IWebElement element)
     {
-        IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;
+        IJavaScriptExecutor jse = (IJavaScriptExecutor)Driver;
         jse.ExecuteScript("arguments[0].style.border='2px solid red'", element);
         return element;
     }
@@ -124,13 +144,14 @@ public class WebDriverAction
             TestContext.WriteLine("click on element" + e.ToString() + "failed");
             throw;
         }
+
     }
 
     public void Click(string locator)
     {
         try
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
             var btnClick = wait.Until(ExpectedConditions.ElementExists(GetXpath(locator)));
             HighlightElement(btnClick);
             btnClick.Click();
@@ -144,6 +165,7 @@ public class WebDriverAction
             HtmlReport.Fail("Click on element" + locator + "unsuccessfully", TakeScreenShot());
             throw;
         }
+
     }
 
     public void Click_(string locator)
@@ -153,7 +175,7 @@ public class WebDriverAction
         {
             IWebElement e = FindElementByXpath(locator);
             HighlightElement(e);
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)Driver;
             executor.ExecuteScript("arguments[0].click();", e);
             TestContext.WriteLine("Click on element [" + locator + "] successfully");
             HtmlReport.Pass("Clicking on element [" + locator + "] passed");
@@ -164,13 +186,14 @@ public class WebDriverAction
             HtmlReport.Fail("Clicking on element [" + locator + "] failed");
             throw;
         }
+
     }
 
     public void DoubleClick(IWebElement e)
     {
         try
         {
-            WebDriverAction action = new(driver);
+            WebDriverBase action = new(Driver);
             HighlightElement(e);
             action.DoubleClick(e);
             HtmlReport.Pass("Double click on element " + e.ToString() + " successfuly");
@@ -180,8 +203,8 @@ public class WebDriverAction
             HtmlReport.Fail("Double click on element " + e.ToString() + " failed with");
             throw;
         }
-    }
 
+    }
 
     public static void SendKeys(IWebElement e, string key)
     {
@@ -195,7 +218,9 @@ public class WebDriverAction
             TestContext.WriteLine("Sendkey into element " + e.ToString() + " failed");
             throw;
         }
+
     }
+
     public void SendKeys_(string locator, string key)
     {
         try
@@ -211,6 +236,7 @@ public class WebDriverAction
             HtmlReport.Fail("Sendkey into element" + locator + "failed", TakeScreenShot());
             throw;
         }
+
     }
 
     public void SelectOption(string locator, string key)
@@ -227,6 +253,7 @@ public class WebDriverAction
             TestContext.WriteLine("Select element " + locator + " failed with " + key);
             throw;
         }
+
     }
 
     public void Clear(string locator)
@@ -249,14 +276,15 @@ public class WebDriverAction
             HtmlReport.Fail("Replace into element" + locator + "failed", TakeScreenShot());
             throw;
         }
+
     }
 
     public void ClosePopUp_(string locator)
     {
         try
         {
-            //try to see if the pop up is open and visible for 15 seconds. If it is, click the Close button
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            //try to see if the pop up is open and visible for 60 seconds. If it is, click the Close button
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
             var popUpCloseButton = wait.Until(ExpectedConditions.ElementIsVisible(GetXpath(locator)));
             popUpCloseButton.Click();
             HtmlReport.Pass("Close Pop up successfully");
@@ -266,7 +294,9 @@ public class WebDriverAction
             HtmlReport.Fail("Close Pop up unsuccessfully");
             throw;
         }
+
     }
+
     // ------------------------------- CAPTURE SCREENSHOT  -------------------------------
 
     public string TakeScreenShot()
@@ -277,7 +307,7 @@ public class WebDriverAction
 
             string path = HtmlReportDirectory.SCREENSHOT_PATH + ("/screenshot_" +
                 DateTime.Now.ToString("yyyyMMddHHmmss")) + ".png"; // Dynamic name
-            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            Screenshot ss = ((ITakesScreenshot)Driver).GetScreenshot();
             ss.SaveAsFile(path, ScreenshotImageFormat.Png);
             HtmlReport.Pass("Take screenshot successfully");
             return path;
@@ -291,35 +321,40 @@ public class WebDriverAction
 
     public void TakeScreenshotIf404()
     {
-        if (driver.Title.Contains("404"))
+        if (Driver.Title.Contains("404"))
         {
             TakeScreenShot();
             HtmlReport.Warning("Error 404 - Screenshot taken");
         }
         TakeScreenShot();
     }
+
     // ------------------------------- WAIT TIME  -------------------------------
+
     public IWebElement WaitToBeVisible(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementIsVisible(GetXpath(locator)));
         return btnToClick;
     }
+
     public IWebElement WaitToBeClickable(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
         return btnToClick;
     }
+
     public bool WaitToBeSelected(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
+
     // ------------------------------- ADDING TIMESPAN  -------------------------------
     public string GetDateTimeStamp()
     {
@@ -334,11 +369,12 @@ public class WebDriverAction
         //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
+
     // ------------------------------- VERIFYING AND COMPARING  -------------------------------
 
     public bool IsElementDisplay(string locator)
     {
-        IWebElement e = driver.FindElement(GetXpath(locator));
+        IWebElement e = Driver.FindElement(GetXpath(locator));
 
         if (e == null)
         {
@@ -355,7 +391,7 @@ public class WebDriverAction
 
     public bool IsPopUpDisplay(string locator)
     {
-        IWebElement e = driver.FindElement(GetXpath(locator));
+        IWebElement e = Driver.FindElement(GetXpath(locator));
 
         if (e == null)
         {
@@ -412,12 +448,14 @@ public class WebDriverAction
         IList<IWebElement> allRows = FindElementsByXPath(rowLocator);
         return allRows;
     }
+
     public IList<IWebElement> GetAllCellsFromOneRow(string rowLocator, string cellLocator, int index)
     {
         string indexRow = GetRowIndex(rowLocator, cellLocator, index);
         IList<IWebElement> allCellsInOneRow = FindElementsByXPath(indexRow);
         return allCellsInOneRow;
     }
+
     public List<string> GetInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
         List<string> valuesFromCells = new List<string>();
@@ -431,9 +469,11 @@ public class WebDriverAction
         }
         return valuesFromCells;
     }
+
     public static object ConvertToJson(object obj)
     {
         var list = JsonConvert.SerializeObject(obj);
         return list;
     }
+
 }

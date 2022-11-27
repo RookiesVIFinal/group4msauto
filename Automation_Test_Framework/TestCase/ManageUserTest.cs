@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Automation_Test_Framework.TestCase;
 [TestFixture]
-public class ManageUserTest : NUnitWebTestSetUp
+public class ManageUserTest : NUnitWebAndAPITestSetUp
 {
 
 }

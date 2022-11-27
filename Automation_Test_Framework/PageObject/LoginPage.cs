@@ -3,10 +3,11 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.PageObject;
 
-public class LoginPage : WebDriverAction
+public class LoginPage : WebDriverBase
 {
     public LoginPage(IWebDriver driver) : base(driver)
     {
+
     }
 
     //private readonly string btnLogin = "";
@@ -30,4 +31,5 @@ public class LoginPage : WebDriverAction
     //        return false;
     //    }
     //}
+
 }

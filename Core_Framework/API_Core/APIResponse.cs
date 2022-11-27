@@ -45,6 +45,7 @@ public class APIResponse
         }
 
     }
+
     public string GetResponseStatusCode()
     {
         try
@@ -68,6 +69,5 @@ public class APIResponse
     //{
 
     //}
-
 
 }

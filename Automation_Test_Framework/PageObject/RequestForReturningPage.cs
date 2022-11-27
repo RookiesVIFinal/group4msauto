@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace Automation_Test_Framework.PageObject;
 
-public class ManageAssetPage : WebDriverBase
+public class RequestForReturningPage : WebDriverBase
 {
-    public ManageAssetPage(IWebDriver driver) : base(driver)
+    public RequestForReturningPage(IWebDriver driver) : base(driver)
     {
 
     }

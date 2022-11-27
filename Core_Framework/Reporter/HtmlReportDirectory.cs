@@ -16,7 +16,7 @@ internal class HtmlReportDirectory
     public static void InitReportDirection()
     {
         string projectPath = FilePath.GetCurrentDirectoryPath();
-        REPORT_ROOT = projectPath + "\\Reports";
+        REPORT_ROOT = projectPath + "\\reports";
         REPORT_FOLDER_PATH = REPORT_ROOT + "\\Latest Reports";
         REPORT_FILE_PATH = REPORT_FOLDER_PATH + "\\report.html";
         SCREENSHOT_PATH = REPORT_FOLDER_PATH + "\\Screenshot";
@@ -44,5 +44,7 @@ internal class HtmlReportDirectory
             TestContext.Progress.Write("new: " + newPath);
             Directory.Move(reportFolder, newPath);
         }
+
     }
+
 }
