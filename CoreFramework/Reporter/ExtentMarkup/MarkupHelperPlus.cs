@@ -9,5 +9,9 @@ public class MarkupHelperPlus
     {
         return new APIRequestLog(request, response);
     }
+    //public static IMarkup CreateAPIRequestLogRS(APIRequestRS request, APIResponseRS response)
+    //{
+    //    return new APIRequestLogRS(request, response);
+    //}
 
 }

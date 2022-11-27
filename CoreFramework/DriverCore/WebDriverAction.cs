@@ -1,11 +1,12 @@
 ﻿using System.Globalization;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using CoreFramework.Reporter;
-using SeleniumExtras.WaitHelpers;
-using OpenQA.Selenium.Interactions;
+using FluentAssertions;
 using Newtonsoft.Json;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+using DriverManager = CoreFramework.DriverCore.WebDriverManager;
 
 
 // KEYWORD-DRIVEN
@@ -13,30 +14,45 @@ namespace CoreFramework.DriverCore;
 
 public class WebDriverAction
 {
-    public IWebDriver driver;
+    public IWebDriver Driver;
+    private WebDriverWait _explicitWait;
+    private Actions _actions;
     public IJavaScriptExecutor Javascript;
-    public WebDriverAction(IWebDriver driver)
+    private int _timeWait = 60;
+    public WebDriverAction(string baseUrl = "")
     {
 
-        // this. means to the current instance of the class
-        this.driver = driver;
+        Driver = DriverManager.GetCurrentDriver();
+        Driver.Url = baseUrl;
+        _actions = new Actions(Driver);
+        _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
+    }
+
+    public WebDriverAction(IWebDriver driver)
+    {
+        this.Driver = driver;
     }
     public void GoToUrl(string url)
     {
-        driver.Navigate().GoToUrl(url);
-        HtmlReport.Pass("Go to URL" + url);
+        Driver.Navigate().GoToUrl(url);
+        HtmlReport.Pass("Go to URL [" + url + "]");
     }
     // ------------------------------- MOVEMENTS -------------------------------
 
     public void MoveForward()
     {
         // Capture Screenshot fail?
-        driver.Navigate().Forward();
+        Driver.Navigate().Forward();
 
     }
     public void MoveBackward()
     {
-        driver.Navigate().Back();
+        Driver.Navigate().Back();
+
+    }
+    public void RefreshPage()
+    {
+        Driver.Navigate().Refresh();
 
     }
     public void ScrollToBottomOfPage()
@@ -60,27 +76,27 @@ public class WebDriverAction
 
     public string GetTitle()
     {
-        return driver.Title;
+        return Driver.Title;
     }
     public string GetUrl()
     {
-        return driver.Url;
+        return Driver.Url;
     }
     public string GetTextFromElem(string locator)
     {
-        return driver.FindElement(By.XPath(locator)).Text;
+        return Driver.FindElement(By.XPath(locator)).Text;
     }
 
     public IWebElement FindElementByXpath(string locator)
     {
-        IWebElement e = driver.FindElement(GetXpath(locator));
+        IWebElement e = Driver.FindElement(GetXpath(locator));
         HighlightElem(e);
         return e;
     }
 
     public IList<IWebElement> FindElementsByXpath(string locator)
     {
-        return driver.FindElements(GetXpath(locator));
+        return Driver.FindElements(GetXpath(locator));
     }
 
 
@@ -152,7 +168,7 @@ public class WebDriverAction
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
             HighlightElem(btnToDoubleClick);
-            Actions action = new Actions(driver);
+            Actions action = new Actions(Driver);
             action.DoubleClick(btnToDoubleClick).Perform();
             HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
         }
@@ -183,7 +199,7 @@ public class WebDriverAction
         {
             IWebElement btnToRightClick = WaitToBeClickable(locator);
             HighlightElem(btnToRightClick);
-            Actions action = new Actions(driver);
+            Actions action = new Actions(Driver);
             action.ContextClick(btnToRightClick).Perform();
             HtmlReport.Pass("Right click on element [" + locator + "] successfuly");
         }
@@ -214,11 +230,13 @@ public class WebDriverAction
         {
             Clear(locator);
             SendKeys_(locator, key);
-            HtmlReport.Pass("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] passed", TakeScreenShot());
+            HtmlReport.Pass("Clearing previous input in [" + locator + "] and " +
+                "replacing it with [" + key + "] passed", TakeScreenShot());
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Clearing previous input in [" + locator + "] and replacing it with [" + key + "] failed", TakeScreenShot());
+            HtmlReport.Fail("Clearing previous input in [" + locator + "] and " +
+                "replacing it with [" + key + "] failed", TakeScreenShot());
             throw excep;
         }
     }
@@ -227,7 +245,7 @@ public class WebDriverAction
     {
         try
         {
-            IJavaScriptExecutor jsDriver = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor jsDriver = (IJavaScriptExecutor)Driver;
             string highlightJavascript = "arguments[0].style.border='2px solid red'";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { e });
             HtmlReport.Pass("Highlight element [" + e.ToString() + "] passed");
@@ -262,8 +280,9 @@ public class WebDriverAction
     {
         try
         {
-            //try to see if the pop up is open and visible for 15 seconds. If it is, click the Close button
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            //try to see if the pop up is open and visible for 15 seconds.
+            //If it is, click the Close button
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
             var popUpCloseButton = wait.Until(
                 ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
             popUpCloseButton.Click();
@@ -279,21 +298,21 @@ public class WebDriverAction
     // ------------------------------- WAIT TIME  -------------------------------
     public IWebElement WaitToBeVisible(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementIsVisible(GetXpath(locator)));
         return btnToClick;
     }
     public IWebElement WaitToBeClickable(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
         return btnToClick;
     }
     public bool WaitToBeSelected(string locator)
     {
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = wait.Until(
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
@@ -309,7 +328,7 @@ public class WebDriverAction
 
             string path = HtmlReportDirectory.SCREENSHOT_PATH + ("/screenshot_" +
                 DateTime.Now.ToString("yyyyMMddHHmmss")) + ".png"; // Dynamic name
-            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            Screenshot ss = ((ITakesScreenshot)Driver).GetScreenshot();
             ss.SaveAsFile(path, ScreenshotImageFormat.Png);
             HtmlReport.Pass("Take screenshot successfully");
             return path;
@@ -353,7 +372,7 @@ public class WebDriverAction
 
     public bool IsElementDisplay(string locator)
     {
-        IWebElement e = driver.FindElement(GetXpath(locator));
+        IWebElement e = Driver.FindElement(GetXpath(locator));
 
         if (e == null)
         {
@@ -373,8 +392,10 @@ public class WebDriverAction
         try
         {
             string actualTitle = GetTitle();
-            Assert.That(actualTitle, Is.EqualTo(expectedTitle));
-            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", TakeScreenShot());
+            actualTitle.Should().BeEquivalentTo(expectedTitle);
+            //Assert.That(actualTitle, Is.EqualTo(expectedTitle));
+            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", 
+                TakeScreenShot());
         }
         catch (Exception excep)
         {
@@ -388,8 +409,10 @@ public class WebDriverAction
         try
         {
             string actualUrl = GetUrl();
-            Assert.That(actualUrl, Is.EqualTo(expectedUrl));
-            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", TakeScreenShot());
+            actualUrl.Should().BeEquivalentTo(expectedUrl);
+            //Assert.That(actualUrl, Is.EqualTo(expectedUrl));
+            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", 
+                TakeScreenShot());
         }
         catch (Exception excep)
         {
@@ -409,13 +432,8 @@ public class WebDriverAction
         IList<IWebElement> allRows = FindElementsByXpath(rowLocator);
         return allRows;
     }
-    public IList<IWebElement> GetAllCellsFromOneRow(string rowLocator, string cellLocator, int index)
-    {
-        string indexRow = GetRowIndex(rowLocator, cellLocator, index);
-        IList<IWebElement> allCellsInOneRow = FindElementsByXpath(indexRow);
-        return allCellsInOneRow;
-    }
-    public List<string> GetInfoFromGrid(string rowLocator, string cellLocator, int index)
+
+    public List<string> GetTextFromAllCellsOfOneRow(string rowLocator, string cellLocator, int index)
     {
         List<string> valuesFromCells = new List<string>();
         IList<IWebElement> allCells = FindElementsByXpath
@@ -433,4 +451,35 @@ public class WebDriverAction
         var list = JsonConvert.SerializeObject(obj);
         return list;
     }
+    // ------------------------------- STRING ASSERTION  -------------------------------
+    public static void AssertEquals(object actual, object expected)
+    {
+        try
+        {
+            actual.Should().BeEquivalentTo(expected);
+            HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
+                "with expected data [" + expected.ToString() + "]");
+        }
+        catch(Exception excep)
+        {
+            HtmlReport.Fail("Actual data [" + actual + "] does not match " +
+                "with expected data [" + expected + "]");
+            throw excep;
+        }
+    }
+
+    //public static void AssertAscendingOrder(object list)
+    //{
+    //    try
+    //    {
+    //        List<object>.Should().BeInAsencingOrder();
+    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches with expected data [" + expected.ToString() + "]");
+    //    }
+    //    catch (Exception excep)
+    //    {
+    //        HtmlReport.Fail("Actual data [" + actual + "] does not match with expected data [" + expected + "]");
+    //        throw excep;
+    //    }
+    //}
+
 }

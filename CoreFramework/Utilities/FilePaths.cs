@@ -28,12 +28,10 @@ public class FilePaths
     public static string GetCurrentDirectoryPath()
     {
         // Reports go into bin folder
-        var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().
-            Location + "\\..\\..\\..");
-        // Reports go into a separate folder (child folder of TestProject)
         //var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().
-        //Location) + "\\..\\..\\..";
-        TestContext.Progress.WriteLine(path);
+        //    Location + "\\..\\..\\..");
+        //TestContext.Progress.WriteLine(path);
+        var path = TestContext.CurrentContext.TestDirectory; // report folder in bin/Debug/net 6.0
         return path;
     }
 }

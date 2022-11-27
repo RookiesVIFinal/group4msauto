@@ -11,19 +11,19 @@ public class NUnitTestSetup
 {
     // Check why [SetUp] uses InitDriver
     // Check Add Project Preference 
-    public IWebDriver? _driver;
-    public WebDriverAction? driverBaseAction;
+    protected IWebDriver? Driver;
+    public WebDriverAction? DriverBaseAction;
     protected ExtentReports? _extentReport;
 
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        HtmlReport.createReport();
+        HtmlReport.CreateReport();
 
         // Without this, a suite will not be created
         // Assign metadata here
-        HtmlReport.createTest(TestContext.CurrentContext.Test.ClassName).
+        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
             AssignAuthor("Hong_Anh_Pham").AssignDevice("PC").AssignCategory("Phase2_TestProject");
     }
 
@@ -32,19 +32,21 @@ public class NUnitTestSetup
     {
         // Pass before initialization => Null
         // Need a parent obj (Test) before creating child objs (Node/Case)
-        HtmlReport.createNode(TestContext.CurrentContext.Test.ClassName, 
+        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, 
             TestContext.CurrentContext.Test.Name);
-        WebDriverManager_.InitDriver("chrome", 1920, 1080);
-        _driver = WebDriverManager_.GetCurrentDriver();
+        WebDriverManager.InitDriver("chrome", 1920, 1080);
+        Driver = WebDriverManager.GetCurrentDriver();
+        DriverBaseAction = new WebDriverAction(Driver);
+        //DriverBaseAction = new WebDriverAction();
 
-        driverBaseAction = new WebDriverAction(_driver);
+
     }
 
     [TearDown]
     public void TearDown()
     {
         //_driver?.Quit();
-        WebDriverManager_.CloseDriver();
+        WebDriverManager.CloseDriver();
 
         // Report results on ExtentRep
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
@@ -56,6 +58,6 @@ public class NUnitTestSetup
         {
             // Unfinished error message TestExecution?
         }
-        HtmlReport.flush();
+        HtmlReport.Flush();
     }
 }

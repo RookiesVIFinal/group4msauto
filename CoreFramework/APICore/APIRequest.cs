@@ -8,47 +8,47 @@ namespace CoreFramework.APICore;
 public class APIRequest
 {
 
-    // ------------------------------- WORKING WITH URL -------------------------------
+    // ------------------------------- WORKING WITH Url -------------------------------
 
-    public HttpWebRequest request;
-    public string url { get; set; }
-    public string requestBody { get; set; }
-    public string formData { get; set; }
+    public HttpWebRequest Request;
+    public string Url { get; set; }
+    public string RequestBody { get; set; }
+    public string FormData { get; set; }
 
 
 
     public APIRequest()
     {
-        url = "";
-        requestBody = "";
-        formData = "";
+        Url = "";
+        RequestBody = "";
+        FormData = "";
     }
     public APIRequest(string baseUrl)
     {
-        this.url = baseUrl;
-        requestBody = "";
-        formData = "";
+        this.Url = baseUrl;
+        RequestBody = "";
+        FormData = "";
     }
-    // ------------------------------- REQUEST ACTIONS -------------------------------
+    // ------------------------------- Request ACTIONS -------------------------------
 
 
     /////// ADD
 
     public APIRequest AddHeader(string key, string value)
     {
-        request.Headers.Add(key, value);
+        Request.Headers.Add(key, value);
         return this;
     }
 
     public APIRequest AddFormData(string key, string value)
     {
-        if(formData.Equals("") || formData == null)
+        if(FormData.Equals("") || FormData == null)
         {
-            formData += key + "=" + value;
+            FormData += key + "=" + value;
         }
-        else if (!formData.Equals(""))
+        else if (!FormData.Equals(""))
         {
-            formData += "&" + key + "=" + value;
+            FormData += "&" + key + "=" + value;
         }
         return this;
     }
@@ -60,77 +60,77 @@ public class APIRequest
     /////// SET 
     public APIRequest SetBody(string body)
     {
-        this.requestBody = body;
+        this.RequestBody = body;
         return this;
     }
     public APIRequest SetURL(string url)
     {
-        this.url = url;
-        request = (HttpWebRequest)WebRequest.Create(url);
+        this.Url = Url;
+        Request = (HttpWebRequest)WebRequest.Create(url);
         return this;
     }
 
     public APIRequest SetRequestParameter(string key, string value)
     {
-        if (url.Contains("?"))
+        if (Url.Contains("?"))
         {
-            url += "?" + key + "=" + value;
+            Url += "?" + key + "=" + value;
         }
         else
         {
             // If there is already a parameter
-            url += "&" + key + "=" + value;
+            Url += "&" + key + "=" + value;
         }
         return this;
     }
     public APIResponse Get()
     {
-        request.Method = "GET";
+        Request.Method = "GET";
         APIResponse response = SendRequest();
         return response;
     }
     public APIResponse Post()
     {
-        request.Method = "POST";
+        Request.Method = "POST";
         APIResponse response = SendRequest();
         return response;
     }
     public APIResponse Put()
     {
-        request.Method = "PUT";
+        Request.Method = "PUT";
         APIResponse response = SendRequest();
         return response;
     }
     public APIResponse Delete()
     {
-        request.Method = "DELETE";
+        Request.Method = "DELETE";
         APIResponse response = SendRequest();
         return response;
     }
     public APIResponse SendRequest()
     {
-        if (request.Method == "GET")
+        if (Request.Method == "GET")
         {
-            requestBody = null;
+            RequestBody = null;
         }
         else
         {
-            if (requestBody != null)
+            if (RequestBody != null)
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes(requestBody);
-                request.ContentLength = byteArray.Length;
-                using (Stream dataStream = request.GetRequestStream())
+                byte[] byteArray = Encoding.UTF8.GetBytes(RequestBody);
+                Request.ContentLength = byteArray.Length;
+                using (Stream dataStream = Request.GetRequestStream())
                 {
                     dataStream.Write(byteArray, 0, byteArray.Length);
                     dataStream.Flush();
                     dataStream.Close();
                 }
             }
-            if (!formData.Equals(""))
+            if (!FormData.Equals(""))
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes(formData);
-                request.ContentLength = byteArray.Length;
-                using (Stream dataStream = request.GetRequestStream())
+                byte[] byteArray = Encoding.UTF8.GetBytes(FormData);
+                Request.ContentLength = byteArray.Length;
+                using (Stream dataStream = Request.GetRequestStream())
                 {
                     dataStream.Write(byteArray, 0, byteArray.Length);
                     dataStream.Flush();
@@ -140,11 +140,11 @@ public class APIRequest
         }
         try
         {
-            IAsyncResult asyncResult = request.BeginGetResponse(null, null);
+            IAsyncResult asyncResult = Request.BeginGetResponse(null, null);
             asyncResult.AsyncWaitHandle.WaitOne();
 
             // Request 4 postman assignment went wrong here?
-            var httpResponse = (HttpWebResponse)request.EndGetResponse(asyncResult);
+            var httpResponse = (HttpWebResponse)Request.EndGetResponse(asyncResult);
             APIResponse response = new APIResponse(httpResponse);
             HtmlReport.CreateAPIRequestLog_(this, response);
             HtmlReport.MarkupPassJson(response.responseBody);

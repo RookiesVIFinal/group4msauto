@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AventStack.ExtentReports;
+﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.MarkupUtils;
 using AventStack.ExtentReports.Reporter;
 using CoreFramework.APICore;
@@ -14,23 +13,23 @@ internal class HtmlReport
     //private static int testCaseIndex;
     //private static string testCaseName;
     private static ExtentReports _report;
-    private static ExtentTest extentTestSuite;
-    private static ExtentTest extentTestCase;
+    private static ExtentTest _extentTestSuite;
+    private static ExtentTest _extentTestCase;
     
 
     // ------------------------------- CREATE EXTENTREPORT  -------------------------------
 
-    public static ExtentReports createReport()
+    public static ExtentReports CreateReport()
     {
         // Check if report is initialized
         // Many methods below do the same thing
         if (_report == null)
         {
-            _report = createInstance();
+            _report = CreateInstance();
         }
         return _report;
     }
-    public static ExtentReports createInstance()
+    public static ExtentReports CreateInstance()
     {
         // Formatting
         HtmlReportDirectory.InitReportDirection(); // create a report folder
@@ -48,7 +47,7 @@ internal class HtmlReport
         return report;
     }
     
-    public static void flush()
+    public static void Flush()
     {
         if (_report != null)
         {
@@ -56,38 +55,38 @@ internal class HtmlReport
         }
     }
     
-    public static ExtentTest createTest(string className, string classDescription ="")
+    public static ExtentTest CreateTest(string className, string classDescription ="")
     {
         // Tạo 1 suite trong file HTML (cột bên trái)
         if (_report == null)
         {
-            _report = createInstance();
+            _report = CreateInstance();
         }
-        extentTestSuite = _report.CreateTest(className, classDescription);
-        return extentTestSuite; 
+        _extentTestSuite = _report.CreateTest(className, classDescription);
+        return _extentTestSuite; 
     }
     
-    public static ExtentTest createNode(string className, string testcase, 
+    public static ExtentTest CreateNode(string className, string testcase, 
         string description = "")
     {
         // Tạo các cases trong suite (cột bên phải)
-        if (extentTestSuite == null)
+        if (_extentTestSuite == null)
         {
-            extentTestSuite = createTest(className);
+            _extentTestSuite = CreateTest(className);
         }
-        extentTestCase = extentTestSuite.CreateNode(testcase, description);
-        return extentTestCase;
+        _extentTestCase = _extentTestSuite.CreateNode(testcase, description);
+        return _extentTestCase;
     }
 
     public static ExtentTest GetParent()
     {
-        return extentTestSuite;
+        return _extentTestSuite;
     }
 
 
     public static ExtentTest GetNode()
     {
-        return extentTestCase;
+        return _extentTestCase;
     }
 
     public static ExtentTest GetTest()
@@ -209,4 +208,8 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
+    //public static void CreateAPIRequestLogRS(APIRequestRS request, APIResponseRS response)
+    //{
+    //    GetTest().Info(MarkupHelperPlus.CreateAPIRequestLogRS(request, response));
+    //}
 }
