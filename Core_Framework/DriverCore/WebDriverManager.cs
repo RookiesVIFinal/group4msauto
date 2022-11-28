@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace Core_Framework.DriverCore;
 
-internal class WebDriverManager
+public class WebDriverManager
 {
     private static readonly AsyncLocal<IWebDriver> _driver = new();
 
@@ -26,7 +26,7 @@ internal class WebDriverManager
             Driver = new SafariDriver();
         }
         Driver.Manage().Window.Maximize();
-        Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+        Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
         Driver.Manage().Window.Size = new Size(Width, Height);
         return Driver;
     }

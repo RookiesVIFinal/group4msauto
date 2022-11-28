@@ -1,22 +1,20 @@
-﻿using Automation_Test_Framework.DAO;
-using Core_Framework.DriverCore;
+﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
+using TheRookiesApp.DAO;
 
-namespace Automation_Test_Framework.TestSetData;
+namespace TheRookiesApp.TestSetData;
 
 public class TestSetDataAssignment : WebDriverBase
 {
     public TestSetDataAssignment(IWebDriver driver) : base(driver)
     {
     }
-    public string RowLocator = "";
-    public string CellLocator = "";
 
 
-    public AssignmentListDAO GetInfoFromGrid(int index)
+    public AssignmentListDAO GetAssignmentInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
-        List<string> valuesFromCells = GetInfoFromGrid
-            (RowLocator, CellLocator, index);
+        List<string> valuesFromCells = GetTextFromAllCellsOfOneRow
+            (rowLocator, cellLocator, index);
         // assign each value from cell to an EmployeeInfo object
         AssignmentListDAO assignment = new AssignmentListDAO(
             valuesFromCells[0],
@@ -28,35 +26,35 @@ public class TestSetDataAssignment : WebDriverBase
             );
 
         return assignment;
+
     }
 
-    public string ReturnAssignmentList()
+    public string ReturnAssignmentRowJSON(string rowLocator, string cellLocator, int index)
+    {
+        // To check when new assignment is created/edited
+        // return only one row of user info
+        string assignmentRow = (string)ConvertToJson(GetAssignmentInfoFromGrid(rowLocator, cellLocator, index));
+        return assignmentRow;
+    }
+
+    public List<AssignmentListDAO> ReturnAssignmentList(string rowLocator, string cellLocator)
     {
         int i = 0;
         List<AssignmentListDAO> listOfAssignments = new List<AssignmentListDAO>();
-        IList<IWebElement> allRows = GetAllRows(RowLocator);
+        IList<IWebElement> allRows = GetAllRows(rowLocator);
 
         foreach (IWebElement row in allRows)
         {
-            AssignmentListDAO assignment = GetInfoFromGrid(i + 1);
+            AssignmentListDAO assignment = GetAssignmentInfoFromGrid(rowLocator, cellLocator, i + 1);
             listOfAssignments.Add(assignment);
             i++;
         }
+        return listOfAssignments;
+    }
 
-        // Probably no empty row - Consider delete?
-        foreach (AssignmentListDAO assignment in listOfAssignments.ToList())
-        {
-            // remove list elements from empty rows
-            if (assignment.AssetCode.Contains(" "))
-            {
-                listOfAssignments.Remove(assignment);
-            }
-            else
-            {
-                continue;
-            }
-        }
-        string assignmentList = (string)ConvertToJson(listOfAssignments);
+    public string ReturnAssignmentListJSON(string rowLocator, string cellLocator)
+    {
+        string assignmentList = (string)ConvertToJson(ReturnAssignmentList(rowLocator, cellLocator));
         return assignmentList;
     }
 

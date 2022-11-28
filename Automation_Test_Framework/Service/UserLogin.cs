@@ -1,4 +1,4 @@
-﻿namespace Automation_Test_Framework.Service;
+﻿namespace TheRookiesApp.Service;
 
 public class UserLogin
 {

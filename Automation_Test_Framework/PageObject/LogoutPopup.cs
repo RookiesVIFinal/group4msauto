@@ -1,7 +1,7 @@
 ﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
 
-namespace Automation_Test_Framework.PageObject;
+namespace TheRookiesApp.PageObject;
 
 public class LogoutPopup : WebDriverBase
 {
@@ -9,17 +9,12 @@ public class LogoutPopup : WebDriverBase
     {
 
     }
+    private readonly string _btnLogout = "//span[text() = 'Log Out']";
+    private readonly string _btnCancel = "//span[text() = 'Cancel']";
+    private readonly string _btnClose = "//span[contains(@aria-label, 'close')]";
 
-    //public bool IsCorrectRedirect()
-    //{
-    //    if (Constant.BASE_URL + addedURL == GetUrl())
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
+    public void LogOutOfPage()
+    {
+        Click(_btnLogout);
+    }
 }

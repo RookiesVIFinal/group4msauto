@@ -1,7 +1,7 @@
-﻿using Automation_Test_Framework.TestSetup;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TheRookiesApp.TestSetup;
 
-namespace Automation_Test_Framework.TestCase;
+namespace TheRookiesApp.TestCase;
 
 [TestFixture]
 public class ManageAssignmentTest : NUnitWebAndAPITestSetUp

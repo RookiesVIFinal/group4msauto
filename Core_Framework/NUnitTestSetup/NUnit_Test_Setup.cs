@@ -43,6 +43,9 @@ public class NUnit_Test_Setup
     public void TearDown()
     {
         Driver?.Quit();
+
+        WebDriverManager.CloseDriver();
+
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {

@@ -1,7 +1,7 @@
 ﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
 
-namespace Automation_Test_Framework.PageObject;
+namespace TheRookiesApp.PageObject;
 
 public class ReportPage : WebDriverBase
 {

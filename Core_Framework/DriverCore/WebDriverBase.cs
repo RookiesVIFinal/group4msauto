@@ -1,4 +1,5 @@
 ﻿using Core_Framework.Reporter;
+using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -30,13 +31,12 @@ public class WebDriverBase
         Driver.Url = baseUrl;
         _actions = new Actions(Driver);
         _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-
     }
 
     public void GoToUrl(string url)
     {
         Driver.Navigate().GoToUrl(url);
-        HtmlReport.Pass("Go to URL" + url);
+        HtmlReport.Pass("Go to URL [" + url + "]");
     }
 
     // ------------------------------- MOVEMENTS -------------------------------
@@ -168,15 +168,32 @@ public class WebDriverBase
 
     }
 
+    public void Clicks(string locator)
+    {
+        try
+        {
+            IWebElement btnToClick = WaitToBeClickable(locator);
+            HighlightElement(btnToClick);
+            btnToClick.Click();
+            HtmlReport.Pass("Clicking on element [" + locator + "] passed");
+
+        }
+        catch (Exception excep)
+        {
+            HtmlReport.Fail("Clicking on element [" + locator + "] failed");
+            throw excep;
+        }
+    }
+
     public void Click_(string locator)
     {
         // Use javascriptexecutor to avoid ClickInterceptedException
         try
         {
-            IWebElement e = FindElementByXpath(locator);
-            HighlightElement(e);
+            IWebElement btnToClick = WaitToBeClickable(locator);
+            HighlightElement(btnToClick);
             IJavaScriptExecutor executor = (IJavaScriptExecutor)Driver;
-            executor.ExecuteScript("arguments[0].click();", e);
+            executor.ExecuteScript("arguments[0].click();", btnToClick);
             TestContext.WriteLine("Click on element [" + locator + "] successfully");
             HtmlReport.Pass("Clicking on element [" + locator + "] passed");
 
@@ -370,7 +387,7 @@ public class WebDriverBase
         return currentTimeVN;
     }
 
-    // ------------------------------- VERIFYING AND COMPARING  -------------------------------
+    // ------------------------------- VERIFYING AND COMPARING AND ASSERTING  -------------------------------
 
     public bool IsElementDisplay(string locator)
     {
@@ -427,7 +444,7 @@ public class WebDriverBase
         {
             string actualUrl = GetUrl();
             Assert.That(actualUrl, Is.EqualTo(expectedUrl));
-            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", TakeScreenShot());
+            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches [" + expectedUrl + "]", TakeScreenShot());
         }
         catch (Exception)
         {
@@ -435,6 +452,52 @@ public class WebDriverBase
             throw;
         }
     }
+
+    public static void AssertEquals(object actual, object expected)
+    {
+        try
+        {
+            actual.Should().BeEquivalentTo(expected);
+            HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
+                "with expected data [" + expected.ToString() + "]");
+        }
+        catch (Exception excep)
+        {
+            HtmlReport.Fail("Actual data [" + actual + "] does not match " +
+                "with expected data [" + expected + "]");
+            throw excep;
+        }
+    }
+
+    //public static void AssertListEquals(object actual, object expected)
+    //{
+    //    try
+    //    {
+    //        actual.Should().BeEquivalentTo(expected);
+    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
+    //            "with expected data [" + expected.ToString() + "]");
+    //    }
+    //    catch (Exception excep)
+    //    {
+    //        HtmlReport.Fail("Actual data [" + actual + "] does not match " +
+    //            "with expected data [" + expected + "]");
+    //        throw excep;
+    //    }
+    //}
+
+    //public static void AssertAscendingOrder(object list)
+    //{
+    //    try
+    //    {
+    //        List<object>.Should().BeInAsencingOrder();
+    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches with expected data [" + expected.ToString() + "]");
+    //    }
+    //    catch (Exception excep)
+    //    {
+    //        HtmlReport.Fail("Actual data [" + actual + "] does not match with expected data [" + expected + "]");
+    //        throw excep;
+    //    }
+    //}
 
     // ------------------------------- DEALING WITH GRID  -------------------------------
     public string GetRowIndex(string rowLocator, string cellLocator, int index)
@@ -449,11 +512,18 @@ public class WebDriverBase
         return allRows;
     }
 
-    public IList<IWebElement> GetAllCellsFromOneRow(string rowLocator, string cellLocator, int index)
+    public List<string> GetTextFromAllCellsOfOneRow(string rowLocator, string cellLocator, int index)
     {
-        string indexRow = GetRowIndex(rowLocator, cellLocator, index);
-        IList<IWebElement> allCellsInOneRow = FindElementsByXPath(indexRow);
-        return allCellsInOneRow;
+        /// Return a list of cell web elements fow an indexed row
+        /// Get texts from all cells of one row and add them to a list of strings
+
+        List<string> valuesFromCells = new List<string>();
+        IList<IWebElement> allCells = FindElementsByXPath(GetRowIndex(rowLocator, cellLocator, index));
+        foreach (IWebElement cell in allCells)
+        {
+            valuesFromCells.Add(GetTextFromElement(cell));
+        }
+        return valuesFromCells;
     }
 
     public List<string> GetInfoFromGrid(string rowLocator, string cellLocator, int index)
@@ -470,7 +540,7 @@ public class WebDriverBase
         return valuesFromCells;
     }
 
-    public static object ConvertToJson(object obj)
+    public object ConvertToJson(object obj)
     {
         var list = JsonConvert.SerializeObject(obj);
         return list;

@@ -1,6 +1,6 @@
 ﻿using Core_Framework.API_Core;
 
-namespace Automation_Test_Framework.Service;
+namespace TheRookiesApp.Service;
 
 public class MockAPILoginService
 {
@@ -19,10 +19,6 @@ public class MockAPILoginService
     }
 
     public string getTodoPath = "/todo";
-
-    public static APIResponse GetTodoRequest(string todoId)
-    {
-    }
 
 
 }

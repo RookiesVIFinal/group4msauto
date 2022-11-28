@@ -1,9 +1,9 @@
-﻿using Automation_Test_Framework.Common;
-using Automation_Test_Framework.TestSetup;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
+using TheRookiesApp.Common;
+using TheRookiesApp.TestSetup;
 
-namespace Automation_Test_Framework.TestCase;
+namespace TheRookiesApp.TestCase;
 
 [TestFixture]
 public class LogoutTest : NUnitWebAndAPITestSetUp
@@ -11,7 +11,7 @@ public class LogoutTest : NUnitWebAndAPITestSetUp
     [Test]
     public void ID01Logout()
     {
-        CommonFlow.LoginFlow(Driver);
+        CommonFlow.LoginFlowAdmin(Driver);
 
         //Profile_Page profilePage = new Profile_Page(_driver);
         //Assert.IsTrue(profilePage.GetUserName().Equals("tonyautotest"));

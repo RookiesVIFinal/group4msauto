@@ -1,14 +1,16 @@
 ﻿using Core_Framework.NUnitTestSetup;
 using NUnit.Framework;
+using TheRookiesApp.DAO;
 
-namespace Automation_Test_Framework.TestSetup;
+namespace TheRookiesApp.TestSetup;
 
 public class NUnitWebAndAPITestSetUp : NUnit_Test_Setup
 {
+    public UserListDAO User;
     [SetUp]
     public void SetUp()
     {
-        DriverBaseAction.GoToUrl(Constant.BASE_URL);
+        DriverBaseAction.GoToUrl(Constant.LOGIN_PAGE_URl);
     }
 
     [TearDown]

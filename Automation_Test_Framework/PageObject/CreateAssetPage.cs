@@ -1,7 +1,8 @@
 ﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
+using TheRookiesApp.TestSetup;
 
-namespace Automation_Test_Framework.PageObject;
+namespace TheRookiesApp.PageObject;
 
 public class CreateAssetPage : WebDriverBase
 {
@@ -10,9 +11,11 @@ public class CreateAssetPage : WebDriverBase
 
     }
 
+    private readonly string _addedURL = "admin/manage-asset";
+
     //public bool IsCorrectRedirect()
     //{
-    //    if (Constant.BASE_URL + addedURL == GetUrl())
+    //    if (Constant.BASE_URL + _addedURL == GetUrl())
     //    {
     //        return true;
     //    }

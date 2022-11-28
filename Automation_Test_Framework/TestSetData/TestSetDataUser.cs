@@ -1,22 +1,20 @@
-﻿using Automation_Test_Framework.DAO;
-using Core_Framework.DriverCore;
+﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
+using TheRookiesApp.DAO;
 
-namespace Automation_Test_Framework.TestSetData;
+namespace TheRookiesApp.TestSetData;
 
 public class TestSetDataUser : WebDriverBase
 {
     public TestSetDataUser(IWebDriver driver) : base(driver)
     {
     }
-    public string RowLocator = "";
-    public string CellLocator = "";
 
 
-    public UserListDAO GetInfoFromGrid(int index)
+    public UserListDAO GetUserInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
         List<string> valuesFromCells = GetInfoFromGrid
-            (RowLocator, CellLocator, index);
+            (rowLocator, cellLocator, index);
         // assign each value from cell to an EmployeeInfo object
         UserListDAO user = new UserListDAO(
             valuesFromCells[0],
@@ -28,34 +26,48 @@ public class TestSetDataUser : WebDriverBase
         return user;
     }
 
-    public string ReturnUserList()
+    public string ReturnUserRowJSON(string rowLocator, string cellLocator, int index)
     {
+        // To check when new user is created/edited
+        // return only one row of user info
+        string userRow = (string)ConvertToJson(GetUserInfoFromGrid(rowLocator, cellLocator, index));
+        return userRow;
+    }
+
+    public List<UserListDAO> ReturnUserList(string rowLocator, string cellLocator)
+    {
+        // Return all user info from a table (assuming that there is no empty row)
         int i = 0;
         List<UserListDAO> listOfUsers = new List<UserListDAO>();
-        IList<IWebElement> allRows = GetAllRows(RowLocator);
+        IList<IWebElement> allRows = GetAllRows(rowLocator);
 
         foreach (IWebElement row in allRows)
         {
-            UserListDAO user = GetInfoFromGrid(i + 1);
+            UserListDAO user = GetUserInfoFromGrid(rowLocator, cellLocator, i + 1);
             listOfUsers.Add(user);
             i++;
         }
+        // If there are empty rows => Remove them
+        //foreach (UserDAO user in listOfUsers.ToList())
+        //{
+        //    // remove list elements from empty rows
+        //    if (user.staffCode.Contains(" "))
+        //    {
+        //        listOfUsers.Remove(user);
+        //    }
+        //    else
+        //    {
+        //        continue;
+        //    }
+        //}
+        return listOfUsers;
+    }
 
-        // Probably no empty row - Consider delete?
-        foreach (UserListDAO user in listOfUsers.ToList())
-        {
-            // remove list elements from empty rows
-            if (user.StaffCode.Contains(" "))
-            {
-                listOfUsers.Remove(user);
-            }
-            else
-            {
-                continue;
-            }
-        }
-        string userList = (string)ConvertToJson(listOfUsers);
+    public string ReturnUserListJSON(string rowLocator, string cellLocator)
+    {
+        string userList = (string)ConvertToJson(ReturnUserList(rowLocator, cellLocator));
         return userList;
     }
+
 
 }

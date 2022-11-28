@@ -1,7 +1,8 @@
 ﻿using Core_Framework.DriverCore;
 using OpenQA.Selenium;
+using TheRookiesApp.TestSetup;
 
-namespace Automation_Test_Framework.PageObject;
+namespace TheRookiesApp.PageObject;
 
 public class LoginPage : WebDriverBase
 {
@@ -10,26 +11,34 @@ public class LoginPage : WebDriverBase
 
     }
 
-    //private readonly string btnLogin = "";
-    //private readonly string btnLogout = "";
-    //private readonly string btnCancel = "";
-    //private readonly string optLogout = "";
-    //private readonly string inputSearch = "";
-    //private readonly string tfUserName = "";
-    //private readonly string btnUserName = "";
-    //private readonly string popUp = "";
-    //private readonly string tfPassword = "";
+    private readonly string _btnLogin = "//button[@type = 'submit']";
+    private readonly string _txtUserName = "//input[@id = 'username']";
+    private readonly string _popUp = "";
+    private readonly string _txtPassword = "//input[@id = 'password']";
 
-    //public bool IsPopUpLogoutDisplay()
-    //{
-    //    if (IsPopUpDisplay(popUp) == true)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    public void IsCorrectRedirect()
+    {
+        CompareUrls(Constant.HOME_PAGE_URL);
+    }
+
+    public void DoLogin(string userName, string password)
+    {
+        SendKeys_(_txtUserName, userName);
+        SendKeys_(_txtPassword, password);
+        Clicks(_btnLogin);
+    }
+
+
+    public bool IsPopUpLogoutDisplay()
+    {
+        if (IsPopUpDisplay(_popUp) == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
