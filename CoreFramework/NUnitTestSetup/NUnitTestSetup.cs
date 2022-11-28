@@ -37,6 +37,7 @@ public class NUnitTestSetup
         WebDriverManager.InitDriver("chrome", 1920, 1080);
         Driver = WebDriverManager.GetCurrentDriver();
         DriverBaseAction = new WebDriverAction(Driver);
+        // TODO: Learn how to use WebDriverAction(string baseUrl = "") in here
         //DriverBaseAction = new WebDriverAction();
 
 

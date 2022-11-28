@@ -11,18 +11,19 @@ public class LoginPage : WebDriverAction
     private readonly string tfPassword = "//input[contains(@id, 'password')]";
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
 
-    //public static LoginPage()
+    // TODO: Learn how to use WebDriverAction(string baseUrl = "") in here
+    //public static LoginPage(IWebDriver? driver)
     //{
-
+    //    Driver = driver;
     //}
-    public LoginPage(IWebDriver driver) : base(driver)
+    public LoginPage(IWebDriver? driver) : base(driver)
     {
     }
 
 
     public string GetUserNameText()
     {
-        return GetTextFromElem(usernameTextLocator);
+        return GetText(usernameTextLocator);
     }
     public void AssertUserNameText()
     {

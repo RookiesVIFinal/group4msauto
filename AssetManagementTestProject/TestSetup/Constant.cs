@@ -7,7 +7,7 @@ public class Constant
 
 
     public static string ADMIN_USERNAME = "admin6";
-    public static string ADMIN_PASSWORD = "Admin@12345";
+    public static string ADMIN_PASSWORD = "Admin@123";
 
     public static string STAFF_USERNANE = "";
     public static string STAFF_PASSWORD = "";

@@ -5,7 +5,11 @@ using OpenQA.Selenium;
 using NUnit.Framework;
 
 namespace AssetManagementTestProject.Asserter;
-
+/// <summary>
+/// Assertions for strings/DAO/List DAO objects
+/// Also check order
+/// Alternatives if FluentAssertions fails
+/// </summary>
 public class Asserter : WebDriverAction
 {
     public Asserter(IWebDriver? driver) : base(driver)
@@ -49,6 +53,7 @@ public class Asserter : WebDriverAction
         //actual.Should().BeEquivalentTo(expected);
     }
     // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
+
     public static void AssertUserEquals(UserDAO actual, UserDAO expected)
     {
         AssertEquals(actual, expected);
@@ -76,6 +81,7 @@ public class Asserter : WebDriverAction
     }
 
     // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
+
     public static void AssertUserListAscending(List<UserDAO> list)
     {
         list.Should().BeInAscendingOrder();
@@ -134,7 +140,8 @@ public class Asserter : WebDriverAction
 
 
     // ------------------------------- IN CASE FLUENT ASSERTION FAILS -------------------------------
-    //public static void AssertListEquals<TE, TA>(Action<TE, TA> asserter, 
+
+    //public static void AssertListEquals<TE, TA>(Action<TE, TA> asserter,
     //    IEnumerable<TE> expected, IEnumerable<TA> actual)
     //{
     //    // Allow user to freely define that on which properties you want to do the assertions:

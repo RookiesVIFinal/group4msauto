@@ -5,6 +5,8 @@
 
 //namespace CoreFramework.APICoreRestSharp;
 
+/// APICore with RestSharp client
+
 //public class APIRequestRS
 //{
 //    public RestRequest request;

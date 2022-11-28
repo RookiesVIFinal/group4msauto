@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace CoreFramework.Utilities;
 

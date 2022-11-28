@@ -21,8 +21,7 @@ internal class HtmlReport
 
     public static ExtentReports CreateReport()
     {
-        // Check if report is initialized
-        // Many methods below do the same thing
+
         if (_report == null)
         {
             _report = CreateInstance();

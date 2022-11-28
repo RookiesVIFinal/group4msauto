@@ -4,7 +4,9 @@ using OpenQA.Selenium;
 
 namespace AssetManagementTestProject.Common;
 
-// Login for every test case
+/// <summary>
+/// Login for every test case
+/// </summary>
 public class AssetManagementTestBase : NUnitWebTestSetup
 {
     public static void LoginFLow(IWebDriver _driver)

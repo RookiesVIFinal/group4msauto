@@ -12,7 +12,8 @@ public class NUnitWebTestSetup : NUnitTestSetup
     {
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         //DriverBaseAction = new WebDriverAction(Driver);
-        //DriverBaseAction.GoToUrl(Constant.BASE_URL);
+
+        // TODO: Fix API here
         //AuthorizationService authorizationService = new AuthorizationService();
         //user = authorizationService.Login(Constant.ADMIN_USERNAME, Constant.ADMIN_USERNAME);
 

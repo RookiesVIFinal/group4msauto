@@ -9,7 +9,6 @@ using SeleniumExtras.WaitHelpers;
 using DriverManager = CoreFramework.DriverCore.WebDriverManager;
 
 
-// KEYWORD-DRIVEN
 namespace CoreFramework.DriverCore;
 
 public class WebDriverAction
@@ -19,6 +18,8 @@ public class WebDriverAction
     private Actions _actions;
     public IJavaScriptExecutor Javascript;
     private int _timeWait = 60;
+
+    // TODO: Check how to integrate this
     public WebDriverAction(string baseUrl = "")
     {
 
@@ -30,7 +31,7 @@ public class WebDriverAction
 
     public WebDriverAction(IWebDriver driver)
     {
-        this.Driver = driver;
+        Driver = driver;
     }
     public void GoToUrl(string url)
     {
@@ -73,7 +74,6 @@ public class WebDriverAction
     {
         return By.XPath(locator);
     }
-
     public string GetTitle()
     {
         return Driver.Title;
@@ -82,9 +82,13 @@ public class WebDriverAction
     {
         return Driver.Url;
     }
-    public string GetTextFromElem(string locator)
+    public string GetText(string locator)
     {
         return Driver.FindElement(By.XPath(locator)).Text;
+    }
+    public string GetTextFromIWebElem(IWebElement e)
+    {
+        return e.Text;
     }
 
     public IWebElement FindElementByXpath(string locator)
@@ -146,7 +150,7 @@ public class WebDriverAction
     }
     public void Click_(string locator)
     {
-        // Use javascriptexecutor to avoid ClickInterceptedException
+        /// Use javascriptexecutor to avoid ClickInterceptedException
         try
         {
             IWebElement btnToClick = WaitToBeClickable(locator);
@@ -168,6 +172,7 @@ public class WebDriverAction
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
             HighlightElem(btnToDoubleClick);
+            /// TODO: Change this to _actions after done integrating
             Actions action = new Actions(Driver);
             action.DoubleClick(btnToDoubleClick).Perform();
             HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
@@ -180,6 +185,8 @@ public class WebDriverAction
     }
     public void DoubleClick_(string locator)
     {
+
+        /// Double click using jsexecutor
         try
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
@@ -212,7 +219,6 @@ public class WebDriverAction
 
     public void SendKeys_(string locator, string key)
     {
-        // Param string locator
         try
         {
             FindElementByXpath(locator).SendKeys(key);
@@ -282,9 +288,7 @@ public class WebDriverAction
         {
             //try to see if the pop up is open and visible for 15 seconds.
             //If it is, click the Close button
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
-            var popUpCloseButton = wait.Until(
-                ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
+            IWebElement popUpCloseButton = WaitToBeClickable(locator);
             popUpCloseButton.Click();
             HtmlReport.Pass("Close Pop up successfully");
         }
@@ -296,6 +300,10 @@ public class WebDriverAction
         }
     }
     // ------------------------------- WAIT TIME  -------------------------------
+    /// <summary>
+    /// Explicit waits to check Visible/Clickable/Selectable
+    /// TODO: Change wait to _explicitWait  + _timeWait after done integrating WebDriverAction(string baseUrl="")
+    /// </summary>
     public IWebElement WaitToBeVisible(string locator)
     {
         var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
@@ -322,7 +330,6 @@ public class WebDriverAction
 
     public string TakeScreenShot()
     {
-        // new version (Yes HtmlReporter)
         try
         {
 
@@ -368,7 +375,7 @@ public class WebDriverAction
         //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
-    // ------------------------------- VERIFYING AND COMPARING  -------------------------------
+    // ------------------------------- VERIFYING / COMPARING / ASSERTING  -------------------------------
 
     public bool IsElementDisplay(string locator)
     {
@@ -420,38 +427,7 @@ public class WebDriverAction
             throw excep;
         }
     }
-    // ------------------------------- DEALING WITH GRID  -------------------------------
-    public string GetRowIndex(string rowLocator, string cellLocator, int index)
-    {
-        // return an indexed row
-        return rowLocator + "[" + index + "]" + cellLocator;
-    }
-
-    public IList<IWebElement> GetAllRows(string rowLocator)
-    {
-        IList<IWebElement> allRows = FindElementsByXpath(rowLocator);
-        return allRows;
-    }
-
-    public List<string> GetTextFromAllCellsOfOneRow(string rowLocator, string cellLocator, int index)
-    {
-        List<string> valuesFromCells = new List<string>();
-        IList<IWebElement> allCells = FindElementsByXpath
-            (GetRowIndex(rowLocator, cellLocator, index));
-        foreach (IWebElement cell in allCells)
-        {
-            // go through each cell and add text values to a list of string
-            valuesFromCells.Add(cell.ToString());
-
-        }
-        return valuesFromCells;
-    }
-    public object ConvertToJson(object obj)
-    {
-        var list = JsonConvert.SerializeObject(obj);
-        return list;
-    }
-    // ------------------------------- STRING ASSERTION  -------------------------------
+    // TODO: Test if this actually works (Worked for string comparison so far)
     public static void AssertEquals(object actual, object expected)
     {
         try
@@ -460,7 +436,7 @@ public class WebDriverAction
             HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
                 "with expected data [" + expected.ToString() + "]");
         }
-        catch(Exception excep)
+        catch (Exception excep)
         {
             HtmlReport.Fail("Actual data [" + actual + "] does not match " +
                 "with expected data [" + expected + "]");
@@ -481,5 +457,40 @@ public class WebDriverAction
     //        throw excep;
     //    }
     //}
+
+    // ------------------------------- DEALING WITH GRID  -------------------------------
+
+    public string GetRowIndex(string rowLocator, string cellLocator, int index)
+    {
+        // return an indexed row
+        return rowLocator + "[" + index + "]" + cellLocator;
+    }
+
+    public IList<IWebElement> GetAllRows(string rowLocator)
+    {
+        IList<IWebElement> allRows = FindElementsByXpath(rowLocator);
+        return allRows;
+    }
+
+    public List<string> GetTextFromAllCellsOfOneRow(string rowLocator, string cellLocator, int index)
+    {
+        /// Return a list of cell web elements fow an indexed row
+        /// Get texts from all cells of one row and add them to a list of strings
+        
+        List<string> valuesFromCells = new List<string>();
+        IList<IWebElement> allCells = FindElementsByXpath
+            (GetRowIndex(rowLocator, cellLocator, index));
+        foreach (IWebElement cell in allCells)
+        {
+            valuesFromCells.Add(GetTextFromIWebElem(cell));
+        }
+        return valuesFromCells;
+    }
+    public object ConvertToJson(object obj)
+    {
+        var list = JsonConvert.SerializeObject(obj);
+        return list;
+    }
+
 
 }

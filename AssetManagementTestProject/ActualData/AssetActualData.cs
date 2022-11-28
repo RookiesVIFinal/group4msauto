@@ -3,9 +3,15 @@ using OpenQA.Selenium;
 using AssetManagementTestProject.DAO;
 
 namespace AssetManagementTestProject.ActualData;
-
+/// <summary>
+/// Iterate through each cell of the View Asset Grid
+/// Add texts from each cell to an attribute of the AssetDAO
+/// Return an AssetDAO object or the JSON-converted version
+/// Similar for other ActualData classes
+/// </summary>
 public class AssetActualData : WebDriverAction
 {
+
     public AssetActualData(IWebDriver? driver) : base(driver)
     {
     }
@@ -29,10 +35,12 @@ public class AssetActualData : WebDriverAction
     public string ReturnAssetRowJSON(string rowLocator, string cellLocator, int index)
     {
         // To check when new asset is created/edited
-        // return only one row of user info
+        // Return only one row of user info
         string assetRow = (string)ConvertToJson(GetAssetInfoFromGrid(rowLocator, cellLocator, index));
         return assetRow;
     }
+
+
     public List<AssetDAO> ReturnAssetList(string rowLocator, string cellLocator)
     {
         int i = 0; // clean up this?
