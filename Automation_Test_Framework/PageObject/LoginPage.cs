@@ -1,24 +1,31 @@
 ﻿using Core_Framework.DriverCore;
-using OpenQA.Selenium;
 using TheRookiesApp.TestSetup;
 
 namespace TheRookiesApp.PageObject;
 
 public class LoginPage : WebDriverBase
 {
-    public LoginPage(IWebDriver driver) : base(driver)
-    {
-
-    }
 
     private readonly string _btnLogin = "//button[@type = 'submit']";
     private readonly string _txtUserName = "//input[@id = 'username']";
     private readonly string _popUp = "";
     private readonly string _txtPassword = "//input[@id = 'password']";
 
+    private readonly string _errorMessage = "//div[contains(text(), 'Username or password is incorrect!')]";
+
+    public LoginPage() : base()
+    {
+
+    }
+
     public void IsCorrectRedirect()
     {
         CompareUrls(Constant.HOME_PAGE_URL);
+    }
+
+    public void ErrorMessageDisplay()
+    {
+        IsErrorMessageDisplay(_errorMessage);
     }
 
     public void DoLogin(string userName, string password)

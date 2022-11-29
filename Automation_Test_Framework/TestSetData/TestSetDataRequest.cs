@@ -9,7 +9,7 @@ public class TestSetDataRequest : WebDriverBase
     private string rowLocator = "";
     private string cellLocator = "";
 
-    public TestSetDataRequest(IWebDriver? driver) : base(driver)
+    public TestSetDataRequest() : base()
     {
     }
     public ReturningListDAO GetRequestInfoFromGrid(int index)

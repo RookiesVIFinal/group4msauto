@@ -39,11 +39,9 @@ public class WebDriverBase
         HtmlReport.Pass("Go to URL [" + url + "]");
     }
 
-    // ------------------------------- MOVEMENTS -------------------------------
-
+    #region "MOVEMENTS"
     public void MoveForward()
     {
-        // Capture Screenshot fail?
         Driver.Navigate().Forward();
 
     }
@@ -68,8 +66,9 @@ public class WebDriverBase
         Thread.Sleep(1000);
     }
 
-    // ------------------------------- INTERACTING WITH ELEMENTS  -------------------------------
+    #endregion
 
+    #region"INTERACTING WITH ELEMENTS"
     public static By GetXpath(string locator)
     {
         return By.XPath(locator);
@@ -313,9 +312,9 @@ public class WebDriverBase
         }
 
     }
+    #endregion
 
-    // ------------------------------- CAPTURE SCREENSHOT  -------------------------------
-
+    #region "CAPTURE SCREENSHOT"
     public string TakeScreenShot()
     {
 
@@ -345,9 +344,9 @@ public class WebDriverBase
         }
         TakeScreenShot();
     }
+    #endregion
 
-    // ------------------------------- WAIT TIME  -------------------------------
-
+    #region "WAIT TIME"
     public IWebElement WaitToBeVisible(string locator)
     {
         var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
@@ -371,8 +370,9 @@ public class WebDriverBase
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
+    #endregion
 
-    // ------------------------------- ADDING TIMESPAN  -------------------------------
+    #region "ADDING TIMESPAN"
     public string GetDateTimeStamp()
     {
         // Get creation time for photos in VN time zone
@@ -386,9 +386,9 @@ public class WebDriverBase
         //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
-
-    // ------------------------------- VERIFYING AND COMPARING AND ASSERTING  -------------------------------
-
+    #endregion
+   
+    #region VERIFYING AND COMPARING AND ASSERTING
     public bool IsElementDisplay(string locator)
     {
         IWebElement e = Driver.FindElement(GetXpath(locator));
@@ -402,6 +402,25 @@ public class WebDriverBase
         {
             HighlightElement(e);
             HtmlReport.Pass("Element [" + e.ToString() + "] is displayed", TakeScreenShot());
+            return true;
+        }
+    }
+
+    public bool IsErrorMessageDisplay(string locator)
+    {
+        IWebElement errorMessage = Driver.FindElement(GetXpath(locator));
+
+        if (errorMessage == null)
+        {
+            HtmlReport.Fail("Errormessage is not displayed");
+            return false;
+        }
+        else
+        {
+            HighlightElement(errorMessage);
+            Console.Write(errorMessage.Text);
+            Assert.IsTrue(errorMessage.Text.Contains("Username or password is incorrect!"));
+            HtmlReport.Pass("Errormessage [" + errorMessage.Text + "] is displayed", TakeScreenShot());
             return true;
         }
     }
@@ -498,8 +517,9 @@ public class WebDriverBase
     //        throw excep;
     //    }
     //}
+    #endregion
 
-    // ------------------------------- DEALING WITH GRID  -------------------------------
+    #region DEALING WITH GRID
     public string GetRowIndex(string rowLocator, string cellLocator, int index)
     {
         // return an indexed row
@@ -545,5 +565,5 @@ public class WebDriverBase
         var list = JsonConvert.SerializeObject(obj);
         return list;
     }
-
+    #endregion
 }

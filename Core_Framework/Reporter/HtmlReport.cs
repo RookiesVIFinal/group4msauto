@@ -13,8 +13,7 @@ internal class HtmlReport
     private static ExtentTest? _extentTestSuite;
     private static ExtentTest? _extentTestCase;
 
-    // ------------------------------- CREATE EXTENTREPORT  -------------------------------
-
+    #region "CREATE EXTENTREPORT"
     public static ExtentReports CreateReport()
     {
         if (_report == null)
@@ -133,8 +132,9 @@ internal class HtmlReport
         GetTest().Skip(des);
         TestContext.WriteLine(des);
     }
+    #endregion
 
-    // ------------------------------- MARKUP  -------------------------------
+    #region "MARKUP"
     public static void MarkUpJson(string json)
     {
         GetTest().Info(MarkupHelper.CreateCodeBlock(json, CodeLanguage.Json));
@@ -144,8 +144,9 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelper.CreateTable(someInts));
     }
+    #endregion
 
-    // LABELS
+    #region "LABELS"
     public static void MarkupPassLabel(string text)
     {
         GetTest().Pass(MarkupHelper.CreateLabel(text, ExtentColor.Green));
@@ -170,10 +171,12 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelper.CreateCodeBlock(code, CodeLanguage.Xml));
     }
-    // ------------------------------- API  -------------------------------
+    #endregion
+
+    #region "API"
     public static void CreateAPIRequestLog(APIRequest request, APIResponse response)
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
-
+    #endregion
 }

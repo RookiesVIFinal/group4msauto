@@ -1,7 +1,6 @@
 ﻿using Core_Framework.DriverCore;
 using FluentAssertions;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using TheRookiesApp.DAO;
 
 namespace AssetManagementTestProject.Asserter;
@@ -12,12 +11,11 @@ namespace AssetManagementTestProject.Asserter;
 /// </summary>
 public class Asserter : WebDriverBase
 {
-    public Asserter(IWebDriver driver) : base(driver)
+    public Asserter() : base()
     {
     }
 
-
-    // ------------------------------- CONVERTED JSON FLUENT ASSERTION -------------------------------
+    #region CONVERTED JSON FLUENT ASSERTION
 
     public static void AssertListStringEquals(string actual, string expected)
     {
@@ -25,8 +23,9 @@ public class Asserter : WebDriverBase
         AssertEquals(actual, expected);
         //actual.Should().BeEquivalentTo(expected);
     }
-    // ------------------------------- DAO LIST WITH FLUENT ASSERTION -------------------------------
+    #endregion
 
+    #region DAO LIST WITH FLUENT ASSERTION
     public static void AssertUserListsEquals(List<UserListDAO> actual, List<UserListDAO> expected)
     {
         AssertEquals(actual, expected);
@@ -52,8 +51,9 @@ public class Asserter : WebDriverBase
         AssertEquals(actual, expected);
         //actual.Should().BeEquivalentTo(expected);
     }
-    // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
+    #endregion
 
+    #region DAO WITH FLUENT EQUAL ASSERTION
     public static void AssertUserEquals(UserListDAO actual, UserListDAO expected)
     {
         AssertEquals(actual, expected);
@@ -79,9 +79,9 @@ public class Asserter : WebDriverBase
         AssertEquals(actual, expected);
         //actual.Should().BeEquivalentTo(expected);
     }
+    #endregion
 
-    // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
-
+    #region DAO WITH FLUENT EQUAL ASSERTION
     public static void AssertUserListAscending(List<UserListDAO> list)
     {
         list.Should().BeInAscendingOrder();
@@ -137,32 +137,32 @@ public class Asserter : WebDriverBase
         TestContext.WriteLine("List is sorted in descending order");
 
     }
+    #endregion
 
+    #region IN CASE FLUENT ASSERTION FAILS
+    public static void AssertListEquals<TE, TA>(Action<TE, TA> asserter,
+        IEnumerable<TE> expected, IEnumerable<TA> actual)
+    {
+        // Allow user to freely define that on which properties you want to do the assertions:
+        IList<TA> actualList = actual.ToList();
+        IList<TE> expectedList = expected.ToList();
 
-    // ------------------------------- IN CASE FLUENT ASSERTION FAILS -------------------------------
+        Assert.True(
+            actualList.Count == expectedList.Count,
+            $"Lists have different sizes. Expected list: {expectedList.Count}, actual list: {actualList.Count}");
 
-    //public static void AssertListEquals<TE, TA>(Action<TE, TA> asserter,
-    //    IEnumerable<TE> expected, IEnumerable<TA> actual)
-    //{
-    //    // Allow user to freely define that on which properties you want to do the assertions:
-    //    IList<TA> actualList = actual.ToList();
-    //    IList<TE> expectedList = expected.ToList();
-
-    //    Assert.True(
-    //        actualList.Count == expectedList.Count,
-    //        $"Lists have different sizes. Expected list: {expectedList.Count}, actual list: {actualList.Count}");
-
-    //    for (var i = 0; i < expectedList.Count; i++)
-    //    {
-    //        try
-    //        {
-    //            asserter.Invoke(expectedList[i], actualList[i]);
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            Assert.True(false, $"Assertion failed because: {e.Message}");
-    //        }
-    //    }
-    //}
+        for (var i = 0; i < expectedList.Count; i++)
+        {
+            try
+            {
+                asserter.Invoke(expectedList[i], actualList[i]);
+            }
+            catch (Exception e)
+            {
+                Assert.True(false, $"Assertion failed because: {e.Message}");
+            }
+        }
+    }
+    #endregion
 
 }

@@ -12,5 +12,10 @@ public class Constant
     public static string STAFF_USER_NAME = "staff1"; 
     public static string STAFF_PASSWORD = "Staff@1234";
 
+    public static string FAIL_USER_NAME = "staff20";
+    public static string FAIL_PASSWORD = "Staff@12349";
+
+    public static string NEW_USER_NAME = "admin9";
+    public static string NEW_PASSWORD = "Admin@123";
 
 }

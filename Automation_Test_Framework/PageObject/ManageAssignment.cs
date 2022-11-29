@@ -1,11 +1,12 @@
 ﻿using Core_Framework.DriverCore;
-using OpenQA.Selenium;
 
 namespace TheRookiesApp.PageObject;
 
 public class ManageAssignment : WebDriverBase
 {
-    public ManageAssignment(IWebDriver driver) : base(driver)
+
+
+    public ManageAssignment() : base()
     {
 
     }

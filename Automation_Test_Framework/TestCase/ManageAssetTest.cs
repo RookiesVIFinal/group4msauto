@@ -5,7 +5,7 @@ using TheRookiesApp.TestSetup;
 namespace TheRookiesApp.TestCase;
 
 [TestFixture]
-public class ManageAssetTest : NUnitWebAndAPITestSetUp
+public class ManageAssetTest : NUnitTestSetUp
 {
     [Test]
     public void ID01CreateNewEmployee()

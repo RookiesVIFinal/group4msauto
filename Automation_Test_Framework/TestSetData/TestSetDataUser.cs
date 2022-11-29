@@ -6,7 +6,7 @@ namespace TheRookiesApp.TestSetData;
 
 public class TestSetDataUser : WebDriverBase
 {
-    public TestSetDataUser(IWebDriver driver) : base(driver)
+    public TestSetDataUser() : base()
     {
     }
 

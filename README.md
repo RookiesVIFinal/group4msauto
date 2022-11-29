@@ -33,51 +33,69 @@ The project is organized as the structure below
 
 Examples for pages
 
-```bash
-HomePage.cs
+WebDriverBase.cs
 
-*** Settings ***
-Library    SeleniumLibrary
+// Settings
+using Core_Framework.Reporter;
+using FluentAssertions;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+using System.Globalization;
+using DriverManager = Core_Framework.DriverCore.WebDriverManager;
 
-*** Variables ***
-${SEARCH_BOX} =     xpath://*[@id="gh-ac"]
-${SEARCH_TEXT} =    mobile
+// Variables 
+    public IWebDriver Driver;
+    public IJavaScriptExecutor Javascript { get; set; }
+    private WebDriverWait _explicitWait;
+    private Actions _actions;
+    private int _timeWait = 60;
 
-*** Keywords ***
-Input Search Text and Click Search
-    Input Text    //*[@id="gh-ac"]   mobile
-    Press Keys    //*[@id="gh-btn"]  RETURN
+// Methods
+#region "MOVEMENTS"
+    public void MoveForward()
+    {
+        Driver.Navigate().Forward();
 
-Click on Advanced Search
-    wait until page contains element    //*[@id="gh-as-a"]
-    Click Element    //*[@id="gh-as-a"]
-```
+    }
+
+    public void MoveBackward()
+    {
+        Driver.Navigate().Back();
+
+    }
 
 Tests examples
 
-```bash
-*** Settings ***
-Documentation    Verify search functionality
-Resource    ../Pages/SearchResultPage.robot
-Resource    ../Pages/LandingPage.robot
-Resource    ../Helperes/Common.robot
+using NUnit.Framework;
+using NUnit.Framework.Internal;
+using TheRookiesApp.Common;
+using TheRookiesApp.PageObject;
+using TheRookiesApp.TestSetup;
 
-Test Setup  Common.Start Test
-Test Teardown   Common.Finish Test
+namespace TheRookiesApp.TestCase;
 
-*** Test Cases ***
-Verify basic search funtionality
-    [Documentation]    Basic search
-    [Tags]    Search    Functionality
-    LandingPage.Search For Somethings
-    SearchResultPage.Verify Search Results
+[TestFixture]
+public class US302LoginTest : NUnitTestSetUp
+{
+    [Test]
+    public void ID01LoginAndLogoutTest()
+    {
+        TestSteps.LoginAsAdmin();
 
-Verify advanced search funtionality
-    [Documentation]    Addvanced Search
-    [Tags]    Search    Functionality
-    LandingPage.Search For Somethings In Advanced
-    SearchResultPage.Verify Search Results
-```
+        LoginPage loginPage = new LoginPage();
+
+        HomePage homePage = new HomePage();
+        homePage.Logout();
+
+        LogoutPopup logOutPopup = new LogoutPopup();
+        logOutPopup.LogOutOfPage();
+
+    }
+}
 
 ## Gitflow
 
