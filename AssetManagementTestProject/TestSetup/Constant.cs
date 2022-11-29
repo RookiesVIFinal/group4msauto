@@ -14,4 +14,9 @@ public class Constant
     public const string STAFF_USERNANE = "staff10";
     public const string BASE_STAFF_PASSWORD = "Staff@123";
     public const string CHANGED_STAFF_PASSWORD = "Staff@1234";
+
+    #region POP-UP MESSAGES
+
+    #endregion
+
 }

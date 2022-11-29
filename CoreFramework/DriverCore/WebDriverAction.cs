@@ -20,18 +20,12 @@ public class WebDriverAction
     private int _timeWait = 60;
 
 
-    public WebDriverAction(string baseUrl = "")
+    public WebDriverAction()
     {
 
         Driver = DriverManager.GetCurrentDriver();
-        //Driver.Url = baseUrl;
         _actions = new Actions(Driver);
         _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-    }
-
-    public WebDriverAction(IWebDriver driver)
-    {
-        Driver = driver;
     }
     public void GoToUrl(string url)
     {
@@ -383,7 +377,7 @@ public class WebDriverAction
     #endregion
 
     #region VERIFYING / COMPARING / ASSERTING ACTIONS
-    public bool IsElementDisplay(string locator)
+    public bool IsElementDisplayed(string locator)
     {
         IWebElement e = Driver.FindElement(GetXpath(locator));
 

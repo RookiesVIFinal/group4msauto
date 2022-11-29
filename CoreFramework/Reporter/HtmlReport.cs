@@ -53,7 +53,7 @@ internal class HtmlReport
     
     public static ExtentTest CreateTest(string className, string classDescription ="")
     {
-        // Tạo 1 suite trong file HTML (cột bên trái)
+        // Create a test suite (left column)
         if (_report == null)
         {
             _report = CreateInstance();
@@ -65,7 +65,7 @@ internal class HtmlReport
     public static ExtentTest CreateNode(string className, string testcase, 
         string description = "")
     {
-        // Tạo các cases trong suite (cột bên phải)
+        // Create test cases (right column)
         if (_extentTestSuite == null)
         {
             _extentTestSuite = CreateTest(className);

@@ -52,13 +52,6 @@ public class APIRequest
         }
         return this;
     }
-    /// TODO: Finish this function
-    //public APIRequest AddGETParam()
-    //{
-
-    //}
-
-    /////// SET 
     public APIRequest SetBody(string body)
     {
         this.RequestBody = body;
