@@ -10,15 +10,12 @@ namespace CoreFramework.Reporter;
 
 internal class HtmlReport
 {
-    //private static int testCaseIndex;
-    //private static string testCaseName;
     private static ExtentReports _report;
     private static ExtentTest _extentTestSuite;
     private static ExtentTest _extentTestCase;
     
 
-    // ------------------------------- CREATE EXTENTREPORT  -------------------------------
-
+    #region Create Extent Report file
     public static ExtentReports CreateReport()
     {
 
@@ -96,12 +93,12 @@ internal class HtmlReport
         }
         return GetNode();
     }
+    #endregion
 
-    // PASS OR FAIL
-
+    #region TestContext for Fail/Pass/Info/Skip
     public static void Pass(string des)
     {
-        // Pass with no screenshot
+
         GetTest().Pass(des);
         TestContext.WriteLine(des);
         //MarkupPassLabel(des);
@@ -109,7 +106,6 @@ internal class HtmlReport
 
     public static void Pass (string des, string path)
     {
-        // Pass with screenshot
         GetTest().Pass(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
         //MarkupPassLabel(des);
@@ -117,7 +113,6 @@ internal class HtmlReport
 
     public static void Fail(string des)
     {
-        // normal fail message
         GetTest().Fail(des);
         TestContext.WriteLine(des);
     }
@@ -125,19 +120,16 @@ internal class HtmlReport
     public static void Fail(string des, string path)
     {
 
-        // fail message with a screenshot
         GetTest().Fail(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
 
     public static void Fail (string des, string ex, string path)
     {
-        // add failed example? and path to screenshot
         GetTest().Fail(des).Fail(ex).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
 
-    // INFO
     public static void Info(string des)
     {
         GetTest().Info(des);
@@ -159,18 +151,9 @@ internal class HtmlReport
         TestContext.WriteLine(des);
     }
 
-    // ------------------------------- MARKUP  -------------------------------
+    #endregion
 
-    //public static void MarkUpHtml()
-    //{
-    // Inject HTML code to report
-    //    var htmlMarkUp = HtmlInjector.CreateHtml();
-    //    var m = MarkupHelper.CreateLabel(htmlMarkUp, ExtentColor.Transparent);
-    //    /* Similar syntax to Java
-    //     * return Log(Status.Info, m);
-    //     */
-    //    GetTest().Info(m);
-    //}
+    #region  Markup 
     public static void MarkupPassJson(string json)
     {
       GetTest().Info(MarkupHelper.CreateCodeBlock(json, CodeLanguage.Json));
@@ -200,15 +183,15 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelper.CreateCodeBlock(code, CodeLanguage.Xml));
     }
+    #endregion 
 
-    // ------------------------------- API  -------------------------------
-
+    #region  Log for API requests/response
     public static void CreateAPIRequestLog_(APIRequest request, APIResponse response)
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
-    //public static void CreateAPIRequestLogRS(APIRequestRS request, APIResponseRS response)
-    //{
-    //    GetTest().Info(MarkupHelperPlus.CreateAPIRequestLogRS(request, response));
-    //}
+
+    #endregion
 }
+
+

@@ -8,7 +8,7 @@ public class ManageAssetPage : WebDriverAction
     public readonly string rowLocator = "";
     public readonly string cellLocator = "";
 
-    public ManageAssetPage(IWebDriver? driver) : base(driver)
+    public ManageAssetPage() : base()
     {
 
     }

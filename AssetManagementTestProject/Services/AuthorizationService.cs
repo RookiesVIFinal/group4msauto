@@ -5,11 +5,12 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace AssetManagementTestProject.Services;
-/// <summary>
-/// API Authorize
-/// </summary>
+
 public class AuthorizationService
 {
+    /// <summary>
+    /// API Authorize
+    /// </summary>
     private string userLoginPath = "";
 
     private APIResponse LoginRequest(string username, string password)

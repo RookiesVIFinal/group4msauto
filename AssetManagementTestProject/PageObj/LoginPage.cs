@@ -12,27 +12,16 @@ public class LoginPage : WebDriverAction
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
 
     // TODO: Learn how to use WebDriverAction(string baseUrl = "") in here
-    //public static LoginPage(IWebDriver? driver)
-    //{
-    //    Driver = driver;
-    //}
-    public LoginPage(IWebDriver? driver) : base(driver)
+    public LoginPage() : base()
     {
     }
-
-
-    public string GetUserNameText()
+    // public LoginPage(IWebDriver? driver) : base(driver)
+    // {
+    // }
+    public void Login(string userName, string password)
     {
-        return GetText(usernameTextLocator);
-    }
-    public void AssertUserNameText()
-    {
-        AssertEquals(GetUserNameText(), "Username");
-    }
-    public void UserCanLogin()
-    {
-        SendKeys_(tfUsername, Constant.ADMIN_USERNAME);
-        SendKeys_(tfPassword, Constant.ADMIN_PASSWORD);
+        SendKeys_(tfUsername, userName);
+        SendKeys_(tfPassword, password);
         Click(btnLogin);
     }
 }

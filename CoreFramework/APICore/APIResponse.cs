@@ -19,16 +19,6 @@ namespace CoreFramework.APICore
             GetResponseStatusCode();
         }
         // ------------------------------- METHODS -------------------------------
-
-        //public int GenerateID()
-        //{
-        //    var jsonData = JSON.parse(responseBody);
-        //    System.Reflection.PropertyInfo pi = jsonData.GetType().GetProperty("todos");
-        //    Array name = (Array)(pi.GetValue(0, null));
-        //    int id = name[0].id;
-        //    return id;
-
-        //}
         public string GetResponseBody()
         {
             // recheck this

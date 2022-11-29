@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Interfaces;
-using OpenQA.Selenium;
-using CoreFramework.DriverCore;
-using AventStack.ExtentReports;
+﻿using CoreFramework.DriverCore;
 using CoreFramework.Reporter;
+using NUnit.Framework.Interfaces;
+using NUnit.Framework;
+using OpenQA.Selenium;
+
 
 namespace CoreFramework.NUnitTestSetup;
 
@@ -12,8 +12,8 @@ public class NUnitTestSetup
     // Check why [SetUp] uses InitDriver
     // Check Add Project Preference 
     protected IWebDriver? Driver;
-    public WebDriverAction? DriverBaseAction;
-    protected ExtentReports? _extentReport;
+    protected WebDriverAction? DriverBaseAction;
+
 
 
     [OneTimeSetUp]
@@ -21,8 +21,7 @@ public class NUnitTestSetup
     {
         HtmlReport.CreateReport();
 
-        // Without this, a suite will not be created
-        // Assign metadata here
+        // TODO: Change all metadata into const and avoid hardcoding
         HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
             AssignAuthor("Hong_Anh_Pham").AssignDevice("PC").AssignCategory("Phase2_TestProject");
     }
@@ -35,10 +34,10 @@ public class NUnitTestSetup
         HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, 
             TestContext.CurrentContext.Test.Name);
         WebDriverManager.InitDriver("chrome", 1920, 1080);
-        Driver = WebDriverManager.GetCurrentDriver();
-        DriverBaseAction = new WebDriverAction(Driver);
+        //Driver = WebDriverManager.GetCurrentDriver();
+        // DriverBaseAction = new WebDriverAction();
         // TODO: Learn how to use WebDriverAction(string baseUrl = "") in here
-        //DriverBaseAction = new WebDriverAction();
+        //DriverBaseAction = new WebDriverAction(Driver.Url);
 
 
     }
@@ -46,7 +45,7 @@ public class NUnitTestSetup
     [TearDown]
     public void TearDown()
     {
-        //_driver?.Quit();
+
         WebDriverManager.CloseDriver();
 
         // Report results on ExtentRep
@@ -57,8 +56,13 @@ public class NUnitTestSetup
         }
         else if (testStatus.Equals(TestStatus.Failed))
         {
-            // Unfinished error message TestExecution?
         }
+
+
+    }
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
         HtmlReport.Flush();
     }
 }

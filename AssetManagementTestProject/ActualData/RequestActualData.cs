@@ -9,7 +9,7 @@ public class RequestActualData : WebDriverAction
     private string rowLocator = "";
     private string cellLocator = "";
 
-    public RequestActualData(IWebDriver? driver) : base(driver)
+    public RequestActualData() : base()
     {
     }
     public ReturningDAO GetRequestInfoFromGrid(int index)

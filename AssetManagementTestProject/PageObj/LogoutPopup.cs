@@ -11,9 +11,9 @@ namespace AssetManagementTestProject.PageObj
         private readonly string btnCancel = "//span[text() = 'Cancel']";
         private readonly string btnClose = "//span[contains(@aria-label, 'close')]";
 
-        public LogoutPopup(IWebDriver? driver) : base(driver)
-        {
 
+        public LogoutPopup() : base()
+        {
         }
 
         public void LogOutOfPage()

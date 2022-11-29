@@ -5,7 +5,7 @@ namespace AssetManagementTestProject.PageObj;
 
 public class CreateUserPage : WebDriverAction
 {
-    public CreateUserPage(IWebDriver? driver) : base(driver)
+    public CreateUserPage() : base()
     {
     }
 }

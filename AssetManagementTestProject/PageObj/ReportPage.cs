@@ -5,7 +5,7 @@ namespace AssetManagementTestProject.PageObj;
 
 public class ReportPage : WebDriverAction
 {
-    public ReportPage(IWebDriver? driver) : base(driver)
+    public ReportPage() : base()
     {
 
     }

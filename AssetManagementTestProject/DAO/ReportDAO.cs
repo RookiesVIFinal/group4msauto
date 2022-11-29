@@ -2,13 +2,13 @@
 
 public class ReportDAO
 {
-    public string Category { get; set; }
-    public int Total { get; set; }
-    public int Assigned { get; set; }
-    public int Available { get; set; }
-    public int NotAvailable { get; set; }
-    public int WaitForRecycle { get; set; }
-    public int Recycled { get; set; }
+    public string Category { get; private set; }
+    public int Total { get; private set; }
+    public int Assigned { get; private set; }
+    public int Available { get; private set; }
+    public int NotAvailable { get; private set; }
+    public int WaitForRecycle { get; private set; }
+    public int Recycled { get; private set; }
 
 
     /// <summary>

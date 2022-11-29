@@ -8,7 +8,7 @@ public class RequestForReturningPage : WebDriverAction
     public readonly string rowLocator = "";
     public readonly string cellLocator = "";
 
-    public RequestForReturningPage(IWebDriver? driver) : base(driver)
+    public RequestForReturningPage() : base()
     {
 
     }

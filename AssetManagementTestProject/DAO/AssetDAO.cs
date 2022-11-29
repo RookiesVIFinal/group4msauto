@@ -2,12 +2,12 @@
 
 public class AssetDAO
 {
-    public string AssetCode { get; set; }
-    public string AssetName { get; set; }
-    public string Category { get; set; }
-    public string State { get; set; }
-    public string Specification { get; set; }
-    public string InstalledDate { get; set; }
+    public string AssetCode { get; private set; }
+    public string AssetName { get; private set; }
+    public string Category { get; private set; }
+    public string State { get; private set; }
+    public string Specification { get; private set; }
+    public string InstalledDate { get; private set; }
 
     /// <summary>
     /// To check detailed asset - 6 properties

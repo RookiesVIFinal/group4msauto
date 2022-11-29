@@ -25,7 +25,7 @@ public class APIRequest
     }
     public APIRequest(string baseUrl)
     {
-        this.Url = baseUrl;
+        Url = baseUrl;
         RequestBody = "";
         FormData = "";
     }
@@ -52,7 +52,8 @@ public class APIRequest
         }
         return this;
     }
-    //public API_Request AddGETParam()
+    /// TODO: Finish this function
+    //public APIRequest AddGETParam()
     //{
 
     //}

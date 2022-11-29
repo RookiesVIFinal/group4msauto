@@ -40,7 +40,6 @@ public class HtmlReportDirectory
 
 
     }
-    // Change name of last report folder and create latest report
     private static void CheckExistReportAndRename(string reportFolder)
     {
         if (Directory.Exists(reportFolder))

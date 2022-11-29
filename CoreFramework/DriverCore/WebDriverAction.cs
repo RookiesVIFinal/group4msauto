@@ -19,12 +19,12 @@ public class WebDriverAction
     public IJavaScriptExecutor Javascript;
     private int _timeWait = 60;
 
-    // TODO: Check how to integrate this
+
     public WebDriverAction(string baseUrl = "")
     {
 
         Driver = DriverManager.GetCurrentDriver();
-        Driver.Url = baseUrl;
+        //Driver.Url = baseUrl;
         _actions = new Actions(Driver);
         _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
     }
@@ -38,8 +38,8 @@ public class WebDriverAction
         Driver.Navigate().GoToUrl(url);
         HtmlReport.Pass("Go to URL [" + url + "]");
     }
-    // ------------------------------- MOVEMENTS -------------------------------
 
+    #region  MOVEMENTS
     public void MoveForward()
     {
         // Capture Screenshot fail?
@@ -68,8 +68,9 @@ public class WebDriverAction
         Javascript.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight)");
         Thread.Sleep(1000);
     }
-    // ------------------------------- INTERACTING WITH ELEMENTS  -------------------------------
+    #endregion
 
+    #region INTERACTING WITH ELEMENTS
     public By GetXpath(string locator)
     {
         return By.XPath(locator);
@@ -173,8 +174,8 @@ public class WebDriverAction
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
             HighlightElem(btnToDoubleClick);
             /// TODO: Change this to _actions after done integrating
-            Actions action = new Actions(Driver);
-            action.DoubleClick(btnToDoubleClick).Perform();
+            //Actions action = new Actions(Driver);
+            _actions.DoubleClick(btnToDoubleClick).Perform();
             HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
         }
         catch (Exception ex)
@@ -186,7 +187,7 @@ public class WebDriverAction
     public void DoubleClick_(string locator)
     {
 
-        /// Double click using jsexecutor
+        /// Double click_actions using jsexecutor
         try
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
@@ -206,8 +207,8 @@ public class WebDriverAction
         {
             IWebElement btnToRightClick = WaitToBeClickable(locator);
             HighlightElem(btnToRightClick);
-            Actions action = new Actions(Driver);
-            action.ContextClick(btnToRightClick).Perform();
+            //Actions action = new Actions(Driver);
+            _actions.ContextClick(btnToRightClick).Perform();
             HtmlReport.Pass("Right click on element [" + locator + "] successfuly");
         }
         catch (Exception ex)
@@ -299,35 +300,37 @@ public class WebDriverAction
 
         }
     }
-    // ------------------------------- WAIT TIME  -------------------------------
+    #endregion
+
+    #region WAIT TIME
     /// <summary>
     /// Explicit waits to check Visible/Clickable/Selectable
     /// TODO: Change wait to _explicitWait  + _timeWait after done integrating WebDriverAction(string baseUrl="")
     /// </summary>
     public IWebElement WaitToBeVisible(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
-        var btnToClick = wait.Until(
+        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementIsVisible(GetXpath(locator)));
         return btnToClick;
     }
     public IWebElement WaitToBeClickable(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
-        var btnToClick = wait.Until(
+        // var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
         return btnToClick;
     }
     public bool WaitToBeSelected(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
-        var btnToClick = wait.Until(
+        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
+    #endregion
 
-    // ------------------------------- CAPTURE SCREENSHOT  -------------------------------
-
+    #region CAPTURE SCREENSHOT
     public string TakeScreenShot()
     {
         try
@@ -361,7 +364,9 @@ public class WebDriverAction
         path = TakeScreenShot();
         return path;
     }
-    // ------------------------------- ADDING TIMESTAMP  -------------------------------
+    #endregion
+
+    #region ADDING TIMESTAMP
     public string GetDateTimeStamp()
     {
         // Get creation time for photos in VN time zone
@@ -375,8 +380,9 @@ public class WebDriverAction
         //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
-    // ------------------------------- VERIFYING / COMPARING / ASSERTING  -------------------------------
+    #endregion
 
+    #region VERIFYING / COMPARING / ASSERTING ACTIONS
     public bool IsElementDisplay(string locator)
     {
         IWebElement e = Driver.FindElement(GetXpath(locator));
@@ -389,7 +395,7 @@ public class WebDriverAction
         else
         {
             HighlightElem(e);
-            HtmlReport.Pass("Element [" + e.ToString() + "] is displayed", TakeScreenShot());
+            HtmlReport.Pass("Element [" + e.Text + "] is displayed", TakeScreenShot());
             return true;
         }
     }
@@ -399,7 +405,7 @@ public class WebDriverAction
         try
         {
             string actualTitle = GetTitle();
-            actualTitle.Should().BeEquivalentTo(expectedTitle);
+            actualTitle.Should().Match(expectedTitle);
             //Assert.That(actualTitle, Is.EqualTo(expectedTitle));
             HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", 
                 TakeScreenShot());
@@ -416,7 +422,7 @@ public class WebDriverAction
         try
         {
             string actualUrl = GetUrl();
-            actualUrl.Should().BeEquivalentTo(expectedUrl);
+            AssertEquals(actualUrl, expectedUrl);
             //Assert.That(actualUrl, Is.EqualTo(expectedUrl));
             HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", 
                 TakeScreenShot());
@@ -443,23 +449,9 @@ public class WebDriverAction
             throw excep;
         }
     }
+    #endregion
 
-    //public static void AssertAscendingOrder(object list)
-    //{
-    //    try
-    //    {
-    //        List<object>.Should().BeInAsencingOrder();
-    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches with expected data [" + expected.ToString() + "]");
-    //    }
-    //    catch (Exception excep)
-    //    {
-    //        HtmlReport.Fail("Actual data [" + actual + "] does not match with expected data [" + expected + "]");
-    //        throw excep;
-    //    }
-    //}
-
-    // ------------------------------- DEALING WITH GRID  -------------------------------
-
+    #region DEALING WITH GRID
     public string GetRowIndex(string rowLocator, string cellLocator, int index)
     {
         // return an indexed row
@@ -491,6 +483,6 @@ public class WebDriverAction
         var list = JsonConvert.SerializeObject(obj);
         return list;
     }
-
+    #endregion
 
 }

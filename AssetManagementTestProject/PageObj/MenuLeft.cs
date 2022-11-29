@@ -5,7 +5,7 @@ namespace AssetManagementTestProject.PageObj;
 
 public class MenuLeft : WebDriverAction
 {
-    public MenuLeft(IWebDriver? driver) : base(driver)
+    public MenuLeft() : base()
     {
 
     }

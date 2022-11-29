@@ -2,13 +2,13 @@
 
 public class ReturningDAO
 {
-    public string AssetCode { get; set; }
-    public string AssetName { get; set; }
-    public string RequestedBy { get; set; }
-    public string AssignedDate { get; set; }
-    public string AcceptedBy { get; set; }
-    public string ReturnedDate { get; set; }
-    public string State { get; set; }
+    public string AssetCode { get; private set; }
+    public string AssetName { get; private set; }
+    public string RequestedBy { get; private set; }
+    public string AssignedDate { get; private set; }
+    public string AcceptedBy { get; private set; }
+    public string ReturnedDate { get; private set; }
+    public string State { get; private set; }
 
 
     // To check View Request list - 7 props

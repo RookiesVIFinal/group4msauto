@@ -11,7 +11,7 @@ namespace AssetManagementTestProject.TestData;
 
 public class AssignmentActualData : WebDriverAction
 {
-    public AssignmentActualData(IWebDriver? driver) : base(driver)
+    public AssignmentActualData() : base()
     {
     }
     public AssignmentDAO GetAssignmentInfoFromGrid(string rowLocator, string cellLocator, int index)

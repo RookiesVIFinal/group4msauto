@@ -8,7 +8,7 @@ public class ManageAssignmentPage : WebDriverAction
     public readonly string rowLocator = "";
     public readonly string cellLocator = "";
 
-    public ManageAssignmentPage(IWebDriver? driver) : base(driver)
+    public ManageAssignmentPage() : base()
     {
 
     }

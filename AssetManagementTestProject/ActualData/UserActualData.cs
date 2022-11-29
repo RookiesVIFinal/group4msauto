@@ -7,7 +7,7 @@ namespace AssetManagementTestProject.TestData;
 public class UserActualData : WebDriverAction
 {
 
-    public UserActualData(IWebDriver? driver) : base(driver)
+    public UserActualData() : base()
     {
     }
     public UserDAO GetUserInfoFromGrid(string rowLocator, string cellLocator, int index)

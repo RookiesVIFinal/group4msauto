@@ -1,22 +1,10 @@
-﻿using AssetManagementTestProject.PageObj;
-using AssetManagementTestProject.TestSetup;
-using OpenQA.Selenium;
+﻿using AssetManagementTestProject.TestSetup;
 
 namespace AssetManagementTestProject.Common;
 
-/// <summary>
-/// Login for every test case
-/// </summary>
+
 public class AssetManagementTestBase : NUnitWebTestSetup
 {
-    public static void LoginFLow(IWebDriver _driver)
-    {
-        LoginPage loginPage = new LoginPage(_driver);
-        loginPage.UserCanLogin();
-    }
-    //public static void LoginFLow()
-    //{
-    //    LoginPage loginPage = new LoginPage();
-    //    loginPage.UserCanLogin();
-    //}
+    /// Use to prepare login flow for example
+    /// So far no need to be used
 }

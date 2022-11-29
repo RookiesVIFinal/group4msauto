@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="APICoreRestSharp\**" />
     <Compile Remove="Reporter\Screenshots\**" />
+    <EmbeddedResource Remove="APICoreRestSharp\**" />
     <EmbeddedResource Remove="Reporter\Screenshots\**" />
+    <None Remove="APICoreRestSharp\**" />
     <None Remove="Reporter\Screenshots\**" />
   </ItemGroup>
 

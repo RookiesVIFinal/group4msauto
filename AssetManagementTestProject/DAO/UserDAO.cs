@@ -5,16 +5,16 @@ namespace AssetManagementTestProject.DAO;
 
 public class UserDAO
 {
-    public string StaffCode { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string FullName { get; set; }
-    public string UserName { get; set; }    
-    public string DateOfBirth { get; set; }
-    public string JoinedDate { get; set; }
-    public string Gender { get; set; }
-    public string Type { get; set; }
-    public string Location { get; set; }
+    public string StaffCode { get; private set; }
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
+    public string FullName { get; private set; }
+    public string UserName { get; private set; }    
+    public string DateOfBirth { get; private set; }
+    public string JoinedDate { get; private set; }
+    public string Gender { get; private set; }
+    public string Type { get; private set; }
+    public string Location { get; private set; }
 
     /// <summary>
     /// To check Create + Edit User - 6 properties

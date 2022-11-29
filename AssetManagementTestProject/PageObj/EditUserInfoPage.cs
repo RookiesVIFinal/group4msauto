@@ -5,7 +5,7 @@ namespace AssetManagementTestProject.PageObj;
 
 public class EditUserInfoPage : WebDriverAction
 {
-    public EditUserInfoPage(IWebDriver? driver) : base(driver)
+    public EditUserInfoPage() : base()
     {
     }
 }

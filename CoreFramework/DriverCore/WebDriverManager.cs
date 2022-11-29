@@ -32,32 +32,7 @@ public class WebDriverManager
         Driver.Manage().Window.Size = new Size(ScreenWidth, ScreenHeight);
         return Driver;
     }
-    //public static IWebDriver? CreateBrowserstack(string Browser,
-    //    int ScreenWidth, int ScreenHeight)
-    //{
-    //    IWebDriver? Driver = null;
-    //    // Assign different drivers for each browser
-    //    if (Browser.SequenceEqual("firefox"))
-    //    {
-    //        //new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
-    //        Driver = new FirefoxDriver();
-    //    }
-    //    else if (Browser.SequenceEqual("chrome"))
-    //    {
-    //        //new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-    //        Driver = new ChromeDriver();
-    //    }
-    //    else if (Browser.SequenceEqual("safari"))
-    //    {
-    //        //new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-    //        Driver = new SafariDriver();
-    //    }
-    //    // commands after starting driver
-    //    Driver.Manage().Window.Maximize();
-    //    Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-    //    Driver.Manage().Window.Size = new Size(ScreenWidth, ScreenHeight);
-    //    return Driver;
-    //}
+
     public static void InitDriver(string Browser, int Width, int Height)
     {
 

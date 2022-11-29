@@ -25,24 +25,4 @@ public class APIRequestLog : IMarkup
     }
 }
 
-//public class APIRequestLogRS : IMarkup
-//{
-//    private APIRequestRS request { get; set; }
-//    private APIResponseRS response { get; set; }
 
-//    public APIRequestLogRS(APIRequestRS request, APIResponseRS response)
-//    {
-//        this.request = request;
-//        this.response = response;
-
-//    }
-
-//    public string GetMarkup()
-//    {
-//        string log = $@"
-//                    <p>Request url: {request.url}</p>
-//                    <p>Request body: {response.responseBody}</p>
-//                    <p>Response status: {response.responseStatusCode}</p>";
-//        return log;
-//    }
-//}

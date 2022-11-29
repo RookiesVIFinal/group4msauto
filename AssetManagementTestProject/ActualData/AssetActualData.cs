@@ -12,7 +12,7 @@ namespace AssetManagementTestProject.ActualData;
 public class AssetActualData : WebDriverAction
 {
 
-    public AssetActualData(IWebDriver? driver) : base(driver)
+    public AssetActualData() : base()
     {
     }
 

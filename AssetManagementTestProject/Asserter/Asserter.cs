@@ -5,28 +5,28 @@ using OpenQA.Selenium;
 using NUnit.Framework;
 
 namespace AssetManagementTestProject.Asserter;
-/// <summary>
-/// Assertions for strings/DAO/List DAO objects
-/// Also check order
-/// Alternatives if FluentAssertions fails
-/// </summary>
+
 public class Asserter : WebDriverAction
 {
-    public Asserter(IWebDriver? driver) : base(driver)
+    /// <summary>
+    /// Assertions for strings/DAO/List DAO objects
+    /// Also check order
+    /// Alternatives if FluentAssertions fails
+    /// </summary>
+    public Asserter() : base()
     {
     }
 
 
-    // ------------------------------- CONVERTED JSON FLUENT ASSERTION -------------------------------
-
-    public static void AssertListStringEquals(string actual, string expected)
+    #region STRING FLUENT ASSERTION
+    public static void AssertStringEquals(string actual, string expected)
     {
-        // Compare two deserialized JSON strings
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
-    // ------------------------------- DAO LIST WITH FLUENT ASSERTION -------------------------------
+    #endregion
 
+
+    #region DAO LIST WITH FLUENT ASSERTION
     public static void AssertUserListsEquals(List<UserDAO> actual, List<UserDAO> expected)
     {
         AssertEquals(actual, expected);
@@ -35,55 +35,52 @@ public class Asserter : WebDriverAction
     public static void AssertAssignmentListsEquals(List<AssignmentDAO> actual, List<AssignmentDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertAssetListsEquals(List<AssetDAO> actual, List<AssetDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertReturningListsEquals(List<ReturningDAO> actual, List<ReturningDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertReportListsEquals(List<ReportDAO> actual, List<ReportDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
-    // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
 
+    #endregion
+
+
+    #region DAO WITH FLUENT EQUAL ASSERTION
     public static void AssertUserEquals(UserDAO actual, UserDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertAssignmentEquals(AssignmentDAO actual, AssignmentDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertAssetListsEquals(AssetDAO actual, AssetDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertReturningListsEquals(ReturningDAO actual, ReturningDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public static void AssertReportListsEquals(ReportDAO actual, ReportDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
 
-    // ------------------------------- DAO WITH FLUENT EQUAL ASSERTION -------------------------------
+    #endregion
 
+
+    #region DAO WITH FLUENT EQUAL ASSERTION
     public static void AssertUserListAscending(List<UserDAO> list)
     {
+        /// TODO: Make this as a WebDriverAction method
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
@@ -138,31 +135,7 @@ public class Asserter : WebDriverAction
 
     }
 
-
-    // ------------------------------- IN CASE FLUENT ASSERTION FAILS -------------------------------
-
-    //public static void AssertListEquals<TE, TA>(Action<TE, TA> asserter,
-    //    IEnumerable<TE> expected, IEnumerable<TA> actual)
-    //{
-    //    // Allow user to freely define that on which properties you want to do the assertions:
-    //    IList<TA> actualList = actual.ToList();
-    //    IList<TE> expectedList = expected.ToList();
-
-    //    Assert.True(
-    //        actualList.Count == expectedList.Count,
-    //        $"Lists have different sizes. Expected list: {expectedList.Count}, actual list: {actualList.Count}");
-
-    //    for (var i = 0; i < expectedList.Count; i++)
-    //    {
-    //        try
-    //        {
-    //            asserter.Invoke(expectedList[i], actualList[i]);
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            Assert.True(false, $"Assertion failed because: {e.Message}");
-    //        }
-    //    }
-    //}
-
+    #endregion
 }
+
+

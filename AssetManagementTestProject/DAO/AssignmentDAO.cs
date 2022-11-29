@@ -2,15 +2,15 @@
 
 public class AssignmentDAO
 {
-    public string AssetCode { get; set; }
-    public string AssetName { get; set; }
-    public string User { get; set; }
-    public string AssignedTo { get; set; }
-    public string AssignedBy { get; set; }
-    public string AssignedDate { get; set; }
-    public string State { get; set; }
-    public string Note { get; set; }
-    public string Specification { get; set; }
+    public string AssetCode { get; private set; }
+    public string AssetName { get; private set; }
+    public string User { get; private set; }
+    public string AssignedTo { get; private set; }
+    public string AssignedBy { get; private set; }
+    public string AssignedDate { get; private set; }
+    public string State { get; private set; }
+    public string Note { get; private set; }
+    public string Specification { get; private set; }
 
     /// <summary>
     /// To check View Assignment - 6 properties
