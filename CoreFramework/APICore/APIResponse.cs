@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Core_Framework.API_Core;
+namespace CoreFramework.APICore;
 
 public class APIResponse
 {

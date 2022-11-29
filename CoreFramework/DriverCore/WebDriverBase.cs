@@ -1,4 +1,4 @@
-﻿using Core_Framework.Reporter;
+﻿using CoreFramework.Reporter;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -7,9 +7,9 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System.Globalization;
-using DriverManager = Core_Framework.DriverCore.WebDriverManager;
+using DriverManager = CoreFramework.DriverCore.WebDriverManager;
 
-namespace Core_Framework.DriverCore;
+namespace CoreFramework.DriverCore;
 
 public class WebDriverBase
 {

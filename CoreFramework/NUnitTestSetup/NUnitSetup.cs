@@ -1,12 +1,12 @@
 ﻿using AventStack.ExtentReports;
-using Core_Framework.DriverCore;
-using Core_Framework.Reporter;
+using CoreFramework.DriverCore;
+using CoreFramework.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 
-namespace Core_Framework.NUnitTestSetup;
+namespace CoreFramework.NUnitTestSetup;
 
 [TestFixture]
 public class NUnitSetup

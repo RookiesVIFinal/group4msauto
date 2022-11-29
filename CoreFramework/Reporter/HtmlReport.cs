@@ -1,11 +1,11 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.MarkupUtils;
 using AventStack.ExtentReports.Reporter;
-using Core_Framework.API_Core;
-using Core_Framework.Reporter.ExtentMarkup;
+using CoreFramework.APICore;
+using CoreFramework.Reporter.ExtentMarkup;
 using NUnit.Framework;
 
-namespace Core_Framework.Reporter;
+namespace CoreFramework.Reporter;
 
 internal class HtmlReport
 {

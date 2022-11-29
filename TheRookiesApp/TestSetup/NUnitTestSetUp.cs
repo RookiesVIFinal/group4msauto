@@ -1,4 +1,4 @@
-﻿using Core_Framework.NUnitTestSetup;
+﻿using CoreFramework.NUnitTestSetup;
 using NUnit.Framework;
 using TheRookiesApp.DAO;
 

@@ -1,4 +1,4 @@
-﻿using Core_Framework.DriverCore;
+﻿using CoreFramework.DriverCore;
 using TheRookiesApp.TestSetup;
 
 namespace TheRookiesApp.PageObject;

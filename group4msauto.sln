@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheRookiesApp", "Automation_Test_Framework\TheRookiesApp.csproj", "{ADDC31AA-4713-4926-901C-F08C0A4840B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheRookiesApp", "TheRookiesApp\TheRookiesApp.csproj", "{ADDC31AA-4713-4926-901C-F08C0A4840B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_Framework", "Core_Framework\Core_Framework.csproj", "{7C2D75CE-B288-4910-8DBD-6C6D6F457988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreFramework", "CoreFramework\CoreFramework.csproj", "{7C2D75CE-B288-4910-8DBD-6C6D6F457988}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

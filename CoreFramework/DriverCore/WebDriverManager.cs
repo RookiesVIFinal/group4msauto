@@ -4,7 +4,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 using System.Drawing;
 
-namespace Core_Framework.DriverCore;
+namespace CoreFramework.DriverCore;
 
 public class WebDriverManager
 {

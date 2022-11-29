@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Reflection;
 
-namespace Core_Framework.Utilities;
+namespace CoreFramework.Utilities;
 
 internal class FilePath
 {

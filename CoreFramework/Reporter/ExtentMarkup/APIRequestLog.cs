@@ -1,7 +1,7 @@
 ﻿using AventStack.ExtentReports.MarkupUtils;
-using Core_Framework.API_Core;
+using CoreFramework.APICore;
 
-namespace Core_Framework.Reporter.ExtentMarkup;
+namespace CoreFramework.Reporter.ExtentMarkup;
 
 public class APIRequestLog : IMarkup
 {

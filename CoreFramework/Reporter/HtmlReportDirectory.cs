@@ -1,7 +1,7 @@
-﻿using Core_Framework.Utilities;
+﻿using CoreFramework.Utilities;
 using NUnit.Framework;
 
-namespace Core_Framework.Reporter;
+namespace CoreFramework.Reporter;
 
 internal class HtmlReportDirectory
 {

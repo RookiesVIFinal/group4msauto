@@ -1,8 +1,8 @@
-﻿using Core_Framework.Reporter;
+﻿using CoreFramework.Reporter;
 using System.Net;
 using System.Text;
 
-namespace Core_Framework.API_Core;
+namespace CoreFramework.APICore;
 
 public class APIRequest
 {

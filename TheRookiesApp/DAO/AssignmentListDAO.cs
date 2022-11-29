@@ -1,6 +1,4 @@
-﻿using Octokit;
-
-namespace TheRookiesApp.DAO;
+﻿namespace TheRookiesApp.DAO;
 
 public class AssignmentListDAO
 {
