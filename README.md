@@ -32,44 +32,33 @@ The project is organized as the structure below
 ## Coding Convention
 
 Examples for pages
-
+```cs
 WebDriverBase.cs
-
 // Settings
 using Core_Framework.Reporter;
-using FluentAssertions;
-using Newtonsoft.Json;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System.Globalization;
-using DriverManager = Core_Framework.DriverCore.WebDriverManager;
 
 // Variables 
-    public IWebDriver Driver;
-    public IJavaScriptExecutor Javascript { get; set; }
-    private WebDriverWait _explicitWait;
-    private Actions _actions;
-    private int _timeWait = 60;
+public IWebDriver Driver;
+public IJavaScriptExecutor Javascript { get; set; }
+private WebDriverWait _explicitWait;
+private Actions _actions;
+private int _timeWait = 60;
 
 // Methods
-#region "MOVEMENTS"
-    public void MoveForward()
-    {
-        Driver.Navigate().Forward();
+public void MoveForward()
+{
+ Driver.Navigate().Forward();
 
-    }
+}
 
-    public void MoveBackward()
-    {
-        Driver.Navigate().Back();
+public void MoveBackward()
+{
+ Driver.Navigate().Back();
 
-    }
-
+}
+```
 Tests examples
-
+```cs
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using TheRookiesApp.Common;
@@ -96,7 +85,7 @@ public class US302LoginTest : NUnitTestSetUp
 
     }
 }
-
+```
 ## Gitflow
 
 1/ Create new branch
