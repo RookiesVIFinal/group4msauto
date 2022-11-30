@@ -394,6 +394,28 @@ public class WebDriverAction
         }
     }
 
+    public List<bool> AreElementsDisplayed(List<string> locators)
+    {
+        List<bool> result = new List<bool>();
+        foreach(string locator in locators)
+        {
+            IWebElement e = Driver.FindElement(GetXpath(locator));
+            if (e == null)
+            {
+                HtmlReport.Fail("Element is not displayed", TakeScreenShot());
+                result.Add(false);
+            }
+            else
+            {
+                HighlightElem(e);
+                HtmlReport.Pass("Element [" + e.Text + "] is displayed", TakeScreenShot());
+                result.Add(true);
+            }
+        }
+        return result;
+
+    }
+
     public void CompareTitles(string expectedTitle)
     {
         try

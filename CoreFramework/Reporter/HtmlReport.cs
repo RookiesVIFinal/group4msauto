@@ -101,14 +101,12 @@ internal class HtmlReport
 
         GetTest().Pass(des);
         TestContext.WriteLine(des);
-        //MarkupPassLabel(des);
     }
 
     public static void Pass (string des, string path)
     {
         GetTest().Pass(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
-        //MarkupPassLabel(des);
     }
 
     public static void Fail(string des)
@@ -162,7 +160,6 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelper.CreateTable(someInts));
     }
-    // LABELS
     public static void MarkupPassLabel(string text)
     {
         GetTest().Pass(MarkupHelper.CreateLabel(text, ExtentColor.Green));

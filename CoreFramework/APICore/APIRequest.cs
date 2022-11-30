@@ -8,7 +8,6 @@ namespace CoreFramework.APICore;
 public class APIRequest
 {
 
-    // ------------------------------- WORKING WITH Url -------------------------------
 
     public HttpWebRequest Request;
     public string Url { get; set; }
@@ -29,7 +28,6 @@ public class APIRequest
         RequestBody = "";
         FormData = "";
     }
-    // ------------------------------- Request ACTIONS -------------------------------
 
 
     /////// ADD

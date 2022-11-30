@@ -46,10 +46,11 @@ public class NUnitTestSetup
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
-
+            HtmlReport.Pass("Test case passed");
         }
         else if (testStatus.Equals(TestStatus.Failed))
         {
+            HtmlReport.Fail("Test case Failed");
         }
 
 

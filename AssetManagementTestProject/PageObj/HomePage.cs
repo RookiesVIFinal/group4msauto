@@ -26,9 +26,9 @@ public class HomePage : WebDriverAction
     {
         return textChangePw1stTime;
     }
-    public void ChangePwFirstTimeLogIn()
+    public void ChangePwFirstTimeLogIn(string newPassword)
     {
-        SendKeys_(tfFirstLoginNewPw, Constant.CHANGED_ADMIN_PASSWORD);
+        SendKeys_(tfFirstLoginNewPw, newPassword);
         Click(btnSaveFirstLoginNewPw);
     }
 
