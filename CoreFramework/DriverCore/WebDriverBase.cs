@@ -480,11 +480,11 @@ public class WebDriverBase
             HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
                 "with expected data [" + expected.ToString() + "]");
         }
-        catch (Exception excep)
+        catch (Exception)
         {
             HtmlReport.Fail("Actual data [" + actual + "] does not match " +
                 "with expected data [" + expected + "]");
-            throw excep;
+            throw;
         }
     }
 

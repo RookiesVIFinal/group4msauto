@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using TheRookiesApp.DAO;
 
-namespace AssetManagementTestProject.Asserter;
+namespace TheRookiesApp.Asserter;
 
 public class UserListAsserter : WebDriverBase
 {

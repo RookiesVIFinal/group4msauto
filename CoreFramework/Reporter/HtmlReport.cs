@@ -178,5 +178,6 @@ internal class HtmlReport
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
+
     #endregion
 }

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using TheRookiesApp.DAO;
 
 // ------------------------------- IN CASE FLUENT ASSERTION FAILS -------------------------------
-namespace AssetManagementTestProject.Asserter;
+namespace TheRookiesApp.Asserter;
 
 public class AssetListAsserter : WebDriverBase
 {

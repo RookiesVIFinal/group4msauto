@@ -3,7 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using TheRookiesApp.DAO;
 
-namespace AssetManagementTestProject.Asserter;
+namespace TheRookiesApp.Asserter;
 /// <summary>
 /// Assertions for strings/DAO/List DAO objects
 /// Also check order

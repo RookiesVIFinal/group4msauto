@@ -10,7 +10,7 @@ namespace TheRookiesApp.Common
         public static void LoginAsAdmin()
         {
             LoginPage loginPage = new LoginPage();
-            loginPage.DoLogin(Constant.ADMIN_USER_NAME, Constant.ADMIN_PASSWORD);
+            loginPage.DoLogin(Constant.ADMIN_USER_NAME, Constant.ADMIN_PASSWORD);;
         }
 
         public static void LoginAsStaff()
