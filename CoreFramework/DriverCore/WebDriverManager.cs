@@ -9,7 +9,6 @@ namespace CoreFramework.DriverCore;
 public class WebDriverManager
 {
     private static readonly AsyncLocal<IWebDriver> _driver = new();
-
     public static IWebDriver CreateLocalDriver(string Browser, int Width, int Height)
     {
         IWebDriver? Driver = null;

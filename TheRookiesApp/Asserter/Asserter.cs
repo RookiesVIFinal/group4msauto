@@ -15,70 +15,78 @@ public class Asserter : WebDriverBase
     {
     }
 
-    #region CONVERTED JSON FLUENT ASSERTION
+    #region STRING FLUENT ASSERTION
+
+    public static void AssertStringEquals(string actual, string expected)
+    {
+        AssertEquals(actual, expected);
+    }
 
     public static void AssertListStringEquals(string actual, string expected)
     {
-        // Compare two deserialized JSON strings
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
+
     #endregion
 
     #region DAO LIST WITH FLUENT ASSERTION
     public static void AssertUserListsEquals(List<UserListDAO> actual, List<UserListDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
+
     public static void AssertAssignmentListsEquals(List<AssignmentListDAO> actual, List<AssignmentListDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
+
     public static void AssertAssetListsEquals(List<AssetListDAO> actual, List<AssetListDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
+
     public static void AssertReturningListsEquals(List<ReturningListDAO> actual, List<ReturningListDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
+
     public static void AssertReportListsEquals(List<ReportListDAO> actual, List<ReportListDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
+
     #endregion
 
     #region DAO WITH FLUENT EQUAL ASSERTION
     public static void AssertUserEquals(UserListDAO actual, UserListDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+ 
     }
     public static void AssertAssignmentEquals(AssignmentListDAO actual, AssignmentListDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
     public static void AssertAssetListsEquals(AssetListDAO actual, AssetListDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
     public static void AssertReturningListsEquals(ReturningListDAO actual, ReturningListDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
     public static void AssertReportListsEquals(ReportListDAO actual, ReportListDAO expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
+
     }
+
     #endregion
 
     #region DAO WITH FLUENT EQUAL ASSERTION
@@ -137,6 +145,7 @@ public class Asserter : WebDriverBase
         TestContext.WriteLine("List is sorted in descending order");
 
     }
+
     #endregion
 
     #region IN CASE FLUENT ASSERTION FAILS
@@ -163,6 +172,7 @@ public class Asserter : WebDriverBase
             }
         }
     }
+
     #endregion
 
 }

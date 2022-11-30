@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Reflection;
 
 namespace CoreFramework.Utilities;
 
@@ -27,8 +26,8 @@ internal class FilePath
 
     public static string GetCurrentDirectoryPath()
     {
-        var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + "\\..\\..\\..");
-        TestContext.Progress.WriteLine(path);
+        // report folder in bin/Debug/net 6.0
+        var path = TestContext.CurrentContext.TestDirectory;
         return path;
     }
 

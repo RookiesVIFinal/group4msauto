@@ -10,16 +10,6 @@ public class ReportPage : WebDriverBase
 
     }
 
-    //public bool IsCorrectRedirect()
-    //{
-    //    if (Constant.BASE_URL + addedURL == GetUrl())
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+ 
 
 }

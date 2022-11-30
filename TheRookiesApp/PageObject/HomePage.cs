@@ -12,35 +12,48 @@ public class HomePage : WebDriverBase
     private readonly string _btnManageReturningInMenu = "//a[text() = 'Manage Returning']";
     private readonly string _btnReportInMenu = "//a[text() = 'Report']";
 
-    private string _btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
-    private string _btnChangePw = "//a[contains(@href, '/change-password')]";
-    private string _btnLogout = "//a[contains(@href, '/logout')]";
+    private string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
+    private string btnChangePw = "//a[contains(@href, '/change-password')]";
+    private string btnLogout = "//a[contains(@href, '/logout')]";
+    private string headerHomePage = "//h1[contains(@class, 'text-red-600')]";
 
     private string _popUp = "//div[contains(@class, 'ant-modal-content')]";
     private string _txtNewPassword = "//input[contains(@id, 'newPassword')]";
     private string _btnSaveNewPw = "//button[contains(@type, 'submit')]";
 
+    #region FIRST TIME LOGIN
+    private string tfFirstLoginNewPw = "//input[contains(@id, 'newPassword')]";
+    private string btnSaveFirstLoginNewPw = "//button[contains(@type, 'submit')]";
+    private string txtChangePw1stTime = "//p[text()='You have to change your password to continue.']";
+
+    #endregion
+
     public HomePage() : base()
     {
 
     }
-    public void Logout()
+
+    public string RedirectToFirstLogin()
     {
-        Click(_btnNavigationBar);
-        Click(_btnLogout);
+        return txtChangePw1stTime;
+    }
+    public void ChangePwFirstTimeLogIn(string newPassword)
+    {
+        SendKeys_(tfFirstLoginNewPw, newPassword);
+        Click(btnSaveFirstLoginNewPw);
     }
 
-    public void IsCorrectRedirect()
+    public string ReturnPageUrl()
     {
-        Click(_btnHomeInMenu);
-        CompareUrls(Constant.HOME_PAGE_URL);
+        WaitToBeVisible(headerHomePage);
+        return GetUrl();
     }
 
-    public void ChangePassword()
+
+    public void SelectLogout()
     {
-        IsPopUpDisplay(_popUp);
-        SendKeys_(_txtNewPassword,"Admin@1234");
-        Clicks(_btnSaveNewPw);
+        Click(btnNavigationBar);
+        Click(btnLogout);
     }
 
 }

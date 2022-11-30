@@ -1,4 +1,4 @@
-﻿using CoreFramework.API_Core;
+﻿using CoreFramework.APICore;
 
 namespace TheRookiesApp.Service;
 

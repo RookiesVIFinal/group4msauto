@@ -19,16 +19,9 @@ public class WebDriverBase
     private Actions _actions;
     private int _timeWait = 60;
 
-
-    public WebDriverBase(IWebDriver driver)
+    public WebDriverBase()
     {
-        this.Driver = driver;
-    }
-
-    public WebDriverBase(string baseUrl = "")
-    {
-        this.Driver = DriverManager.GetCurrentDriver();
-        Driver.Url = baseUrl;
+        Driver = DriverManager.GetCurrentDriver();
         _actions = new Actions(Driver);
         _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
     }
@@ -49,6 +42,12 @@ public class WebDriverBase
     public void MoveBackward()
     {
         Driver.Navigate().Back();
+
+    }
+
+    public void RefreshPage()
+    {
+        Driver.Navigate().Refresh();
 
     }
 
@@ -84,12 +83,12 @@ public class WebDriverBase
         return Driver.Url;
     }
 
-    public string GetTextFromElement(string locator)
+    public string GetText(string locator)
     {
         return Driver.FindElement(By.XPath(locator)).Text;
     }
 
-    public static string GetTextFromElement(IWebElement e)
+    public static string GetTextFromIWebElement(IWebElement e)
     {
         return e.Text;
     }
@@ -122,52 +121,41 @@ public class WebDriverBase
 
     }
 
-    public IWebElement HighlightElement(IWebElement element)
-    {
-        IJavaScriptExecutor jse = (IJavaScriptExecutor)Driver;
-        jse.ExecuteScript("arguments[0].style.border='2px solid red'", element);
-        return element;
-    }
-
-
-    public void Click(IWebElement e)
+    public void Clear(string locator)
     {
         try
         {
-            HighlightElement(e);
-            e.Click();
-            TestContext.WriteLine("click on element" + e.ToString() + "passed");
+            FindElementByXpath(locator).Clear();
+            HtmlReport.Pass("Clear previous input in element [" + locator + "] passed");
+
         }
         catch (Exception)
         {
-            TestContext.WriteLine("click on element" + e.ToString() + "failed");
+            HtmlReport.Fail("Clear previous input in element [" + locator + "] failed");
             throw;
         }
+    }
 
+    public IWebElement HighlightElement(IWebElement e)
+    {
+        try
+        {
+            IJavaScriptExecutor jsDriver = (IJavaScriptExecutor)Driver;
+            string highlightJavascript = "arguments[0].style.border='2px solid red'";
+            jsDriver.ExecuteScript(highlightJavascript, new object[] { e });
+            HtmlReport.Pass("Highlight element [" + e.ToString() + "] passed");
+            return e;
+
+        }
+        catch (Exception)
+        {
+            HtmlReport.Fail("Highlight element [" + e.ToString() + "] failed");
+            throw;
+
+        }
     }
 
     public void Click(string locator)
-    {
-        try
-        {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-            var btnClick = wait.Until(ExpectedConditions.ElementExists(GetXpath(locator)));
-            HighlightElement(btnClick);
-            btnClick.Click();
-            TestContext.WriteLine("Click on element" + locator + "successfully");
-            HtmlReport.Pass("Click on element" + locator + "successfully");
-
-        }
-        catch (Exception)
-        {
-            TestContext.WriteLine("Click on element" + locator + "unsuccessfully");
-            HtmlReport.Fail("Click on element" + locator + "unsuccessfully", TakeScreenShot());
-            throw;
-        }
-
-    }
-
-    public void Clicks(string locator)
     {
         try
         {
@@ -177,23 +165,22 @@ public class WebDriverBase
             HtmlReport.Pass("Clicking on element [" + locator + "] passed");
 
         }
-        catch (Exception excep)
+        catch (Exception)
         {
             HtmlReport.Fail("Clicking on element [" + locator + "] failed");
-            throw excep;
+            throw;
         }
     }
 
     public void Click_(string locator)
     {
-        // Use javascriptexecutor to avoid ClickInterceptedException
+        /// Use javascriptexecutor to avoid ClickInterceptedException
         try
         {
             IWebElement btnToClick = WaitToBeClickable(locator);
             HighlightElement(btnToClick);
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)Driver;
-            executor.ExecuteScript("arguments[0].click();", btnToClick);
-            TestContext.WriteLine("Click on element [" + locator + "] successfully");
+            Javascript.ExecuteScript("arguments[0].click();", btnToClick);
+
             HtmlReport.Pass("Clicking on element [" + locator + "] passed");
 
         }
@@ -205,33 +192,55 @@ public class WebDriverBase
 
     }
 
-    public void DoubleClick(IWebElement e)
+    public void DoubleClick(string locator)
     {
         try
         {
-            WebDriverBase action = new(Driver);
-            HighlightElement(e);
-            action.DoubleClick(e);
-            HtmlReport.Pass("Double click on element " + e.ToString() + " successfuly");
+            IWebElement btnToDoubleClick = WaitToBeClickable(locator);
+            HighlightElement(btnToDoubleClick);
+            /// TODO: Change this to _actions after done integrating
+            //Actions action = new Actions(Driver);
+            _actions.DoubleClick(btnToDoubleClick).Perform();
+            HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
         }
         catch (Exception)
         {
-            HtmlReport.Fail("Double click on element " + e.ToString() + " failed with");
+            HtmlReport.Fail("Double click on element [" + locator + "] failed");
             throw;
         }
-
     }
 
-    public static void SendKeys(IWebElement e, string key)
+    public void DoubleClick_(string locator)
     {
+
+        /// Double click_actions using jsexecutor
         try
         {
-            e.SendKeys(key);
-            TestContext.WriteLine("Sendkey into element " + e.ToString() + " successfuly");
+            IWebElement btnToDoubleClick = WaitToBeClickable(locator);
+            HighlightElement(btnToDoubleClick);
+            Javascript.ExecuteScript("arguments[0].dblclick();", btnToDoubleClick);
+            HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
         }
         catch (Exception)
         {
-            TestContext.WriteLine("Sendkey into element " + e.ToString() + " failed");
+            HtmlReport.Fail("Double click on element [" + locator + "] failed");
+            throw;
+        }
+    }
+
+    public void RightClick(string locator)
+    {
+        try
+        {
+            IWebElement btnToRightClick = WaitToBeClickable(locator);
+            HighlightElement(btnToRightClick);
+            //Actions action = new Actions(Driver);
+            _actions.ContextClick(btnToRightClick).Perform();
+            HtmlReport.Pass("Right click on element [" + locator + "] successfuly");
+        }
+        catch (Exception)
+        {
+            HtmlReport.Fail("Right click on element [" + locator + "] failed");
             throw;
         }
 
@@ -243,7 +252,7 @@ public class WebDriverBase
         {
             FindElementByXpath(locator).SendKeys(key);
             TestContext.WriteLine("Sendkey into element" + locator + "passed");
-            HtmlReport.Pass("Sendkey into element" + locator + "passed");
+            HtmlReport.Pass("Sendkey into element" + locator + "passed", TakeScreenShot());
         }
         catch (Exception)
         {
@@ -253,6 +262,23 @@ public class WebDriverBase
             throw;
         }
 
+    }
+
+    public void ReplaceKey(string locator, string key)
+    {
+        try
+        {
+            Clear(locator);
+            SendKeys_(locator, key);
+            HtmlReport.Pass("Clearing previous input in [" + locator + "] and " +
+                "replacing it with [" + key + "] passed", TakeScreenShot());
+        }
+        catch (Exception)
+        {
+            HtmlReport.Fail("Clearing previous input in [" + locator + "] and " +
+                "replacing it with [" + key + "] failed", TakeScreenShot());
+            throw;
+        }
     }
 
     public void SelectOption(string locator, string key)
@@ -267,29 +293,6 @@ public class WebDriverBase
         catch (Exception)
         {
             TestContext.WriteLine("Select element " + locator + " failed with " + key);
-            throw;
-        }
-
-    }
-
-    public void Clear(string locator)
-    {
-        FindElementByXpath(locator).Clear();
-        TestContext.WriteLine("Clear element " + locator + " successfully");
-        HtmlReport.Pass("Clear element" + locator + "passed");
-    }
-
-    public void ReplaceKey(string locator, string key)
-    {
-        try
-        {
-            FindElementByXpath(locator).Clear();
-            FindElementByXpath(locator).SendKeys(key);
-            HtmlReport.Pass("Replace into element" + locator + "passed");
-        }
-        catch (Exception)
-        {
-            HtmlReport.Fail("Replace into element" + locator + "failed", TakeScreenShot());
             throw;
         }
 
@@ -317,10 +320,8 @@ public class WebDriverBase
     #region "CAPTURE SCREENSHOT"
     public string TakeScreenShot()
     {
-
         try
         {
-
             string path = HtmlReportDirectory.SCREENSHOT_PATH + ("/screenshot_" +
                 DateTime.Now.ToString("yyyyMMddHHmmss")) + ".png"; // Dynamic name
             Screenshot ss = ((ITakesScreenshot)Driver).GetScreenshot();
@@ -335,38 +336,50 @@ public class WebDriverBase
         }
     }
 
-    public void TakeScreenshotIf404()
+    public string GetErrorMessage()
     {
-        if (Driver.Title.Contains("404"))
+        var errorMessage = TestContext.CurrentContext.Result.Message;
+        return errorMessage;
+    }
+
+    public string TakeScreenshotIf404()
+    {
+        // Use when comparing titles
+        string title = GetTitle();
+        string path;
+        if (title.Contains("404"))
         {
-            TakeScreenShot();
+            path = TakeScreenShot();
             HtmlReport.Warning("Error 404 - Screenshot taken");
+            return path;
+
         }
-        TakeScreenShot();
+        path = TakeScreenShot();
+        return path;
     }
     #endregion
 
     #region "WAIT TIME"
     public IWebElement WaitToBeVisible(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-        var btnToClick = wait.Until(
+        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementIsVisible(GetXpath(locator)));
         return btnToClick;
     }
 
     public IWebElement WaitToBeClickable(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-        var btnToClick = wait.Until(
+        // var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
         return btnToClick;
     }
 
     public bool WaitToBeSelected(string locator)
     {
-        var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
-        var btnToClick = wait.Until(
+        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+        var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
@@ -387,9 +400,9 @@ public class WebDriverBase
         return currentTimeVN;
     }
     #endregion
-   
+
     #region VERIFYING AND COMPARING AND ASSERTING
-    public bool IsElementDisplay(string locator)
+    public bool IsElementDisplayed(string locator)
     {
         IWebElement e = Driver.FindElement(GetXpath(locator));
 
@@ -404,6 +417,28 @@ public class WebDriverBase
             HtmlReport.Pass("Element [" + e.ToString() + "] is displayed", TakeScreenShot());
             return true;
         }
+    }
+
+    public List<bool> AreElementsDisplayed(List<string> locators)
+    {
+        List<bool> result = new List<bool>();
+        foreach (string locator in locators)
+        {
+            IWebElement e = Driver.FindElement(GetXpath(locator));
+            if (e == null)
+            {
+                HtmlReport.Fail("Element is not displayed", TakeScreenShot());
+                result.Add(false);
+            }
+            else
+            {
+                HighlightElement(e);
+                HtmlReport.Pass("Element [" + e.Text + "] is displayed", TakeScreenShot());
+                result.Add(true);
+            }
+        }
+        return result;
+
     }
 
     public bool IsErrorMessageDisplay(string locator)
@@ -447,12 +482,14 @@ public class WebDriverBase
         try
         {
             string actualTitle = GetTitle();
-            Assert.That(actualTitle, Is.EqualTo(expectedTitle));
-            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", TakeScreenShot());
+            actualTitle.Should().Match(expectedTitle);
+            //Assert.That(actualTitle, Is.EqualTo(expectedTitle));
+            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]",
+                TakeScreenShot());
         }
         catch (Exception)
         {
-            HtmlReport.Fail("Titles do not match", TakeScreenShot());
+            HtmlReport.Fail("Titles do not match", TakeScreenshotIf404());
             throw;
         }
     }
@@ -462,12 +499,14 @@ public class WebDriverBase
         try
         {
             string actualUrl = GetUrl();
-            Assert.That(actualUrl, Is.EqualTo(expectedUrl));
-            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches [" + expectedUrl + "]", TakeScreenShot());
+            AssertEquals(actualUrl, expectedUrl);
+            //Assert.That(actualUrl, Is.EqualTo(expectedUrl));
+            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]",
+                TakeScreenShot());
         }
         catch (Exception)
         {
-            HtmlReport.Fail("Urls do not match", TakeScreenShot());
+            HtmlReport.Fail("Urls do not match", TakeScreenshotIf404());
             throw;
         }
     }
@@ -487,36 +526,6 @@ public class WebDriverBase
             throw;
         }
     }
-
-    //public static void AssertListEquals(object actual, object expected)
-    //{
-    //    try
-    //    {
-    //        actual.Should().BeEquivalentTo(expected);
-    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches " +
-    //            "with expected data [" + expected.ToString() + "]");
-    //    }
-    //    catch (Exception excep)
-    //    {
-    //        HtmlReport.Fail("Actual data [" + actual + "] does not match " +
-    //            "with expected data [" + expected + "]");
-    //        throw excep;
-    //    }
-    //}
-
-    //public static void AssertAscendingOrder(object list)
-    //{
-    //    try
-    //    {
-    //        List<object>.Should().BeInAsencingOrder();
-    //        HtmlReport.Pass("Actual data [" + actual.ToString() + "] matches with expected data [" + expected.ToString() + "]");
-    //    }
-    //    catch (Exception excep)
-    //    {
-    //        HtmlReport.Fail("Actual data [" + actual + "] does not match with expected data [" + expected + "]");
-    //        throw excep;
-    //    }
-    //}
     #endregion
 
     #region DEALING WITH GRID
@@ -538,10 +547,11 @@ public class WebDriverBase
         /// Get texts from all cells of one row and add them to a list of strings
 
         List<string> valuesFromCells = new List<string>();
-        IList<IWebElement> allCells = FindElementsByXPath(GetRowIndex(rowLocator, cellLocator, index));
+        IList<IWebElement> allCells = FindElementsByXPath
+            (GetRowIndex(rowLocator, cellLocator, index));
         foreach (IWebElement cell in allCells)
         {
-            valuesFromCells.Add(GetTextFromElement(cell));
+            valuesFromCells.Add(GetTextFromIWebElement(cell));
         }
         return valuesFromCells;
     }

@@ -32,7 +32,7 @@ public class LoginPage : WebDriverBase
     {
         SendKeys_(_txtUserName, userName);
         SendKeys_(_txtPassword, password);
-        Clicks(_btnLogin);
+        Click(_btnLogin);
     }
 
 

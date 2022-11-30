@@ -25,8 +25,4 @@ public class APIRequestLog : IMarkup
 
     }
 
-    /*public static void CreateAPIRequestLog(API_Request request, API_Response response)
-    {
-        GetTest().Info(Markup_Helper_Plus.CreateAPIRequestLog(request, response));
-    }*/
 }

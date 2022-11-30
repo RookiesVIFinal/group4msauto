@@ -11,7 +11,6 @@ public class TestSetDataAsset : WebDriverBase
 
     }
 
-
     public AssetListDAO GetAssetInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
         List<string> valuesFromCells = GetTextFromAllCellsOfOneRow

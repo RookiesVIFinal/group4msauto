@@ -47,20 +47,8 @@ public class TestSetDataUser : WebDriverBase
             listOfUsers.Add(user);
             i++;
         }
-        // If there are empty rows => Remove them
-        //foreach (UserDAO user in listOfUsers.ToList())
-        //{
-        //    // remove list elements from empty rows
-        //    if (user.staffCode.Contains(" "))
-        //    {
-        //        listOfUsers.Remove(user);
-        //    }
-        //    else
-        //    {
-        //        continue;
-        //    }
-        //}
         return listOfUsers;
+
     }
 
     public string ReturnUserListJSON(string rowLocator, string cellLocator)

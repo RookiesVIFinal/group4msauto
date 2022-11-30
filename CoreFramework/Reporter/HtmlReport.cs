@@ -83,10 +83,12 @@ internal class HtmlReport
         }
         return GetNode();
     }
+    #endregion
 
+    #region TestContext for Fail/Pass/Info/Skip
     public static void Pass(string des)
     {
-        GetTest().Pass(MarkupHelper.CreateLabel(des, ExtentColor.Green));
+        GetTest().Pass(des);
         TestContext.WriteLine(des);
     }
 
@@ -96,9 +98,9 @@ internal class HtmlReport
         TestContext.WriteLine(des);
     }
 
-    public static void Fail(string des, string path)
+    public static void Fail(string des)
     {
-        GetTest().Fail(MarkupHelper.CreateLabel(des, ExtentColor.Green)).AddScreenCaptureFromPath(path);
+        GetTest().Fail(des);
         TestContext.WriteLine(des);
     }
 
@@ -108,10 +110,10 @@ internal class HtmlReport
         TestContext.WriteLine(des);
     }
 
-    public static void Fail(string des)
+    public static void Fail(string des, string path)
     {
 
-        GetTest().Fail(des);
+        GetTest().Fail(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
 
@@ -119,6 +121,19 @@ internal class HtmlReport
     {
         GetTest().Info(des);
         TestContext.WriteLine(des);
+    }
+
+    public static void Info(string des, string path)
+    {
+
+        GetTest().Fail(des).AddScreenCaptureFromPath(path);
+        TestContext.WriteLine(des);
+    }
+
+    public static void Info(APIRequest request, APIResponse response)
+    {
+        GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
+        TestContext.Progress.WriteLine();
     }
 
     public static void Warning(string des)
@@ -173,11 +188,11 @@ internal class HtmlReport
     }
     #endregion
 
-    #region "API"
+    #region Log for API requests/response
     public static void CreateAPIRequestLog(APIRequest request, APIResponse response)
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
-
     #endregion
+
 }

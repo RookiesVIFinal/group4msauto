@@ -1,41 +1,36 @@
-﻿using AventStack.ExtentReports;
-using CoreFramework.DriverCore;
+﻿using CoreFramework.DriverCore;
 using CoreFramework.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
-using OpenQA.Selenium;
 
 namespace CoreFramework.NUnitTestSetup;
 
 [TestFixture]
 public class NUnitSetup
 {
-    protected IWebDriver Driver;
-    protected WebDriverBase DriverBaseAction;
+    protected WebDriverBase? DriverBaseAction;
+    private string Author = "Tran Nguyen Minh";
+    private string Device = "PC";
+    private string Category = "Phase2_TestProject";
 
-    protected ExtentReports? _extentReport;
-    protected ExtentTest? _extentSuite;
-    protected ExtentTest? _extentTestCase;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         HtmlReport.CreateReport();
-        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName)
-            .AssignAuthor("Tran Nguyen Minh")
-            .AssignDevice("PC")
-            .AssignCategory("Selenium Project");
+
+        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
+                    AssignAuthor(Author).AssignDevice(Device).AssignCategory(Category);
     }
 
 
     [SetUp]
     public void SetUp()
     {
-        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, TestContext.CurrentContext.Test.Name);
+        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName,
+            TestContext.CurrentContext.Test.Name);
         WebDriverManager.InitDriver("chrome", 1920, 1080);
-        Driver = WebDriverManager.GetCurrentDriver();
-        DriverBaseAction = new WebDriverBase(Driver);
 
     }
 
@@ -47,15 +42,23 @@ public class NUnitSetup
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
-
+            HtmlReport.Pass("Test case passed");
         }
         else if (testStatus.Equals(TestStatus.Failed))
         {
-
+            if (TestContext.CurrentContext.Result.Outcome.Label == "Error")
+                HtmlReport.Info("Test is in Error", DriverBaseAction.GetErrorMessage());
+            else
+                HtmlReport.Fail("Test case Failed", DriverBaseAction.TakeScreenShot());
         }
-        HtmlReport.Flush();
+
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        HtmlReport.Flush();
+    }
 }
 
 

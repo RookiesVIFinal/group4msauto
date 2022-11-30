@@ -2,7 +2,7 @@
 
 public class Constant
 {
-    public static string HOME_PAGE_URL = "https://group4b6ms.azurewebsites.net";
+    public static string HOME_PAGE_URL = "https://group4b6ms.azurewebsites.net/";
     public static string LOGIN_PAGE_URl = "https://group4b6ms.azurewebsites.net/login";
     public static string BASE_API_URL = "https://group4b6msapi.azurewebsites.net/";
     public static string CHANGE_PW_1ST_TIME_URL = "https://group4b6ms.azurewebsites.net/change-password-first-time";
