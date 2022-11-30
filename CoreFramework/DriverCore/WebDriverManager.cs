@@ -6,10 +6,8 @@ using OpenQA.Selenium.Safari;
 
 namespace CoreFramework.DriverCore;
 
-// public means visible from anywhere
 public class WebDriverManager
 {
-    // Noted Async in Obsi
     private static AsyncLocal<IWebDriver> driver = new AsyncLocal<IWebDriver>();
     public static IWebDriver? CreateLocalDriver(string Browser,
     int ScreenWidth, int ScreenHeight)
@@ -44,12 +42,10 @@ public class WebDriverManager
         driver.Value = newDriver;
 
     }
-
     public static IWebDriver GetCurrentDriver()
     {
         return driver.Value;
     }
-
     public static void CloseDriver()
     {
         if (driver.Value != null)

@@ -2,12 +2,8 @@
 
 namespace CoreFramework.APICore
 {
-
     public class APIResponse
     {    
-
-        // ------------------------------- ATTRIBUTES -------------------------------
-
         public HttpWebResponse response;
         public string responseBody { get; set; }
         public string responseStatusCode { get; set; }
@@ -18,10 +14,8 @@ namespace CoreFramework.APICore
             GetResponseBody();
             GetResponseStatusCode();
         }
-        // ------------------------------- METHODS -------------------------------
         public string GetResponseBody()
         {
-            // recheck this
             responseBody = "";
             using (var responseStream = response.GetResponseStream())
             {
@@ -45,7 +39,6 @@ namespace CoreFramework.APICore
             }
             catch (WebException webException)
             {
-                // In case of 4xx and 5xx throw a WebException
                 responseStatusCode = ((HttpWebResponse)webException.Response).StatusCode.ToString();
             }
             return responseStatusCode;

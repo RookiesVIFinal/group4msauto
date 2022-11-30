@@ -8,9 +8,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using DriverManager = CoreFramework.DriverCore.WebDriverManager;
 
-
 namespace CoreFramework.DriverCore;
-
 public class WebDriverAction
 {
     public IWebDriver Driver;
@@ -145,7 +143,6 @@ public class WebDriverAction
     }
     public void JSExeClick(string locator)
     {
-        /// Use javascriptexecutor to avoid ClickInterceptedException
         try
         {
             IWebElement btnToClick = WaitToBeClickable(locator);
@@ -167,8 +164,6 @@ public class WebDriverAction
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
             HighlightElem(btnToDoubleClick);
-            /// TODO: Change this to _actions after done integrating
-            //Actions action = new Actions(Driver);
             _actions.DoubleClick(btnToDoubleClick).Perform();
             HtmlReport.Pass("Double click on element [" + locator + "] successfuly");
         }
@@ -181,7 +176,6 @@ public class WebDriverAction
     public void JSExeDoubleClick(string locator)
     {
 
-        /// Double click_actions using jsexecutor
         try
         {
             IWebElement btnToDoubleClick = WaitToBeClickable(locator);
@@ -260,7 +254,6 @@ public class WebDriverAction
 
         }
     }
-
     public void SelectOption(string locator, string key)
     {
         try
@@ -281,8 +274,6 @@ public class WebDriverAction
     {
         try
         {
-            //try to see if the pop up is open and visible for 15 seconds.
-            //If it is, click the Close button
             IWebElement popUpCloseButton = WaitToBeClickable(locator);
             popUpCloseButton.Click();
             HtmlReport.Pass("Close Pop up successfully");
@@ -329,7 +320,6 @@ public class WebDriverAction
     {
         try
         {
-
             string path = HtmlReportDirectory.SCREENSHOT_PATH + ("/screenshot_" +
                 DateTime.Now.ToString("yyyyMMddHHmmss")) + ".png"; // Dynamic name
             Screenshot ss = ((ITakesScreenshot)Driver).GetScreenshot();
@@ -415,7 +405,6 @@ public class WebDriverAction
         return result;
 
     }
-
     public void CompareTitles(string expectedTitle)
     {
         try
@@ -432,7 +421,6 @@ public class WebDriverAction
             throw excep;
         }
     }
-
     public void CompareUrls(string expectedUrl)
     {
         try

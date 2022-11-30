@@ -24,7 +24,6 @@ public class FilePaths
     }
     public static string GetCurrentDirectoryPath()
     {
-        // report folder in bin/Debug/net 6.0
         var path = TestContext.CurrentContext.TestDirectory; 
         return path;
     }

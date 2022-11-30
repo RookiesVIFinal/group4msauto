@@ -2,7 +2,6 @@
 using CoreFramework.APICore;
 
 namespace CoreFramework.Reporter.ExtentMarkup;
-
 public class MarkupHelperPlus
 {
     public static IMarkup CreateAPIRequestLog(APIRequest request, APIResponse response)

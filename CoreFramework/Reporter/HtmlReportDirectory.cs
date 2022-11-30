@@ -19,7 +19,6 @@ public class HtmlReportDirectory
         REPORT_FOLDER_PATH = REPORT_ROOT + "\\latest reports";
         REPORT_FILE_PATH = REPORT_FOLDER_PATH + "\\report.html";
         SCREENSHOT_PATH = REPORT_FOLDER_PATH + "\\screenshot";
-        // Future lessons
         ACTUAL_SCREENSHOT_PATH = REPORT_FOLDER_PATH + "\\actual";
         DIFFERENCE_SCREENSHOT_PATH = REPORT_FOLDER_PATH + "\\difference";
         BASELINE_SCREENSHOT_PATH = FilePaths.GetCurrentDirectoryPath() + "\\resource\\baseline";

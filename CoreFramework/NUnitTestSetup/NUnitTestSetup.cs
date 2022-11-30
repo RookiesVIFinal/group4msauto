@@ -5,9 +5,6 @@ using NUnit.Framework;
 namespace CoreFramework.NUnitTestSetup;
 public class NUnitTestSetup
 {
-    // Check why [SetUp] uses InitDriver
-    // Check Add Project Preference 
-    // protected IWebDriver? Driver;
     protected WebDriverAction? DriverBaseAction;
     private string Author = "Hong_Anh_Pham";
     private string Device = "PC";
@@ -16,8 +13,6 @@ public class NUnitTestSetup
     public void OneTimeSetUp()
     {
         HtmlReport.CreateReport();
-
-        // TODO: Change all metadata into const and avoid hardcoding
         HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
             AssignAuthor(Author).AssignDevice(Device).AssignCategory(Category);
     }
