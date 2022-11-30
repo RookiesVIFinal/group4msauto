@@ -42,14 +42,11 @@ public class NUnitSetup
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
-            HtmlReport.Pass("Test case passed");
+            HtmlReport.Pass("PASSED: Test case passed");
         }
         else if (testStatus.Equals(TestStatus.Failed))
         {
-            if (TestContext.CurrentContext.Result.Outcome.Label == "Error")
-                HtmlReport.Info("Test is in Error", DriverBaseAction.GetErrorMessage());
-            else
-                HtmlReport.Fail("Test case Failed", DriverBaseAction.TakeScreenShot());
+                HtmlReport.Fail("FAILED: Test errors: "+ TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
         }
 
     }
