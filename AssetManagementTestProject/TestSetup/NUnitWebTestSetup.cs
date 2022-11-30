@@ -1,19 +1,15 @@
-﻿using AssetManagementTestProject.Asserter;
-using CoreFramework.NUnitTestSetup;
+﻿using CoreFramework.NUnitTestSetup;
 using NUnit.Framework;
 using AssetManagementTestProject.PageObj;
 using CoreFramework.DriverCore;
-
-
 namespace AssetManagementTestProject.TestSetup;
-
 public class NUnitWebTestSetup : NUnitTestSetup
 {
     protected LoginPage LoginPage;
     protected HomePage HomePage;
-    protected LogoutPopup LogoutPopup;
+    protected LogoutPopupPage LogoutPopup;
     protected Asserter.Asserter Asserter;
-    protected MenuLeft MenuBarLeft;
+    protected LeftMenuPage MenuBarLeft;
 
     [SetUp]
     public void SetUp()
@@ -22,16 +18,14 @@ public class NUnitWebTestSetup : NUnitTestSetup
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
         HomePage = new HomePage();
-        LogoutPopup = new LogoutPopup();
+        LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
-        MenuBarLeft = new MenuLeft();
-
+        MenuBarLeft = new LeftMenuPage();
     }
     [TearDown]
     public void TearDown()
     {
     }
-
 }
 
 

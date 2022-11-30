@@ -7,14 +7,11 @@ using NUnit.Framework;
 
 
 namespace CoreFramework.Reporter;
-
 internal class HtmlReport
 {
     private static ExtentReports _report;
     private static ExtentTest _extentTestSuite;
     private static ExtentTest _extentTestCase;
-    
-
     #region Create Extent Report file
     public static ExtentReports CreateReport()
     {
@@ -42,7 +39,6 @@ internal class HtmlReport
         report.AttachReporter(htmlReporter);
         return report;
     }
-    
     public static void Flush()
     {
         if (_report != null)
@@ -50,7 +46,6 @@ internal class HtmlReport
             _report.Flush();
         }
     }
-    
     public static ExtentTest CreateTest(string className, string classDescription ="")
     {
         // Create a test suite (left column)
@@ -61,7 +56,6 @@ internal class HtmlReport
         _extentTestSuite = _report.CreateTest(className, classDescription);
         return _extentTestSuite; 
     }
-    
     public static ExtentTest CreateNode(string className, string testcase, 
         string description = "")
     {
@@ -73,18 +67,14 @@ internal class HtmlReport
         _extentTestCase = _extentTestSuite.CreateNode(testcase, description);
         return _extentTestCase;
     }
-
     public static ExtentTest GetParent()
     {
         return _extentTestSuite;
     }
-
-
     public static ExtentTest GetNode()
     {
         return _extentTestCase;
     }
-
     public static ExtentTest GetTest()
     {
         if (GetNode() == null)
@@ -94,7 +84,6 @@ internal class HtmlReport
         return GetNode();
     }
     #endregion
-
     #region TestContext for Fail/Pass/Info/Skip
     public static void Pass(string des)
     {
@@ -102,32 +91,27 @@ internal class HtmlReport
         GetTest().Pass(des);
         TestContext.WriteLine(des);
     }
-
     public static void Pass (string des, string path)
     {
         GetTest().Pass(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
-
     public static void Fail(string des)
     {
         GetTest().Fail(des);
         TestContext.WriteLine(des);
     }
-
     public static void Fail(string des, string path)
     {
 
         GetTest().Fail(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
-
     public static void Fail (string des, string ex, string path)
     {
         GetTest().Fail(des).Fail(ex).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
-
     public static void Info(string des)
     {
         GetTest().Info(des);
@@ -148,9 +132,7 @@ internal class HtmlReport
         GetTest().Skip(des);
         TestContext.WriteLine(des);
     }
-
     #endregion
-
     #region  Markup 
     public static void MarkupPassJson(string json)
     {
@@ -181,13 +163,11 @@ internal class HtmlReport
         GetTest().Info(MarkupHelper.CreateCodeBlock(code, CodeLanguage.Xml));
     }
     #endregion 
-
     #region  Log for API requests/response
-    public static void CreateAPIRequestLog_(APIRequest request, APIResponse response)
+    public static void CreateAPIRequestLog(APIRequest request, APIResponse response)
     {
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
     }
-
     #endregion
 }
 

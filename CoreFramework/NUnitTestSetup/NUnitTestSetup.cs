@@ -2,11 +2,7 @@
 using CoreFramework.Reporter;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework;
-using OpenQA.Selenium;
-
-
 namespace CoreFramework.NUnitTestSetup;
-
 public class NUnitTestSetup
 {
     // Check why [SetUp] uses InitDriver
@@ -16,8 +12,6 @@ public class NUnitTestSetup
     private string Author = "Hong_Anh_Pham";
     private string Device = "PC";
     private string Category = "Phase2_TestProject";
-
-
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
@@ -39,21 +33,17 @@ public class NUnitTestSetup
     [TearDown]
     public void TearDown()
     {
-
         WebDriverManager.CloseDriver();
-
         // Report results on ExtentRep
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
-            HtmlReport.Pass("Test case passed");
+            HtmlReport.Pass("PASSED: Test case passed");
         }
         else if (testStatus.Equals(TestStatus.Failed))
         {
-            HtmlReport.Fail("Test case Failed");
+            HtmlReport.Fail("FAILED: Test errors: " + TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
         }
-
-
     }
     [OneTimeTearDown]
     public void OneTimeTearDown()

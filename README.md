@@ -43,36 +43,28 @@ Examples for pages
 
 ```cs
 
-WebDriverAction.cs
+LoginPage.cs
 
-using System.Globalization;
-using CoreFramework.Reporter;
-using FluentAssertions;
-using Newtonsoft.Json;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using DriverManager = CoreFramework.DriverCore.WebDriverManager;
+using CoreFramework.DriverCore;
 
+namespace AssetManagementTestProject.PageObj;
 
-namespace CoreFramework.DriverCore;
-
-public class WebDriverAction
+public class LoginPage : WebDriverAction
 {
-    public IWebDriver Driver;
-    private WebDriverWait _explicitWait;
-    private Actions _actions;
-    public IJavaScriptExecutor Javascript;
-    private int _timeWait = 60;
+    private readonly string usernameTextLocator = "//label[contains(@title, 'Username')]"; // for testing
+    private readonly string tfUsername = "//input[contains(@id, 'username')]";
+    private readonly string tfPassword = "//input[contains(@id, 'password')]";
+    private readonly string btnLogin = "//button[contains(@type, 'submit')]";
 
-
-    public WebDriverAction()
+    public LoginPage() : base()
     {
+    }
 
-        Driver = DriverManager.GetCurrentDriver();
-        _actions = new Actions(Driver);
-        _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
+    public void Login(string userName, string password)
+    {
+        SendKeys_(tfUsername, userName);
+        SendKeys_(tfPassword, password);
+        Click(btnLogin);
     }
 }
 ```

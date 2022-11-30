@@ -1,21 +1,16 @@
 ﻿using CoreFramework.Utilities;
 
 namespace CoreFramework.Reporter;
-
 public class HtmlReportDirectory
 {
-
     public static string REPORT_ROOT { get; set;}
     public static string REPORT_FOLDER_PATH { get; set; }
     public static string REPORT_FILE_PATH { get; set; }
     public static string SCREENSHOT_PATH { get; set; }
 
-
     public static string ACTUAL_SCREENSHOT_PATH { get; set; }
     public static string DIFFERENCE_SCREENSHOT_PATH { get; set; }
     public static string BASELINE_SCREENSHOT_PATH { get; set; }
-
-
 
     public static void InitReportDirection()
     {
@@ -36,9 +31,6 @@ public class HtmlReportDirectory
         FilePaths.CreateIfNotExists(ACTUAL_SCREENSHOT_PATH);
         FilePaths.CreateIfNotExists(DIFFERENCE_SCREENSHOT_PATH);
         FilePaths.CreateIfNotExists(BASELINE_SCREENSHOT_PATH);
-
-
-
     }
     private static void CheckExistReportAndRename(string reportFolder)
     {
@@ -48,7 +40,6 @@ public class HtmlReportDirectory
             var newPath = REPORT_ROOT + "\\report_" + dirInfo.CreationTime.
                 ToString().Replace(":", ".").Replace("/", "-");
             Directory.Move(reportFolder, newPath);
-
         }
     }
 }

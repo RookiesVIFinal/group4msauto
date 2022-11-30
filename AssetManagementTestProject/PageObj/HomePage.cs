@@ -1,11 +1,8 @@
-﻿using AssetManagementTestProject.TestSetup;
-using CoreFramework.DriverCore;
+﻿using CoreFramework.DriverCore;
 
 namespace AssetManagementTestProject.PageObj;
-
 public class HomePage : WebDriverAction
 {
-
     private string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
     private string btnChangePw = "//a[contains(@href, '/change-password')]";
     private string btnLogout = "//a[contains(@href, '/logout')]";
@@ -17,33 +14,26 @@ public class HomePage : WebDriverAction
     private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
 
     #endregion
-
     public HomePage() : base()
     {
     }
-
     public string RedirectToFirstLogin()
     {
         return textChangePw1stTime;
     }
     public void ChangePwFirstTimeLogIn(string newPassword)
     {
-        SendKeys_(tfFirstLoginNewPw, newPassword);
+        SendKeys(tfFirstLoginNewPw, newPassword);
         Click(btnSaveFirstLoginNewPw);
     }
-
     public string ReturnPageUrl()
     {
         WaitToBeVisible(headerHomePage); // Wait for the page to log in before verifying
         return GetUrl();
     }
-
-
     public void SelectLogout()
     {
         Click(btnNavigationBar);
         Click(btnLogout);
     }
-
-
 }

@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace AssetManagementTestProject.PageObj;
 
-public class MenuLeft : WebDriverAction
+public class LeftMenuPage : WebDriverAction
 {
     private readonly string btnHomeInMenu = "//a[text() = 'Home']";
     private readonly string btnManageUserInMenu = "//a[text() = 'Manage User']";
@@ -12,7 +12,7 @@ public class MenuLeft : WebDriverAction
     private readonly string btnManageReturningInMenu = "//a[text() = 'Manage Returning']";
     private readonly string btnReportInMenu = "//a[text() = 'Report']";
 
-    public MenuLeft() : base()
+    public LeftMenuPage() : base()
     {
 
     }

@@ -7,14 +7,11 @@ public class APIRequestLog : IMarkup
 {
     private APIRequest Request { get; set; }
     private APIResponse Response { get; set; }
-
     public APIRequestLog(APIRequest request, APIResponse response)
     {
         Request = request;
         Response = response;
-
     }
-
     public string GetMarkup()
     {
         string log = $@"

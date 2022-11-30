@@ -1,12 +1,8 @@
-﻿using AssetManagementTestProject.TestSetup;
-using CoreFramework.DriverCore;
-using OpenQA.Selenium;
+﻿using CoreFramework.DriverCore;
 
 namespace AssetManagementTestProject.PageObj;
-
 public class LoginPage : WebDriverAction
 {
-    private readonly string usernameTextLocator = "//label[contains(@title, 'Username')]"; // for testing
     private readonly string tfUsername = "//input[contains(@id, 'username')]";
     private readonly string tfPassword = "//input[contains(@id, 'password')]";
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
@@ -14,11 +10,10 @@ public class LoginPage : WebDriverAction
     public LoginPage() : base()
     {
     }
-
     public void Login(string userName, string password)
     {
-        SendKeys_(tfUsername, userName);
-        SendKeys_(tfPassword, password);
+        SendKeys(tfUsername, userName);
+        SendKeys(tfPassword, password);
         Click(btnLogin);
     }
 }

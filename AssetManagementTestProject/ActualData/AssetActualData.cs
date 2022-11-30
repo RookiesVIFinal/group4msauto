@@ -11,11 +11,9 @@ namespace AssetManagementTestProject.ActualData;
 /// </summary>
 public class AssetActualData : WebDriverAction
 {
-
     public AssetActualData() : base()
     {
     }
-
     public AssetDAO GetAssetInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
         List<string> valuesFromCells = GetTextFromAllCellsOfOneRow
@@ -39,8 +37,6 @@ public class AssetActualData : WebDriverAction
         string assetRow = (string)ConvertToJson(GetAssetInfoFromGrid(rowLocator, cellLocator, index));
         return assetRow;
     }
-
-
     public List<AssetDAO> ReturnAssetList(string rowLocator, string cellLocator)
     {
         int i = 0; // clean up this?
@@ -55,7 +51,6 @@ public class AssetActualData : WebDriverAction
         }
         return listOfAsset;
     }
-
     public string ReturnAssetListJSON(string rowLocator, string cellLocator)
     {
         string assetList = (string)ConvertToJson(ReturnAssetList(rowLocator, cellLocator));

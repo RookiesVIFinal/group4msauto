@@ -9,6 +9,4 @@ public class MarkupHelperPlus
     {
         return new APIRequestLog(request, response);
     }
-
-
 }

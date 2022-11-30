@@ -143,7 +143,7 @@ public class WebDriverAction
             throw excep;
         }
     }
-    public void Click_(string locator)
+    public void JSExeClick(string locator)
     {
         /// Use javascriptexecutor to avoid ClickInterceptedException
         try
@@ -178,7 +178,7 @@ public class WebDriverAction
             throw ex;
         }
     }
-    public void DoubleClick_(string locator)
+    public void JSExeDoubleClick(string locator)
     {
 
         /// Double click_actions using jsexecutor
@@ -212,7 +212,7 @@ public class WebDriverAction
         }
     }
 
-    public void SendKeys_(string locator, string key)
+    public void SendKeys(string locator, string key)
     {
         try
         {
@@ -230,7 +230,7 @@ public class WebDriverAction
         try
         {
             Clear(locator);
-            SendKeys_(locator, key);
+            SendKeys(locator, key);
             HtmlReport.Pass("Clearing previous input in [" + locator + "] and " +
                 "replacing it with [" + key + "] passed", TakeScreenShot());
         }

@@ -15,8 +15,6 @@ public class Asserter : WebDriverAction
     public Asserter() : base()
     {
     }
-
-
     #region STRING FLUENT ASSERTION
     public void AssertStringEquals(string actual, string expected)
     {

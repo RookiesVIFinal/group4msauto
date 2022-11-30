@@ -15,6 +15,7 @@ public class UserDAO
     public string Gender { get; private set; }
     public string Type { get; private set; }
     public string Location { get; private set; }
+    public string Password {get; private set;}
 
     /// <summary>
     /// To check Create + Edit User - 6 properties
@@ -75,6 +76,15 @@ public class UserDAO
         Type = type;
         Location = location;
     }
-
+    /// <summary>
+    /// To check login function
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="password"></param>
+    public UserDAO(string userName, string password)
+    {
+        UserName = userName;
+        Password = password;
+    }
 
 }

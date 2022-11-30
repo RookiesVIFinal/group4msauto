@@ -3,19 +3,12 @@ using System.Text;
 using CoreFramework.Reporter;
 
 namespace CoreFramework.APICore;
-
-
 public class APIRequest
 {
-
-
     public HttpWebRequest Request;
     public string Url { get; set; }
     public string RequestBody { get; set; }
     public string FormData { get; set; }
-
-
-
     public APIRequest()
     {
         Url = "";
@@ -28,10 +21,6 @@ public class APIRequest
         RequestBody = "";
         FormData = "";
     }
-
-
-    /////// ADD
-
     public APIRequest AddHeader(string key, string value)
     {
         Request.Headers.Add(key, value);
@@ -138,7 +127,7 @@ public class APIRequest
             // Request 4 postman assignment went wrong here?
             var httpResponse = (HttpWebResponse)Request.EndGetResponse(asyncResult);
             APIResponse response = new APIResponse(httpResponse);
-            HtmlReport.CreateAPIRequestLog_(this, response);
+            HtmlReport.CreateAPIRequestLog(this, response);
             HtmlReport.MarkupPassJson(response.responseBody);
             return response;
 
