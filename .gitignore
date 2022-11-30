@@ -50,7 +50,7 @@ Generated\ Files/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
-[Rr]epors*/
+[Rr]eports*/
 # NUnit
 *.VisualState.xml
 TestResult.xml
