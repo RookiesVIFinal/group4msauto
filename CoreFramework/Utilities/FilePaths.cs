@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 
 namespace CoreFramework.Utilities;
-
 public class FilePaths
 {
     public static void CreateFolder(string path)
@@ -23,7 +22,6 @@ public class FilePaths
             Directory.CreateDirectory(path);
         }
     }
-
     public static string GetCurrentDirectoryPath()
     {
         // report folder in bin/Debug/net 6.0

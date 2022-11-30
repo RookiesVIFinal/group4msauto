@@ -51,15 +51,5 @@ namespace CoreFramework.APICore
             return responseStatusCode;
 
         }
-        //public string Constructor()
-        //{
-
-        //}
-        //public string ExtractFromBody()
-        //{
-
-        //}
-        
-
     }
 }

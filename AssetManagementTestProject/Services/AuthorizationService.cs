@@ -24,7 +24,6 @@ public class AuthorizationService
         return response;
 
     }
-
     public UserDAO Login(string username, string password)
     {
         APIResponse response = LoginRequest(username, password);

@@ -1,8 +1,6 @@
-﻿using OpenQA.Selenium;
-using CoreFramework.DriverCore;
+﻿using CoreFramework.DriverCore;
 
 namespace AssetManagementTestProject.PageObj;
-
 public class ManageAssetPage : WebDriverAction
 {
     public readonly string rowLocator = "";
@@ -10,6 +8,5 @@ public class ManageAssetPage : WebDriverAction
 
     public ManageAssetPage() : base()
     {
-
     }
 }

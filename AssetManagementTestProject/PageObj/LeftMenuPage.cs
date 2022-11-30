@@ -1,8 +1,6 @@
 ﻿using CoreFramework.DriverCore;
-using OpenQA.Selenium;
 
 namespace AssetManagementTestProject.PageObj;
-
 public class LeftMenuPage : WebDriverAction
 {
     private readonly string btnHomeInMenu = "//a[text() = 'Home']";

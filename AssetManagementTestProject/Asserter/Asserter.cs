@@ -21,13 +21,10 @@ public class Asserter : WebDriverAction
         AssertEquals(actual, expected);
     }
     #endregion
-
-
     #region DAO LIST WITH FLUENT ASSERTION
     public void AssertUserListsEquals(List<UserDAO> actual, List<UserDAO> expected)
     {
         AssertEquals(actual, expected);
-        //actual.Should().BeEquivalentTo(expected);
     }
     public void AssertAssignmentListsEquals(List<AssignmentDAO> actual, List<AssignmentDAO> expected)
     {

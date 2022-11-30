@@ -6,7 +6,6 @@ public class LoginPage : WebDriverAction
     private readonly string tfUsername = "//input[contains(@id, 'username')]";
     private readonly string tfPassword = "//input[contains(@id, 'password')]";
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
-
     public LoginPage() : base()
     {
     }
