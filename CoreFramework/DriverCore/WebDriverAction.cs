@@ -17,10 +17,8 @@ public class WebDriverAction
     public IJavaScriptExecutor Javascript;
     private int _timeWait = 60;
 
-
     public WebDriverAction()
     {
-
         Driver = DriverManager.GetCurrentDriver();
         _actions = new Actions(Driver);
         _explicitWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(_timeWait));
@@ -34,7 +32,6 @@ public class WebDriverAction
     #region  MOVEMENTS
     public void MoveForward()
     {
-        // Capture Screenshot fail?
         Driver.Navigate().Forward();
 
     }
@@ -50,13 +47,11 @@ public class WebDriverAction
     }
     public void ScrollToBottomOfPage()
     {
-        //This will scroll to the bottom of the page and wait for 1 second for the action to finish
         Javascript.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
         Thread.Sleep(1000);
     }
     public void ScrollToTopOfPage()
     {
-        //This will scroll to the top of the page and wait one second
         Javascript.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight)");
         Thread.Sleep(1000);
     }
@@ -195,7 +190,6 @@ public class WebDriverAction
         {
             IWebElement btnToRightClick = WaitToBeClickable(locator);
             HighlightElem(btnToRightClick);
-            //Actions action = new Actions(Driver);
             _actions.ContextClick(btnToRightClick).Perform();
             HtmlReport.Pass("Right click on element [" + locator + "] successfuly");
         }
@@ -294,21 +288,18 @@ public class WebDriverAction
     /// </summary>
     public IWebElement WaitToBeVisible(string locator)
     {
-        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementIsVisible(GetXpath(locator)));
         return btnToClick;
     }
     public IWebElement WaitToBeClickable(string locator)
     {
-        // var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeClickable(GetXpath(locator)));
         return btnToClick;
     }
     public bool WaitToBeSelected(string locator)
     {
-        /// var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         var btnToClick = _explicitWait.Until(
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
@@ -335,7 +326,6 @@ public class WebDriverAction
     }
     public string TakeScreenshotIf404()
     {
-        // Use when comparing titles
         string title = GetTitle();
         string path;
         if (title.Contains("404"))
@@ -353,15 +343,10 @@ public class WebDriverAction
     #region ADDING TIMESTAMP
     public string GetDateTimeStamp()
     {
-        // Get creation time for photos in VN time zone
         var VNCulture = new CultureInfo("vi-VN");
-        // get current UTC time
         var utcDate = DateTime.UtcNow;
-        // Change time to match VN time
         var VNDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(utcDate, "SE Asia Standard Time");
-        // output the GMT+7 time in Vietnam
         string currentTimeVN = VNDate.ToString("yyyy_MM_dd_HH_mm_ss", VNCulture);
-        //string currentTimeVN = DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss");
         return currentTimeVN;
     }
     #endregion
@@ -411,7 +396,6 @@ public class WebDriverAction
         {
             string actualTitle = GetTitle();
             actualTitle.Should().Match(expectedTitle);
-            //Assert.That(actualTitle, Is.EqualTo(expectedTitle));
             HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", 
                 TakeScreenShot());
         }
@@ -427,7 +411,6 @@ public class WebDriverAction
         {
             string actualUrl = GetUrl();
             AssertEquals(actualUrl, expectedUrl);
-            //Assert.That(actualUrl, Is.EqualTo(expectedUrl));
             HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", 
                 TakeScreenShot());
         }
@@ -437,7 +420,6 @@ public class WebDriverAction
             throw excep;
         }
     }
-    // TODO: Test if this actually works (Worked for string comparison so far)
     public static void AssertEquals(object actual, object expected)
     {
         try

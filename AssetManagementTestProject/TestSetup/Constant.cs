@@ -15,15 +15,11 @@ public class Constant
     #endregion
     #region SELF-CREATED USERNAMES-PWS
     public const string STAFF_USERNAME_1 = "anhp1";
+    public const string BASE_STAFF_PASSWORD_1 = "anhp1@29112000";
     public const string ADMIN_USERNAME_1 = "anhp3";
     public const string BASE_ADMIN_PASSWORD_1 = "anhp3@11062000";
     public const string CHANGED_ADMIN_PASSWORD_1 = "Admin@1234";
     #endregion
-
-    public const string STAFF_USERNANE = "staff10";
-    public const string BASE_STAFF_PASSWORD = "Staff@123";
-    public const string CHANGED_STAFF_PASSWORD = "Staff@1234";
-
     #region POP-UP MESSAGES
 
     #endregion

@@ -2,14 +2,17 @@
 using NUnit.Framework;
 using AssetManagementTestProject.PageObj;
 using CoreFramework.DriverCore;
+using AssetManagementTestProject.Common;
+
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
 {
     protected LoginPage LoginPage;
+    protected ChangePassword1stTimePage ChangePw1stTime;
     protected HomePage HomePage;
     protected LogoutPopupPage LogoutPopup;
-    protected Asserter.Asserter Asserter;
     protected LeftMenuPage MenuBarLeft;
+    protected Asserter.Asserter Asserter;
 
     [SetUp]
     public void SetUp()
@@ -21,11 +24,13 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
+        ChangePw1stTime = new ChangePassword1stTimePage();
     }
     [TearDown]
     public void TearDown()
     {
     }
+
 }
 
 
