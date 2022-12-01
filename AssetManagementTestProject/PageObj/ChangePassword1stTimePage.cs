@@ -9,7 +9,7 @@ public class ChangePassword1stTimePage : WebDriverAction
     private string btnSaveFirstLoginNewPw = "//button[contains(@type, 'submit')]";
     private string headerChangePw1stTime = "//h1[text()='Change Password']";
     private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
-    private string pathChangePw1stTime = "/change-password-first-time";
+    private string pathChangePw1stTime = "change-password-first-time";
     #endregion
     public ChangePassword1stTimePage() : base()
     {

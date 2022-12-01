@@ -410,8 +410,8 @@ public class WebDriverAction
         try
         {
             string actualUrl = GetUrl();
-            AssertEquals(actualUrl, expectedUrl);
-            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]", 
+            actualUrl.Should().Match(expectedUrl);
+            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches with expected Url [" + expectedUrl + "]", 
                 TakeScreenShot());
         }
         catch (Exception excep)
