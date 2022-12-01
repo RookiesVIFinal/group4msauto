@@ -10,16 +10,5 @@ public class EditAssetInfoPage : WebDriverBase
     {
 
     }
-    //public bool IsCorrectRedirect()
-    //{
-    //    if (Constant.BASE_URL + _addedURL == GetUrl())
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
 
 }

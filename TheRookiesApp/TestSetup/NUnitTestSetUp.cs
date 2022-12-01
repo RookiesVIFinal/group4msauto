@@ -11,7 +11,7 @@ public class NUnitTestSetUp : NUnitSetup
     protected LoginPage LoginPage;
     protected HomePage HomePage;
     protected LogoutPopupPage LogoutPopup;
-    protected Asserter.Asserter Asserter;
+    public Asserter.Asserter Asserter;
     protected LeftMenuPage MenuBarLeft;
 
     [SetUp]

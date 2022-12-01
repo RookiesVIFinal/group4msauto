@@ -24,7 +24,9 @@ public class ManageUserPage : WebDriverBase
     private string _btnFullName = "//span[contains(text(), 'Full Name')]";
     private string _btnUsername = "//span[contains(text(), 'Username')]";
     private string _btnJoinDated = "//span[contains(text(), 'Joined Date')]";
+
 }
+
 
 
 

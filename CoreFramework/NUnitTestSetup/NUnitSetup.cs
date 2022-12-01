@@ -10,7 +10,7 @@ namespace CoreFramework.NUnitTestSetup;
 public class NUnitSetup
 {
     protected WebDriverBase? DriverBaseAction;
-    private string Author = "Tran Nguyen Minh";
+    private string Author = "Tran_Nguyen_Minh";
     private string Device = "PC";
     private string Category = "Phase2_TestProject";
 
@@ -44,11 +44,10 @@ public class NUnitSetup
         {
             HtmlReport.Pass("PASSED: Test case passed");
         }
-        else if (testStatus.Equals(TestStatus.Failed))
+        else
         {
-                HtmlReport.Fail("FAILED: Test errors: "+ TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
+            HtmlReport.Fail("FAILED: Test errors: "+ TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
         }
-
     }
 
     [OneTimeTearDown]

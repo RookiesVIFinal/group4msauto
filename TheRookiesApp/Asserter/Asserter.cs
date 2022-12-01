@@ -17,12 +17,12 @@ public class Asserter : WebDriverBase
 
     #region STRING FLUENT ASSERTION
 
-    public static void AssertStringEquals(string actual, string expected)
+    public void AssertStringEquals(string actual, string expected)
     {
         AssertEquals(actual, expected);
     }
 
-    public static void AssertListStringEquals(string actual, string expected)
+    public void AssertListStringEquals(string actual, string expected)
     {
         AssertEquals(actual, expected);
     }
@@ -30,29 +30,29 @@ public class Asserter : WebDriverBase
     #endregion
 
     #region DAO LIST WITH FLUENT ASSERTION
-    public static void AssertUserListsEquals(List<UserListDAO> actual, List<UserListDAO> expected)
+    public void AssertUserListsEquals(List<UserListDAO> actual, List<UserListDAO> expected)
     {
         AssertEquals(actual, expected);
     }
 
-    public static void AssertAssignmentListsEquals(List<AssignmentListDAO> actual, List<AssignmentListDAO> expected)
+    public void AssertAssignmentListsEquals(List<AssignmentListDAO> actual, List<AssignmentListDAO> expected)
     {
         AssertEquals(actual, expected);
     }
 
-    public static void AssertAssetListsEquals(List<AssetListDAO> actual, List<AssetListDAO> expected)
-    {
-        AssertEquals(actual, expected);
-
-    }
-
-    public static void AssertReturningListsEquals(List<ReturningListDAO> actual, List<ReturningListDAO> expected)
+    public void AssertAssetListsEquals(List<AssetListDAO> actual, List<AssetListDAO> expected)
     {
         AssertEquals(actual, expected);
 
     }
 
-    public static void AssertReportListsEquals(List<ReportListDAO> actual, List<ReportListDAO> expected)
+    public void AssertReturningListsEquals(List<ReturningListDAO> actual, List<ReturningListDAO> expected)
+    {
+        AssertEquals(actual, expected);
+
+    }
+
+    public void AssertReportListsEquals(List<ReportListDAO> actual, List<ReportListDAO> expected)
     {
         AssertEquals(actual, expected);
 
@@ -61,27 +61,27 @@ public class Asserter : WebDriverBase
     #endregion
 
     #region DAO WITH FLUENT EQUAL ASSERTION
-    public static void AssertUserEquals(UserListDAO actual, UserListDAO expected)
+    public void AssertUserEquals(UserListDAO actual, UserListDAO expected)
     {
         AssertEquals(actual, expected);
  
     }
-    public static void AssertAssignmentEquals(AssignmentListDAO actual, AssignmentListDAO expected)
+    public void AssertAssignmentEquals(AssignmentListDAO actual, AssignmentListDAO expected)
     {
         AssertEquals(actual, expected);
 
     }
-    public static void AssertAssetListsEquals(AssetListDAO actual, AssetListDAO expected)
+    public void AssertAssetListsEquals(AssetListDAO actual, AssetListDAO expected)
     {
         AssertEquals(actual, expected);
 
     }
-    public static void AssertReturningListsEquals(ReturningListDAO actual, ReturningListDAO expected)
+    public void AssertReturningListsEquals(ReturningListDAO actual, ReturningListDAO expected)
     {
         AssertEquals(actual, expected);
 
     }
-    public static void AssertReportListsEquals(ReportListDAO actual, ReportListDAO expected)
+    public void AssertReportListsEquals(ReportListDAO actual, ReportListDAO expected)
     {
         AssertEquals(actual, expected);
 
@@ -90,56 +90,56 @@ public class Asserter : WebDriverBase
     #endregion
 
     #region DAO WITH FLUENT EQUAL ASSERTION
-    public static void AssertUserListAscending(List<UserListDAO> list)
+    public void AssertUserListAscending(List<UserListDAO> list)
     {
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public static void AssertUserListDescending(List<UserListDAO> list)
+    public void AssertUserListDescending(List<UserListDAO> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");
 
     }
-    public static void AssertAssignmentListAscending(List<AssignmentListDAO> list)
+    public void AssertAssignmentListAscending(List<AssignmentListDAO> list)
     {
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public static void AsserAssignmentListDescending(List<AssignmentListDAO> list)
+    public void AsserAssignmentListDescending(List<AssignmentListDAO> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");
 
     }
-    public static void AssertAssetListAscending(List<AssetListDAO> list)
+    public void AssertAssetListAscending(List<AssetListDAO> list)
     {
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public static void AssertAssetListDescending(List<AssetListDAO> list)
+    public void AssertAssetListDescending(List<AssetListDAO> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");
 
     }
-    public static void AssertReturningListAscending(List<ReturningListDAO> list)
+    public void AssertReturningListAscending(List<ReturningListDAO> list)
     {
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public static void AssertReturningListDescending(List<ReturningListDAO> list)
+    public void AssertReturningListDescending(List<ReturningListDAO> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");
 
     }
-    public static void AssertReportListAscending(List<ReportListDAO> list)
+    public void AssertReportListAscending(List<ReportListDAO> list)
     {
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public static void AssertReportListDescending(List<ReportListDAO> list)
+    public void AssertReportListDescending(List<ReportListDAO> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");

@@ -17,7 +17,7 @@ internal class HtmlReportDirectory
     {
         string projectPath = FilePath.GetCurrentDirectoryPath();
         REPORT_ROOT = projectPath + "\\reports";
-        REPORT_FOLDER_PATH = REPORT_ROOT + "\\latest Reports";
+        REPORT_FOLDER_PATH = REPORT_ROOT + "\\latest reports";
         REPORT_FILE_PATH = REPORT_FOLDER_PATH + "\\report.html";
         SCREENSHOT_PATH = REPORT_FOLDER_PATH + "\\screenshot";
 

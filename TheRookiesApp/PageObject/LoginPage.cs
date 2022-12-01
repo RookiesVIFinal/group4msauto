@@ -20,7 +20,7 @@ public class LoginPage : WebDriverBase
 
     public void IsCorrectRedirect()
     {
-        CompareUrls(Constant.HOME_PAGE_URL);
+        CompareUrls(Constant.LOGIN_PAGE_URl);
     }
 
     public void ErrorMessageDisplay()

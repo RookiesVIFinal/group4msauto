@@ -162,12 +162,12 @@ public class WebDriverBase
             IWebElement btnToClick = WaitToBeClickable(locator);
             HighlightElement(btnToClick);
             btnToClick.Click();
-            HtmlReport.Pass("Clicking on element [" + locator + "] passed");
+            HtmlReport.Pass("Clicking on element [" + locator + "] passed", TakeScreenShot());
 
         }
         catch (Exception)
         {
-            HtmlReport.Fail("Clicking on element [" + locator + "] failed");
+            HtmlReport.Fail("Clicking on element [" + locator + "] failed", TakeScreenShot());
             throw;
         }
     }
@@ -181,12 +181,12 @@ public class WebDriverBase
             HighlightElement(btnToClick);
             Javascript.ExecuteScript("arguments[0].click();", btnToClick);
 
-            HtmlReport.Pass("Clicking on element [" + locator + "] passed");
+            HtmlReport.Pass("Clicking on element [" + locator + "] passed", TakeScreenShot());
 
         }
         catch (Exception)
         {
-            HtmlReport.Fail("Clicking on element [" + locator + "] failed");
+            HtmlReport.Fail("Clicking on element [" + locator + "] failed", TakeScreenShot());
             throw;
         }
 
@@ -501,7 +501,7 @@ public class WebDriverBase
             string actualUrl = GetUrl();
             AssertEquals(actualUrl, expectedUrl);
             //Assert.That(actualUrl, Is.EqualTo(expectedUrl));
-            HtmlReport.Pass("Actual title [" + actualUrl + "] matches [" + expectedUrl + "]",
+            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches [" + expectedUrl + "]",
                 TakeScreenShot());
         }
         catch (Exception)
