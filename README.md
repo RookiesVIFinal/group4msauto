@@ -31,61 +31,8 @@ The project is organized as the structure below
 
 ## Coding Convention
 
-Examples for pages
-```cs
-WebDriverBase.cs
-// Settings
-using Core_Framework.Reporter;
+...
 
-// Variables 
-public IWebDriver Driver;
-public IJavaScriptExecutor Javascript { get; set; }
-private WebDriverWait _explicitWait;
-private Actions _actions;
-private int _timeWait = 60;
-
-// Methods
-public void MoveForward()
-{
- Driver.Navigate().Forward();
-
-}
-
-public void MoveBackward()
-{
- Driver.Navigate().Back();
-
-}
-```
-Tests examples
-```cs
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using TheRookiesApp.Common;
-using TheRookiesApp.PageObject;
-using TheRookiesApp.TestSetup;
-
-namespace TheRookiesApp.TestCase;
-
-[TestFixture]
-public class US302LoginTest : NUnitTestSetUp
-{
-    [Test]
-    public void ID01LoginAndLogoutTest()
-    {
-        TestSteps.LoginAsAdmin();
-
-        LoginPage loginPage = new LoginPage();
-
-        HomePage homePage = new HomePage();
-        homePage.Logout();
-
-        LogoutPopup logOutPopup = new LogoutPopup();
-        logOutPopup.LogOutOfPage();
-
-    }
-}
-```
 ## Gitflow
 
 1/ Create new branch
