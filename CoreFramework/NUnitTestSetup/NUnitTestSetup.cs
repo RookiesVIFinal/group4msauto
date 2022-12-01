@@ -35,7 +35,7 @@ public class NUnitTestSetup
         {
             HtmlReport.Pass("PASSED: Test case passed");
         }
-        else if (testStatus.Equals(TestStatus.Failed))
+        else
         {
             HtmlReport.Fail("FAILED: Test errors: " + TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
         }
