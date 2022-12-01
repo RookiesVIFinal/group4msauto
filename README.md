@@ -25,6 +25,7 @@ The project is organized as the structure below
   - ManageUserPage.cs
   - MenuLeft.cs
   - RequestForReturningPage.cs
+  - ChangePassword1stTimePage.cs
 
 
 - **Results**: Includes test results/reports after executing tests 
