@@ -3,7 +3,7 @@
 namespace AssetManagementTestProject.PageObj;
 public class LoginPage : WebDriverAction
 {
-private readonly string tfUsername = "//input[contains(@id, 'username')]";
+    private readonly string tfUsername = "//input[contains(@id, 'username')]";
     private readonly string tfPassword = "//input[contains(@id, 'password')]";
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
     private readonly string btnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
@@ -18,5 +18,15 @@ private readonly string tfUsername = "//input[contains(@id, 'username')]";
         Click(btnViewDecryptedPassword);
         TakeScreenShot();
         Click(btnLogin);
+    }
+
+    public List<string> LoginPageElementUI()
+    {
+        List<string> loginElement = new List<string>();
+        loginElement.Add(tfUsername);
+        loginElement.Add(tfPassword);
+        loginElement.Add(btnLogin);
+        loginElement.Add(btnViewDecryptedPassword);
+        return loginElement;
     }
 }

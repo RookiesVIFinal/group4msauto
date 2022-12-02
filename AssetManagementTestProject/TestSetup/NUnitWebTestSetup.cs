@@ -15,7 +15,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected Asserter.Asserter Asserter;
 
     [SetUp]
-    public void SetUp()
+    public void WebDriverBaseSetUp()
     {   
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
@@ -27,7 +27,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
         ChangePw1stTime = new ChangePassword1stTimePage();
     }
     [TearDown]
-    public void TearDown()
+    public void WebDriverBaseTearDown()
     {
     }
 

@@ -13,5 +13,10 @@ namespace AssetManagementTestProject.PageObj
         {
             Click(btnLogout);
         }
+
+        public void CancelLogOutOfPage()
+        {
+            Click(btnCancel);
+        }
     }
 }

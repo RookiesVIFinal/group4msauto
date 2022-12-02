@@ -5,8 +5,8 @@ using NUnit.Framework;
 namespace CoreFramework.NUnitTestSetup;
 public class NUnitTestSetup
 {
-    protected WebDriverAction? DriverBaseAction;
-    private string Author = "Hong_Anh_Pham";
+    protected WebDriverAction DriverBaseAction;
+    private string Author = "Tran_Nguyen_Minh";
     private string Device = "PC";
     private string Category = "Phase2_TestProject";
     [OneTimeSetUp]
@@ -29,7 +29,6 @@ public class NUnitTestSetup
     public void TearDown()
     {
         WebDriverManager.CloseDriver();
-        // Report results on ExtentRep
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
