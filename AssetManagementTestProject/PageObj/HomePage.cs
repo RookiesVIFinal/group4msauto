@@ -18,10 +18,9 @@ public class HomePage : WebDriverAction
     public HomePage() : base()
     {
     }
-    public string ReturnHomePageUrl()
+    public string ReturnHeaderHomePage()
     {
-        WaitToBeVisible(headerHomePage); // Wait for the page to log in before verifying
-        return GetUrl();
+        return headerHomePage;
     }
     public void SelectLogout()
     {

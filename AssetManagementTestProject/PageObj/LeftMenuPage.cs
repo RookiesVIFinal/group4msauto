@@ -18,13 +18,36 @@ public class LeftMenuPage : WebDriverAction
     {
         List<string> menuBar = new List<string>();
         menuBar.Add(btnHomeInMenu);
-        menuBar.Add(btnManageUserInMenu);
-        menuBar.Add(btnManageAssetInMenu);
-        menuBar.Add(btnManageAssignmentInMenu);
-        menuBar.Add(btnManageReturningInMenu);
-        menuBar.Add(btnReportInMenu);
+        if (FindElementByXpath(btnManageUserInMenu) != null)
+        {
+            menuBar.Add(btnManageUserInMenu);
+        }
+        if (FindElementByXpath(btnManageAssetInMenu) != null)
+        {
+            menuBar.Add(btnManageAssetInMenu);
+        }        
+        if (FindElementByXpath(btnManageAssignmentInMenu) != null)
+        {
+            menuBar.Add(btnManageAssignmentInMenu);
+        }        
+        if (FindElementByXpath(btnManageReturningInMenu) != null)
+        {
+            menuBar.Add(btnManageReturningInMenu);
+        }        
+        if (FindElementByXpath(btnReportInMenu) != null)
+        {
+            menuBar.Add(btnReportInMenu);
+        }
         return menuBar;
 
     }
+    public string ReturnManageUserBtn()
+    {
+        return btnManageUserInMenu;
+    } 
+    public string ReturnHomeBtn()
+    {
+        return btnHomeInMenu;
+    } 
 
 }
