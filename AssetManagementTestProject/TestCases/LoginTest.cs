@@ -6,11 +6,11 @@ namespace AssetManagementTestProject;
 
 [TestFixture]
 public class LoginTest : NUnitWebTestSetup
-{
-    protected ChangePassword1stTimePage ChangePw1stTime;
+{    
+    protected ChangePassword1stTimePage? ChangePw1stTime; 
 
     [SetUp]
-    public void SetUp()
+    public void TestSetUp()
     {
         ChangePw1stTime = new ChangePassword1stTimePage();
     }
@@ -18,37 +18,37 @@ public class LoginTest : NUnitWebTestSetup
     public void UserLoginSuccess()
     {
         LoginPage.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        DriverBaseAction.WaitToBeVisible(HomePage.ReturnHeaderHomePage());
-        DriverBaseAction.CompareUrls(Constant.BASE_URL);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        Asserter.AssertElementIsDisplayed(HomePage.HeaderHomePage);
     }
     [Test]
-    public void UserLoginFirstTime()
+    public void UserAskedChangePasswordFirstTime()
     {
         LoginPage.Login(Constant.STAFF_USERNAME_1ST_TIME, Constant.STAFF_PASSWORD_1ST_TIME);
-        DriverBaseAction.IsElementDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
-        DriverBaseAction.CompareUrls(ChangePw1stTime.ReturnExpectedChangePw1stTimeUrl());
+        Asserter.AssertElementIsDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
+        Asserter.AssertUrlsEquals(DriverBaseAction?.GetUrl(), ChangePw1stTime.ReturnExpectedChangePw1stTimeUrl());
     }
     [Test] 
     public void UserLoginWithNewPassword()
     {
         LoginPage.Login(Constant.ADMIN_USERNAME, Constant.CHANGED_ADMIN_PASSWORD);
-        DriverBaseAction.WaitToBeVisible(HomePage.ReturnHeaderHomePage());
-        DriverBaseAction.CompareUrls(Constant.BASE_URL);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        Asserter.AssertUrlsEquals(DriverBaseAction?.GetUrl(),Constant.BASE_URL);
     }
     [Test]
     public void AdminCanLoginToTheApp()
     {
         LoginPage.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        DriverBaseAction.AreElementsDisplayed(MenuBarLeft.ReturnMenuBar());
+        Asserter.AssertElementsAreDisplayed(MenuBarLeft.ReturnMenuBar());
     }
     [Test]
     public void StaffCanLoginToTheApp()
     {
         LoginPage.Login(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD);
-        DriverBaseAction.IsElementDisplayed(MenuBarLeft.ReturnHomeBtn());
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.ReturnHomeBtn());
     }
     [TearDown]
-    public void TearDown()
+    public void TestTearDown()
     {
     }
 }

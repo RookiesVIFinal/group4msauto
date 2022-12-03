@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using AssetManagementTestProject.PageObj;
 using CoreFramework.DriverCore;
-using AssetManagementTestProject.Common;
 
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
@@ -14,7 +13,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected Asserter.Asserter Asserter;
 
     [SetUp]
-    public void SetUp()
+    public void WebTestSetUp()
     {   
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
@@ -25,8 +24,8 @@ public class NUnitWebTestSetup : NUnitTestSetup
         MenuBarLeft = new LeftMenuPage();
 
     }
-    [TearDown]
-    public void TearDown()
+    [TearDown]    
+    public void WebTestTearDown()
     {
     }
 

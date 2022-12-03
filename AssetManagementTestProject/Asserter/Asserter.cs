@@ -1,6 +1,6 @@
 ﻿using AssetManagementTestProject.DAO;
-using FluentAssertions;
 using CoreFramework.DriverCore;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace AssetManagementTestProject.Asserter;
@@ -10,15 +10,27 @@ public class Asserter : WebDriverAction
     /// <summary>
     /// Assertions for strings/DAO/List DAO objects
     /// Also check order
-    /// Alternatives if FluentAssertions fails
     /// </summary>
     public Asserter() : base()
     {
     }
     #region STRING FLUENT ASSERTION
-    public void AssertStringEquals(string actual, string expected)
+    public void AssertUrlsEquals(string actual, string expected)
     {
         AssertEquals(actual, expected);
+    }
+    #endregion
+    #region ELEMENT DISPLAY ASSERTION
+    public void AssertElementIsDisplayed(string locator)
+    {
+        IsElementDisplayed(locator).Should().BeTrue();
+    }
+    public void AssertElementsAreDisplayed(List<string> locators)
+    {
+        foreach(string locator in locators)
+        {
+            AssertElementIsDisplayed(locator);
+        }
     }
     #endregion
     #region DAO LIST WITH FLUENT ASSERTION
