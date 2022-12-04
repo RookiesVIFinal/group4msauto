@@ -22,8 +22,5 @@ public class Constant
     public const string STAFF_USERNAME = "anhp4";
     public const string STAFF_PASSWORD = "Staff@1234";
     #endregion
-    #region POP-UP MESSAGES
-
-    #endregion
 
 }

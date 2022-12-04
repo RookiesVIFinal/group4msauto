@@ -6,15 +6,11 @@ namespace CoreFramework.NUnitTestSetup;
 public class NUnitTestSetup
 {
     protected WebDriverAction? DriverBaseAction;
-    private string Author = "Hong_Anh_Pham";
-    private string Device = "PC";
-    private string Category = "Phase2_TestProject";
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         HtmlReport.CreateReport();
-        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
-            AssignAuthor(Author).AssignDevice(Device).AssignCategory(Category);
+        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName);
     }
 
     [SetUp]
