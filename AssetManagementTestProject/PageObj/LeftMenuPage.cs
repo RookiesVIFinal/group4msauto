@@ -3,51 +3,41 @@
 namespace AssetManagementTestProject.PageObj;
 public class LeftMenuPage : WebDriverAction
 {
-    private readonly string btnHomeInMenu = "//a[text() = 'Home']";
-    private readonly string btnManageUserInMenu = "//a[text() = 'Manage User']";
     private readonly string btnManageAssetInMenu = "//a[text() = 'Manage Asset']";
     private readonly string btnManageAssignmentInMenu = "//a[text() = 'Manage Assignment']";
     private readonly string btnManageReturningInMenu = "//a[text() = 'Manage Returning']";
+    private readonly string btnManageUserInMenu = "//a[text() = 'Manage User']";
     private readonly string btnReportInMenu = "//a[text() = 'Report']";
-
+    public List<string> MenuBar;
+    public readonly string BtnHomeInMenu = "//a[text() = 'Home']";
     public LeftMenuPage() : base()
     {
-
     }
     public List<string> ReturnMenuBar()
     {
-        List<string> menuBar = new List<string>();
-        menuBar.Add(btnHomeInMenu);
+        MenuBar = new List<string>();
+        MenuBar.Add(BtnHomeInMenu);
         if (FindElementByXpath(btnManageUserInMenu) != null)
         {
-            menuBar.Add(btnManageUserInMenu);
+            MenuBar.Add(btnManageUserInMenu);
         }
         if (FindElementByXpath(btnManageAssetInMenu) != null)
         {
-            menuBar.Add(btnManageAssetInMenu);
+            MenuBar.Add(btnManageAssetInMenu);
         }        
         if (FindElementByXpath(btnManageAssignmentInMenu) != null)
         {
-            menuBar.Add(btnManageAssignmentInMenu);
+            MenuBar.Add(btnManageAssignmentInMenu);
         }        
         if (FindElementByXpath(btnManageReturningInMenu) != null)
         {
-            menuBar.Add(btnManageReturningInMenu);
+            MenuBar.Add(btnManageReturningInMenu);
         }        
         if (FindElementByXpath(btnReportInMenu) != null)
         {
-            menuBar.Add(btnReportInMenu);
+            MenuBar.Add(btnReportInMenu);
         }
-        return menuBar;
-
+        return MenuBar;
     }
-    public string ReturnManageUserBtn()
-    {
-        return btnManageUserInMenu;
-    } 
-    public string ReturnHomeBtn()
-    {
-        return btnHomeInMenu;
-    } 
-
 }
+

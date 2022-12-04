@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace CoreFramework.NUnitTestSetup;
 public class NUnitTestSetup
 {
-    protected WebDriverAction? DriverBaseAction;
+protected WebDriverAction? DriverBaseAction;
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {

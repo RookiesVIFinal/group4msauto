@@ -1,7 +1,7 @@
-﻿using CoreFramework.NUnitTestSetup;
-using NUnit.Framework;
-using AssetManagementTestProject.PageObj;
+﻿using AssetManagementTestProject.PageObj;
 using CoreFramework.DriverCore;
+using CoreFramework.NUnitTestSetup;
+using NUnit.Framework;
 
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
@@ -22,7 +22,6 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
-
     }
     [TearDown]    
     public void WebTestTearDown()

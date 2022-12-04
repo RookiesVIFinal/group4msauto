@@ -5,11 +5,11 @@ namespace AssetManagementTestProject.PageObj;
 public class ChangePassword1stTimePage : WebDriverAction
 {
     #region FIRST TIME LOGIN
-    private string tfFirstLoginNewPw = "//input[contains(@id, 'newPassword')]";
     private string btnSaveFirstLoginNewPw = "//button[contains(@type, 'submit')]";
     private string headerChangePw1stTime = "//h1[text()='Change Password']";
-    private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
     private string pathChangePw1stTime = "change-password-first-time";
+    private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
+    private string tfFirstLoginNewPw = "//input[contains(@id, 'newPassword')]";
     #endregion
     public ChangePassword1stTimePage() : base()
     {

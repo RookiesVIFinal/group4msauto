@@ -8,12 +8,6 @@ namespace AssetManagementTestProject;
 public class LoginTest : NUnitWebTestSetup
 {    
     protected ChangePassword1stTimePage? ChangePw1stTime; 
-
-    [SetUp]
-    public void TestSetUp()
-    {
-        ChangePw1stTime = new ChangePassword1stTimePage();
-    }
     [Test]
     public void UserLoginSuccess()
     {
@@ -25,6 +19,7 @@ public class LoginTest : NUnitWebTestSetup
     public void UserAskedChangePasswordFirstTime()
     {
         LoginPage.Login(Constant.STAFF_USERNAME_1ST_TIME, Constant.STAFF_PASSWORD_1ST_TIME);
+        ChangePw1stTime = new ChangePassword1stTimePage();
         Asserter.AssertElementIsDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
         Asserter.AssertUrlsEquals(DriverBaseAction?.GetUrl(), ChangePw1stTime.ReturnExpectedChangePw1stTimeUrl());
     }
@@ -45,11 +40,7 @@ public class LoginTest : NUnitWebTestSetup
     public void StaffCanLoginToTheApp()
     {
         LoginPage.Login(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD);
-        Asserter.AssertElementIsDisplayed(MenuBarLeft.ReturnHomeBtn());
-    }
-    [TearDown]
-    public void TestTearDown()
-    {
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
     }
 }
 

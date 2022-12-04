@@ -1,17 +1,16 @@
-﻿namespace AssetManagementTestProject.TestSetup;
+﻿using AssetManagementTestProject.DAO;
 
+namespace AssetManagementTestProject.TestSetup;
 public class Constant
 {
+    #region URLS
     public static string BASE_URL = "https://group4b6ms.azurewebsites.net/";
     public static string BASE_API_URL = "https://group4b6msapi.azurewebsites.net/";
-    public static string CHANGE_PW_1ST_TIME_URL = "https://group4b6ms.azurewebsites.net/change-password-first-time";
-
+    #endregion
     #region DEFAULT USERNAME-PW
     public const string ADMIN_USERNAME_HN = "adminhn";
-    public const string ADMIN_USERNAME_HCM = "adminhcms";
+    public const string ADMIN_USERNAME_HCM = "adminhcm";
     public const string ADMIN_PASSWORD_HN = "Admin@123";
-
-
     #endregion
     #region CREATED USERNAMES-PWS
     public const string STAFF_USERNAME_1ST_TIME = "anhp1";
@@ -22,5 +21,11 @@ public class Constant
     public const string STAFF_USERNAME = "anhp4";
     public const string STAFF_PASSWORD = "Staff@1234";
     #endregion
-
+    
+    #region USER INFO
+    public const string GENDER_MALE = "Male";
+    public const string GENDER_FEMALE = "Female";
+    public const string TYPE_ADMIN = "Admin";
+    public const string TYPE_STAFF = "Staff";
+    #endregion
 }

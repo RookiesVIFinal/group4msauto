@@ -57,7 +57,6 @@ public class Asserter : WebDriverAction
 
     #endregion
 
-
     #region DAO WITH FLUENT EQUAL ASSERTION
     public void AssertUserEquals(UserDAO actual, UserDAO expected)
     {
@@ -81,7 +80,6 @@ public class Asserter : WebDriverAction
     }
 
     #endregion
-
 
     #region DAO WITH FLUENT EQUAL ASSERTION
     public void AssertUserListAscending(List<UserDAO> list)
@@ -140,7 +138,6 @@ public class Asserter : WebDriverAction
         TestContext.WriteLine("List is sorted in descending order");
 
     }
-
     #endregion
 }
 
