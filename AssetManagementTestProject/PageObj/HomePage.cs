@@ -15,6 +15,14 @@ public class HomePage : WebDriverAction
     private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
     private string pathChangePw1stTime = "/change-password-first-time";
     #endregion
+
+    private readonly string btnHomeInMenu = "//a[text() = 'Home']";
+    private readonly string btnManageUserInMenu = "//a[text() = 'Manage User']";
+    private readonly string btnManageAssetInMenu = "//a[text() = 'Manage Asset']";
+    private readonly string btnManageAssignmentInMenu = "//a[text() = 'Manage Assignment']";
+    private readonly string btnManageReturningInMenu = "//a[text() = 'Manage Returning']";
+    private readonly string btnReportInMenu = "//a[text() = 'Report']";
+
     public HomePage() : base()
     {
     }
@@ -28,4 +36,35 @@ public class HomePage : WebDriverAction
         Click(btnNavigationBar);
         Click(btnLogout);
     }
+    public List<string> ReturnHomePageElementUI()
+    {
+        List<string> menuBar = new List<string>();
+        menuBar.Add(btnHomeInMenu);
+        if (FindElementByXpath(btnHomeInMenu) != null)
+        {
+            menuBar.Add(btnHomeInMenu);
+        }
+        if (FindElementByXpath(btnManageUserInMenu) != null)
+        {
+            menuBar.Add(btnManageUserInMenu);
+        }
+        if (FindElementByXpath(btnManageAssetInMenu) != null)
+        {
+            menuBar.Add(btnManageAssetInMenu);
+        }
+        if (FindElementByXpath(btnManageAssignmentInMenu) != null)
+        {
+            menuBar.Add(btnManageAssignmentInMenu);
+        }
+        if (FindElementByXpath(btnManageReturningInMenu) != null)
+        {
+            menuBar.Add(btnManageReturningInMenu);
+        }
+        if (FindElementByXpath(btnReportInMenu) != null)
+        {
+            menuBar.Add(btnReportInMenu);
+        }
+        return menuBar;
+    }
+
 }

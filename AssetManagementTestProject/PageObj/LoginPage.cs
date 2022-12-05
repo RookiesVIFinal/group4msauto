@@ -22,11 +22,20 @@ public class LoginPage : WebDriverAction
 
     public List<string> LoginPageElementUI()
     {
-        List<string> loginElement = new List<string>();
-        loginElement.Add(tfUsername);
-        loginElement.Add(tfPassword);
-        loginElement.Add(btnLogin);
-        loginElement.Add(btnViewDecryptedPassword);
-        return loginElement;
+        List<string> menuBar = new List<string>();
+        menuBar.Add(tfUsername);
+        if (FindElementByXpath(tfUsername) != null)
+        {
+            menuBar.Add(tfUsername);
+        }
+        if (FindElementByXpath(tfPassword) != null)
+        {
+            menuBar.Add(tfPassword);
+        }
+        if (FindElementByXpath(btnLogin) != null)
+        {
+            menuBar.Add(btnLogin);
+        }
+        return menuBar;
     }
 }

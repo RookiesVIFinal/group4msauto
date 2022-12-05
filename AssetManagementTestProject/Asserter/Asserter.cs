@@ -2,6 +2,7 @@
 using FluentAssertions;
 using CoreFramework.DriverCore;
 using NUnit.Framework;
+using System.Security;
 
 namespace AssetManagementTestProject.Asserter;
 
@@ -15,11 +16,34 @@ public class Asserter : WebDriverAction
     public Asserter() : base()
     {
     }
+    #region URL FLUENT ASSERTION
+    public void AssertUrlEquals(string actual, string expected)
+    {
+        AssertEquals(actual, expected);
+    }
+    #endregion
+
+    #region ELEMENTS DISPLAY FLUENT ASSERTION
+    public void AssertElementIsDisplayed(string locator)
+    {
+        IsElementDisplayed(locator).Should().BeTrue();
+    }
+
+    public void AssertElementsAreDisplayed(List<string> locators)
+    {
+        foreach(string locator in locators)
+        {
+            AssertElementIsDisplayed(locator);
+        }
+    }
+    #endregion
+
     #region STRING FLUENT ASSERTION
     public void AssertStringEquals(string actual, string expected)
     {
         AssertEquals(actual, expected);
     }
+
     #endregion
     #region DAO LIST WITH FLUENT ASSERTION
     public void AssertUserListsEquals(List<UserDAO> actual, List<UserDAO> expected)
@@ -42,9 +66,7 @@ public class Asserter : WebDriverAction
     {
         AssertEquals(actual, expected);
     }
-
     #endregion
-
 
     #region DAO WITH FLUENT EQUAL ASSERTION
     public void AssertUserEquals(UserDAO actual, UserDAO expected)

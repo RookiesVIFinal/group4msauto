@@ -22,6 +22,18 @@ public class Constant
     public const string CHANGED_ADMIN_PASSWORD_1 = "Admin@1234";
     public const string STAFF_USER_NAME = "minht7";
     public const string STAFF_PASSWORD = "Polo@2109";
+
+    public const string NEW_STAFF_USER_NAME_1 = "tonyt";
+    public const string NEW_STAFF_PASSWORD_1 = "tonyt@21092000";
+    public const string CHANGED_NEW_STAFF_PASSWORD_1 = "Tonyt@21092000";
+
+    public const string NEW_STAFF_USER_NAME_2 = "tonyt1";
+    public const string NEW_STAFF_PASSWORD_2 = "tonyt1@21092000";
+    public const string CHANGED_NEW_STAFF_PASSWORD_2 = "Tonyt1@21092000";
+
+    public const string NEW_STAFF_USER_NAME_3 = "tonyt3";
+    public const string NEW_STAFF_PASSWORD_3 = "tonyt3@21092000";
+    public const string CHANGED_NEW_STAFF_PASSWORD_3 = "Tonyt3@21092000";
     #endregion
     #region POP-UP MESSAGES
 

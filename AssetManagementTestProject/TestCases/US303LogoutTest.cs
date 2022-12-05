@@ -8,7 +8,6 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US303LogoutTest : NUnitWebTestSetup
 {
-    #region STAFF AND ADMIN LOGOUT
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
     [TestCase(Constant.STAFF_USER_NAME, Constant.STAFF_PASSWORD)]
     public void LogoutSuccessfully(string userName, string password)
@@ -18,7 +17,7 @@ public class US303LogoutTest : NUnitWebTestSetup
 
         HomePage.SelectLogout();
         LogoutPopup.LogOutOfPage();
-        DriverBaseAction.CompareUrls(Constant.LOGIN_PAGE_URl);
+        Asserter.AssertElementsAreDisplayed(LoginPage.LoginPageElementUI());
     }
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
@@ -30,7 +29,7 @@ public class US303LogoutTest : NUnitWebTestSetup
 
         HomePage.SelectLogout();
         LogoutPopup.CancelLogOutOfPage();
-        DriverBaseAction.CompareUrls(Constant.BASE_URL);
+        Asserter.AssertUrlEquals(DriverBaseAction.GetUrl(), Constant.BASE_URL);
     }
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
@@ -42,9 +41,8 @@ public class US303LogoutTest : NUnitWebTestSetup
 
         HomePage.SelectLogout();
         LogoutPopup.LogOutOfPage();
-        DriverBaseAction.MoveBackward();
-        DriverBaseAction.CompareUrls(Constant.LOGIN_PAGE_URl);
+        DriverBaseAction?.MoveBackward();
+        Asserter.AssertElementsAreDisplayed(LoginPage.LoginPageElementUI());
     }
-    #endregion
 
 }
