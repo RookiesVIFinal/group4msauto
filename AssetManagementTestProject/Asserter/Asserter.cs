@@ -25,13 +25,6 @@ public class Asserter : WebDriverAction
     {
         IsElementDisplayed(locator).Should().BeTrue();
     }
-    public void AssertElementsAreDisplayed(List<string> locators)
-    {
-        foreach(string locator in locators)
-        {
-            AssertElementIsDisplayed(locator);
-        }
-    }
     #endregion
     #region DAO LIST WITH FLUENT ASSERTION
     public void AssertUserListsEquals(List<UserDAO> actual, List<UserDAO> expected)

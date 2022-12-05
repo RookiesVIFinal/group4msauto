@@ -1,4 +1,6 @@
-﻿using AssetManagementTestProject.PageObj;
+﻿using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.PageObj;
+using AssetManagementTestProject.Services;
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
@@ -7,7 +9,8 @@ namespace AssetManagementTestProject;
 [TestFixture]
 public class LoginTest : NUnitWebTestSetup
 {    
-    protected ChangePassword1stTimePage? ChangePw1stTime; 
+    protected ChangePassword1stTimePage? ChangePw1stTime;
+    protected ManageUserService? ManageUserService;
     [Test]
     public void UserLoginSuccess()
     {
@@ -34,7 +37,12 @@ public class LoginTest : NUnitWebTestSetup
     public void AdminCanLoginToTheApp()
     {
         LoginPage.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        Asserter.AssertElementsAreDisplayed(MenuBarLeft.ReturnMenuBar());
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnManageUserInMenu);
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnManageAssetInMenu);
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnManageAssignmentInMenu);
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnManageReturningInMenu);
+        Asserter.AssertElementIsDisplayed(MenuBarLeft.BtnReportInMenu);
     }
     [Test]
     public void StaffCanLoginToTheApp()

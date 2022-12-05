@@ -1,7 +1,10 @@
-﻿using AssetManagementTestProject.PageObj;
+﻿using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.PageObj;
+using AssetManagementTestProject.Services;
 using CoreFramework.DriverCore;
 using CoreFramework.NUnitTestSetup;
 using NUnit.Framework;
+using ServiceStack;
 
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
@@ -11,6 +14,8 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected LogoutPopupPage LogoutPopup;
     protected LeftMenuPage MenuBarLeft;
     protected Asserter.Asserter Asserter;
+    protected AuthorizationService AuthorizationService;
+    public UserDAO TestUser;
 
     [SetUp]
     public void WebTestSetUp()
@@ -22,6 +27,9 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
+        AuthorizationService = new AuthorizationService();
+        TestUser = AuthorizationService.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+
     }
     [TearDown]    
     public void WebTestTearDown()

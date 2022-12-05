@@ -5,7 +5,7 @@ public class Constant
 {
     #region URLS
     public static string BASE_URL = "https://group4b6ms.azurewebsites.net/";
-    public static string BASE_API_URL = "https://group4b6msapi.azurewebsites.net/";
+    public static string BASE_API = "https://group4b6msapi.azurewebsites.net/";
     #endregion
     #region DEFAULT USERNAME-PW
     public const string ADMIN_USERNAME_HN = "adminhn";

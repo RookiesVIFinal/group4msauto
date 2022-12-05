@@ -5,6 +5,7 @@ namespace AssetManagementTestProject.DAO;
 
 public class UserDAO
 {
+    public string UserId {get; private set; }
     public string StaffCode { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -14,6 +15,7 @@ public class UserDAO
     public string JoinedDate { get; private set; }
     public string Gender { get; private set; }
     public string Type { get; private set; }
+    public string Token { get; private set; }
     public string Location { get; private set; }
     public string Password {get; private set;}
 
@@ -81,10 +83,12 @@ public class UserDAO
     /// </summary>
     /// <param name="userName"></param>
     /// <param name="password"></param>
-    public UserDAO(string userName, string password)
+    public UserDAO(string userName, string password, string token, string id)
     {
         UserName = userName;
         Password = password;
+        Token = token;
+        UserId = id;
     }
 
 }

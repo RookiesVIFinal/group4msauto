@@ -3,21 +3,18 @@ using AssetManagementTestProject.TestSetup;
 using CoreFramework.APICore;
 using Newtonsoft.Json;
 using NUnit.Framework;
-
 namespace AssetManagementTestProject.Services;
-
 public class AuthorizationService
 {
     /// <summary>
     /// API Authorize
     /// </summary>
-    private string userLoginPath = "";
-
+    private string userLoginPath = "api/authorization";
     private APIResponse LoginRequest(string username, string password)
     {
-        string body = "{\'userName\':\"" + username + "\",\'password\': \"" + password + "\"}";
+        string body = "{'username':" + username + ",'password': " + password + "}";
         APIResponse response = new APIRequest()
-               .SetURL(Constant.BASE_API_URL + userLoginPath)
+               .SetURL(Constant.BASE_API + userLoginPath)
                .AddHeader("Content-Type", "application/json")
                .SetBody(body)
                .Post();
