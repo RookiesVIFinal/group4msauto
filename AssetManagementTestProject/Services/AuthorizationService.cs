@@ -30,8 +30,7 @@ public class AuthorizationService
     {
         APIResponse response = LoginRequest(username, password);
         Assert.True(response.responseStatusCode.Equals("OK"));
-        UserDAO? user = JsonConvert.DeserializeObject
-            <UserDAO>(response.responseBody);
+        UserDAO? user = JsonConvert.DeserializeObject<UserDAO>(response.responseBody);
         return user;
     }
 

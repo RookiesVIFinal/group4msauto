@@ -14,7 +14,7 @@ namespace AssetManagementTestProject.APITest
         public void AdminCanCreateUser()
         {
             ManageUserService = new ManageUserService();
-            List<UserDAO> expectedUsers = ManageUserService.GetUsers(TestUser.Token);
+            List<UserDAO> expectedUsers = ManageUserService.GetUsers(TestUser.token);
         }
 
         public AuthorizationService? AuthorizationService;
