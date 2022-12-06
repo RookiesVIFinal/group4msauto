@@ -23,7 +23,6 @@ public class LoginPage : WebDriverAction
     public List<string> LoginPageElementUI()
     {
         List<string> menuBar = new List<string>();
-        menuBar.Add(tfUsername);
         if (FindElementByXpath(tfUsername) != null)
         {
             menuBar.Add(tfUsername);

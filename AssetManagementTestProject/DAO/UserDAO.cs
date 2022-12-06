@@ -1,5 +1,4 @@
-﻿using CoreFramework.DriverCore;
-using OpenQA.Selenium;
+﻿using Microsoft.Azure.Amqp.Framing;
 
 namespace AssetManagementTestProject.DAO;
 
@@ -16,6 +15,15 @@ public class UserDAO
     public string Type { get; private set; }
     public string Location { get; private set; }
     public string Password {get; private set;}
+
+    public string Token { get; set; }
+    public string Role { get; set; }
+    public bool IsFirstTimeLogin { get; set; }
+    public string Id { get; set; }
+    public bool IsSuccess { get; set; }
+    public string Message { get; set; }
+    public Data Data { get; set; }
+
 
     /// <summary>
     /// To check Create + Edit User - 6 properties
@@ -81,10 +89,37 @@ public class UserDAO
     /// </summary>
     /// <param name="userName"></param>
     /// <param name="password"></param>
-    public UserDAO(string userName, string password)
+    public UserDAO(string userName, string password, string token, string id)
     {
         UserName = userName;
         Password = password;
+        Token = token;
+        Id = id;
     }
 
+    public UserDAO(bool isSuccess, string message, Data data)
+    {
+        IsSuccess = isSuccess;
+        Message = message;
+        Data = data;
+    }
+ 
+}
+
+public class Data
+{
+    public string Id { get; set; }
+    public string UserName { get;  set; }
+    public string Role { get; set; }
+    public string Token { get; set; }
+    public bool IsFirstTimeLogin { get; set; }
+
+    public Data(string id, string userName, string role, string token, bool isFirstTimeLogin)
+    {
+        Id = id;
+        UserName = userName;
+        Role = role;
+        Token = token;
+        IsFirstTimeLogin = isFirstTimeLogin;
+    }
 }

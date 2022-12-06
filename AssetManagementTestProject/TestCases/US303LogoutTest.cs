@@ -10,7 +10,7 @@ public class US303LogoutTest : NUnitWebTestSetup
 {
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
     [TestCase(Constant.STAFF_USER_NAME, Constant.STAFF_PASSWORD)]
-    public void LogoutSuccessfully(string userName, string password)
+    public void UserCanLogoutSuccessfully(string userName, string password)
     {
         LoginPage.Login(userName, password); 
         Asserter.AssertStringEquals(HomePage.ReturnHomePageUrl(), Constant.BASE_URL);
@@ -22,19 +22,19 @@ public class US303LogoutTest : NUnitWebTestSetup
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
     [TestCase(Constant.STAFF_USER_NAME, Constant.STAFF_PASSWORD)]
-    public void CancelLogout(string userName, string password)
+    public void UserCanCancelLogout(string userName, string password)
     {
         LoginPage.Login(userName, password);
         Asserter.AssertStringEquals(HomePage.ReturnHomePageUrl(), Constant.BASE_URL);
 
         HomePage.SelectLogout();
         LogoutPopup.CancelLogOutOfPage();
-        Asserter.AssertUrlEquals(DriverBaseAction.GetUrl(), Constant.BASE_URL);
+        Asserter.AssertUrlEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
     }
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD)]
     [TestCase(Constant.STAFF_USER_NAME, Constant.STAFF_PASSWORD)]
-    public void CannotGoBackToHomePageAfterLogOut(string userName, string password)
+    public void UserCannotGoBackToHomePageAfterLogOut(string userName, string password)
     {
         LoginPage.Login(userName, password);
         Asserter.AssertStringEquals(HomePage.ReturnHomePageUrl(), Constant.BASE_URL);

@@ -1,8 +1,9 @@
-﻿using CoreFramework.NUnitTestSetup;
-using NUnit.Framework;
+﻿using AssetManagementTestProject.DAO;
 using AssetManagementTestProject.PageObj;
+using AssetManagementTestProject.Services;
 using CoreFramework.DriverCore;
-using AssetManagementTestProject.Common;
+using CoreFramework.NUnitTestSetup;
+using NUnit.Framework;
 
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
@@ -13,6 +14,10 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected LogoutPopupPage LogoutPopup;
     protected LeftMenuPage MenuBarLeft;
     protected Asserter.Asserter Asserter;
+    protected ChangePassword ChangePassword;
+    protected AuthorizationService AuthorizationService;
+
+    protected UserDAO TestUser;
 
     [SetUp]
     public void WebDriverBaseSetUp()
@@ -25,6 +30,11 @@ public class NUnitWebTestSetup : NUnitTestSetup
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
         ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePassword = new ChangePassword();
+
+        AuthorizationService = new AuthorizationService();
+        TestUser = AuthorizationService.Login(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD);
+
     }
     [TearDown]
     public void WebDriverBaseTearDown()

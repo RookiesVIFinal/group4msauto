@@ -36,35 +36,10 @@ public class HomePage : WebDriverAction
         Click(btnNavigationBar);
         Click(btnLogout);
     }
-    public List<string> ReturnHomePageElementUI()
+    public void SelectChangePw()
     {
-        List<string> menuBar = new List<string>();
-        menuBar.Add(btnHomeInMenu);
-        if (FindElementByXpath(btnHomeInMenu) != null)
-        {
-            menuBar.Add(btnHomeInMenu);
-        }
-        if (FindElementByXpath(btnManageUserInMenu) != null)
-        {
-            menuBar.Add(btnManageUserInMenu);
-        }
-        if (FindElementByXpath(btnManageAssetInMenu) != null)
-        {
-            menuBar.Add(btnManageAssetInMenu);
-        }
-        if (FindElementByXpath(btnManageAssignmentInMenu) != null)
-        {
-            menuBar.Add(btnManageAssignmentInMenu);
-        }
-        if (FindElementByXpath(btnManageReturningInMenu) != null)
-        {
-            menuBar.Add(btnManageReturningInMenu);
-        }
-        if (FindElementByXpath(btnReportInMenu) != null)
-        {
-            menuBar.Add(btnReportInMenu);
-        }
-        return menuBar;
+        Click(btnNavigationBar);
+        Click(btnChangePw);
     }
-
+   
 }
