@@ -9,13 +9,15 @@ public class AuthorizationService
     /// <summary>
     /// API Authorize
     /// </summary>
-    private string userLoginPath = "api/authorization";
+    private string userLoginPath = "api/authentication";
     private APIResponse LoginRequest(string username, string password)
     {
-        string body = "{'username':" + username + ",'password': " + password + "}";
+        string body = "{\"username\":" + username + ",\"password\": " + password + "}";
         APIResponse response = new APIRequest()
                .SetURL(Constant.BASE_API + userLoginPath)
                .AddHeader("Content-Type", "application/json")
+               .AddHeader("Accept-Encoding", "gzip, deflate, br")
+               .AddHeader("User-Agent", ".NET Framework Test Client")
                .SetBody(body)
                .Post();
         return response;

@@ -21,7 +21,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     public void WebTestSetUp()
     {   
         DriverBaseAction = new WebDriverAction();
-        DriverBaseAction.GoToUrl(Constant.BASE_URL);
+        //DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
         HomePage = new HomePage();
         LogoutPopup = new LogoutPopupPage();
