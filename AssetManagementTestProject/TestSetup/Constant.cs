@@ -66,5 +66,14 @@ public class Constant
         (int)Roles.Staff,
         (int)Locations.HaNoi
     );
+    public static CreateUserDAO.CreateUserUI NEW_ADMIN_HN_UI = new CreateUserDAO.CreateUserUI
+    (
+        "Anh",
+        "Pham",
+        "12/06/2000",
+        Constant.GENDER_MALE,
+        "01/11/2022",
+        Constant.ROLE_ADMIN
+    );
     #endregion
 }

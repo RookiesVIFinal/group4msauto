@@ -1,5 +1,4 @@
-﻿using AssetManagementTestProject.DAO;
-using AssetManagementTestProject.PageObj;
+﻿using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.Services;
 using AssetManagementTestProject.TestData;
 using AssetManagementTestProject.TestSetup;
@@ -12,11 +11,11 @@ public class US302_LoginTest : NUnitWebTestSetup
 {    
     protected ChangePassword1stTimePage? ChangePw1stTime;
 
-
-    [Test]
-    public void TC01_UserLoginSuccess()
+    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
+    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
+    public void TC01_UserLoginSuccess(string username, string password)
     {
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(username, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
     }
@@ -80,7 +79,6 @@ public class US302_LoginTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.BtnRequestReturnAsset);
 
     }
-
 
 }
 

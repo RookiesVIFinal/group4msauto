@@ -13,7 +13,6 @@ public class HomePage : WebDriverAction
     public string BtnAcceptAssignment = "(//span[contains(@aria-label, 'check')])[1]";
     public string BtnDeclineAssignment = "(//span[contains(@aria-label, 'close')])[1]";
     public string BtnRequestReturnAsset = "(//span[contains(@aria-label, 'undo')])[1]";
-
     #endregion
     public HomePage() : base()
     {
