@@ -20,7 +20,7 @@ public class LoginPage : WebDriverAction
         Click(btnLogin);
     }
 
-    public List<string> LoginPageElementUI()
+    public List<string> GetLoginPageElement()
     {
         List<string> menuBar = new List<string>();
         if (FindElementByXpath(tfUsername) != null)

@@ -8,22 +8,24 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US303LogoutTest : NUnitWebTestSetup
 {
-    [Test]
-    public void UserCanLogoutSuccessfully()
+    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
+    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
+    public void UserCanLogoutSuccessfully(string userName, string password)
     {
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
-        HomePage.SelectLogout();
-        LogoutPopup.LogOutOfPage();
-        Asserter.AssertElementsAreDisplayed(LoginPage.LoginPageElementUI());
+        HomePage?.SelectLogout();
+        LogoutPopup?.LogOutOfPage();
+        Asserter?.AssertElementsAreDisplayed(LoginPage.GetLoginPageElement());
     }
 
-    [Test]
-    public void UserCanCancelLogout()
+    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
+    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
+    public void UserCanCancelLogout(string userName, string password)
     {
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
@@ -32,17 +34,18 @@ public class US303LogoutTest : NUnitWebTestSetup
         Asserter.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
     }
 
-    [Test]
-    public void UserCannotGoBackToHomePageAfterLogOut()
+    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
+    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
+    public void UserCannotGoBackToHomePageAfterLogOut(string userName, string password)
     {
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
         HomePage.SelectLogout();
         LogoutPopup.LogOutOfPage();
         DriverBaseAction?.MoveBackward();
-        Asserter.AssertElementsAreDisplayed(LoginPage.LoginPageElementUI());
+        Asserter.AssertElementsAreDisplayed(LoginPage.GetLoginPageElement());
     }
 
 }
