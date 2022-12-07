@@ -7,9 +7,7 @@ public class DisableUserDAO
     {
         public Guid Id { get; private set; }
         public int Location { get; private set; }
-        public DisableUserRequest(Guid id, string lastName, 
-        string dateOfBirth, int gender, string joinedDate, 
-        int role, int location )
+        public DisableUserRequest(Guid id, int location )
         {
             Id = id;
             Location = location;

@@ -126,9 +126,7 @@ public class APIRequest
             var httpResponse = (HttpWebResponse)Request.EndGetResponse(asyncResult);
             APIResponse response = new APIResponse(httpResponse);
             HtmlReport.CreateAPIRequestLog(this, response);
-            HtmlReport.MarkupPassJson(response.responseBody);
             return response;
-
         }
         catch (Exception e)
         {

@@ -11,6 +11,7 @@ public class US302_LoginTest : NUnitWebTestSetup
 {    
     protected ChangePassword1stTimePage? ChangePw1stTime;
 
+
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)
@@ -24,10 +25,10 @@ public class US302_LoginTest : NUnitWebTestSetup
     {
         AuthorizationService = new AssetManagementAPIServices();
         Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        newUserService = new AssetManagementAPIServices();
-        newUser = newUserService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
+        APIService = new AssetManagementAPIServices();
+        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
         FirstTimeLoginData newLoginData = new FirstTimeLoginData();
-        newLoginData.newUser = newUser;
+        newLoginData.NewUser = NewUser;
         string newAdminUsername = newLoginData.GetUsername();
         string newAdminPassword = newLoginData.GetPassword();
         LoginPage?.Login(newAdminUsername, newAdminPassword);
@@ -40,10 +41,10 @@ public class US302_LoginTest : NUnitWebTestSetup
     {
         AuthorizationService = new AssetManagementAPIServices();
         Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        newUserService = new AssetManagementAPIServices();
-        newUser = newUserService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
+        APIService = new AssetManagementAPIServices();
+        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
         FirstTimeLoginData newLoginData = new FirstTimeLoginData();
-        newLoginData.newUser = newUser;
+        newLoginData.NewUser = NewUser;
         string newAdminUsername = newLoginData.GetUsername();
         string newAdminPassword = newLoginData.GetPassword();
         LoginPage?.Login(newAdminUsername, newAdminPassword);
@@ -77,7 +78,6 @@ public class US302_LoginTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.BtnAcceptAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.BtnDeclineAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.BtnRequestReturnAsset);
-
     }
 
 }
