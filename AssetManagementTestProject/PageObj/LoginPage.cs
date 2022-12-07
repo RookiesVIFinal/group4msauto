@@ -38,3 +38,4 @@ public class LoginPage : WebDriverAction
         return menuBar;
     }
 }
+
