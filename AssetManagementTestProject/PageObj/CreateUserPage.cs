@@ -18,23 +18,21 @@ public class CreateUserPage : WebDriverAction
     public CreateUserPage() : base()
     {
     }
-    public void CreateNewUser(UserDAO userInfo)
+    public void CreateNewUser(CreateUserDAO.CreateUserUI userInfo)
     {
         SendKeys(tfFirstName, userInfo.FirstName);
         SendKeys(tfLastName,userInfo.LastName);
         SelectDateOfBirth(userInfo.DateOfBirth);
         SelectGender(userInfo.Gender);
         SelectJoinedDate(userInfo.JoinedDate);
-        SelectUserType(userInfo.Type);
+        SelectUserType(userInfo.Role);
         Click(btnSave);
     }
     public void SelectDate(string dateTimeString, string dateField)
     {
-        // Format dd/MM/yyyy to yyyy/MM/dd
-        IFormatProvider culture = new CultureInfo("en-US", true); 
-        DateTime dateTime = DateTime.ParseExact(dateTimeString, "yyyy/MM/dd", culture);
+        DateTime dateTime = DateTime.ParseExact(dateTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         WaitToBeClickable(dateField);
-        Javascript.ExecuteScript($"arguments[0].setAttribute('value', '{dateTime.ToString()}"); 
+        Javascript.ExecuteScript($"arguments[0].setAttribute('value', '{dateTime.ToString("yyyy/MM/dd")}"); 
     }
     public void SelectDateOfBirth(string dateTimeString)
     {
@@ -57,7 +55,6 @@ public class CreateUserPage : WebDriverAction
     }
     public void SelectGender (string gender)
     {
-        // TODO: Avoid hardcoding here
         if (gender == Constant.GENDER_MALE)
         {
             Click(tickGenderMale);

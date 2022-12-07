@@ -25,7 +25,46 @@ public class Constant
     #region USER INFO
     public const string GENDER_MALE = "Male";
     public const string GENDER_FEMALE = "Female";
-    public const string TYPE_ADMIN = "Admin";
-    public const string TYPE_STAFF = "Staff";
+    public enum Genders
+    {
+        Male,
+        Female
+    }
+    public const string ROLE_ADMIN = "Admin";
+    public const string ROLE_STAFF = "Staff";
+    public enum Roles
+    {
+        Admin,
+        Staff
+    }
+    public const string LOCATION_HANOI = "HaNoi";
+    public const string LOCATION_HCM = "HoChiMinh";
+    public enum Locations
+    {
+        HaNoi,
+        HoChiMinh
+    }
+    #endregion
+    #region SEND POST REQUEST TO CREATE NEW ADMIN/STAFF
+    public static CreateUserDAO.CreateUserRequest NEW_ADMIN_HN = new CreateUserDAO.CreateUserRequest
+    (
+        "Anh",
+        "Pham",
+        "2000-06-12",
+        (int)Genders.Male,
+        "2022-11-01",
+        (int)Roles.Admin,
+        (int)Locations.HaNoi
+    );
+    public static CreateUserDAO.CreateUserRequest NEW_STAFF_HN = new CreateUserDAO.CreateUserRequest
+    (
+        "Anh",
+        "Pham",
+        "2000-06-12",
+        (int)Genders.Male,
+        "2022-11-01",
+        (int)Roles.Staff,
+        (int)Locations.HaNoi
+    );
     #endregion
 }

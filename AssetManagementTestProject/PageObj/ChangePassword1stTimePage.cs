@@ -7,7 +7,7 @@ public class ChangePassword1stTimePage : WebDriverAction
     #region FIRST TIME LOGIN
     private string btnSaveFirstLoginNewPw = "//button[contains(@type, 'submit')]";
     private string headerChangePw1stTime = "//h1[text()='Change Password']";
-    private string pathChangePw1stTime = "change-password-first-time";
+    public string pathChangePw1stTime = "change-password-first-time";
     private string textChangePw1stTime = "//p[text()='You have to change your password to continue.']";
     private string tfFirstLoginNewPw = "//input[contains(@id, 'newPassword')]";
     #endregion
@@ -18,10 +18,6 @@ public class ChangePassword1stTimePage : WebDriverAction
     {
         WaitToBeVisible(headerChangePw1stTime); // Wait for the page to log in before verifying
         return textChangePw1stTime;
-    }
-    public string ReturnExpectedChangePw1stTimeUrl()
-    {
-        return Constant.BASE_URL + pathChangePw1stTime;
     }
     public void ChangePwFirstTimeLogIn(string newPassword)
     {
