@@ -15,9 +15,9 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected LeftMenuPage MenuBarLeft;
     protected Asserter.Asserter Asserter;
     protected ChangePassword ChangePassword;
-    protected AuthorizationService AuthorizationService;
 
-    protected UserDAO TestUser;
+    protected AuthorizationService AuthorizationService;
+    public string Token;
 
     [SetUp]
     public void WebDriverBaseSetUp()
@@ -33,7 +33,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
         ChangePassword = new ChangePassword();
 
         AuthorizationService = new AuthorizationService();
-        TestUser = AuthorizationService.Login(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD);
+        Token = AuthorizationService.GetLoginToken(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD);
 
     }
     [TearDown]

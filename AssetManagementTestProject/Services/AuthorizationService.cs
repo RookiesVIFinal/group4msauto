@@ -26,12 +26,13 @@ public class AuthorizationService
         return response;
 
     }
-    public UserDAO? Login(string username, string password)
+
+    public string GetLoginToken(string username, string password)
     {
         APIResponse response = LoginRequest(username, password);
         Assert.True(response.responseStatusCode.Equals("OK"));
-        UserDAO? user = JsonConvert.DeserializeObject<UserDAO>(response.responseBody);
-        return user;
+        LoginDAO.LoginPostResponse? loginResponse = JsonConvert.DeserializeObject<LoginDAO.LoginPostResponse>(response.responseBody);
+        return loginResponse.Data.Token;
     }
 
 }

@@ -1,4 +1,7 @@
-﻿namespace AssetManagementTestProject.TestSetup;
+﻿using AssetManagementTestProject.DAO;
+using Microsoft.CodeAnalysis;
+
+namespace AssetManagementTestProject.TestSetup;
 
 public class Constant
 {
@@ -30,6 +33,52 @@ public class Constant
     public const string STAFF_USER_NAME_FOR_FIRST_TIME_LOG_IN = "tonyt3";
     public const string STAFF_PASSWORD_FOR_FIRST_TIME_LOG_IN = "tonyt3@21092000";
     public const string CHANGED_STAFF_PASSWORD_FOR_FIRST_TIME_LOG_IN = "Tonyt3@21092000";
+    #endregion
+
+    #region USER INFO
+    public const string GENDER_MALE = "Male";
+
+    public const string GENDER_FEMALE = "Female";
+
+    public enum Genders
+    {
+        Male,
+
+        Female
+    }
+    public const string ROLE_ADMIN = "Admin";
+
+    public const string ROLE_STAFF = "Staff";
+
+    public enum Roles
+    {
+        Admin,
+
+        Staff
+    }
+    public const string LOCATION_HANOI = "HaNoi";
+
+    public const string LOCATION_HCM = "HoChiMinh";
+
+    public enum Locations
+    {
+        HaNoi,
+
+        HoChiMinh
+    }
+    #endregion
+
+    #region SEND POST REQUEST TO CREATE NEW USER
+    public static CreateUserDAO.CreateUserRequest NEW_USER_1 = new CreateUserDAO.CreateUserRequest
+    (
+        "Tony",
+        "Tran",
+        "2000-09-21",
+        (int)Genders.Male,
+        "2022-12-07",
+        (int)Roles.Admin,
+        (int)Locations.HaNoi
+    );
     #endregion
     #region POP-UP MESSAGES
 
