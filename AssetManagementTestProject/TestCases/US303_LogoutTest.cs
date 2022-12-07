@@ -10,7 +10,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
 {
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void UserCanLogoutSuccessfully(string userName, string password)
+    public void TC01And02_UserCanLogoutSuccessfully(string userName, string password)
     {
         LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
@@ -24,7 +24,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void UserCanCancelLogout(string userName, string password)
+    public void TC03And04_UserCanCancelLogout(string userName, string password)
     {
         LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
@@ -37,7 +37,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void UserCannotGoBackToHomePageAfterLogOut(string userName, string password)
+    public void TC05And06_UserCannotGoBackToHomePageAfterLogOut(string userName, string password)
     {
         LoginPage?.Login(userName, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
