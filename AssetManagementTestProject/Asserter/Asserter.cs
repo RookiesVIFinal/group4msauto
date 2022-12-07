@@ -10,58 +10,38 @@ public class Asserter : WebDriverAction
     public Asserter() : base()
     {
     }
-    #region URL FLUENT ASSERTION
+    #region STRING FLUENT ASSERTION
     public void AssertUrlsEquals(string actual, string expected)
     {
         AssertEquals(actual, expected);
     }
     #endregion
-
-    #region ELEMENTS DISPLAY FLUENT ASSERTION
+    #region ELEMENT DISPLAY ASSERTION
     public void AssertElementIsDisplayed(string locator)
     {
         IsElementDisplayed(locator).Should().BeTrue();
     }
-
-    public void AssertElementsAreDisplayed(List<string> locators)
-    {
-        foreach (string locator in locators)
-        {
-            AssertElementIsDisplayed(locator);
-        }
-    }
     #endregion
 
-    #region STRING FLUENT ASSERTION
-    public void AssertStringEquals(string actual, string expected)
+    #region CHECK EQUALS
+    public void AssertViewUserEquals(ViewUserDAO.ViewUserInList actual, ViewUserDAO.ViewUserInList expected)
+    {
+        AssertEquals(actual, expected);
+    }
+    public void AssertDetailedUserEquals(ViewUserDAO.ViewDetailedUser actual, ViewUserDAO.ViewDetailedUser expected)
     {
         AssertEquals(actual, expected);
     }
 
     #endregion
-    #region DAO LIST WITH FLUENT ASSERTION
-    public void AssertUserListsEquals(List<ViewUserDAO> actual, List<ViewUserDAO> expected)
-    {
-        AssertEquals(actual, expected);
-    }
-    #endregion
 
-    #region DAO WITH FLUENT EQUAL ASSERTION
-    public void AssertUserEquals(ViewUserDAO actual, ViewUserDAO expected)
+    #region CHECK ORDER
+    public void AssertUserListAscending(List<ViewUserDAO.ViewUserInList> list)
     {
-        AssertEquals(actual, expected);
-    }
-    #endregion
-
-
-    #region DAO WITH FLUENT EQUAL ASSERTION
-    public void AssertUserListAscending(List<ViewUserDAO> list)
-    {
-        /// TODO: Make this as a WebDriverAction method
         list.Should().BeInAscendingOrder();
         TestContext.WriteLine("List is sorted in ascending order");
     }
-    public void AssertUserListDescending(List<ViewUserDAO> list)
+    public void AssertUserListDescending(List<ViewUserDAO.ViewUserInList> list)
     {
         list.Should().BeInDescendingOrder();
         TestContext.WriteLine("List is sorted in descending order");
@@ -69,5 +49,3 @@ public class Asserter : WebDriverAction
     }
     #endregion
 }
-
-

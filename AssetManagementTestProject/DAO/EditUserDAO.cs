@@ -1,19 +1,41 @@
 ﻿namespace AssetManagementTestProject.DAO;
-public class GetUserDAO
+
+public class EditUserDAO
 {
-    public partial class GetUserResponse
+    #region EDIT USER REQUEST
+    public partial class EditUserRequest
+    {
+        public Guid Id { get; private set; }
+        public string DateOfBirth { get; private set; }
+        public int Gender { get; private set; }
+        public string JoinedDate { get; private set; }
+        public int Role { get; private set; }
+        public int AdminLocation { get; private set; }
+        public EditUserRequest(Guid id,
+        string dateOfBirth, int gender, string joinedDate,
+        int role, int location)
+        {
+            DateOfBirth = dateOfBirth;
+            Gender = gender;
+            JoinedDate = joinedDate;
+            Role = role;
+            AdminLocation = location;
+        }
+    }
+    #endregion
+    #region EDIT USER RESPONSE
+    public partial class EditUserResponse
     {
         public bool IsSuccess { get; private set; }
         public string Message { get; private set; }
         public Data Data { get; private set; }
-        public GetUserResponse(bool status, string message, Data data)
+        public EditUserResponse(bool status, string message, Data data)
         {
             IsSuccess = status;
             Message = message;
             Data = data;
         }
     }
-
     public partial class Data
     {
         public Guid Id { get; private set; }
@@ -27,10 +49,9 @@ public class GetUserDAO
         public string JoinedDate { get; private set; }
         public string Role { get; private set; }
         public string Location { get; private set; }
-
-        public Data(Guid id, string userName, string staffCode, string firstName,
-        string lastName, string fullName, string dateOfBirth, string gender,
-        string joinedDate, string role, string location)
+        public Data(Guid id, string userName, string staffCode,
+        string firstName, string lastName, string fullName, string dateOfBirth,
+        string gender, string joinedDate, string role, string location)
         {
             Id = id;
             Username = userName;
@@ -45,14 +66,5 @@ public class GetUserDAO
             Location = location;
         }
     }
-    public partial class GetCanDisableUser
-    {
-        public bool IsSuccess { get; private set; }
-        public string Message { get; private set; }
-        public GetCanDisableUser(bool status, string message)
-        {
-            IsSuccess = status;
-            Message = message;
-        }
-    }
+    #endregion
 }

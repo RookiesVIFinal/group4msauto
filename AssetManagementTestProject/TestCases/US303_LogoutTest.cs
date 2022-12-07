@@ -6,7 +6,7 @@ using NUnit.Framework.Internal;
 namespace AssetManagementTestProject.TestCase;
 
 [TestFixture]
-public class US303LogoutTest : NUnitWebTestSetup
+public class US303_LogoutTest : NUnitWebTestSetup
 {
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
@@ -18,7 +18,8 @@ public class US303LogoutTest : NUnitWebTestSetup
 
         HomePage?.SelectLogout();
         LogoutPopup?.LogOutOfPage();
-        Asserter?.AssertElementsAreDisplayed(LoginPage.GetLoginPageElement());
+        Asserter?.AssertElementIsDisplayed(LoginPage.TfUsername);
+        Asserter?.AssertElementIsDisplayed(LoginPage.TfPassword);
     }
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
@@ -45,7 +46,8 @@ public class US303LogoutTest : NUnitWebTestSetup
         HomePage.SelectLogout();
         LogoutPopup.LogOutOfPage();
         DriverBaseAction?.MoveBackward();
-        Asserter.AssertElementsAreDisplayed(LoginPage.GetLoginPageElement());
+        Asserter?.AssertElementIsDisplayed(LoginPage.TfUsername);
+        Asserter?.AssertElementIsDisplayed(LoginPage.TfPassword);
     }
 
 }

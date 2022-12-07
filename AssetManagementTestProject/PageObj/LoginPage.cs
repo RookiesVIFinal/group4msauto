@@ -3,37 +3,37 @@
 namespace AssetManagementTestProject.PageObj;
 public class LoginPage : WebDriverAction
 {
-    private readonly string tfUsername = "//input[contains(@id, 'username')]";
-    private readonly string tfPassword = "//input[contains(@id, 'password')]";
-    private readonly string btnLogin = "//button[contains(@type, 'submit')]";
-    private readonly string btnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
+    public readonly string TfUsername = "//input[contains(@id, 'username')]";
+    public readonly string TfPassword = "//input[contains(@id, 'password')]";
+    public readonly string BtnLogin = "//button[contains(@type, 'submit')]";
+    public readonly string BtnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
     public LoginPage() : base()
     {
     }
     public void Login(string userName, string password)
     {
         ///Click Eye icon to view if password is inputed correctly before login
-        SendKeys(tfUsername, userName);
-        SendKeys(tfPassword, password);
-        Click(btnViewDecryptedPassword);
+        SendKeys(TfUsername, userName);
+        SendKeys(TfPassword, password);
+        Click(BtnViewDecryptedPassword);
         TakeScreenShot();
-        Click(btnLogin);
+        Click(BtnLogin);
     }
 
     public List<string> GetLoginPageElement()
     {
         List<string> menuBar = new List<string>();
-        if (FindElementByXpath(tfUsername) != null)
+        if (FindElementByXpath(TfUsername) != null)
         {
-            menuBar.Add(tfUsername);
+            menuBar.Add(TfUsername);
         }
-        if (FindElementByXpath(tfPassword) != null)
+        if (FindElementByXpath(TfPassword) != null)
         {
-            menuBar.Add(tfPassword);
+            menuBar.Add(TfPassword);
         }
-        if (FindElementByXpath(btnLogin) != null)
+        if (FindElementByXpath(BtnLogin) != null)
         {
-            menuBar.Add(btnLogin);
+            menuBar.Add(BtnLogin);
         }
         return menuBar;
     }

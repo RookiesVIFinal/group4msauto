@@ -3,9 +3,9 @@
 namespace AssetManagementTestProject.PageObj;
 public class HomePage : WebDriverAction
 {
-    private string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
-    private string btnChangePw = "//a[contains(@href, '/change-password')]";
-    private string btnLogout = "//a[contains(@href, '/logout')]";
+    public string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
+    public string btnChangePw = "//a[contains(@href, '/change-password')]";
+    public string btnLogout = "//a[contains(@href, '/logout')]";
     public string HeaderHomePage = "//h1[contains(@class, 'text-red-600')]";
 
     #region MY ASSIGNMENT LIST

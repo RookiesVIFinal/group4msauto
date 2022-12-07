@@ -23,6 +23,9 @@ public class Constant
 
     public const string STAFF_USERNAME = "minht7";
     public const string STAFF_PASSWORD = "Polo@2109";
+    public const string CHANGED_USER_PASSWORD = "Polo@21009";
+    public const string INCORRECT_USER_OLD_PASSWORD = "Polo@210090";
+    public const string INCORRECT_USER_NEW_PASSWORD = "olo210090";
     #endregion
 
     #region USER INFO
@@ -71,11 +74,11 @@ public class Constant
     );
     public static CreateUserDAO.CreateUserRequest NEW_STAFF_HN = new CreateUserDAO.CreateUserRequest
     (
-        "Anh",
-        "Pham",
-        "2000-06-12",
+        "Tony",
+        "Tran",
+        "2000-09-21",
         (int)Genders.Male,
-        "2022-11-01",
+        "2022-12-07",
         (int)Roles.Staff,
         (int)Locations.HaNoi
     );
