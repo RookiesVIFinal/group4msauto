@@ -55,4 +55,5 @@ public class GetUserDAO
             Message = message;
         }
     }
+
 }
