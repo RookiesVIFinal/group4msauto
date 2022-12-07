@@ -2,6 +2,7 @@
 
 public class CreateUserDAO
 {
+    #region CREATE USER REQUEST
     public partial class CreateUserRequest
     {
         public string FirstName { get; private set; }
@@ -24,6 +25,33 @@ public class CreateUserDAO
         }
     }
 
+    public partial class CreateUserUI
+    {
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string DateOfBirth { get; private set; }
+        public string Gender { get; private set; }
+        public string JoinedDate { get; private set; }
+        public string Role { get; private set; }
+
+        public CreateUserUI(string firstName,
+                            string lastName,
+                            string dateOfBirth,
+                            string gender,
+                            string joinedDate,
+                            string role)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Gender = gender;
+            JoinedDate = joinedDate;
+            Role = role;
+        }
+    }
+    #endregion
+
+    #region CREATE USER RESPONE BODY
     public partial class CreateUserResponse
     {
         public bool IsSuccess { get; private set; }
@@ -67,5 +95,5 @@ public class CreateUserDAO
             Location = location;
         }
     }
-
+    #endregion
 }

@@ -20,7 +20,7 @@ public class NUnitTestSetup
     {
         HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, 
             TestContext.CurrentContext.Test.Name);
-        WebDriverManager.InitDriver("chrome", 1920, 1080);
+        WebDriverManager.InitDriver("chrome");
     }
 
     [TearDown]

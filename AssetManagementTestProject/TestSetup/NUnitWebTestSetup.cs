@@ -8,20 +8,19 @@ using NUnit.Framework;
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
 {
-    protected LoginPage LoginPage;
-    protected ChangePassword1stTimePage ChangePw1stTime;
-    protected HomePage HomePage;
-    protected LogoutPopupPage LogoutPopup;
-    protected LeftMenuPage MenuBarLeft;
-    protected Asserter.Asserter Asserter;
-    protected ChangePassword ChangePassword;
-
-    protected AuthorizationService AuthorizationService;
-    public string Token;
+    protected LoginPage? LoginPage;
+    protected HomePage? HomePage;
+    protected LogoutPopupPage? LogoutPopup;
+    protected LeftMenuPage? MenuBarLeft;
+    protected Asserter.Asserter? Asserter;
+    protected AssetManagementAPIServices? AuthorizationService;
+    public CreateUserDAO.CreateUserResponse? newUser;
+    protected AssetManagementAPIServices? newUserService;
+    public string? Token;
 
     [SetUp]
     public void WebDriverBaseSetUp()
-    {   
+    {
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
@@ -29,11 +28,6 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePassword = new ChangePassword();
-
-        AuthorizationService = new AuthorizationService();
-        Token = AuthorizationService.GetLoginToken(Constant.ADMIN_USERNAME_HN, Constant.BASE_ADMIN_PASSWORD);
 
     }
     [TearDown]
