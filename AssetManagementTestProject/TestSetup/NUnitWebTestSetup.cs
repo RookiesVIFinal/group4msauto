@@ -23,10 +23,13 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     public AssetManagementAPIServices? APIService;
     protected string? Token;
+    protected string? NewAdminUsername;
+    protected string? NewAdminPassword;
 
     [SetUp]
     public void WebDriverBaseSetUp()
     {
+
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
@@ -36,20 +39,16 @@ public class NUnitWebTestSetup : NUnitTestSetup
         MenuBarLeft = new LeftMenuPage();
         ChangePw1stTime = new ChangePassword1stTimePage();
         ChangePassword = new ChangePasswordPage();
-
+        // Create data with API for testing
         AuthorizationService = new AssetManagementAPIServices();
         Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
         APIService = new AssetManagementAPIServices();
         NewUser = APIService.ReturnNewUser(Constant.NEW_STAFF_HN, Token);
         FirstTimeLoginData newLoginData = new FirstTimeLoginData();
         newLoginData.NewUser = NewUser;
-        string newAdminUsername = newLoginData.GetUsername();
-        string newAdminPassword = newLoginData.GetPassword();
-        LoginPage?.Login(newAdminUsername, newAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
+        string NewAdminUsername = newLoginData.GetUsername();
+        string NewAdminPassword = newLoginData.GetPassword();
+
     }
     [TearDown]
     public void WebDriverBaseTearDown()
