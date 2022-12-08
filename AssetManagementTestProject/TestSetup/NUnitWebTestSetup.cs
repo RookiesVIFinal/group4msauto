@@ -48,6 +48,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
         newLoginData.NewUser = NewUser;
         string NewAdminUsername = newLoginData.GetUsername();
         string NewAdminPassword = newLoginData.GetPassword();
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
 
     }
     [TearDown]
