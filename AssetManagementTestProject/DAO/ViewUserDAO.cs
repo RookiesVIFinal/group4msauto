@@ -1,4 +1,5 @@
-﻿namespace AssetManagementTestProject.DAO;
+﻿
+namespace AssetManagementTestProject.DAO;
 
 public class ViewUserDAO
 {
@@ -9,7 +10,7 @@ public class ViewUserDAO
     {
         public string StaffCode { get; private set; }
         public string FullName { get; private set; }
-        public string UserName { get; private set; }
+        public string UserName { get; private set; }    
         public string DateOfBirth { get; private set; }
         public string JoinedDate { get; private set; }
         public string Type { get; private set; }
@@ -29,12 +30,24 @@ public class ViewUserDAO
     /// </summary>
     public partial class ViewDetailedUser
     {
+
+        public string StaffCode { get; private set; }
+        public string FullName { get; private set; }
+        public string UserName { get; private set; }    
+        public string DateOfBirth { get; private set; }
         public string Gender { get; private set; }
+        public string Type { get; private set; }
         public string Location { get; private set; }
-        public ViewUserInList UserInfo { get; private set; }
-        public ViewDetailedUser(string gender, string location, ViewUserInList userInfo)
+        public ViewDetailedUser
+        (string staffCode, string fullName, string username, 
+        string dateOfBirth, string gender, string type, string location)
         {
+            StaffCode = staffCode;
+            FullName = fullName;
+            UserName = username;
+            DateOfBirth = dateOfBirth;
             Gender = gender;
+            Type = type;
             Location = location;
             UserInfo = userInfo;
         }

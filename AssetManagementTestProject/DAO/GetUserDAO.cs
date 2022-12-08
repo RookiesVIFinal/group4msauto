@@ -1,4 +1,5 @@
 ﻿namespace AssetManagementTestProject.DAO;
+
 public class GetUserDAO
 {
     public partial class GetUserResponse
@@ -28,7 +29,7 @@ public class GetUserDAO
         public string Role { get; private set; }
         public string Location { get; private set; }
 
-        public Data(Guid id, string userName, string staffCode, string firstName,
+        public Data(Guid id, string userName, string staffCode, string firstName, 
         string lastName, string fullName, string dateOfBirth, string gender,
         string joinedDate, string role, string location)
         {

@@ -25,18 +25,18 @@ public class AssetManagementAPIServices
     {
         APIResponse response = LoginRequest(username, password);
         Assert.True(response.responseStatusCode.Equals("OK"));
-        LoginDAO.LoginPostResponse? loginRequest = JsonConvert.DeserializeObject
+        LoginDAO.LoginPostResponse? loginResponse = JsonConvert.DeserializeObject
             <LoginDAO.LoginPostResponse>(response.responseBody);
-        return loginRequest.Data.Token;
+        return loginResponse.Data.Token;
     }
     #endregion
     #region CREATE NEW USER
-    private string userPath = "api/users";
+    private string createUserPath = "api/users";
     private APIResponse CreateNewUserRequest(CreateUserDAO.CreateUserRequest newUser, string token)
     {
         string body = JsonConvert.SerializeObject(newUser);
         APIResponse response = new APIRequest()
-               .SetURL(Constant.BASE_API + userPath)
+               .SetURL(Constant.BASE_API + createUserPath)
                .AddHeader("Authorization", token)
                .AddHeader("Content-Type", "application/json")
                .AddHeader("Accept-Encoding", "none")
@@ -46,7 +46,8 @@ public class AssetManagementAPIServices
                .Post();
         return response;
     }
-    public CreateUserDAO.CreateUserResponse ReturnNewUser(CreateUserDAO.CreateUserRequest newUserRequest, string token)
+    public CreateUserDAO.CreateUserResponse ReturnNewUser
+    (CreateUserDAO.CreateUserRequest newUserRequest, string token)
     {
         APIResponse response = CreateNewUserRequest(newUserRequest, token);
         Assert.True(response.responseStatusCode.Equals("OK"));
@@ -55,7 +56,7 @@ public class AssetManagementAPIServices
         return newUser;
     }
     #endregion
-    #region GET USER
+    #region GET USER 
     private string returnUserPath = "api/users/{0}";
     private APIResponse GetUserRequest(string userId, string token)
     {
@@ -105,6 +106,7 @@ public class AssetManagementAPIServices
         return editedUser;
     }
     #endregion
+    
     #region CHECK IF USER CAN BE DISABLE AND DISABLE USER
     private string checkIfDisablePath = "api/users/disable-availability/{0}";
     private APIResponse GetDisableUserRequest(string userId, string token)
@@ -155,3 +157,4 @@ public class AssetManagementAPIServices
     }
     #endregion
 }
+

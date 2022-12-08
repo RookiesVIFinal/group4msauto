@@ -41,7 +41,7 @@ public class WebDriverManager
             (browser, width, height);
 
         if (newDriver == null)
-            throw new Exception($"{browser} Browser is not supported");
+            throw new Exception($"{browser} browser is not supported");
         driver.Value = newDriver;
 
     }

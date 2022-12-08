@@ -1,5 +1,6 @@
-﻿using AssetManagementTestProject.DAO;
-using System.Globalization;
+﻿using System.Globalization;
+using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.TestSetup;
 namespace AssetManagementTestProject.TestData
 {
     public class FirstTimeLoginData
@@ -13,7 +14,7 @@ namespace AssetManagementTestProject.TestData
         {
             string newUserDob = NewUser.Data.DateOfBirth;
             DateTime parsedDob = DateTime.ParseExact(newUserDob, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            string formattedDob = parsedDob.ToString("ddMMyyyy");
+            string formattedDob = parsedDob.ToString("ddMMyyyy");            
             string password = GetUsername() + "@" + formattedDob;
             return password;
         }

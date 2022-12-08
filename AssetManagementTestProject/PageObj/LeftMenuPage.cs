@@ -11,8 +11,17 @@ public class LeftMenuPage : WebDriverAction
     public readonly string BtnReportInMenu = "//a[text() = 'Report']";
     public LeftMenuPage() : base()
     {
+    }
+}
+    {
+        List<string> menuBar = new List<string>();
+        menuBar.Add(btnHomeInMenu);
+        menuBar.Add(btnManageUserInMenu);
+        menuBar.Add(btnManageAssetInMenu);
+        menuBar.Add(btnManageAssignmentInMenu);
+        menuBar.Add(btnManageReturningInMenu);
+        menuBar.Add(btnReportInMenu);
+        return menuBar;
 
     }
 
-
-}

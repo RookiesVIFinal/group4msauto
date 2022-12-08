@@ -1,10 +1,11 @@
-﻿namespace AssetManagementTestProject.DAO;
+﻿
+namespace AssetManagementTestProject.DAO;
 
 public class LoginDAO
 {
     public partial class LoginPostRequest
     {
-        public string Username { get; private set; }
+        public string Username { get; private set; }  
         public string Password { get; private set; }
         public LoginPostRequest(string username, string password)
         {
@@ -31,15 +32,15 @@ public class LoginDAO
         public Guid Id { get; private set; }
         public string Username { get; private set; }
         public string Role { get; private set; }
-        public string Token { get; set; }
-        public bool IsFirstTimeLogin { get; set; }
-        public Data(Guid id, string username, string role, string token, bool isFirstTimeLogin)
+        public string Token { get; private set; }
+        public bool IsFirstTimeLogin { get; private set; }
+        public Data(Guid id, string userName, string role, string token, bool statusFirstTimeLogin)
         {
             Id = id;
-            Username = username;
+            Username = userName;
             Role = role;
             Token = token;
-            IsFirstTimeLogin = isFirstTimeLogin;
+            IsFirstTimeLogin = statusFirstTimeLogin;
         }
     }
 }

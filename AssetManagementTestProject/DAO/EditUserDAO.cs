@@ -11,8 +11,8 @@ public class EditUserDAO
         public string JoinedDate { get; private set; }
         public int Role { get; private set; }
         public int AdminLocation { get; private set; }
-        public EditUserRequest(Guid id,
-        string dateOfBirth, int gender, string joinedDate,
+        public EditUserRequest(Guid id, 
+        string dateOfBirth, int gender, string joinedDate, 
         int role, int location)
         {
             DateOfBirth = dateOfBirth;
@@ -49,7 +49,7 @@ public class EditUserDAO
         public string JoinedDate { get; private set; }
         public string Role { get; private set; }
         public string Location { get; private set; }
-        public Data(Guid id, string userName, string staffCode,
+        public Data(Guid id, string userName, string staffCode, 
         string firstName, string lastName, string fullName, string dateOfBirth,
         string gender, string joinedDate, string role, string location)
         {
