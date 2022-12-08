@@ -29,7 +29,7 @@ public class APIRequest
 
     public APIRequest AddFormData(string key, string value)
     {
-        if(FormData.Equals("") || FormData == null)
+        if (FormData.Equals("") || FormData == null)
         {
             FormData += key + "=" + value;
         }
@@ -139,4 +139,3 @@ public class APIRequest
     }
 
 }
-

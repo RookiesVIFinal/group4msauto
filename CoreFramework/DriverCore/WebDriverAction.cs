@@ -372,7 +372,7 @@ public class WebDriverAction
     public List<bool> AreElementsDisplayed(List<string> locators)
     {
         List<bool> result = new List<bool>();
-        foreach(string locator in locators)
+        foreach (string locator in locators)
         {
             IWebElement e = Driver.FindElement(GetXpath(locator));
             if (e == null)
@@ -396,7 +396,7 @@ public class WebDriverAction
         {
             string actualTitle = GetTitle();
             actualTitle.Should().Match(expectedTitle);
-            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]", 
+            HtmlReport.Pass("Actual title [" + actualTitle + "] matches [" + expectedTitle + "]",
                 TakeScreenShot());
         }
         catch (Exception excep)
@@ -411,7 +411,7 @@ public class WebDriverAction
         {
             string actualUrl = GetUrl();
             actualUrl.Should().Match(expectedUrl);
-            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches with expected Url [" + expectedUrl + "]", 
+            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches with expected Url [" + expectedUrl + "]",
                 TakeScreenShot());
         }
         catch (Exception excep)
@@ -454,7 +454,7 @@ public class WebDriverAction
     {
         /// Return a list of cell web elements fow an indexed row
         /// Get texts from all cells of one row and add them to a list of strings
-        
+
         List<string> valuesFromCells = new List<string>();
         IList<IWebElement> allCells = FindElementsByXpath
             (GetRowIndex(rowLocator, cellLocator, index));

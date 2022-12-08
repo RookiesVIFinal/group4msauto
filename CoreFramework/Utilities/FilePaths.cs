@@ -24,7 +24,7 @@ public class FilePaths
     }
     public static string GetCurrentDirectoryPath()
     {
-        var path = TestContext.CurrentContext.TestDirectory; 
+        var path = TestContext.CurrentContext.TestDirectory;
         return path;
     }
 }

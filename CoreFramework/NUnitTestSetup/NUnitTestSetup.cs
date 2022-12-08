@@ -6,30 +6,27 @@ namespace CoreFramework.NUnitTestSetup;
 public class NUnitTestSetup
 {
     protected WebDriverAction? DriverBaseAction;
-    private string Author = "Hong_Anh_Pham";
     private string Device = "PC";
     private string Category = "Phase2_TestProject";
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         HtmlReport.CreateReport();
-        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).
-            AssignAuthor(Author).AssignDevice(Device).AssignCategory(Category);
+        HtmlReport.CreateTest(TestContext.CurrentContext.Test.ClassName).AssignDevice(Device).AssignCategory(Category);
     }
 
     [SetUp]
     public void SetUp()
     {
-        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, 
+        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName,
             TestContext.CurrentContext.Test.Name);
-        WebDriverManager.InitDriver("chrome", 1920, 1080);
+        WebDriverManager.InitDriver("chrome");
     }
 
     [TearDown]
     public void TearDown()
     {
         WebDriverManager.CloseDriver();
-        // Report results on ExtentRep
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {

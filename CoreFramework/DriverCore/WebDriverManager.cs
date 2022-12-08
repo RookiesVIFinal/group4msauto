@@ -9,36 +9,39 @@ namespace CoreFramework.DriverCore;
 public class WebDriverManager
 {
     private static AsyncLocal<IWebDriver> driver = new AsyncLocal<IWebDriver>();
-    public static IWebDriver? CreateLocalDriver(string Browser,
-    int ScreenWidth, int ScreenHeight)
+    public static IWebDriver? CreateLocalDriver(string browser,
+    int? screenWidth = null, int? screenHeight = null)
     {
         IWebDriver? Driver = null;
-        if (Browser.SequenceEqual("firefox"))
+        if (browser.SequenceEqual("firefox"))
         {
             Driver = new FirefoxDriver();
         }
-        else if (Browser.SequenceEqual("chrome"))
+        else if (browser.SequenceEqual("chrome"))
         {
             Driver = new ChromeDriver();
         }
-        else if (Browser.SequenceEqual("safari"))
+        else if (browser.SequenceEqual("safari"))
         {
             Driver = new SafariDriver();
         }
         Driver.Manage().Window.Maximize();
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-        Driver.Manage().Window.Size = new Size(ScreenWidth, ScreenHeight);
+        if (screenHeight != null & screenWidth != null)
+        {
+            Driver.Manage().Window.Size = new Size(screenWidth ?? 1920, screenHeight ?? 1080);
+        }
         return Driver;
     }
 
-    public static void InitDriver(string Browser, int Width, int Height)
+    public static void InitDriver(string browser, int? width = null, int? height = null)
     {
 
         IWebDriver newDriver = CreateLocalDriver
-            (Browser, Width, Height);
+            (browser, width, height);
 
         if (newDriver == null)
-            throw new Exception($"{Browser} browser is not supported");
+            throw new Exception($"{browser} Browser is not supported");
         driver.Value = newDriver;
 
     }

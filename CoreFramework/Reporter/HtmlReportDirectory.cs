@@ -3,7 +3,7 @@
 namespace CoreFramework.Reporter;
 public class HtmlReportDirectory
 {
-    public static string REPORT_ROOT { get; set;}
+    public static string REPORT_ROOT { get; set; }
     public static string REPORT_FOLDER_PATH { get; set; }
     public static string REPORT_FILE_PATH { get; set; }
     public static string SCREENSHOT_PATH { get; set; }

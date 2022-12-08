@@ -46,7 +46,7 @@ internal class HtmlReport
             _report.Flush();
         }
     }
-    public static ExtentTest CreateTest(string className, string classDescription ="")
+    public static ExtentTest CreateTest(string className, string classDescription = "")
     {
         // Create a test suite (left column)
         if (_report == null)
@@ -54,9 +54,9 @@ internal class HtmlReport
             _report = CreateInstance();
         }
         _extentTestSuite = _report.CreateTest(className, classDescription);
-        return _extentTestSuite; 
+        return _extentTestSuite;
     }
-    public static ExtentTest CreateNode(string className, string testcase, 
+    public static ExtentTest CreateNode(string className, string testcase,
         string description = "")
     {
         // Create test cases (right column)
@@ -91,7 +91,7 @@ internal class HtmlReport
         GetTest().Pass(des);
         TestContext.WriteLine(des);
     }
-    public static void Pass (string des, string path)
+    public static void Pass(string des, string path)
     {
         GetTest().Pass(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
@@ -107,7 +107,7 @@ internal class HtmlReport
         GetTest().Fail(des).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
     }
-    public static void Fail (string des, string ex, string path)
+    public static void Fail(string des, string ex, string path)
     {
         GetTest().Fail(des).Fail(ex).AddScreenCaptureFromPath(path);
         TestContext.WriteLine(des);
@@ -122,7 +122,7 @@ internal class HtmlReport
         GetTest().Info(MarkupHelperPlus.CreateAPIRequestLog(request, response));
         TestContext.Progress.WriteLine();
     }
-    public static void Warning (string des)
+    public static void Warning(string des)
     {
         GetTest().Warning(des);
         TestContext.WriteLine(des);
@@ -136,7 +136,7 @@ internal class HtmlReport
     #region  Markup 
     public static void MarkupPassJson(string json)
     {
-      GetTest().Info(MarkupHelper.CreateCodeBlock(json, CodeLanguage.Json));
+        GetTest().Info(MarkupHelper.CreateCodeBlock(json, CodeLanguage.Json));
     }
     public static void MarkupTable(string[][] someInts)
     {
@@ -170,5 +170,3 @@ internal class HtmlReport
     }
     #endregion
 }
-
-
