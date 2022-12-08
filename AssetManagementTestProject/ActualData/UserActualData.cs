@@ -8,13 +8,13 @@ public class UserActualData : WebDriverAction
     public UserActualData() : base()
     {
     }
-    public UserDAO GetUserInfoFromGrid(string rowLocator, string cellLocator, int index)
+    public ViewUserDAO.ViewUserInList GetUserInfoFromGrid(string rowLocator, string cellLocator, int index)
     {
         // To check view user list
         List<string> valuesFromCells = GetTextFromAllCellsOfOneRow
             (rowLocator, cellLocator, index);
 
-        UserDAO user = new UserDAO(
+        ViewUserDAO.ViewUserInList user = new ViewUserDAO.ViewUserInList(
             valuesFromCells[0],
             valuesFromCells[1],
             valuesFromCells[2],
@@ -29,16 +29,16 @@ public class UserActualData : WebDriverAction
         string userRow = (string)ConvertToJson(GetUserInfoFromGrid(rowLocator, cellLocator, index));
         return userRow;
     }
-    public List<UserDAO> ReturnUserList(string rowLocator, string cellLocator)
+    public List<ViewUserDAO.ViewUserInList> ReturnUserList(string rowLocator, string cellLocator)
     {
         // Return all user info from a table (assuming that there is no empty row)
         int i = 0;
-        List<UserDAO> listOfUsers = new List<UserDAO>();
+        List<ViewUserDAO.ViewUserInList> listOfUsers = new List<ViewUserDAO.ViewUserInList>();
         IList<IWebElement> allRows = GetAllRows(rowLocator);
 
         foreach (IWebElement row in allRows)
         {
-            UserDAO user = GetUserInfoFromGrid(rowLocator, cellLocator, i + 1);
+            ViewUserDAO.ViewUserInList user = GetUserInfoFromGrid(rowLocator, cellLocator, i + 1);
             listOfUsers.Add(user);
             i++;
         }
