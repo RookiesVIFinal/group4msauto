@@ -49,7 +49,6 @@ public class ViewUserDAO
             Gender = gender;
             Type = type;
             Location = location;
-            UserInfo = userInfo;
         }
     }
 
