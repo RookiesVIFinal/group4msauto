@@ -2,6 +2,7 @@
 namespace AssetManagementTestProject.PageObj;
 public class ManageUserPage : WebDriverAction
 {
+    public readonly string PathManageUser = "admin/manage-user";
     private readonly string rowLocator = "";
     private readonly string cellLocator = "";
     public readonly string BtnCreateNewUser = "//button[contains(@class, 'ant-btn css-1wismvm ant-btn-primary ant-btn-dangerous ml-3')]";

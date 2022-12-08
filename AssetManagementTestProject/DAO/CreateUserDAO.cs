@@ -2,7 +2,7 @@
 
 public class CreateUserDAO
 {
-    #region CREATE USER REQUEST
+    #region CREATE USER WITH API AND VIA UI
     public partial class CreateUserRequest
     {
         public string FirstName { get; private set; }

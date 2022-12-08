@@ -36,9 +36,9 @@ public class NUnitWebTestSetup : NUnitTestSetup
         MenuBarLeft = new LeftMenuPage();
         /// Create data with API for testing
         AuthorizationService = new AssetManagementAPIServices();
-        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         APIService = new AssetManagementAPIServices();
-        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
+        NewUser = APIService.ReturnNewUser(CreateUserData.NEW_ADMIN_HN, Token);
         FirstTimeLoginData newLoginData = new FirstTimeLoginData();
         newLoginData.NewUser = NewUser;
         NewAdminUsername = newLoginData.GetUsername();

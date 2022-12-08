@@ -1,12 +1,12 @@
-﻿using System.Globalization;
-using CoreFramework.Reporter;
+﻿using CoreFramework.Reporter;
+using DriverManager = CoreFramework.DriverCore.WebDriverManager;
 using FluentAssertions;
 using Newtonsoft.Json;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-using DriverManager = CoreFramework.DriverCore.WebDriverManager;
+using System.Globalization;
 
 namespace CoreFramework.DriverCore;
 public class WebDriverAction

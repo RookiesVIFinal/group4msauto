@@ -9,7 +9,7 @@ public class US302_LoginTest : NUnitWebTestSetup
 {    
     protected ChangePassword1stTimePage? ChangePw1stTime;
 
-    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
+    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)
     {
@@ -30,11 +30,11 @@ public class US302_LoginTest : NUnitWebTestSetup
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.ADMIN_PASSWORD_HN);
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
         LogoutPopup?.LogOutOfPage();
-        LoginPage?.Login(NewAdminUsername, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(NewAdminUsername, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
     }
@@ -48,7 +48,7 @@ public class US302_LoginTest : NUnitWebTestSetup
     [Test]
     public void TC08To14_AdminCanLoginToTheApp()
     {
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnManageUserInMenu);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnManageAssetInMenu);
