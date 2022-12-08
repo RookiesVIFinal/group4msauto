@@ -8,43 +8,32 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US303_LogoutTest : NUnitWebTestSetup
 {
-    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
-    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void TC01And02_UserCanLogoutSuccessfully(string userName, string password)
-    {
-        LoginPage?.Login(userName, password);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
+    [Test]
+    public void TC01_UserCanLogoutSuccessfully()
+    {
         HomePage?.SelectLogout();
         LogoutPopup?.LogOutOfPage();
         Asserter?.AssertElementIsDisplayed(LoginPage.TfUsername);
         Asserter?.AssertElementIsDisplayed(LoginPage.TfPassword);
     }
 
-    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
-    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void TC03And04_UserCanCancelLogout(string userName, string password)
-    {
-        LoginPage?.Login(userName, password);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
-        HomePage.SelectLogout();
-        LogoutPopup.CancelLogOutOfPage();
-        Asserter.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
+    [Test]
+    public void TC02_UserCanCancelLogout()
+    {
+        HomePage?.SelectLogout();
+        LogoutPopup?.CancelLogOutOfPage();
+        Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
     }
 
-    [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
-    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
-    public void TC05And06_UserCannotGoBackToHomePageAfterLogOut(string userName, string password)
-    {
-        LoginPage?.Login(userName, password);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
 
-        HomePage.SelectLogout();
-        LogoutPopup.LogOutOfPage();
+    [Test]
+    public void TC03_UserCannotGoBackToHomePageAfterLogOut()
+    {
+
+        HomePage?.SelectLogout();
+        LogoutPopup?.LogOutOfPage();
         DriverBaseAction?.MoveBackward();
         Asserter?.AssertElementIsDisplayed(LoginPage.TfUsername);
         Asserter?.AssertElementIsDisplayed(LoginPage.TfPassword);

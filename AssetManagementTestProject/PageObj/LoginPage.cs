@@ -20,22 +20,5 @@ public class LoginPage : WebDriverAction
         Click(BtnLogin);
     }
 
-    public List<string> GetLoginPageElement()
-    {
-        List<string> menuBar = new List<string>();
-        if (FindElementByXpath(TfUsername) != null)
-        {
-            menuBar.Add(TfUsername);
-        }
-        if (FindElementByXpath(TfPassword) != null)
-        {
-            menuBar.Add(TfPassword);
-        }
-        if (FindElementByXpath(BtnLogin) != null)
-        {
-            menuBar.Add(BtnLogin);
-        }
-        return menuBar;
-    }
 }
 

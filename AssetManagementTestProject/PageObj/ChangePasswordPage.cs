@@ -3,7 +3,7 @@ using CoreFramework.DriverCore;
 
 namespace AssetManagementTestProject.PageObj;
 
-public class ChangePassword : WebDriverAction
+public class ChangePasswordPage : WebDriverAction
 {
     #region CHANGE PASSWORD
     private string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
@@ -20,7 +20,7 @@ public class ChangePassword : WebDriverAction
     private string errorMessages = "//div[contains(@id, 'newPassword_help')]";
     #endregion
 
-    public ChangePassword() : base()
+    public ChangePasswordPage() : base()
     {
     }
     public string DisplayChangePwPopUp()

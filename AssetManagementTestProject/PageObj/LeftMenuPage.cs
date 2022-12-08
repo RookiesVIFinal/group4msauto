@@ -13,17 +13,6 @@ public class LeftMenuPage : WebDriverAction
     {
 
     }
-    public List<string> ReturnMenuBar()
-    {
-        List<string> menuBar = new List<string>();
-        menuBar.Add(BtnHomeInMenu);
-        menuBar.Add(BtnManageAssetInMenu);
-        menuBar.Add(BtnManageAssignmentInMenu);
-        menuBar.Add(BtnManageReturningInMenu);
-        menuBar.Add(BtnManageUserInMenu);
-        menuBar.Add(BtnReportInMenu);
-        return menuBar;
 
-    }
 
 }

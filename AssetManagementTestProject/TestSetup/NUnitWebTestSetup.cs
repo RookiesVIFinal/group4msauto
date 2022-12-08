@@ -1,6 +1,7 @@
 ﻿using AssetManagementTestProject.DAO;
 using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.Services;
+using AssetManagementTestProject.TestData;
 using CoreFramework.DriverCore;
 using CoreFramework.NUnitTestSetup;
 using NUnit.Framework;
@@ -13,14 +14,14 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected LogoutPopupPage? LogoutPopup;
     protected LeftMenuPage? MenuBarLeft;
     protected ChangePassword1stTimePage? ChangePw1stTime;
-    protected ChangePassword? ChangePassword;
+    protected ChangePasswordPage? ChangePassword;
     protected Asserter.Asserter? Asserter;
 
     protected AssetManagementAPIServices? AuthorizationService;
     protected CreateUserDAO.CreateUserResponse? NewUser;
-    public DisableUserDAO.DisableUserRequest? DisabledUser;
-    public DisableUserDAO.DisableUserResponse? DisableUserResponse;
-    protected AssetManagementAPIServices? APIService;
+    protected DisableUserDAO.DisableUserRequest? DisabledUser;
+    protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
+    public AssetManagementAPIServices? APIService;
     protected string? Token;
 
     [SetUp]
@@ -34,7 +35,21 @@ public class NUnitWebTestSetup : NUnitTestSetup
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
         ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePassword = new ChangePassword();
+        ChangePassword = new ChangePasswordPage();
+
+        AuthorizationService = new AssetManagementAPIServices();
+        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        APIService = new AssetManagementAPIServices();
+        NewUser = APIService.ReturnNewUser(Constant.NEW_STAFF_HN, Token);
+        FirstTimeLoginData newLoginData = new FirstTimeLoginData();
+        newLoginData.NewUser = NewUser;
+        string newAdminUsername = newLoginData.GetUsername();
+        string newAdminPassword = newLoginData.GetPassword();
+        LoginPage?.Login(newAdminUsername, newAdminPassword);
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
     }
     [TearDown]
     public void WebDriverBaseTearDown()
@@ -57,6 +72,3 @@ public class NUnitWebTestSetup : NUnitTestSetup
     }
 
 }
-
-
-
