@@ -1,6 +1,4 @@
 ﻿using AssetManagementTestProject.PageObj;
-using AssetManagementTestProject.Services;
-using AssetManagementTestProject.TestData;
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
@@ -11,7 +9,6 @@ public class US302_LoginTest : NUnitWebTestSetup
 {    
     protected ChangePassword1stTimePage? ChangePw1stTime;
 
-
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN)]
     [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)
@@ -21,39 +18,23 @@ public class US302_LoginTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
     }
     [Test]
-    public void TC02_UserAskedChangePasswordFirstTime()
+    public void TC02_UserIsAskedChangePasswordFirstTime()
     {
-        AuthorizationService = new AssetManagementAPIServices();
-        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        APIService = new AssetManagementAPIServices();
-        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
-        FirstTimeLoginData newLoginData = new FirstTimeLoginData();
-        newLoginData.NewUser = NewUser;
-        string newAdminUsername = newLoginData.GetUsername();
-        string newAdminPassword = newLoginData.GetPassword();
-        LoginPage?.Login(newAdminUsername, newAdminPassword);
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
         Asserter?.AssertElementIsDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
         Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ChangePw1stTime.pathChangePw1stTime);
     }
     [Test] 
-    public void TC03_UserLoginWithNewPassword()
+    public void TC03_UserCanLoginWithNewPassword()
     {
-        AuthorizationService = new AssetManagementAPIServices();
-        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
-        APIService = new AssetManagementAPIServices();
-        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
-        FirstTimeLoginData newLoginData = new FirstTimeLoginData();
-        newLoginData.NewUser = NewUser;
-        string newAdminUsername = newLoginData.GetUsername();
-        string newAdminPassword = newLoginData.GetPassword();
-        LoginPage?.Login(newAdminUsername, newAdminPassword);
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
         ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.ADMIN_PASSWORD_HN);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
         LogoutPopup?.LogOutOfPage();
-        LoginPage?.Login(newAdminUsername, Constant.ADMIN_PASSWORD_HN);
+        LoginPage?.Login(NewAdminUsername, Constant.ADMIN_PASSWORD_HN);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
     }

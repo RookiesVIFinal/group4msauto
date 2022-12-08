@@ -1,6 +1,7 @@
 ﻿using AssetManagementTestProject.DAO;
 using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.Services;
+using AssetManagementTestProject.TestData;
 using CoreFramework.DriverCore;
 using CoreFramework.NUnitTestSetup;
 using NUnit.Framework;
@@ -15,14 +16,17 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected Asserter.Asserter? Asserter;
     protected AssetManagementAPIServices? AuthorizationService;
     protected CreateUserDAO.CreateUserResponse? NewUser;
-    public DisableUserDAO.DisableUserRequest? DisabledUser;
-    public DisableUserDAO.DisableUserResponse? DisableUserResponse;
+    protected DisableUserDAO.DisableUserRequest? DisabledUser;
+    protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected AssetManagementAPIServices? APIService;
     protected string? Token;
+    protected string? NewAdminUsername;
+    protected string? NewAdminPassword;
 
     [SetUp]
     public void WebTestSetUp()
     {   
+        /// Initialize header pages
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
@@ -30,6 +34,15 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
+        /// Create data with API for testing
+        AuthorizationService = new AssetManagementAPIServices();
+        Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD_HN);
+        APIService = new AssetManagementAPIServices();
+        NewUser = APIService.ReturnNewUser(Constant.NEW_ADMIN_HN, Token);
+        FirstTimeLoginData newLoginData = new FirstTimeLoginData();
+        newLoginData.NewUser = NewUser;
+        NewAdminUsername = newLoginData.GetUsername();
+        NewAdminPassword = newLoginData.GetPassword();
     }
     [TearDown]    
     public void WebTestTearDown()
