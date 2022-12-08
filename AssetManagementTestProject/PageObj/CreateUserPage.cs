@@ -2,12 +2,12 @@
 using AssetManagementTestProject.TestSetup;
 using System.Globalization;
 using CoreFramework.DriverCore;
-using OpenQA.Selenium.Support.UI;
 
 namespace AssetManagementTestProject.PageObj;
 public class CreateUserPage : WebDriverAction
 {
     private readonly string btnSave = "//span[text()='Save']";
+    private readonly string btnCloseAfterCreateSuccess = "//span[text()='Close']";
     private readonly string datePickJoinedDate = "//input[contains(@id, 'formCreateUser_joinedDate')]";
     private readonly string dropBarType = "//input[@id='formCreateUser_role']";
     private readonly string tfFirstName = "//input[contains(@id, 'formCreateUser_firstName')]";
@@ -15,7 +15,7 @@ public class CreateUserPage : WebDriverAction
     private readonly string tickGenderFemale = "(//input[contains(@type, 'radio')])[1]";
     private readonly string tickGenderMale = "(//input[contains(@type, 'radio')])[2]";
 
-    private string typePath = "//div[text()='{0}']";
+    private string typePath = "//div[@title='{0}']";
     #region BUTTONS TO PICK DOB
     private readonly string datePickDateOfBirth = "//input[contains(@id, 'formCreateUser_dateOfBirth')]";
     private readonly string btnHeaderYear = "//button[@class='ant-picker-year-btn']";
@@ -31,9 +31,12 @@ public class CreateUserPage : WebDriverAction
         SendKeys(tfFirstName, userInfo.FirstName);
         SendKeys(tfLastName,userInfo.LastName);
         SelectDateOfBirth(userInfo.DateOfBirth);
+        // Create a new female user by default
+        //SelectGender(userInfo.Gender); 
         SelectJoinedDate(userInfo.JoinedDate);
         SelectUserType(userInfo.Role);
         Click(btnSave);
+        Click(btnCloseAfterCreateSuccess);
     }
     public void SelectDate(string dateTimeString, string dateField)
     {
@@ -56,16 +59,16 @@ public class CreateUserPage : WebDriverAction
         if (userType == Constant.ROLE_ADMIN)
         {
             typePath = string.Format(typePath, Constant.ROLE_ADMIN);
-            /// TODO: Fix Elem not interactable here
-            FindElementByXpath(typePath).Click();
+            Click(typePath);
+
         }
         else if (userType == Constant.ROLE_STAFF)
         {
             typePath = string.Format(typePath, Constant.ROLE_STAFF);
-            FindElementByXpath(typePath).Click();
+            Click(typePath);
         }
     }
-    public void SelectGender (string gender)
+    public void SelectGender(string gender)
     {
         if (gender == Constant.GENDER_MALE)
         {
