@@ -66,3 +66,4 @@ public class ChangePasswordPage : WebDriverAction
         return errorMessages;
     }
 }
+

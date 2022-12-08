@@ -16,7 +16,7 @@ public class LoginDAO
     public partial class LoginPostResponse
     {
         public bool IsSuccess { get; private set; }
-        public object Message { get; private set; }
+        public object Message { get; private set;  }
         public Data Data { get; private set; }
         public LoginPostResponse(bool status, object message, Data data)
         {
@@ -43,3 +43,4 @@ public class LoginDAO
         }
     }
 }
+

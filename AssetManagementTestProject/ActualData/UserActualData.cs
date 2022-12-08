@@ -50,4 +50,3 @@ public class UserActualData : WebDriverAction
         return userList;
     }
 }
-
