@@ -12,12 +12,13 @@ public class ChangePasswordPage : WebDriverAction
     private string btnSaveNewPw = "//button[contains(@type, 'submit')]";
     private string btnChangePw = "//a[contains(@href, '/change-password')]";
     private string btnCancel = "//span[contains(text(), 'Cancel')]";
-    private string headerChangePw = "//h1[text()='Change Password']";
+    public string HeaderChangePw = "//h1[text()='Change Password']";
     private string pathChangePw = "change-password";
-    private string textChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
+    public string TextChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
     #endregion
     #region ERROR MESSAGES
-    private string errorMessages = "//div[contains(@id, 'newPassword_help')]";
+    public string ErrorMessagesNewPw = "//div[contains(@id, 'newPassword_help')]";
+    public string ErrorMessagesOldPw = "//div[contains(@id, 'newPassword_help')]";
     #endregion
 
     public ChangePasswordPage() : base()
@@ -25,8 +26,8 @@ public class ChangePasswordPage : WebDriverAction
     }
     public string DisplayChangePwPopUp()
     {
-        WaitToBeVisible(headerChangePw);
-        return headerChangePw;
+        WaitToBeVisible(HeaderChangePw);
+        return HeaderChangePw;
     }
     public string ReturnExpectedChangePWUrl()
     {
@@ -45,8 +46,8 @@ public class ChangePasswordPage : WebDriverAction
     }
     public string DisplayChangePwSuccessfully()
     {
-        WaitToBeVisible(headerChangePw);
-        return textChangePwSuccessfully;
+        WaitToBeVisible(HeaderChangePw);
+        return TextChangePwSuccessfully;
     }
     public void SelectChangePassword()
     {
@@ -62,8 +63,10 @@ public class ChangePasswordPage : WebDriverAction
     }
     public string DisplayErrorMessages()
     {
-        WaitToBeVisible(errorMessages);
-        return errorMessages;
+        WaitToBeVisible(ErrorMessagesNewPw);
+        return ErrorMessagesNewPw;
+        WaitToBeVisible(ErrorMessagesOldPw);
+        return ErrorMessagesOldPw;
     }
 }
 

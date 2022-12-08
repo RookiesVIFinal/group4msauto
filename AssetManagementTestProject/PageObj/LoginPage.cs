@@ -3,8 +3,8 @@
 namespace AssetManagementTestProject.PageObj;
 public class LoginPage : WebDriverAction
 {
-    private readonly string tfUsername = "//input[contains(@id, 'username')]";
-    private readonly string tfPassword = "//input[contains(@id, 'password')]";
+    public readonly string TfUsername = "//input[contains(@id, 'username')]";
+    public readonly string TfPassword = "//input[contains(@id, 'password')]";
     private readonly string btnLogin = "//button[contains(@type, 'submit')]";
     private readonly string btnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
     public LoginPage() : base()
@@ -15,9 +15,9 @@ public class LoginPage : WebDriverAction
         ///Click Eye icon to view if password is inputed correctly before login
         SendKeys(TfUsername, userName);
         SendKeys(TfPassword, password);
-        Click(BtnViewDecryptedPassword);
+        Click(btnViewDecryptedPassword);
         TakeScreenShot();
-        Click(BtnLogin);
+        Click(btnLogin);
     }
 
 }
