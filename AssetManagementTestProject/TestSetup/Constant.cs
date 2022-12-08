@@ -1,4 +1,4 @@
-﻿using AssetManagementTestProject.DAO;
+﻿namespace AssetManagementTestProject.TestSetup;
 
 namespace AssetManagementTestProject.TestSetup;
 public class Constant
@@ -41,3 +41,4 @@ public class Constant
     }
     #endregion
 }
+

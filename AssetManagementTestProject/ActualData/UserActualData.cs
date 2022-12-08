@@ -1,6 +1,6 @@
-﻿using CoreFramework.DriverCore;
+﻿using AssetManagementTestProject.DAO;
+using CoreFramework.DriverCore;
 using OpenQA.Selenium;
-using AssetManagementTestProject.DAO;
 
 namespace AssetManagementTestProject.TestData;
 public class UserActualData : WebDriverAction
@@ -50,4 +50,5 @@ public class UserActualData : WebDriverAction
         return userList;
     }
 }
+
 

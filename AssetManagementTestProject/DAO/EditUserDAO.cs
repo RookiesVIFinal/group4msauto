@@ -13,7 +13,7 @@ public class EditUserDAO
         public int AdminLocation { get; private set; }
         public EditUserRequest(Guid id, 
         string dateOfBirth, int gender, string joinedDate, 
-        int role, int location )
+        int role, int location)
         {
             DateOfBirth = dateOfBirth;
             Gender = gender;

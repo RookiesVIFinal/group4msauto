@@ -23,6 +23,15 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected string? NewAdminUsername;
     protected string? NewAdminPassword;
 
+    protected AssetManagementAPIServices? AuthorizationService;
+    protected CreateUserDAO.CreateUserResponse? NewUser;
+    protected DisableUserDAO.DisableUserRequest? DisabledUser;
+    protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
+    public AssetManagementAPIServices? APIService;
+    protected string? Token;
+    protected string? NewAdminUsername;
+    protected string? NewAdminPassword;
+
     [SetUp]
     public void WebTestSetUp()
     {   
@@ -65,5 +74,3 @@ public class NUnitWebTestSetup : NUnitTestSetup
     }
 
 }
-
-

@@ -14,6 +14,7 @@ public class GetUserDAO
             Data = data;
         }
     }
+
     public partial class Data
     {
         public Guid Id { get; private set; }
@@ -27,6 +28,7 @@ public class GetUserDAO
         public string JoinedDate { get; private set; }
         public string Role { get; private set; }
         public string Location { get; private set; }
+
         public Data(Guid id, string userName, string staffCode, string firstName, 
         string lastName, string fullName, string dateOfBirth, string gender,
         string joinedDate, string role, string location)
@@ -54,4 +56,5 @@ public class GetUserDAO
             Message = message;
         }
     }
+
 }

@@ -27,7 +27,6 @@ public class NUnitTestSetup
     public void TearDown()
     {
         WebDriverManager.CloseDriver();
-        // Report results on ExtentRep
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
@@ -44,3 +43,4 @@ public class NUnitTestSetup
         HtmlReport.Flush();
     }
 }
+

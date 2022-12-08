@@ -25,6 +25,7 @@ public class CreateUserDAO
             Location = location;
         }
     }
+
     public partial class CreateUserUI
     {
         public string FirstName { get; private set; }
@@ -59,6 +60,7 @@ public class CreateUserDAO
             Data = data;
         }
     }
+
     public partial class Data
     {
         public Guid Id { get; private set; }
@@ -91,3 +93,4 @@ public class CreateUserDAO
     }
     #endregion
 }
+

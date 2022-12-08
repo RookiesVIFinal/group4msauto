@@ -1,4 +1,3 @@
-using AssetManagementTestProject.TestSetup;
 using CoreFramework.DriverCore;
 
 namespace AssetManagementTestProject.PageObj;

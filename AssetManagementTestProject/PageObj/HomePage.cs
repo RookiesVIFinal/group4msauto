@@ -14,6 +14,7 @@ public class HomePage : WebDriverAction
     public string BtnDeclineAssignment = "(//span[contains(@aria-label, 'close')])[1]";
     public string BtnRequestReturnAsset = "(//span[contains(@aria-label, 'undo')])[1]";
     #endregion
+
     public HomePage() : base()
     {
     }
@@ -22,4 +23,5 @@ public class HomePage : WebDriverAction
         Click(btnNavigationBar);
         Click(btnLogout);
     }
+
 }

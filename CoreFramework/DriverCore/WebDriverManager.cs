@@ -31,7 +31,6 @@ public class WebDriverManager
         {
             Driver.Manage().Window.Size = new Size(screenWidth ?? 1920, screenHeight ?? 1080);
         }
-
         return Driver;
     }
 
@@ -59,3 +58,4 @@ public class WebDriverManager
         }
     }
 }
+

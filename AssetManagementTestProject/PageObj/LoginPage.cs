@@ -13,10 +13,12 @@ public class LoginPage : WebDriverAction
     public void Login(string userName, string password)
     {
         ///Click Eye icon to view if password is inputed correctly before login
-        SendKeys(tfUsername, userName);
-        SendKeys(tfPassword, password);
-        Click(btnViewDecryptedPassword);
+        SendKeys(TfUsername, userName);
+        SendKeys(TfPassword, password);
+        Click(BtnViewDecryptedPassword);
         TakeScreenShot();
-        Click(btnLogin);
+        Click(BtnLogin);
     }
+
 }
+

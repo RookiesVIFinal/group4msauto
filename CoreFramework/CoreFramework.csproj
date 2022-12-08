@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="APICoreRestSharp\**" />
-    <Compile Remove="Reporter\Screenshots\**" />
-    <EmbeddedResource Remove="APICoreRestSharp\**" />
-    <EmbeddedResource Remove="Reporter\Screenshots\**" />
-    <None Remove="APICoreRestSharp\**" />
-    <None Remove="Reporter\Screenshots\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="APICoreRestSharp\**" />
+		<Compile Remove="Reporter\Screenshots\**" />
+		<EmbeddedResource Remove="APICoreRestSharp\**" />
+		<EmbeddedResource Remove="Reporter\Screenshots\**" />
+		<None Remove="APICoreRestSharp\**" />
+		<None Remove="Reporter\Screenshots\**" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
