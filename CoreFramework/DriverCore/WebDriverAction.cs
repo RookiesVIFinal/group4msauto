@@ -102,7 +102,7 @@ public class WebDriverAction
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Press enter on element [" + locator + "] failed");
+            HtmlReport.Fail("Press enter on element [" + locator + "] failed", TakeScreenShot());
             throw excep;
         }
     }
@@ -116,7 +116,7 @@ public class WebDriverAction
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Clear previous input in element [" + locator + "] failed");
+            HtmlReport.Fail("Clear previous input in element [" + locator + "] failed", TakeScreenShot());
             throw excep;
         }
     }
@@ -132,7 +132,7 @@ public class WebDriverAction
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Clicking on element [" + locator + "] failed");
+            HtmlReport.Fail("Clicking on element [" + locator + "] failed", TakeScreenShot());
             throw excep;
         }
     }
@@ -143,7 +143,6 @@ public class WebDriverAction
             IWebElement btnToClick = WaitToBeClickable(locator);
             HighlightElem(btnToClick);
             Javascript.ExecuteScript("arguments[0].click();", btnToClick);
-
             HtmlReport.Pass("Clicking on element [" + locator + "] passed");
 
         }
@@ -205,7 +204,7 @@ public class WebDriverAction
         try
         {
             FindElementByXpath(locator).SendKeys(key);
-            HtmlReport.Pass("Sendkeys to element [" + locator + "] passed", TakeScreenShot());
+            HtmlReport.Pass("Sendkeys to element [" + locator + "] passed");
         }
         catch (Exception excep)
         {
@@ -237,13 +236,13 @@ public class WebDriverAction
             IJavaScriptExecutor jsDriver = (IJavaScriptExecutor)Driver;
             string highlightJavascript = "arguments[0].style.border='2px solid red'";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { e });
-            HtmlReport.Pass("Highlight element [" + e.ToString() + "] passed");
+            HtmlReport.Pass("Highlight element [" + e.ToString() + "] passed", TakeScreenShot());
             return e;
 
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Highlight element [" + e.ToString() + "] failed");
+            HtmlReport.Fail("Highlight element [" + e.ToString() + "] failed", TakeScreenShot());
             throw excep;
 
         }
@@ -259,7 +258,7 @@ public class WebDriverAction
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Select element " + locator + " failed with " + key);
+            HtmlReport.Fail("Select element " + locator + " failed with " + key, TakeScreenShot());
             throw excep;
         }
     }
@@ -274,7 +273,7 @@ public class WebDriverAction
         }
         catch (Exception excep)
         {
-            HtmlReport.Fail("Close Pop up fail");
+            HtmlReport.Fail("Close Pop up fail", TakeScreenShot());
             throw excep;
 
         }
@@ -352,7 +351,7 @@ public class WebDriverAction
     #endregion
 
     #region VERIFYING / COMPARING / ASSERTING ACTIONS
-    public bool IsElementDisplayed(string locator)
+    public bool VerifyElementIsDisplayed(string locator)
     {
         IWebElement e = Driver.FindElement(GetXpath(locator));
 
@@ -369,7 +368,7 @@ public class WebDriverAction
         }
     }
 
-    public List<bool> AreElementsDisplayed(List<string> locators)
+    public List<bool> VerifyElementsAreDisplayed(List<string> locators)
     {
         List<bool> result = new List<bool>();
         foreach(string locator in locators)

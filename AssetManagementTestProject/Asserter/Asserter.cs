@@ -19,7 +19,7 @@ public class Asserter : WebDriverAction
     #region ELEMENT DISPLAY ASSERTION
     public void AssertElementIsDisplayed(string locator)
     {
-        IsElementDisplayed(locator).Should().BeTrue();
+        VerifyElementIsDisplayed(locator).Should().BeTrue();
     }
     #endregion
 
