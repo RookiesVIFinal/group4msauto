@@ -9,12 +9,21 @@ public class US304ChangePasswordTest : NUnitWebTestSetup
     [Test]
     public void TC01_UserCanChangePWSuccsessfullyForTheFirstTimeLogIn()
     {
-
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
     }
 
     [TestCase(Constant.CHANGED_USER_PASSWORD, Constant.STAFF_PASSWORD)]
     public void TC02_UserCanChangePWSuccessfully(string newPassword, string oldPassword)
     {
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         ChangePassword?.SelectChangePassword();
         Asserter?.AssertElementIsDisplayed(ChangePassword.DisplayChangePwPopUp());
         ChangePassword?.ChangeNewPwSuccessfully(oldPassword, newPassword);
@@ -24,6 +33,11 @@ public class US304ChangePasswordTest : NUnitWebTestSetup
     [Test]
     public void TC03_UserCanCancelChangePWAction()
     {
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         ChangePassword?.SelectCancel();
@@ -34,6 +48,11 @@ public class US304ChangePasswordTest : NUnitWebTestSetup
     [TestCase(Constant.INCORRECT_USER_NEW_PASSWORD, Constant.INCORRECT_USER_OLD_PASSWORD)]
     public void TC04_UserChangePwUnsuccessfully(string incorrectNewPw, string incorrectOldPw)
     {
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         ChangePassword?.SelectChangePassword();
         Asserter?.AssertElementIsDisplayed(ChangePassword.DisplayChangePwPopUp());
         ChangePassword?.ChangeNewPwUnSuccessfully(incorrectOldPw, incorrectNewPw);
@@ -41,4 +60,3 @@ public class US304ChangePasswordTest : NUnitWebTestSetup
     }
 
 }
-
