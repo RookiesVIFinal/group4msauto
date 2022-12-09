@@ -22,6 +22,21 @@ public class EditUserDAO
             AdminLocation = location;
         }
     }
+    public partial class EditUserUI
+    {
+        public string DateOfBirth { get; private set; } 
+        public string Gender { get; private set; }
+        public string JoinedDate { get; private set; }
+        public string Role { get; private set; }
+        public EditUserUI( string dateOfBirth, string gender, string joinedDate, 
+        string role)
+        {
+            DateOfBirth = dateOfBirth;
+            Gender = gender;
+            JoinedDate = joinedDate;
+            Role = role;
+        }
+    }
     #endregion
     #region EDIT USER RESPONSE
     public partial class EditUserResponse

@@ -7,7 +7,7 @@ using NUnit.Framework.Internal;
 namespace AssetManagementTestProject.TestCase;
 
 [TestFixture]
-public class CreateUserTest : NUnitWebTestSetup
+public class US305_CreateUserTest : NUnitWebTestSetup
 {    
     /// TODO: Do not commit this to US302 branch
     protected ManageUserPage? ManageUserPage; 

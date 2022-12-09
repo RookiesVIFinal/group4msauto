@@ -7,26 +7,19 @@ This is the Automation code base for the 2nd phase of The Rookies Program
 The project is organized as the structure below
 
 - **Data**: Includes data-driven files
-- **Projects**: 
+- **Projects**:
   - CoreFW contains all base methods of test/driver interaction
   - TestProject contains all test cases, page objects, DAOs, etc.
 - **Pages**: Includes pages
-  - CreateAssetPage.cs
-  - CreateAssignmentPage.cs
+  - ChangePassword1stTimePage.cs
+  - ChangePasswordPage.cs
   - CreateUserPage.cs
-  - EditAssignmentPage.cs
-  - EditAssetPage.cs
   - EditUserInfoPage.cs
   - HomePage.cs
+  - LeftMenuPage.cs
   - LoginPage.cs
   - LogoutPopup.cs
-  - ManageAssetPage.cs
-  - ManageAssignmentPage.cs
   - ManageUserPage.cs
-  - MenuLeft.cs
-  - RequestForReturningPage.cs
-  - ChangePassword1stTimePage.cs
-
 
 - **Results**: Includes test results/reports after executing tests 
 - **Tests**: Includes all tests scripts divided by features
@@ -35,8 +28,6 @@ The project is organized as the structure below
   - Login
   - Report
   - User
-
-
 
 ## Coding Convention
 
@@ -98,4 +89,3 @@ public class LoginTest : NUnitWebTestSetup
     }
 }
 ```
-

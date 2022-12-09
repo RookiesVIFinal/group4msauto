@@ -167,6 +167,21 @@ public class WebDriverAction
             throw ex;
         }
     }
+    public void HoverBtn(string locator)
+    {
+        try
+        {
+            IWebElement btnToHover = WaitToBeVisible(locator);
+            HighlightElem(btnToHover);
+            _actions.MoveToElement(btnToHover).Perform();
+            HtmlReport.Pass("Hover on element [" + locator + "] successfuly");
+        }
+        catch (Exception ex)
+        {
+            HtmlReport.Fail("Hover on element [" + locator + "] failed");
+            throw ex;
+        }
+    }
     public void JSExeDoubleClick(string locator)
     {
 
