@@ -6,14 +6,14 @@ namespace AssetManagementTestProject.PageObj;
 public class ChangePasswordPage : WebDriverAction
 {
     #region CHANGE PASSWORD
-    private string btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
-    private string tfNewPw = "//input[contains(@id, 'newPassword')]";
-    private string tfOldPw = "//input[contains(@id, 'oldPassword')]";
-    private string btnSaveNewPw = "//button[contains(@type, 'submit')]";
-    private string btnChangePw = "//a[contains(@href, '/change-password')]";
-    private string btnCancel = "//span[contains(text(), 'Cancel')]";
+    public string BtnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
+    public string TfNewPw = "//input[contains(@id, 'newPassword')]";
+    public string TfOldPw = "//input[contains(@id, 'oldPassword')]";
+    public string BtnSaveNewPw = "//button[contains(@type, 'submit')]";
+    public string BtnChangePw = "//a[contains(@href, '/change-password')]";
+    public string BtnCancel = "//span[contains(text(), 'Cancel')]";
     public string HeaderChangePw = "//h1[text()='Change Password']";
-    private string pathChangePw = "change-password";
+    public string PathChangePw = "change-password";
     public string TextChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
     #endregion
     #region ERROR MESSAGES
@@ -31,18 +31,18 @@ public class ChangePasswordPage : WebDriverAction
     }
     public string ReturnExpectedChangePWUrl()
     {
-        return Constant.BASE_URL + pathChangePw;
+        return Constant.BASE_URL + PathChangePw;
     }
     public void ChangeNewPwSuccessfully(string oldPassword, string newPassword)
     {
-        SendKeys(tfOldPw, oldPassword);
-        SendKeys(tfNewPw, newPassword);
-        Click(btnSaveNewPw);
+        SendKeys(TfOldPw, oldPassword);
+        SendKeys(TfNewPw, newPassword);
+        Click(BtnSaveNewPw);
     }
     public void ChangeNewPwUnSuccessfully(string oldPassword, string newPassword)
     {
-        SendKeys(tfOldPw, oldPassword);
-        SendKeys(tfNewPw, newPassword);
+        SendKeys(TfOldPw, oldPassword);
+        SendKeys(TfNewPw, newPassword);
     }
     public string DisplayChangePwSuccessfully()
     {
@@ -51,22 +51,15 @@ public class ChangePasswordPage : WebDriverAction
     }
     public void SelectChangePassword()
     {
-        Click(btnNavigationBar);
-        Click(btnChangePw);
+        Click(BtnNavigationBar);
+        Click(BtnChangePw);
 
     }
     public void SelectCancel()
     {
-        Click(btnNavigationBar);
-        Click(btnChangePw);
-        Click(btnCancel);
-    }
-    public string DisplayErrorMessages()
-    {
-        WaitToBeVisible(ErrorMessagesNewPw);
-        return ErrorMessagesNewPw;
-        WaitToBeVisible(ErrorMessagesOldPw);
-        return ErrorMessagesOldPw;
+        Click(BtnNavigationBar);
+        Click(BtnChangePw);
+        Click(BtnCancel);
     }
 }
 

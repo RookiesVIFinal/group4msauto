@@ -1,23 +1,22 @@
 ﻿using AssetManagementTestProject.DAO;
 using AssetManagementTestProject.TestSetup;
-using System.Globalization;
 using CoreFramework.DriverCore;
 using System.Globalization;
 namespace AssetManagementTestProject.PageObj;
 public class CreateUserPage : WebDriverAction
 {
-    private readonly string btnSave = "//span[text()='Save']";
-    public readonly string  BtnCancel = "//span[text()='Cancel']";
-    private readonly string btnCloseAfterCreateSuccess = "//span[text()='Close']";
-    private readonly string datePickDateOfBirth = "//input[contains(@id, 'formCreateUser_dateOfBirth')]";
+    public readonly string BtnSave = "//span[text()='Save']";
+    public readonly string BtnCancel = "//span[text()='Cancel']";
+    public readonly string BtnCloseAfterCreateSuccess = "//span[text()='Close']";
+    public readonly string DatePickDateOfBirth = "//input[contains(@id, 'formCreateUser_dateOfBirth')]";
 
-    private readonly string datePickJoinedDate = "//input[contains(@id, 'formCreateUser_joinedDate')]";
-    private readonly string dropBarType = "//input[@id='formCreateUser_role']";
-    private readonly string tfFirstName = "//input[contains(@id, 'formCreateUser_firstName')]";
-    private readonly string tfLastName = "//input[contains(@id, 'formCreateUser_lastName')]";
-    private readonly string tickGenderFemale = "(//input[contains(@type, 'radio')])[1]";
-    private readonly string tickGenderMale = "(//input[contains(@type, 'radio')])[2]";
-    private string typePath = "//div[@title='{0}']";
+    public readonly string DatePickJoinedDate = "//input[contains(@id, 'formCreateUser_joinedDate')]";
+    public readonly string DropBarType = "//input[@id='formCreateUser_role']";
+    public readonly string TfFirstName = "//input[contains(@id, 'formCreateUser_firstName')]";
+    public readonly string TfLastName = "//input[contains(@id, 'formCreateUser_lastName')]";
+    public readonly string TickGenderFemale = "(//input[contains(@type, 'radio')])[1]";
+    public readonly string TickGenderMale = "(//input[contains(@type, 'radio')])[2]";
+    public string typePath = "//div[@title='{0}']";
     #region ERROR MESSAGES
     public readonly string ErrorMsgInvalidName = "//div[text()='Name should only contain alphabetic: A to Z or a to z and one space between words!']";
     public readonly string ErrorMsgDOBUnder18 = "//div[text()='User is under 18. Please select a different date!']";
@@ -30,20 +29,20 @@ public class CreateUserPage : WebDriverAction
     }
     public void CreateNewUser(CreateUserDAO.CreateUserUI userInfo)
     {
-        SendKeys(tfFirstName, userInfo.FirstName);
-        SendKeys(tfLastName,userInfo.LastName);
+        SendKeys(TfFirstName, userInfo.FirstName);
+        SendKeys(TfLastName,userInfo.LastName);
         SelectDateOfBirth(userInfo.DateOfBirth);
         // Create a new female user by default
         //SelectGender(userInfo.Gender); 
         SelectJoinedDate(userInfo.JoinedDate);
         SelectUserType(userInfo.Role);
-        Click(btnSave);
-        Click(btnCloseAfterCreateSuccess);
+        Click(BtnSave);
+        Click(BtnCloseAfterCreateSuccess);
     }
     public void SendInvalidInfo(CreateUserDAO.CreateUserUI invalidUserInfo)
     {
-        SendKeys(tfFirstName, invalidUserInfo.FirstName);
-        SendKeys(tfLastName,invalidUserInfo.LastName);
+        SendKeys(TfFirstName, invalidUserInfo.FirstName);
+        SendKeys(TfLastName,invalidUserInfo.LastName);
         SelectDateOfBirth(invalidUserInfo.DateOfBirth);
         // Create a new female user by default
         //SelectGender(invalidUserInfo.Gender); 
@@ -57,17 +56,17 @@ public class CreateUserPage : WebDriverAction
     }
     public void SelectDateOfBirth(string dateTimeString)
     {
-        SelectDate(dateTimeString, datePickDateOfBirth);
-        PressEnter(datePickDateOfBirth);
+        SelectDate(dateTimeString, DatePickDateOfBirth);
+        PressEnter(DatePickDateOfBirth);
     }
     public void SelectJoinedDate(string dateTimeString)
     {
-        SelectDate(dateTimeString, datePickJoinedDate);
-        PressEnter(datePickJoinedDate);
+        SelectDate(dateTimeString, DatePickJoinedDate);
+        PressEnter(DatePickJoinedDate);
     }
     public void SelectUserType(string userType)
     {
-        FindElementByXpath(dropBarType).Click();
+        FindElementByXpath(DropBarType).Click();
         if (userType == Constant.ROLE_ADMIN)
         {
             typePath = string.Format(typePath, Constant.ROLE_ADMIN);
@@ -84,11 +83,11 @@ public class CreateUserPage : WebDriverAction
     {
         if (gender == Constant.GENDER_MALE)
         {
-            Click(tickGenderMale);
+            Click(TickGenderMale);
         }
         else if(gender == Constant.GENDER_FEMALE)
         {
-            Click(tickGenderFemale);
+            Click(TickGenderFemale);
         }
     }
 }

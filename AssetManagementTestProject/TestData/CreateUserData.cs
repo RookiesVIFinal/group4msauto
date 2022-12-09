@@ -17,9 +17,9 @@ namespace AssetManagementTestProject.TestData
         );
         public static CreateUserDAO.CreateUserRequest NEW_STAFF_HN = new CreateUserDAO.CreateUserRequest
         (
-            "Anh",
-            "Pham",
-            "2000-06-12",
+            "Tony",
+            "Tran",
+            "2000-09-21",
             (int)Constant.Genders.Male,
             "2022-11-01",
             (int)Constant.Roles.Staff,

@@ -5,8 +5,8 @@ public class LoginPage : WebDriverAction
 {
     public readonly string TfUsername = "//input[contains(@id, 'username')]";
     public readonly string TfPassword = "//input[contains(@id, 'password')]";
-    private readonly string btnLogin = "//button[contains(@type, 'submit')]";
-    private readonly string btnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
+    public readonly string BtnLogin = "//button[contains(@type, 'submit')]";
+    public readonly string BtnViewDecryptedPassword = "//span[contains(@class, 'anticon-eye')]";
     public LoginPage() : base()
     {
     }
@@ -15,10 +15,11 @@ public class LoginPage : WebDriverAction
         ///Click Eye icon to view if password is inputed correctly before login
         SendKeys(TfUsername, userName);
         SendKeys(TfPassword, password);
-        Click(btnViewDecryptedPassword);
+        Click(BtnViewDecryptedPassword);
         TakeScreenShot();
-        Click(btnLogin);
-    }
+        Click(BtnLogin);
 
+    }
 }
+
 
