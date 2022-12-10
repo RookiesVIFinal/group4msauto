@@ -11,7 +11,6 @@ public class ViewUserDAO
         public string StaffCode { get; private set; }
         public string FullName { get; private set; }
         public string UserName { get; private set; }    
-        public string DateOfBirth { get; private set; }
         public string JoinedDate { get; private set; }
         public string Type { get; private set; }
 
@@ -49,7 +48,6 @@ public class ViewUserDAO
             Gender = gender;
             Type = type;
             Location = location;
-            UserInfo = userInfo;
         }
     }
 

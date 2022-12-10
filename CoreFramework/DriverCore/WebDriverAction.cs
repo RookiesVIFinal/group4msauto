@@ -167,6 +167,21 @@ public class WebDriverAction
             throw ex;
         }
     }
+    public void HoverBtn(string locator)
+    {
+        try
+        {
+            IWebElement btnToHover = WaitToBeVisible(locator);
+            HighlightElem(btnToHover);
+            _actions.MoveToElement(btnToHover).Perform();
+            HtmlReport.Pass("Hover on element [" + locator + "] successfuly");
+        }
+        catch (Exception ex)
+        {
+            HtmlReport.Fail("Hover on element [" + locator + "] failed");
+            throw ex;
+        }
+    }
     public void JSExeDoubleClick(string locator)
     {
 
@@ -283,7 +298,6 @@ public class WebDriverAction
     #region WAIT TIME
     /// <summary>
     /// Explicit waits to check Visible/Clickable/Selectable
-    /// TODO: Change wait to _explicitWait  + _timeWait after done integrating WebDriverAction(string baseUrl="")
     /// </summary>
     public IWebElement WaitToBeVisible(string locator)
     {
@@ -419,7 +433,7 @@ public class WebDriverAction
             throw excep;
         }
     }
-    public static void AssertEquals(object actual, object expected)
+    public void AssertEquals(object actual, object expected)
     {
         try
         {

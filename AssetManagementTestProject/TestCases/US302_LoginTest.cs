@@ -2,7 +2,7 @@
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
-namespace AssetManagementTestProject;
+namespace AssetManagementTestProject.TestCase;
 
 [TestFixture]
 public class US302_LoginTest : NUnitWebTestSetup
@@ -23,7 +23,7 @@ public class US302_LoginTest : NUnitWebTestSetup
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
         Asserter?.AssertElementIsDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
-        Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ChangePw1stTime.pathChangePw1stTime);
+        Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ChangePw1stTime.PathChangePw1stTime);
     }
     [Test] 
     public void TC03_UserCanLoginWithNewPassword()
