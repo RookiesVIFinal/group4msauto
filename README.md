@@ -14,6 +14,7 @@ The project is organized as the structure below
   - ChangePassword1stTimePage.cs
   - ChangePasswordPage.cs
   - CreateUserPage.cs
+  - DetailedUserInfoPage.cs
   - EditUserInfoPage.cs
   - HomePage.cs
   - LeftMenuPage.cs
@@ -21,7 +22,7 @@ The project is organized as the structure below
   - LogoutPopup.cs
   - ManageUserPage.cs
 
-- **Results**: Includes test results/reports after executing tests 
+- **Results**: Includes test results/reports after executing tests
 - **Tests**: Includes all tests scripts divided by features
   - Asset
   - Assignment

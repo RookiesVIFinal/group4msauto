@@ -10,12 +10,6 @@ public class Asserter : WebDriverAction
     public Asserter() : base()
     {
     }
-    #region STRING FLUENT ASSERTION
-    public void AssertUrlsEquals(string actual, string expected)
-    {
-        AssertEquals(actual, expected);
-    }
-    #endregion
     #region ELEMENT DISPLAY ASSERTION
     public void AssertElementIsDisplayed(string locator)
     {
@@ -28,7 +22,7 @@ public class Asserter : WebDriverAction
     {
         AssertEquals(actual, expected);
     }
-        public void AssertDetailedUserEquals(ViewUserDAO.ViewDetailedUser actual, ViewUserDAO.ViewDetailedUser expected)
+    public void AssertDetailedUserEquals(ViewUserDAO.ViewDetailedUser actual, ViewUserDAO.ViewDetailedUser expected)
     {
         AssertEquals(actual, expected);
     }

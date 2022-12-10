@@ -15,6 +15,7 @@ public class EditUserDAO
         string dateOfBirth, int gender, string joinedDate, 
         int role, int location)
         {
+            Id = id;
             DateOfBirth = dateOfBirth;
             Gender = gender;
             JoinedDate = joinedDate;

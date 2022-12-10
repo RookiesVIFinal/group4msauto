@@ -32,7 +32,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
         LogoutPopup?.CancelLogOutOfPage();
-        Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
+        Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
     }
     [Test]
     public void TC03_UserCannotGoBackToHomePageAfterLogOut()

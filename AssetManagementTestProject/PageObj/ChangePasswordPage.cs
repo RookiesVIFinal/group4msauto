@@ -6,18 +6,18 @@ namespace AssetManagementTestProject.PageObj;
 public class ChangePasswordPage : WebDriverAction
 {
     #region CHANGE PASSWORD
-    private string _btnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
-    private string _tfNewPw = "//input[contains(@id, 'newPassword')]";
-    private string _tfOldPw = "//input[contains(@id, 'oldPassword')]";
-    private string _btnSaveNewPw = "//button[contains(@type, 'submit')]";
-    private string _btnChangePw = "//a[contains(@href, '/change-password')]";
-    private string _btnCancel = "//span[contains(text(), 'Cancel')]";
-    private string _headerChangePw = "//h1[text()='Change Password']";
-    private string _pathChangePw = "change-password";
-    private string _textChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
+    public string BtnNavigationBar = "//div[contains(@class, 'ant-dropdown-trigger cursor-pointer')]";
+    public string TfNewPw = "//input[contains(@id, 'newPassword')]";
+    public string TfOldPw = "//input[contains(@id, 'oldPassword')]";
+    public string BtnSaveNewPw = "//button[contains(@type, 'submit')]";
+    public string BtnChangePw = "//a[contains(@href, '/change-password')]";
+    public string BtnCancel = "//span[contains(text(), 'Cancel')]";
+    public string HeaderChangePw = "//h1[text()='Change Password']";
+    public string PathChangePw = "change-password";
+    public string TextChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
     #endregion
     #region ERROR MESSAGES
-    private string _errorMessages = "//div[contains(@id, 'newPassword_help')]";
+    public string ErrorMessages = "//div[contains(@id, 'newPassword_help')]";
     #endregion
 
     public ChangePasswordPage() : base()
@@ -25,45 +25,45 @@ public class ChangePasswordPage : WebDriverAction
     }
     public string DisplayChangePwPopUp()
     {
-        WaitToBeVisible(_headerChangePw);
-        return _headerChangePw;
+        WaitToBeVisible(HeaderChangePw);
+        return HeaderChangePw;
     }
     public string ReturnExpectedChangePWUrl()
     {
-        return Constant.BASE_URL + _pathChangePw;
+        return Constant.BASE_URL + PathChangePw;
     }
     public void ChangeNewPwSuccessfully(string oldPassword, string newPassword)
     {
-        SendKeys(_tfOldPw, oldPassword);
-        SendKeys(_tfNewPw, newPassword);
-        Click(_btnSaveNewPw);
+        SendKeys(TfOldPw, oldPassword);
+        SendKeys(TfNewPw, newPassword);
+        Click(BtnSaveNewPw);
     }
     public void ChangeNewPwUnSuccessfully(string oldPassword, string newPassword)
     {
-        SendKeys(_tfOldPw, oldPassword);
-        SendKeys(_tfNewPw, newPassword);
+        SendKeys(TfOldPw, oldPassword);
+        SendKeys(TfNewPw, newPassword);
     }
     public string DisplayChangePwSuccessfully()
     {
-        WaitToBeVisible(_headerChangePw);
-        return _textChangePwSuccessfully;
+        WaitToBeVisible(HeaderChangePw);
+        return TextChangePwSuccessfully;
     }
     public void SelectChangePassword()
     {
-        Click(_btnNavigationBar);
-        Click(_btnChangePw);
+        Click(BtnNavigationBar);
+        Click(BtnChangePw);
 
     }
     public void SelectCancel()
     {
-        Click(_btnNavigationBar);
-        Click(_btnChangePw);
-        Click(_btnCancel);
+        Click(BtnNavigationBar);
+        Click(BtnChangePw);
+        Click(BtnCancel);
     }
     public string DisplayErrorMessages()
     {
-        WaitToBeVisible(_errorMessages);
-        return _errorMessages;
+        WaitToBeVisible(ErrorMessages);
+        return ErrorMessages;
     }
 }
 

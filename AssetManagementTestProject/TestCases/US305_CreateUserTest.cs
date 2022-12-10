@@ -9,7 +9,6 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US305_CreateUserTest : NUnitWebTestSetup
 {    
-    /// TODO: Do not commit this to US302 branch
     protected ManageUserPage? ManageUserPage; 
     protected CreateUserPage? CreateUserPage;
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
@@ -54,7 +53,7 @@ public class US305_CreateUserTest : NUnitWebTestSetup
         DriverBaseAction?.Click(ManageUserPage.BtnCreateNewUser);
         CreateUserPage = new CreateUserPage();
         DriverBaseAction?.Click(CreateUserPage.BtnCancel);
-        Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ManageUserPage.PathManageUser);
+        Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ManageUserPage.PathManageUser);
     }
 }
 

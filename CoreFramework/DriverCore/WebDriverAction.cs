@@ -298,7 +298,6 @@ public class WebDriverAction
     #region WAIT TIME
     /// <summary>
     /// Explicit waits to check Visible/Clickable/Selectable
-    /// TODO: Change wait to _explicitWait  + _timeWait after done integrating WebDriverAction(string baseUrl="")
     /// </summary>
     public IWebElement WaitToBeVisible(string locator)
     {
@@ -434,7 +433,7 @@ public class WebDriverAction
             throw excep;
         }
     }
-    public static void AssertEquals(object actual, object expected)
+    public void AssertEquals(object actual, object expected)
     {
         try
         {
