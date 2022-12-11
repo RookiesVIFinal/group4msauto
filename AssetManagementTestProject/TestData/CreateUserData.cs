@@ -15,16 +15,6 @@ namespace AssetManagementTestProject.TestData
             (int)Constant.Roles.Admin,
             (int)Constant.Locations.HaNoi
         );
-        public static CreateUserDAO.CreateUserRequest NEW_STAFF_HN = new CreateUserDAO.CreateUserRequest
-        (
-            "Tony",
-            "Tran",
-            "2000-09-21",
-            (int)Constant.Genders.Male,
-            "2022-11-01",
-            (int)Constant.Roles.Staff,
-            (int)Constant.Locations.HaNoi
-        );
         public static CreateUserDAO.CreateUserUI NEW_ADMIN_UI = new CreateUserDAO.CreateUserUI
         (
             "Anh",

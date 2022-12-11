@@ -48,7 +48,7 @@ public class UserActualData : WebDriverAction
     {
         List<string> valuesFromCells = new List<string>();
         IList<IWebElement> cellElems = FindElementsByXpath(locators);
-        foreach (IWebElement elem in cellElems)
+        foreach(IWebElement elem in cellElems)
         {
             valuesFromCells.Add(elem.Text);
         }

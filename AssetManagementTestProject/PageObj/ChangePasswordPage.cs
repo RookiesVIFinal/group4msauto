@@ -61,5 +61,10 @@ public class ChangePasswordPage : WebDriverAction
         Click(BtnChangePw);
         Click(BtnCancel);
     }
+    public string DisplayErrorMessages()
+    {
+        WaitToBeVisible(ErrorMessages);
+        return ErrorMessages;
+    }
 }
 

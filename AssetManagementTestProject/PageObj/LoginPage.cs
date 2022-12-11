@@ -16,7 +16,6 @@ public class LoginPage : WebDriverAction
         SendKeys(TfUsername, userName);
         SendKeys(TfPassword, password);
         Click(BtnViewDecryptedPassword);
-        TakeScreenShot();
         Click(BtnLogin);
 
     }

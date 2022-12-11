@@ -9,7 +9,6 @@ namespace AssetManagementTestProject.TestCase;
 public class US303_LogoutTest : NUnitWebTestSetup
 {
     protected ChangePassword1stTimePage? ChangePw1stTime;
-
     [Test]
     public void TC01_UserCanLogoutSuccessfully()
     {
@@ -23,8 +22,6 @@ public class US303_LogoutTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(LoginPage.TfUsername);
         Asserter?.AssertElementIsDisplayed(LoginPage.TfPassword);
     }
-
-
     [Test]
     public void TC02_UserCanCancelLogout()
     {
@@ -35,10 +32,8 @@ public class US303_LogoutTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
         LogoutPopup?.CancelLogOutOfPage();
-        Asserter?.AssertUrlsEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
+        Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL);
     }
-
-
     [Test]
     public void TC03_UserCannotGoBackToHomePageAfterLogOut()
     {
