@@ -1,8 +1,9 @@
-﻿using CoreFramework.DriverCore;
+﻿using AssetManagementTestProject.ActualData;
+using AssetManagementTestProject.DAO;
+using CoreFramework.DriverCore;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using static AssetManagementTestProject.DAO.ViewUserDAO;
-using static MongoDB.Libmongocrypt.CryptContext;
 
 namespace AssetManagementTestProject.PageObj;
 public class ManageUserPage : WebDriverAction
@@ -13,7 +14,7 @@ public class ManageUserPage : WebDriverAction
     public readonly string BHeaderUserList = "//h1[text()='User List']";
     public readonly string FirstRowOfUserList = "(//tr[@class='ant-table-row ant-table-row-level-0'])[1]";
     #region CELL LOCATOR
-    public readonly string CellLocator = "(//td[contains(@class,'ant-table-cell')])";
+    public readonly string CellLocator = "(//tr[contains(@class, 'ant-table-row ant-table-row-level-0')])[1]//td[contains(@class, 'ant-table-cell')]";
     public readonly string RowLocator = "(//tr[contains(@class,'ant-table-row ant-table-row-level-0')])";
     #endregion
     #region USER LIST
@@ -22,13 +23,22 @@ public class ManageUserPage : WebDriverAction
     public readonly string BtnFullName = "//span[contains(text(), 'Full Name')]";
     public readonly string BtnUsername = "//span[contains(text(), 'Username')]";
     public readonly string BtnJoinedDate = "//span[contains(text(), 'Joined Date')]";
-    public readonly string BtnSortType = "(//span[contains(text(), 'Type')])[1]";
+    public readonly string BtnSortType = "(//input[contains(@type, 'search')])[1]";
+    public readonly string BtnSortAdminType = "(//div[contains(text(), 'Admin')])[2]";
+    public readonly string BtnSortStaffType = "(//div[contains(text(), 'Staff')])[2]";
     public readonly string BtnType = "(//span[contains(text(), 'Type')])[2]";
     #endregion
+    public readonly string HeaderDetailedUser = "//h1[text()='Detail User Information']";
+    public readonly string CellsDetailedInfo = "//td[contains(@class, 'font-bold')]/following-sibling::*";
     #region SEARCH
     public readonly string TfSearch = "//input[contains(@class,'ant-input css-1wismvm')]";
     public readonly string BtnSearch = "//button[contains(@class,'ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-input-search-button')]";
     public readonly string TableData = "//tbody[contains(@class,'ant-table-tbody')]";
+    #endregion
+    #region GRID
+    public UserActualData? UserActualData;
+    public ViewUserInList? UserInfo;
+    public ViewDetailedUser? DetailedUserInfo;
     #endregion
     public ManageUserPage() : base()
     {
@@ -46,7 +56,51 @@ public class ManageUserPage : WebDriverAction
         Thread.Sleep(5000);
     }
 
+    public void SelectAdminType()
+    {
+        FindElementByXpath(BtnSortType).Click();
+        FindElementByXpath(BtnSortAdminType).Click();
+    }
+    public void SelectStaffType()
+    {
+        FindElementByXpath(BtnSortType).Click();
+        FindElementByXpath(BtnSortAdminType).Click();
+    }
 
+    public ViewUserDAO.ViewDetailedUser ReturnDetailedUserInfoFromUI()
+    {
+        UserActualData actualData = new UserActualData();
+        DetailedUserInfo = actualData.ReturnDetailedInfo(CellsDetailedInfo);
+        return DetailedUserInfo;
+    }
+
+    public void GetDataFromGrid(int index)
+    {
+        UserActualData = new UserActualData();
+        UserActualData.GetUserInfoFromGrid(RowLocator, CellLocator, index);
+    }
+    public void ReturnNumberOfRows()
+    {
+        List<int> rows = new List<int>();
+
+        for (int  i = 0; i < 10; i++)
+        {
+
+        }
+
+
+    }
+    public void ReturnUserDataFromGrid()
+    {
+        UserActualData = new UserActualData();
+        UserActualData.ReturnUserList(RowLocator, CellLocator);
+    }
+
+    public void ReturnUserRowJsonData(int index)
+    {
+        UserActualData = new UserActualData();
+        UserActualData.ReturnUserRowJSON(RowLocator, CellLocator, index);
+    }
     public string GetRowIndex_(int index)
     {
         // return an indexed row
@@ -58,10 +112,7 @@ public class ManageUserPage : WebDriverAction
         IList<IWebElement> allRows = FindElementsByXpath(RowLocator);
         return allRows;
     }
-    public void GetAllRows_()
-    {
-        GetAllRows();
-    }
+
 
     public List<string> GetTextFromAllCellsOfOneRow(int index)
     {
@@ -91,7 +142,7 @@ public class ManageUserPage : WebDriverAction
 
         }
         // assign each value from cell to an EmployeeInfo object
-        ViewUserInList employee = new ViewUserInList(
+        ViewUserInList userInList = new ViewUserInList(
             valuesFromCells[0],
             valuesFromCells[1],
             valuesFromCells[2],
@@ -99,35 +150,23 @@ public class ManageUserPage : WebDriverAction
             valuesFromCells[4]
             );
 
-        return employee;
+        return userInList;
 
     }
 
     public List<ViewUserInList> ReturnListEmployeeInfo()
     {
         int i = 0;
-        List<ViewUserInList> listOfEmployees = new List<ViewUserInList>();
-        IList<IWebElement> allEmployeeRows = GetAllRows();
+        List<ViewUserInList> listOfUsers = new List<ViewUserInList>();
+        IList<IWebElement> allUserRows = GetAllRows();
 
-        foreach (IWebElement row in allEmployeeRows)
+        foreach (IWebElement row in allUserRows)
         {
             ViewUserInList employee = GetTextFromEachCell(i + 1);
-            listOfEmployees.Add(employee);
+            listOfUsers.Add(employee);
             i++;
         }
-        foreach (ViewUserInList employee in listOfEmployees.ToList())
-        {
-            // remove list elements from empty rows
-            if (employee.StaffCode.Contains(" "))
-            {
-                listOfEmployees.Remove(employee);
-            }
-            else
-            {
-                continue;
-            }
-        }
-        return listOfEmployees;
+        return listOfUsers;
     }
 
     public object ConvertToJson(object obj)

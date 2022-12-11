@@ -15,7 +15,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
@@ -30,7 +30,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
@@ -44,7 +44,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.STAFF_PASSWORD);
+        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();

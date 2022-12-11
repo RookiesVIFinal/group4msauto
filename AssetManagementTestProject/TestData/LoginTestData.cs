@@ -8,10 +8,5 @@ public class LoginTestData
     public const string CHANGED_USER_PASSWORD = "Staff@12345";
     public const string INCORRECT_USER_OLD_PASSWORD = "12345";
     public const string INCORRECT_USER_NEW_PASSWORD = "123457";
-
     #endregion
-    #region SEARCH FULLNAME AND STAFFCODE
-    public const string STAFFCODE = "SD0107";
-    #endregion
-
 }

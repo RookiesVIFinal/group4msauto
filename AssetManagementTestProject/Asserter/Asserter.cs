@@ -28,10 +28,11 @@ public class Asserter : WebDriverAction
     {
         AssertEquals(actual, expected);
     }
-        public void AssertDetailedUserEquals(ViewUserDAO.ViewDetailedUser actual, ViewUserDAO.ViewDetailedUser expected)
+    public void AssertDetailedUserEquals(ViewUserDAO.ViewDetailedUser actual, ViewUserDAO.ViewDetailedUser expected)
     {
         AssertEquals(actual, expected);
     }
+
 
     #endregion
 

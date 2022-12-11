@@ -2,7 +2,7 @@
 using CoreFramework.DriverCore;
 using OpenQA.Selenium;
 
-namespace AssetManagementTestProject.TestData;
+namespace AssetManagementTestProject.ActualData;
 public class UserActualData : WebDriverAction
 {
     public UserActualData() : base()
@@ -43,6 +43,25 @@ public class UserActualData : WebDriverAction
             i++;
         }
         return listOfUsers;
+    }
+    public ViewUserDAO.ViewDetailedUser ReturnDetailedInfo(string locators)
+    {
+        List<string> valuesFromCells = new List<string>();
+        IList<IWebElement> cellElems = FindElementsByXpath(locators);
+        foreach (IWebElement elem in cellElems)
+        {
+            valuesFromCells.Add(elem.Text);
+        }
+        ViewUserDAO.ViewDetailedUser userDetailedInfo = new ViewUserDAO.ViewDetailedUser(
+            valuesFromCells[0],
+            valuesFromCells[1],
+            valuesFromCells[2],
+            valuesFromCells[3],
+            valuesFromCells[4],
+            valuesFromCells[5],
+            valuesFromCells[6]
+        );
+        return userDetailedInfo;
     }
     public string ReturnUserListJSON(string rowLocator, string cellLocator)
     {
