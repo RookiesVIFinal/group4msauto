@@ -2,7 +2,7 @@
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
-namespace AssetManagementTestProject.TestCase;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US302_LoginTest : NUnitWebTestSetup

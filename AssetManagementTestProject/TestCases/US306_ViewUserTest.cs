@@ -1,10 +1,8 @@
 ﻿using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.TestSetup;
-using Newtonsoft.Json;
 using NUnit.Framework;
-using static AssetManagementTestProject.DAO.ViewUserDAO;
 
-namespace AssetManagementTestProject;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US306_ViewUserTest : NUnitWebTestSetup
@@ -20,7 +18,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(username, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.HeaderUserList);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnStaffCode);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnFullName);
@@ -36,7 +34,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         ManageUserPage.InputSearch(NewUser.Data.StaffCode);
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.TableData);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);
@@ -49,7 +47,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         ManageUserPage.SelectAdminType();
     }
 
@@ -60,7 +58,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         ManageUserPage.SelectStaffType();
     }
 }

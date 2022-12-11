@@ -15,7 +15,7 @@ public class CreateUserPage : WebDriverAction
     public readonly string DropBarType = "//input[@id='formCreateUser_role']";
     public readonly string TfFirstName = "//input[contains(@id, 'formCreateUser_firstName')]";
     public readonly string TfLastName = "//input[contains(@id, 'formCreateUser_lastName')]";
-    public string TickGender = "(//input[contains(@type, 'radio')])[{0}]";
+    public string BtnGender = "//span[text()='{0}']";
     public string OptionType = "//div[@title='{0}']";
     #endregion
     #region ERROR MESSAGES
@@ -81,13 +81,13 @@ public class CreateUserPage : WebDriverAction
     {
         if (gender == Constant.GENDER_MALE)
         {
-            TickGender = string.Format(TickGender, "1");
-            FindElementByXpath(TickGender).Click();
+            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
+            FindElementByXpath(BtnGender).Click();
         }
         else
         {
-            TickGender = string.Format(TickGender, "2");
-            FindElementByXpath(TickGender).Click();
+            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
+            FindElementByXpath(BtnGender).Click();
         }
     }
 }
