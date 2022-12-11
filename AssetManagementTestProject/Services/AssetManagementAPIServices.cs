@@ -1,5 +1,4 @@
 ﻿using AssetManagementTestProject.DAO;
-using AssetManagementTestProject.TestSetup;
 using CoreFramework.APICore;
 using Newtonsoft.Json;
 using NUnit.Framework;
