@@ -1,5 +1,4 @@
 ﻿
-namespace AssetManagementTestProject.TestSetup;
 public class Constant
 {
     #region URLS

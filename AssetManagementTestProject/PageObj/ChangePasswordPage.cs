@@ -17,7 +17,8 @@ public class ChangePasswordPage : WebDriverAction
     public string TextChangePwSuccessfully = "//p[text()='Your password has been changed successfully']";
     #endregion
     #region ERROR MESSAGES
-    public string ErrorMessages = "//div[contains(@id, 'newPassword_help')]";
+    public string ErrorMessagesNewPw = "//div[contains(@id, 'newPassword_help')]";
+    public string ErrorMessagesOldPw = "//div[contains(@id, 'newPassword_help')]";
     #endregion
 
     public ChangePasswordPage() : base()
@@ -59,11 +60,6 @@ public class ChangePasswordPage : WebDriverAction
         Click(BtnNavigationBar);
         Click(BtnChangePw);
         Click(BtnCancel);
-    }
-    public string DisplayErrorMessages()
-    {
-        WaitToBeVisible(ErrorMessages);
-        return ErrorMessages;
     }
 }
 

@@ -27,6 +27,7 @@ public class Asserter : WebDriverAction
         AssertEquals(actual, expected);
     }
 
+
     #endregion
 
     #region CHECK ORDER

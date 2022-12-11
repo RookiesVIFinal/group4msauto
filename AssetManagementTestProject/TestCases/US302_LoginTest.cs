@@ -10,7 +10,7 @@ public class US302_LoginTest : NUnitWebTestSetup
     protected ChangePassword1stTimePage? ChangePw1stTime;
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
-    [TestCase(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD)]
+    [TestCase(LoginTestData.STAFF_USERNAME, LoginTestData.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)
     {
         LoginPage?.Login(username, password);
@@ -41,7 +41,7 @@ public class US302_LoginTest : NUnitWebTestSetup
     [Test]
     public void TC04To07_StaffCanLoginToTheApp()
     {
-        LoginPage?.Login(Constant.STAFF_USERNAME, Constant.STAFF_PASSWORD);
+        LoginPage?.Login(LoginTestData.STAFF_USERNAME, LoginTestData.STAFF_PASSWORD);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
     }
