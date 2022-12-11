@@ -1,4 +1,4 @@
-﻿using AssetManagementTestProject.ActualData;
+﻿using AssetManagementTestProject.DataFromUI;
 using AssetManagementTestProject.DAO;
 using CoreFramework.DriverCore;
 
@@ -13,7 +13,7 @@ public class DetailedUserInfoPage : WebDriverAction
     }
     public ViewUserDAO.ViewDetailedUser ReturnDetailedUserInfoFromUI()
     {
-        UserActualData actualData = new UserActualData();
+        UserDataFromUI actualData = new UserDataFromUI();
         DetailedUserInfo = actualData.ReturnDetailedInfo(CellsDetailedInfo);
         return DetailedUserInfo;
     }

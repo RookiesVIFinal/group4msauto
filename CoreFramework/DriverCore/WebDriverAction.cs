@@ -448,6 +448,32 @@ public class WebDriverAction
             throw excep;
         }
     }
+    public void AssertListAscending(List<string> list)
+    {
+        try
+        {
+            list.Should().BeInAscendingOrder();
+            HtmlReport.Pass("List is sorted in ascending order");
+        }
+        catch(Exception excep)
+        {
+            HtmlReport.Fail("List is not sorted in ascending order");
+            throw excep;
+        }
+    }
+    public void AssertListDesceding(List<string> list)
+    {
+        try
+        {
+            list.Should().BeInDescendingOrder();
+            HtmlReport.Pass("List is sorted in descending order");
+        }
+        catch(Exception excep)
+        {
+            HtmlReport.Fail("List is not sorted in descending order");
+            throw excep;
+        }
+    }
     #endregion
 
     #region DEALING WITH GRID

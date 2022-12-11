@@ -1,4 +1,6 @@
-﻿using AssetManagementTestProject.PageObj;
+﻿using AssetManagementTestProject.DataFromUI;
+using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
@@ -9,6 +11,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
 {
     protected ChangePassword1stTimePage? ChangePw1stTime;
     protected ManageUserPage? ManageUserPage;
+    protected UserDataFromUI? UserDataFromUI;
 
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
@@ -60,6 +63,20 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         ManageUserPage.SelectStaffType();
+    }
+    [Test]
+    public void TC05_AdminCanSortByStaffCode()
+    {
+        ManageUserPage = new ManageUserPage();
+        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
+        ManageUserPage.SortUser(ManageUserPage.BtnStaffCode);
+        UserDataFromUI = new UserDataFromUI();
+        List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
+        List<string> userListByStaffCode = UserDataFromUI.ReturnUserListStaffCode(userList);
+        Asserter?.AssertUserListAscending(userListByStaffCode);
     }
 }
 
