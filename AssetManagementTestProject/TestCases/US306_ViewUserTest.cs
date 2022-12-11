@@ -1,8 +1,6 @@
 ﻿using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.TestSetup;
-using Newtonsoft.Json;
 using NUnit.Framework;
-using static AssetManagementTestProject.DAO.ViewUserDAO;
 
 namespace AssetManagementTestProject;
 
@@ -42,27 +40,6 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);
 
     }
-    [Test]
-    public void TC03_AdminCanFilterUserByAdmin()
-    {
-        ManageUserPage = new ManageUserPage();
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
-        ManageUserPage.SelectAdminType();
-    }
 
-    [Test]
-    public void TC04_AdminCanFilterUserByStaff()
-    {
-        ManageUserPage = new ManageUserPage();
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
-        ManageUserPage.SelectStaffType();
-    }
 }
-
 

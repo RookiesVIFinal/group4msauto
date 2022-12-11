@@ -35,6 +35,13 @@ public class ManageUserPage : WebDriverAction
     public readonly string BtnSearch = "//button[contains(@class,'ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-input-search-button')]";
     public readonly string TableData = "//tbody[contains(@class,'ant-table-tbody')]";
     #endregion
+    #region DISABLE
+    public readonly string BtnDisableOnTable = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-btn-dangerous ml-2')])";
+    public readonly string BtnDisableOnPopUp = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-primary ant-btn-dangerous mr-2')])";
+    public readonly string BtnCancelDisable = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-default')])";
+    public string HeaderDisableUser = "//h1[text()='Are you sure?']";
+    public string TextDisableUser = "//p[text()='Do you want to disable this user?']";
+    #endregion
     #region GRID
     public UserActualData? UserActualData;
     public ViewUserInList? UserInfo;
@@ -56,6 +63,18 @@ public class ManageUserPage : WebDriverAction
         Thread.Sleep(5000);
     }
 
+    public void ClearAndInputSearch(string input)
+    {
+        Clear(TfSearch);
+        SendKeys(TfSearch, input);
+        Click(BtnSearch);
+        Thread.Sleep(5000);
+    }
+    public void ClickSearch()
+    {
+        Click(BtnSearch);
+        Thread.Sleep(5000);
+    }
     public void SelectAdminType()
     {
         FindElementByXpath(BtnSortType).Click();
@@ -66,6 +85,18 @@ public class ManageUserPage : WebDriverAction
         FindElementByXpath(BtnSortType).Click();
         FindElementByXpath(BtnSortAdminType).Click();
     }
-
+    public void SelectDisable()
+    {
+        Click(BtnDisableOnTable);
+    }
+    public void SelectDisableOnPopUp()
+    {
+        Click(BtnDisableOnPopUp);
+        Thread.Sleep(5000);
+    }
+    public void SelectCancelDisable()
+    {
+        Click(BtnCancelDisable);
+    }
 }
 
