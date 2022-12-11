@@ -21,7 +21,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         ManageUserPage.GoToUserList();
-        Asserter?.AssertElementIsDisplayed(ManageUserPage.BHeaderUserList);
+        Asserter?.AssertElementIsDisplayed(ManageUserPage.HeaderUserList);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnStaffCode);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnFullName);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnUsername);
@@ -51,7 +51,6 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         ManageUserPage.GoToUserList();
         ManageUserPage.SelectAdminType();
-
     }
 
     [Test]
@@ -63,15 +62,6 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         ManageUserPage.GoToUserList();
         ManageUserPage.SelectStaffType();
-
-        List<ViewUserInList> actualListUser = ManageUserPage.ReturnListEmployeeInfo();
-        var actualListUserJson = JsonConvert.SerializeObject(actualListUser);
-
-        List<ViewUserInList> expectedListUser = new List<ViewUserInList>();
-        var expectedListUserJson = JsonConvert.SerializeObject(expectedListUser);
-
-        Asserter.AssertUserListAscending(actualListUser);
-
     }
 }
 

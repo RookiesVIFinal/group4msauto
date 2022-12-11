@@ -1,6 +1,8 @@
 ﻿using AssetManagementTestProject.DAO;
 using AssetManagementTestProject.TestSetup;
 using CoreFramework.DriverCore;
+using System.Globalization;
+
 namespace AssetManagementTestProject.PageObj;
 public class CreateUserPage : WebDriverAction
 {
