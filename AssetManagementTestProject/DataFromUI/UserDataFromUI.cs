@@ -40,10 +40,40 @@ public class UserDataFromUI : WebDriverAction
     }
     public List<string> ReturnUserListStaffCode(List<ViewUserDAO.ViewUserInList> userList)
     {
-        List<string> staffCodeFromUserList =  new List<string>();
-        foreach(ViewUserDAO.ViewUserInList user in userList)
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
         {
             staffCodeFromUserList.Add(user.StaffCode);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListFullName(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.FullName);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListJoinedDate(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.JoinedDate);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListType(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.Type);
         }
         return staffCodeFromUserList;
 
@@ -52,7 +82,7 @@ public class UserDataFromUI : WebDriverAction
     {
         List<string> valuesFromCells = new List<string>();
         IList<IWebElement> cellElems = FindElementsByXpath(locators);
-        foreach(IWebElement elem in cellElems)
+        foreach (IWebElement elem in cellElems)
         {
             valuesFromCells.Add(elem.Text);
         }
@@ -68,5 +98,4 @@ public class UserDataFromUI : WebDriverAction
         return userDetailedInfo;
     }
 }
-
 

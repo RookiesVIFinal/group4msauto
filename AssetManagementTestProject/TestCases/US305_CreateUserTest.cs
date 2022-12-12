@@ -9,6 +9,7 @@ namespace AssetManagementTestProject.TestCases;
 [TestFixture]
 public class US305_CreateUserTest : NUnitWebTestSetup
 {    
+
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
     public void TC01To02_AdminCanCreateNewUser(string username, string password)
@@ -16,10 +17,8 @@ public class US305_CreateUserTest : NUnitWebTestSetup
         LoginPage?.Login(username, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage = new ManageUserPage();
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.HeaderUserList);
         DriverBaseAction?.Click(ManageUserPage.BtnCreateNewUser);
-        CreateUserPage = new CreateUserPage();
         CreateUserPage?.CreateNewUser(CreateUserData.NEW_ADMIN_UI);
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.BtnEditUserAtTop);
         DriverBaseAction?.FindElementByXpath(ManageUserPage.FirstRowOfUserList);
@@ -30,15 +29,13 @@ public class US305_CreateUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage = new ManageUserPage();
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.HeaderUserList);
         DriverBaseAction?.Click(ManageUserPage.BtnCreateNewUser);
-        CreateUserPage = new CreateUserPage();
         CreateUserPage?.SendInvalidInfo(CreateUserData.INVALID_INFO);
-        Asserter.AssertElementIsDisplayed(CreateUserPage.ErrorMsgInvalidName);
-        Asserter.AssertElementIsDisplayed(CreateUserPage.ErrorMsgDOBUnder18);
-        Asserter.AssertElementIsDisplayed(CreateUserPage.ErrorMsgJoinedDateNotLaterThanDOB);
-        Asserter.AssertElementIsDisplayed(CreateUserPage.ErrorMsgJoinDateIsWeekend);
+        Asserter?.AssertElementIsDisplayed(CreateUserPage.ErrorMsgInvalidName);
+        Asserter?.AssertElementIsDisplayed(CreateUserPage.ErrorMsgDOBUnder18);
+        Asserter?.AssertElementIsDisplayed(CreateUserPage.ErrorMsgJoinedDateNotLaterThanDOB);
+        Asserter?.AssertElementIsDisplayed(CreateUserPage.ErrorMsgJoinDateIsWeekend);
     }
     [Test]
     public void TC04_AdminPressCancelWhenCreatingNewUser()
@@ -46,12 +43,9 @@ public class US305_CreateUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage = new ManageUserPage();
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.HeaderUserList);
         DriverBaseAction?.Click(ManageUserPage.BtnCreateNewUser);
-        CreateUserPage = new CreateUserPage();
         DriverBaseAction?.Click(CreateUserPage.BtnCancel);
         Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ManageUserPage.PathManageUser);
     }
 }
-

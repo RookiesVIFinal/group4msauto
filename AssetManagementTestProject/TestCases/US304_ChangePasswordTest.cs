@@ -10,8 +10,7 @@ public class US304_ChangePasswordTest : NUnitWebTestSetup
     public void TC01_UserCanChangePWSuccsessfullyForTheFirstTimeLogIn()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
     }
@@ -20,10 +19,8 @@ public class US304_ChangePasswordTest : NUnitWebTestSetup
     public void TC02_UserCanChangePWSuccessfully(string newPassword, string oldPassword)
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
-        ChangePassword = new ChangePasswordPage();
         ChangePassword?.SelectChangePassword();
         Asserter?.AssertElementIsDisplayed(ChangePassword.DisplayChangePwPopUp());
         ChangePassword?.ChangeNewPwSuccessfully(oldPassword, newPassword);
@@ -34,13 +31,11 @@ public class US304_ChangePasswordTest : NUnitWebTestSetup
     public void TC03_UserCanCancelChangePWAction()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(MenuBarLeft.BtnHomeInMenu);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
-        ChangePassword = new ChangePasswordPage();
         ChangePassword?.SelectCancel();
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
@@ -50,11 +45,9 @@ public class US304_ChangePasswordTest : NUnitWebTestSetup
     public void TC04_UserChangePwUnsuccessfully(string incorrectNewPw, string incorrectOldPw)
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
-        ChangePassword = new ChangePasswordPage();
         ChangePassword?.SelectChangePassword();
         DriverBaseAction?.WaitToBeVisible(ChangePassword.HeaderChangePw);
         Asserter?.AssertElementIsDisplayed(ChangePassword.HeaderChangePw);

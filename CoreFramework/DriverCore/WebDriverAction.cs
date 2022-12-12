@@ -459,7 +459,7 @@ public class WebDriverAction
             list.Should().BeInAscendingOrder();
             HtmlReport.Pass("List is sorted in ascending order" + list.ToString());
         }
-        catch(Exception excep)
+        catch (Exception excep)
         {
             HtmlReport.Fail("List is not sorted in ascending order" + list.ToString());
             throw excep;
@@ -472,7 +472,7 @@ public class WebDriverAction
             list.Should().BeInDescendingOrder();
             HtmlReport.Pass("List is sorted in descending order" + list.ToString());
         }
-        catch(Exception excep)
+        catch (Exception excep)
         {
             HtmlReport.Fail("List is not sorted in descending order" + list.ToString());
             throw excep;

@@ -1,5 +1,5 @@
-﻿using AssetManagementTestProject.DataFromUI;
-using AssetManagementTestProject.DAO;
+﻿using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.DataFromUI;
 using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
@@ -13,7 +13,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
     [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
     public void TC01_AdminCanViewUserList(string username, string password)
     {
-        ManageUserPage = new ManageUserPage();
+
         LoginPage?.Login(username, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
@@ -29,12 +29,10 @@ public class US306_ViewUserTest : NUnitWebTestSetup
     [Test]
     public void TC02_AdminCanSearchByStaffCode()
     {
-        ManageUserPage = new ManageUserPage();
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage.InputSearch(NewUser.Data.StaffCode);
+        ManageUserPage?.GoToUserList();
+        ManageUserPage?.InputSearch(NewUser.Data.StaffCode);
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.TableData);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);
 
@@ -42,38 +40,63 @@ public class US306_ViewUserTest : NUnitWebTestSetup
     [Test]
     public void TC03_AdminCanFilterUserByAdmin()
     {
-        ManageUserPage = new ManageUserPage();
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage.SelectAdminType();
+        ManageUserPage?.SelectAdminType();
     }
 
     [Test]
     public void TC04_AdminCanFilterUserByStaff()
     {
-        ManageUserPage = new ManageUserPage();
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage.SelectStaffType();
+        ManageUserPage?.SelectStaffType();
     }
     [Test]
-    public void TC05_AdminCanSortByStaffCode()
+    public void TC05_AdminCanSortByStaffCodeInAscending()
     {
-        ManageUserPage = new ManageUserPage();
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage.SortUser(ManageUserPage.BtnStaffCode);
-        UserDataFromUI = new UserDataFromUI();
+        ManageUserPage?.SortStaffCodeUserInAscending();
         List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
         List<string> userListByStaffCode = UserDataFromUI.ReturnUserListStaffCode(userList);
         Asserter?.AssertUserListAscending(userListByStaffCode);
     }
+    [Test]
+    public void TC06_AdminCanSortByStaffCodeInDescending()
+    {
+
+        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
+        ManageUserPage?.SortStaffCodeUserInDescending();
+        List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
+        List<string> userListByStaffCode = UserDataFromUI.ReturnUserListStaffCode(userList);
+        Asserter?.AssertUserListDescending(userListByStaffCode);
+    }
+    [Test]
+    public void TC07_AdminCanSortByFullNameInAscending()
+    {
+        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
+        List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
+        List<string> userListByFullName = UserDataFromUI.ReturnUserListFullName(userList);
+        Asserter?.AssertUserListAscending(userListByFullName);
+    }
+    [Test]
+    public void TC08_AdminCanSortByFullNameInDescending()
+    {
+        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
+        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
+        ManageUserPage?.SortFullName();
+        List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
+        List<string> userListByFullName = UserDataFromUI.ReturnUserListFullName(userList);
+        Asserter?.AssertUserListDescending(userListByFullName);
+    }
+
 }
-
-

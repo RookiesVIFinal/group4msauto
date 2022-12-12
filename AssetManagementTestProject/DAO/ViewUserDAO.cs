@@ -10,7 +10,7 @@ public class ViewUserDAO
     {
         public string StaffCode { get; private set; }
         public string FullName { get; private set; }
-        public string UserName { get; private set; }    
+        public string UserName { get; private set; }
         public string JoinedDate { get; private set; }
         public string Type { get; private set; }
 
@@ -32,13 +32,13 @@ public class ViewUserDAO
 
         public string StaffCode { get; private set; }
         public string FullName { get; private set; }
-        public string UserName { get; private set; }    
+        public string UserName { get; private set; }
         public string DateOfBirth { get; private set; }
         public string Gender { get; private set; }
         public string Type { get; private set; }
         public string Location { get; private set; }
         public ViewDetailedUser
-        (string staffCode, string fullName, string username, 
+        (string staffCode, string fullName, string username,
         string dateOfBirth, string gender, string type, string location)
         {
             StaffCode = staffCode;
