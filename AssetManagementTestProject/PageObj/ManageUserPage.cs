@@ -5,13 +5,21 @@ using static AssetManagementTestProject.DAO.ViewUserDAO;
 namespace AssetManagementTestProject.PageObj;
 public class ManageUserPage : WebDriverAction
 {
-    public readonly string PathManageUser = "admin/manage-user";
+    #region CELL LOCATOR
+    public readonly string CellLocator = "//td[contains(@class,'ant-table-cell')]";
+    public readonly string RowLocator = "//tr[contains(@class,'ant-table-row ant-table-row-level-0')]";
+    #endregion
+    public static string PathManageUser = "admin/manage-user";
+    public string BtnViewTopUserDetailedInfo = "(//td[@class='ant-table-cell'])[1]";
     public readonly string BtnCreateNewUser = "//button[contains(@class, 'ant-btn css-1wismvm ant-btn-primary ant-btn-dangerous ml-3')]";
     public readonly string BtnEditUserAtTop = "(//button[@class='ant-btn css-1wismvm ant-btn-default ant-btn-icon-only mr-2'])[1]";
     public readonly string HeaderUserList = "//h1[text()='User List']";
     public readonly string FirstRowOfUserList = "(//tr[@class='ant-table-row ant-table-row-level-0'])[1]";
-    #region USER LIST
-    public readonly string BtnManageUser = "//a[contains(@href, '/admin/manage-user')]";
+    #region SEARCH
+    public readonly string TfSearch = "//input[@type='text']";
+    public readonly string TableData = "//tbody[contains(@class,'ant-table-tbody')]";
+    public readonly string BtnSearch = "//button[@class='ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-input-search-button']";
+    #endregion
     public readonly string BtnStaffCode = "//span[contains(text(), 'Staff Code')]";
     public readonly string BtnFullName = "//span[contains(text(), 'Full Name')]";
     public readonly string BtnUsername = "//span[contains(text(), 'Username')]";
@@ -48,17 +56,17 @@ public class ManageUserPage : WebDriverAction
     public ManageUserPage() : base()
     {
     }
-
-    public void GoToUserList()
-    {
-        Click(BtnManageUser);
-    }
-
     public void InputSearch(string input)
     {
         SendKeys(TfSearch, input);
         Click(BtnSearch);
-        WaitForQueryResult();
+        //FindElementByXpath(BtnSearch).Click();
+        /// Search is not fast enough
+        WaitForQueryResult(5000);
+    }
+    public string ReturnStaffCodeTopListUser()
+    {
+        return FindElementByXpath(BtnViewTopUserDetailedInfo).Text;
     }
 
     public void ClearAndInputSearch(string input)
@@ -76,12 +84,18 @@ public class ManageUserPage : WebDriverAction
     public void SelectAdminType()
     {
         FindElementByXpath(BtnSortType).Click();
-        FindElementByXpath(BtnSortAdminType).Click();
+        Click(BtnSortAdminType);
     }
     public void SelectStaffType()
     {
         FindElementByXpath(BtnSortType).Click();
-        FindElementByXpath(BtnSortAdminType).Click();
+        Click(BtnSortStaffType);
+    }
+    public void SortUser(string sortType)
+    {
+        Click(sortType);
+        // Sorting is not fast enough
+        WaitForQueryResult(5000);
     }
     public void SelectDisable()
     {

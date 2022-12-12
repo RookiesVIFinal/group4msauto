@@ -1,7 +1,6 @@
 ﻿using AssetManagementTestProject.DAO;
 using CoreFramework.DriverCore;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace AssetManagementTestProject.Asserter;
 

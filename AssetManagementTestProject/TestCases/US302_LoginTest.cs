@@ -2,11 +2,12 @@
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
-namespace AssetManagementTestProject.TestCase;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US302_LoginTest : NUnitWebTestSetup
 {    
+
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(LoginTestData.STAFF_USERNAME, LoginTestData.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)

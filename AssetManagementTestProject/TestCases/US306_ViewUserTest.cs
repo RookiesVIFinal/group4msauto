@@ -4,7 +4,7 @@ using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 
-namespace AssetManagementTestProject;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US306_ViewUserTest : NUnitWebTestSetup
@@ -17,7 +17,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(username, password);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.HeaderUserList);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnStaffCode);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.BtnFullName);

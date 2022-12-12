@@ -10,25 +10,35 @@ using NUnit.Framework;
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
 {
-    protected LoginPage? LoginPage;
-    protected HomePage? HomePage;
-    protected LogoutPopupPage? LogoutPopup;
-    protected LeftMenuPage? MenuBarLeft;
+    #region INIT PAGE OBJS + ASSERTER
+    protected Asserter.Asserter? Asserter;
     protected ChangePassword1stTimePage? ChangePw1stTime;
     protected ChangePasswordPage? ChangePassword;
-    protected ManageUserPage? ManageUserPage;
-    protected UserDataFromUI? UserDataFromUI;
     protected CreateUserPage? CreateUserPage;
-    protected Asserter.Asserter? Asserter;
-    protected AssetManagementAPIServices? AuthorizationService;
+    protected DetailedUserInfoPage? DetailedUserInfoPage;
+    protected EditUserInfoPage? EditUserInfoPage;
+    protected HomePage? HomePage;
+    protected LeftMenuPage? MenuBarLeft;
+    protected LoginPage? LoginPage;
+    protected LogoutPopupPage? LogoutPopup;
+    protected ManageUserPage? ManageUserPage; 
+    #endregion
+    #region INIT DAO + DATA FROM UI
     protected CreateUserDAO.CreateUserResponse? NewUser;
     protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
     protected DisableUserDAO.DisableUserRequest? DisabledUser;
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
+    protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
+    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
+    protected UserDataFromUI? UserDataFromUI;
+    #endregion
+    #region INIT API SERVICES
     protected AssetManagementAPIServices? APIService;
-    protected string? Token;
-    protected string? NewAdminUsername;
+    protected AssetManagementAPIServices? AuthorizationService;
     protected string? NewAdminPassword;
+    protected string? NewAdminUsername;
+    protected string? Token;
+    #endregion
 
     [SetUp]
     public void WebTestSetUp()
@@ -71,7 +81,6 @@ public class NUnitWebTestSetup : NUnitTestSetup
                 DisabledUser = new DisableUserDAO.DisableUserRequest(NewUser.Data.Id, (int)Constant.Locations.HoChiMinh);
                 DisableUserResponse = APIService?.ReturnDisableUserResponse(DisabledUser, Token);
             }
-
         }
     }
 }

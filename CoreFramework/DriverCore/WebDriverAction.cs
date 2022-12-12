@@ -317,9 +317,9 @@ public class WebDriverAction
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
-    public void WaitForQueryResult()
+    public void WaitForQueryResult(int waitTime)
     {
-        Thread.Sleep(5000);
+        Thread.Sleep(waitTime);
     }
     #endregion
 

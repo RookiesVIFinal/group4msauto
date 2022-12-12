@@ -15,7 +15,7 @@ public class EditUserInfoPage : WebDriverAction
     public readonly string BtnCloseAfterCreateSuccess = "//span[text()='Close']";
     public string BtnClearDOB = "(//span[@class='anticon anticon-close-circle'])[1]";
     public string BtnClearJoinedDate = "(//span[@class='anticon anticon-close-circle'])[2]";
-    public string TickGender = "(//input[contains(@type, 'radio')])[{0}]";
+    public string BtnGender = "//span[text()=' {0} ']";
     public readonly string HeaderEditUser = "//h1[text()='Edit User']";
     public EditUserInfoPage() : base()
     {
@@ -69,13 +69,13 @@ public class EditUserInfoPage : WebDriverAction
     {
         if (gender == Constant.GENDER_MALE)
         {
-            TickGender = string.Format(TickGender, "1");
-            FindElementByXpath(TickGender).Click();
+            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
+            FindElementByXpath(BtnGender).Click();
         }
         else
         {
-            TickGender = string.Format(TickGender, "2");
-            FindElementByXpath(TickGender).Click();
+            BtnGender = string.Format(BtnGender, Constant.GENDER_FEMALE);
+            FindElementByXpath(BtnGender).Click();
         }
     }
 }
