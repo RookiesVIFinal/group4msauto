@@ -10,28 +10,34 @@ using NUnit.Framework;
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
 {
+    #region INIT PAGE OBJS + ASSERTER
     protected Asserter.Asserter? Asserter;
-    protected AssetManagementAPIServices? APIService;
-    protected AssetManagementAPIServices? AuthorizationService;
     protected ChangePassword1stTimePage? ChangePw1stTime;
     protected ChangePasswordPage? ChangePassword;
-    protected CreateUserDAO.CreateUserResponse? NewUser;
     protected CreateUserPage? CreateUserPage;
     protected DetailedUserInfoPage? DetailedUserInfoPage;
-    protected DisableUserDAO.DisableUserRequest? DisabledUser;
-    protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected EditUserInfoPage? EditUserInfoPage;
-    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
     protected HomePage? HomePage;
     protected LeftMenuPage? MenuBarLeft;
     protected LoginPage? LoginPage;
     protected LogoutPopupPage? LogoutPopup;
     protected ManageUserPage? ManageUserPage; 
-    protected UserDataFromUI? UserDataFromUI;
+    #endregion
+    #region INIT DAO + DATA FROM UI
+    protected CreateUserDAO.CreateUserResponse? NewUser;
+    protected DisableUserDAO.DisableUserRequest? DisabledUser;
+    protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
+    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
+    protected UserDataFromUI? UserDataFromUI;
+    #endregion
+    #region INIT API SERVICES
+    protected AssetManagementAPIServices? APIService;
+    protected AssetManagementAPIServices? AuthorizationService;
     protected string? NewAdminPassword;
     protected string? NewAdminUsername;
     protected string? Token;
+    #endregion
 
     [SetUp]
     public void WebTestSetUp()
