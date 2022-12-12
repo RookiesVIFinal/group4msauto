@@ -31,16 +31,13 @@ public class Asserter : WebDriverAction
     #endregion
 
     #region CHECK ORDER
-    public void AssertUserListAscending(List<ViewUserDAO.ViewUserInList> list)
+    public void AssertUserListAscending(List<string> list)
     {
-        list.Should().BeInAscendingOrder();
-        TestContext.WriteLine("List is sorted in ascending order");
+        AssertListAscending(list);
     }
-    public void AssertUserListDescending(List<ViewUserDAO.ViewUserInList> list)
+    public void AssertUserListDescending(List<string> list)
     {
-        list.Should().BeInDescendingOrder();
-        TestContext.WriteLine("List is sorted in descending order");
-
+        AssertListDescending(list);
     }
     #endregion
 }

@@ -10,28 +10,6 @@ public class US308_DisableUserTest : NUnitWebTestSetup
 
     protected ManageUserPage? ManageUserPage;
 
-    [Test]
-    public void TC01_AdminCanDisableUser()
-    {
-        ManageUserPage = new ManageUserPage();
-        LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
-        DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
-        ManageUserPage.GoToUserList();
-        ManageUserPage.InputSearch(NewUser.Data.StaffCode);
-        DriverBaseAction?.WaitToBeVisible(ManageUserPage.TableData);
-        Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);
-        ManageUserPage.SelectDisable();
-        DriverBaseAction?.WaitToBeVisible(ManageUserPage.HeaderDisableUser);
-        Asserter?.AssertElementIsDisplayed(ManageUserPage.HeaderDisableUser);
-        DriverBaseAction?.WaitToBeVisible(ManageUserPage.TextDisableUser);
-        Asserter?.AssertElementIsDisplayed(ManageUserPage.TextDisableUser);
-        ManageUserPage.SelectDisableOnPopUp();
-
-
-
-    }
-    [Test]
     public void TC02_AdminCanCancelDisableAction()
     {
         ManageUserPage = new ManageUserPage();

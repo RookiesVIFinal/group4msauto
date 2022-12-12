@@ -2,10 +2,10 @@
 using CoreFramework.DriverCore;
 using OpenQA.Selenium;
 
-namespace AssetManagementTestProject.ActualData;
-public class UserActualData : WebDriverAction
+namespace AssetManagementTestProject.DataFromUI;
+public class UserDataFromUI : WebDriverAction
 {
-    public UserActualData() : base()
+    public UserDataFromUI() : base()
     {
     }
     public ViewUserDAO.ViewUserInList GetUserInfoFromGrid(string rowLocator, string cellLocator, int index)
@@ -23,12 +23,6 @@ public class UserActualData : WebDriverAction
             );
         return user;
     }
-    public string ReturnUserRowJSON(string rowLocator, string cellLocator, int index)
-    {
-
-        string userRow = (string)ConvertToJson(GetUserInfoFromGrid(rowLocator, cellLocator, index));
-        return userRow;
-    }
     public List<ViewUserDAO.ViewUserInList> ReturnUserList(string rowLocator, string cellLocator)
     {
         // Return all user info from a table (assuming that there is no empty row)
@@ -44,11 +38,51 @@ public class UserActualData : WebDriverAction
         }
         return listOfUsers;
     }
+    public List<string> ReturnUserListStaffCode(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.StaffCode);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListFullName(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.FullName);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListJoinedDate(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.JoinedDate);
+        }
+        return staffCodeFromUserList;
+
+    }
+    public List<string> ReturnUserListType(List<ViewUserDAO.ViewUserInList> userList)
+    {
+        List<string> staffCodeFromUserList = new List<string>();
+        foreach (ViewUserDAO.ViewUserInList user in userList)
+        {
+            staffCodeFromUserList.Add(user.Type);
+        }
+        return staffCodeFromUserList;
+
+    }
     public ViewUserDAO.ViewDetailedUser ReturnDetailedInfo(string locators)
     {
         List<string> valuesFromCells = new List<string>();
         IList<IWebElement> cellElems = FindElementsByXpath(locators);
-        foreach(IWebElement elem in cellElems)
+        foreach (IWebElement elem in cellElems)
         {
             valuesFromCells.Add(elem.Text);
         }
@@ -63,11 +97,5 @@ public class UserActualData : WebDriverAction
         );
         return userDetailedInfo;
     }
-    public string ReturnUserListJSON(string rowLocator, string cellLocator)
-    {
-        string userList = (string)ConvertToJson(ReturnUserList(rowLocator, cellLocator));
-        return userList;
-    }
 }
-
 
