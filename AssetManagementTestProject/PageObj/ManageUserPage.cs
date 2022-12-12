@@ -28,13 +28,9 @@ public class ManageUserPage : WebDriverAction
     public readonly string BtnSortAdminType = "//div[(text()= 'Admin') and (@class='ant-select-item-option-content')]";
     public readonly string BtnSortStaffType = "//div[(text()= 'Staff') and (@class='ant-select-item-option-content')]";
     public readonly string BtnType = "//span[text()= 'Type' and @class='ant-table-column-title']";
-    #endregion
     public readonly string HeaderDetailedUser = "//h1[text()='Detail User Information']";
     public readonly string CellsDetailedInfo = "//td[contains(@class, 'font-bold')]/following-sibling::*";
     #region SEARCH
-    public readonly string TfSearch = "//input[contains(@class,'ant-input css-1wismvm')]";
-    public readonly string BtnSearch = "//button[contains(@class,'ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-input-search-button')]";
-    public readonly string TableData = "//tbody[contains(@class,'ant-table-tbody')]";
     #endregion
     #region DISABLE
     public readonly string BtnDisableOnTable = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-default ant-btn-icon-only ant-btn-dangerous ml-2')])";
@@ -49,10 +45,7 @@ public class ManageUserPage : WebDriverAction
     public ViewDetailedUser? DetailedUserInfo;
     #endregion
     #region CELL LOCATOR
-    public readonly string CellLocator = "//td[contains(@class,'ant-table-cell')]";
-    public readonly string RowLocator = "//tr[contains(@class,'ant-table-row ant-table-row-level-0')]";
     #endregion
-    public string BtnViewTopUserDetailedInfo = "(//td[@class='ant-table-cell'])[1]";
     public ManageUserPage() : base()
     {
     }
@@ -74,12 +67,12 @@ public class ManageUserPage : WebDriverAction
         Clear(TfSearch);
         SendKeys(TfSearch, input);
         Click(BtnSearch);
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
     }
     public void ClickSearch()
     {
         Click(BtnSearch);
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
     }
     public void SelectAdminType()
     {
@@ -104,47 +97,42 @@ public class ManageUserPage : WebDriverAction
     public void SelectDisableOnPopUp()
     {
         Click(BtnDisableOnPopUp);
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
     }
     public void SelectCancelDisable()
     {
         Click(BtnCancelDisable);
     }
-    public void SortUser(string sortType)
-    {
-        Click(sortType);
-        WaitForQueryResult();
-    }
     public void SortStaffCodeUserInAscending()
     {
         FindElementByXpath(BtnStaffCode).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         TakeScreenShot();
     }
     public void SortStaffCodeUserInDescending()
     {
         FindElementByXpath(BtnStaffCode).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         FindElementByXpath(BtnStaffCode).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         TakeScreenShot();
     }
     public void SortFullName()
     {
         FindElementByXpath(BtnFullName).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         TakeScreenShot();
     }
     public void SortJoinedDate()
     {
         FindElementByXpath(BtnJoinedDate).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         TakeScreenShot();
     }
     public void SortType()
     {
         FindElementByXpath(BtnType).Click();
-        WaitForQueryResult();
+        WaitForQueryResult(5000);
         TakeScreenShot();
     }
 }

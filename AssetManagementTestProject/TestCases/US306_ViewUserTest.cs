@@ -10,7 +10,7 @@ namespace AssetManagementTestProject.TestCases;
 public class US306_ViewUserTest : NUnitWebTestSetup
 {
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
-    [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
+[TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
     public void TC01_AdminCanViewUserList(string username, string password)
     {
 
@@ -31,7 +31,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
     {
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
-        ManageUserPage?.GoToUserList();
+        DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
         ManageUserPage?.InputSearch(NewUser.Data.StaffCode);
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.TableData);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);

@@ -29,7 +29,6 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected DisableUserDAO.DisableUserRequest? DisabledUser;
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
-    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
     protected UserDataFromUI? UserDataFromUI;
     #endregion
     #region INIT API SERVICES
@@ -44,6 +43,9 @@ public class NUnitWebTestSetup : NUnitTestSetup
     public void WebTestSetUp()
     {
         /// Initialize header pages
+        ChangePw1stTime = new ChangePassword1stTimePage();
+        ChangePassword = new ChangePasswordPage();
+        CreateUserPage = new CreateUserPage();
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
