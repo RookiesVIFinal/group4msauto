@@ -24,11 +24,8 @@ The project is organized as the structure below
 
 - **Results**: Includes test results/reports after executing tests
 - **Tests**: Includes all tests scripts divided by features
-  - Asset
-  - Assignment
-  - Login
-  - Report
-  - User
+  - Login account
+  - Manage User
 
 ## Coding Convention
 
@@ -44,10 +41,10 @@ namespace AssetManagementTestProject.PageObj;
 
 public class LoginPage : WebDriverAction
 {
-    private readonly string usernameTextLocator = "//label[contains(@title, 'Username')]"; // for testing
-    private readonly string tfUsername = "//input[contains(@id, 'username')]";
-    private readonly string tfPassword = "//input[contains(@id, 'password')]";
-    private readonly string btnLogin = "//button[contains(@type, 'submit')]";
+    private readonly string _usernameTextLocator = "//label[contains(@title, 'Username')]";
+    private readonly string _tfUsername = "//input[contains(@id, 'username')]";
+    private readonly string _tfPassword = "//input[contains(@id, 'password')]";
+    private readonly string _btnLogin = "//button[contains(@type, 'submit')]";
 
     public LoginPage() : base()
     {
@@ -55,8 +52,8 @@ public class LoginPage : WebDriverAction
 
     public void Login(string userName, string password)
     {
-        SendKeys_(tfUsername, userName);
-        SendKeys_(tfPassword, password);
+        SendKeys(tfUsername, userName);
+        SendKeys(tfPassword, password);
         Click(btnLogin);
     }
 }
@@ -86,7 +83,6 @@ public class LoginTest : NUnitWebTestSetup
         LogoutPopup.LogOutOfPage();
         LoginPage.Login(Constant.ADMIN_USERNAME_HN, Constant.CHANGED_ADMIN_PASSWORD);
         Asserter.AssertStringEquals(HomePage.VerifyCorrectRedirection(), Constant.BASE_URL);
-
     }
 }
 ```
