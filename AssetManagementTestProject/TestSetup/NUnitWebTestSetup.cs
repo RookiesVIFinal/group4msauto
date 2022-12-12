@@ -1,4 +1,5 @@
 ﻿using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.DataFromUI;
 using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.Services;
 using AssetManagementTestProject.TestData;
@@ -13,6 +14,11 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected HomePage? HomePage;
     protected LogoutPopupPage? LogoutPopup;
     protected LeftMenuPage? MenuBarLeft;
+    protected ChangePassword1stTimePage? ChangePw1stTime;
+    protected ChangePasswordPage? ChangePassword;
+    protected ManageUserPage? ManageUserPage;
+    protected UserDataFromUI? UserDataFromUI;
+    protected CreateUserPage? CreateUserPage;
     protected Asserter.Asserter? Asserter;
     protected AssetManagementAPIServices? AuthorizationService;
     protected CreateUserDAO.CreateUserResponse? NewUser;
@@ -35,6 +41,8 @@ public class NUnitWebTestSetup : NUnitTestSetup
         LogoutPopup = new LogoutPopupPage();
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
+        ManageUserPage = new ManageUserPage();
+        UserDataFromUI = new UserDataFromUI();
         /// Create data with API for testing
         AuthorizationService = new AssetManagementAPIServices();
         Token = AuthorizationService.ReturnLoginToken(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);

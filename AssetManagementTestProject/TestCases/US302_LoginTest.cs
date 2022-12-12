@@ -7,8 +7,6 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US302_LoginTest : NUnitWebTestSetup
 {    
-    protected ChangePassword1stTimePage? ChangePw1stTime;
-
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(LoginTestData.STAFF_USERNAME, LoginTestData.STAFF_PASSWORD)]
     public void TC01_UserLoginSuccess(string username, string password)
@@ -21,16 +19,14 @@ public class US302_LoginTest : NUnitWebTestSetup
     public void TC02_UserIsAskedChangePasswordFirstTime()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
         Asserter?.AssertElementIsDisplayed(ChangePw1stTime.AskChangePwFirstLogin());
-        Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ChangePw1stTime.PathChangePw1stTime);
+        Asserter?.AssertEquals(DriverBaseAction.GetUrl(), Constant.BASE_URL + ChangePw1stTime.PathChangePw1stTime);
     }
     [Test] 
     public void TC03_UserCanLoginWithNewPassword()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(Constant.ADMIN_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
         LogoutPopup?.LogOutOfPage();

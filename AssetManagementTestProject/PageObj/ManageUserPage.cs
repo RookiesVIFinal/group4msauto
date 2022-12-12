@@ -61,7 +61,7 @@ public class ManageUserPage : WebDriverAction
     {
         SendKeys(TfSearch, input);
         Click(BtnSearch);
-        Thread.Sleep(5000);
+        WaitForQueryResult();
     }
 
     public void ClearAndInputSearch(string input)
@@ -69,12 +69,12 @@ public class ManageUserPage : WebDriverAction
         Clear(TfSearch);
         SendKeys(TfSearch, input);
         Click(BtnSearch);
-        Thread.Sleep(5000);
+        WaitForQueryResult();
     }
     public void ClickSearch()
     {
         Click(BtnSearch);
-        Thread.Sleep(5000);
+        WaitForQueryResult();
     }
     public void SelectAdminType()
     {
@@ -93,7 +93,7 @@ public class ManageUserPage : WebDriverAction
     public void SelectDisableOnPopUp()
     {
         Click(BtnDisableOnPopUp);
-        Thread.Sleep(5000);
+        WaitForQueryResult();
     }
     public void SelectCancelDisable()
     {
@@ -102,7 +102,7 @@ public class ManageUserPage : WebDriverAction
     public void SortUser(string sortType)
     {
         Click(sortType);
-        Thread.Sleep(5000);
+        WaitForQueryResult();
     }
     public void SortStaffCodeUser()
     {

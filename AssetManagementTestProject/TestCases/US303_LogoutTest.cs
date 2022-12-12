@@ -8,13 +8,11 @@ namespace AssetManagementTestProject.TestCase;
 [TestFixture]
 public class US303_LogoutTest : NUnitWebTestSetup
 {
-    protected ChangePassword1stTimePage? ChangePw1stTime;
     [Test]
     public void TC01_UserCanLogoutSuccessfully()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
@@ -26,8 +24,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     public void TC02_UserCanCancelLogout()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
@@ -38,8 +35,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     public void TC03_UserCannotGoBackToHomePageAfterLogOut()
     {
         LoginPage?.Login(NewAdminUsername, NewAdminPassword);
-        ChangePw1stTime = new ChangePassword1stTimePage();
-        ChangePw1stTime.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
+        ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
         HomePage?.SelectLogout();
