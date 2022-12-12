@@ -49,4 +49,3 @@ public class US305_CreateUserTest : NUnitWebTestSetup
         Asserter?.AssertEquals(DriverBaseAction?.GetUrl(), Constant.BASE_URL + ManageUserPage.PathManageUser);
     }
 }
-

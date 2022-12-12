@@ -1,8 +1,5 @@
 ﻿using AssetManagementTestProject.DataFromUI;
-using AssetManagementTestProject.DAO;
 using CoreFramework.DriverCore;
-using Newtonsoft.Json;
-using OpenQA.Selenium;
 using static AssetManagementTestProject.DAO.ViewUserDAO;
 
 namespace AssetManagementTestProject.PageObj;
@@ -104,8 +101,16 @@ public class ManageUserPage : WebDriverAction
         Click(sortType);
         WaitForQueryResult();
     }
-    public void SortStaffCodeUser()
+    public void SortStaffCodeUserInAscending()
     {
+        FindElementByXpath(BtnStaffCode).Click();
+        WaitForQueryResult();
+        TakeScreenShot();
+    }
+    public void SortStaffCodeUserInDescending()
+    {
+        FindElementByXpath(BtnStaffCode).Click();
+        WaitForQueryResult();
         FindElementByXpath(BtnStaffCode).Click();
         WaitForQueryResult();
         TakeScreenShot();

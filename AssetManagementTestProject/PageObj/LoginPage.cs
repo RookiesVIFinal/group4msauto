@@ -20,5 +20,3 @@ public class LoginPage : WebDriverAction
 
     }
 }
-
-

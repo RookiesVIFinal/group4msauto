@@ -14,6 +14,7 @@ public class US308_DisableUserTest : NUnitWebTestSetup
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderHomePage);
         ManageUserPage?.GoToUserList();
         ManageUserPage?.InputSearch(NewUser.Data.StaffCode);
+        //Verify after creating and searching new user, new user's information will appear on the record
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.TableData);
         Asserter?.AssertElementIsDisplayed(ManageUserPage.TableData);
         ManageUserPage?.SelectDisable();
@@ -29,5 +30,3 @@ public class US308_DisableUserTest : NUnitWebTestSetup
     }
 
 }
-
-

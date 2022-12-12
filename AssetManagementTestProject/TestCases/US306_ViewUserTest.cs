@@ -60,7 +60,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage?.SortStaffCodeUser();
+        ManageUserPage?.SortStaffCodeUserInAscending();
         List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
         List<string> userListByStaffCode = UserDataFromUI.ReturnUserListStaffCode(userList);
         Asserter?.AssertUserListAscending(userListByStaffCode);
@@ -72,8 +72,7 @@ public class US306_ViewUserTest : NUnitWebTestSetup
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderHomePage);
         DriverBaseAction?.Click(MenuBarLeft.BtnManageUserInMenu);
-        ManageUserPage?.SortStaffCodeUser();
-        ManageUserPage?.SortStaffCodeUser();
+        ManageUserPage?.SortStaffCodeUserInDescending();
         List<ViewUserDAO.ViewUserInList> userList = UserDataFromUI.ReturnUserList(ManageUserPage.RowLocator, ManageUserPage.CellLocator);
         List<string> userListByStaffCode = UserDataFromUI.ReturnUserListStaffCode(userList);
         Asserter?.AssertUserListDescending(userListByStaffCode);
@@ -101,4 +100,3 @@ public class US306_ViewUserTest : NUnitWebTestSetup
     }
 
 }
-
