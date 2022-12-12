@@ -1,5 +1,4 @@
 ﻿using AssetManagementTestProject.DAO;
-using AssetManagementTestProject.TestSetup;
 namespace AssetManagementTestProject.TestData
 {
     public class CreateUserData

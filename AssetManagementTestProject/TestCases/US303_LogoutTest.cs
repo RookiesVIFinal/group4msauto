@@ -3,12 +3,11 @@ using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
-namespace AssetManagementTestProject.TestCase;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US303_LogoutTest : NUnitWebTestSetup
 {
-    protected ChangePassword1stTimePage? ChangePw1stTime;
     [Test]
     public void TC01_UserCanLogoutSuccessfully()
     {

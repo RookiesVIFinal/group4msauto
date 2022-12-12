@@ -38,5 +38,6 @@ public class Constant
         HoChiMinh
     }
     #endregion
+    public const string USER_CAN_BE_DISABLED_MSG = "User can be disabled";
 }
 

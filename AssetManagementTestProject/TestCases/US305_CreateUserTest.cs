@@ -4,13 +4,11 @@ using AssetManagementTestProject.TestSetup;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
-namespace AssetManagementTestProject.TestCase;
+namespace AssetManagementTestProject.TestCases;
 
 [TestFixture]
 public class US305_CreateUserTest : NUnitWebTestSetup
 {    
-    protected ManageUserPage? ManageUserPage; 
-    protected CreateUserPage? CreateUserPage;
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
     public void TC01To02_AdminCanCreateNewUser(string username, string password)
