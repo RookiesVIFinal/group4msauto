@@ -31,9 +31,10 @@ public class ManageUserPage : WebDriverAction
     public void InputSearch(string input)
     {
         SendKeys(TfSearch, input);
-        FindElementByXpath(BtnSearch).Click();
+        Click(BtnSearch);
+        //FindElementByXpath(BtnSearch).Click();
         /// Search is not fast enough
-        Thread.Sleep(5000);
+        WaitForQueryResult(5000);
     }
     public string ReturnStaffCodeTopListUser()
     {
@@ -52,7 +53,8 @@ public class ManageUserPage : WebDriverAction
     public void SortUser(string sortType)
     {
         Click(sortType);
-        Thread.Sleep(5000);
+        // Sorting is not fast enough
+        WaitForQueryResult(5000);
     }
 }
 

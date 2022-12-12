@@ -9,10 +9,6 @@ namespace AssetManagementTestProject.TestCases;
 [TestFixture]
 public class US306_ViewUserTest : NUnitWebTestSetup
 {
-    protected ChangePassword1stTimePage? ChangePw1stTime;
-    protected ManageUserPage? ManageUserPage;
-    protected UserDataFromUI? UserDataFromUI;
-
     [TestCase(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD)]
     [TestCase(Constant.ADMIN_USERNAME_HCM, Constant.ADMIN_PASSWORD)]
     public void TC01_AdminCanViewUserList(string username, string password)

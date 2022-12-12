@@ -1,4 +1,5 @@
 ﻿using AssetManagementTestProject.DAO;
+using AssetManagementTestProject.DataFromUI;
 using AssetManagementTestProject.PageObj;
 using AssetManagementTestProject.Services;
 using AssetManagementTestProject.TestData;
@@ -9,20 +10,28 @@ using NUnit.Framework;
 namespace AssetManagementTestProject.TestSetup;
 public class NUnitWebTestSetup : NUnitTestSetup
 {
-    protected LoginPage? LoginPage;
-    protected HomePage? HomePage;
-    protected LogoutPopupPage? LogoutPopup;
-    protected LeftMenuPage? MenuBarLeft;
     protected Asserter.Asserter? Asserter;
+    protected AssetManagementAPIServices? APIService;
     protected AssetManagementAPIServices? AuthorizationService;
+    protected ChangePassword1stTimePage? ChangePw1stTime;
+    protected ChangePasswordPage? ChangePassword;
     protected CreateUserDAO.CreateUserResponse? NewUser;
-    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
+    protected CreateUserPage? CreateUserPage;
+    protected DetailedUserInfoPage? DetailedUserInfoPage;
     protected DisableUserDAO.DisableUserRequest? DisabledUser;
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
-    protected AssetManagementAPIServices? APIService;
-    protected string? Token;
-    protected string? NewAdminUsername;
+    protected EditUserInfoPage? EditUserInfoPage;
+    protected GetUserDAO.GetCanDisableUser? UserToBeDisabled;
+    protected HomePage? HomePage;
+    protected LeftMenuPage? MenuBarLeft;
+    protected LoginPage? LoginPage;
+    protected LogoutPopupPage? LogoutPopup;
+    protected ManageUserPage? ManageUserPage; 
+    protected UserDataFromUI? UserDataFromUI;
+    protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
     protected string? NewAdminPassword;
+    protected string? NewAdminUsername;
+    protected string? Token;
 
     [SetUp]
     public void WebTestSetUp()

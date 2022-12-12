@@ -317,6 +317,10 @@ public class WebDriverAction
             ExpectedConditions.ElementToBeSelected(GetXpath(locator)));
         return btnToClick;
     }
+    public void WaitForQueryResult(int waitTime)
+    {
+        Thread.Sleep(waitTime);
+    }
     #endregion
 
     #region CAPTURE SCREENSHOT
@@ -453,24 +457,24 @@ public class WebDriverAction
         try
         {
             list.Should().BeInAscendingOrder();
-            HtmlReport.Pass("List is sorted in ascending order");
+            HtmlReport.Pass("List is sorted in ascending order" + list.ToString());
         }
         catch(Exception excep)
         {
-            HtmlReport.Fail("List is not sorted in ascending order");
+            HtmlReport.Fail("List is not sorted in ascending order" + list.ToString());
             throw excep;
         }
     }
-    public void AssertListDesceding(List<string> list)
+    public void AssertListDescending(List<string> list)
     {
         try
         {
             list.Should().BeInDescendingOrder();
-            HtmlReport.Pass("List is sorted in descending order");
+            HtmlReport.Pass("List is sorted in descending order" + list.ToString());
         }
         catch(Exception excep)
         {
-            HtmlReport.Fail("List is not sorted in descending order");
+            HtmlReport.Fail("List is not sorted in descending order" + list.ToString());
             throw excep;
         }
     }

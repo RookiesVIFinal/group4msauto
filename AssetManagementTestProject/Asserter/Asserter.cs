@@ -1,7 +1,6 @@
 ﻿using AssetManagementTestProject.DAO;
 using CoreFramework.DriverCore;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace AssetManagementTestProject.Asserter;
 
@@ -37,7 +36,7 @@ public class Asserter : WebDriverAction
     }
     public void AssertUserListDescending(List<string> list)
     {
-        AssertListDesceding(list);
+        AssertListDescending(list);
     }
     #endregion
 }

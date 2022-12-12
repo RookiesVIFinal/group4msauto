@@ -10,11 +10,6 @@ namespace AssetManagementTestProject.TestCases;
 [TestFixture]
 public class US307_EditUserTest : NUnitWebTestSetup
 {    
-    protected ManageUserPage? ManageUserPage; 
-    protected EditUserInfoPage? EditUserInfoPage;
-    protected DetailedUserInfoPage? DetailedUserInfoPage;
-    protected ViewUserDAO.ViewDetailedUser? DetailedUserInfoFromUI;
-    protected GetUserDAO.GetUserResponse? NewUserAfterEdit;
     [Test]
     public void TC01_AdminEditUserInfoSuccessfully()
     {
@@ -27,8 +22,9 @@ public class US307_EditUserTest : NUnitWebTestSetup
         // Verify that the search user is displayed on top before editing
         Asserter?.AssertEquals(ManageUserPage.ReturnStaffCodeTopListUser(), NewUser.Data.StaffCode);
         DriverBaseAction?.Click(ManageUserPage.BtnEditUserAtTop);
+        // Edit user created with API
         EditUserInfoPage = new EditUserInfoPage();
-        EditUserInfoPage.EditUserInfo(EditUserData.EDITED_USER);
+        EditUserInfoPage.EditUserInfo(EditUserData.InfoToBeEdited);
         DriverBaseAction?.WaitToBeVisible(ManageUserPage.BtnEditUserAtTop);
         // Screen shot to ensure edited user is at the top of the list
         DriverBaseAction?.FindElementByXpath(ManageUserPage.FirstRowOfUserList);
@@ -36,19 +32,11 @@ public class US307_EditUserTest : NUnitWebTestSetup
         DetailedUserInfoPage = new DetailedUserInfoPage();
         DriverBaseAction?.WaitToBeVisible(DetailedUserInfoPage.HeaderDetailedUser);
         DetailedUserInfoPage detailedUserInfo = new DetailedUserInfoPage();
-        DetailedUserInfoFromUI = detailedUserInfo.ReturnDetailedUserInfoFromUI();
-        // Update new user info with GET request
-        NewUserAfterEdit = APIService?.ReturnSelectedUser(NewUser.Data.Id.ToString(), Token);
-        // Assert detailed info from UI with info of the user created with API
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.StaffCode, NewUserAfterEdit.Data.StaffCode);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.FullName, NewUserAfterEdit.Data.FullName);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.UserName, NewUserAfterEdit.Data.Username);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.DateOfBirth, NewUserAfterEdit.Data.DateOfBirth);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Gender, NewUserAfterEdit.Data.Gender);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Type, NewUserAfterEdit.Data.Role);
-        // Delete white space in Location info from UI (Ha Noi to HaNoi)
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Location.Trim().Replace(" ",""), NewUserAfterEdit.Data.Location);
-
+        ActualDetailedUserInfoFromUI = detailedUserInfo.ReturnDetailedUserInfoFromUI();
+        // Verify detailed info from UI after editing match with edited user info
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.DateOfBirth, EditUserData.ExpectedEditInfo.DateOfBirth);
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.Gender, EditUserData.ExpectedEditInfo.Gender);
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.Type, EditUserData.ExpectedEditInfo.Role);
     }
     [Test]  
     public void TC02_AdminCancelEditingUser()
@@ -72,17 +60,11 @@ public class US307_EditUserTest : NUnitWebTestSetup
         DetailedUserInfoPage = new DetailedUserInfoPage();
         DriverBaseAction?.WaitToBeVisible(DetailedUserInfoPage.HeaderDetailedUser);
         DetailedUserInfoPage detailedUserInfo = new DetailedUserInfoPage();
-        DetailedUserInfoFromUI = detailedUserInfo.ReturnDetailedUserInfoFromUI();
-        // Assert detailed info from UI with info of the user created with API
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.StaffCode, NewUser.Data.StaffCode);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.FullName, NewUser.Data.FullName);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.UserName, NewUser.Data.Username);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.DateOfBirth, NewUser.Data.DateOfBirth);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Gender, NewUser.Data.Gender);
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Type, NewUser.Data.Role);
-        // Delete white space in Location info from UI (Ha Noi to HaNoi)
-        Asserter?.AssertEquals(DetailedUserInfoFromUI.Location.Trim().Replace(" ",""), NewUser.Data.Location);
-
+        ActualDetailedUserInfoFromUI = detailedUserInfo.ReturnDetailedUserInfoFromUI();
+        // Verify detailed info from UI after cancelling editing match with user info
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.DateOfBirth, NewUser.Data.DateOfBirth);
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.Gender, NewUser.Data.Gender);
+        Asserter?.AssertEquals(ActualDetailedUserInfoFromUI.Type, NewUser.Data.Role);
     }
 }
 

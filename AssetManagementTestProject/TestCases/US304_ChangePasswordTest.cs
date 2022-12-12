@@ -6,9 +6,6 @@ namespace AssetManagementTestProject.TestCases;
 
 public class US304_ChangePasswordTest : NUnitWebTestSetup
 {
-    protected ChangePassword1stTimePage? ChangePw1stTime;
-    protected ChangePasswordPage? ChangePassword;
-
     [Test]
     public void TC01_UserCanChangePWSuccsessfullyForTheFirstTimeLogIn()
     {
