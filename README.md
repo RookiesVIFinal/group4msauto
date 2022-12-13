@@ -41,7 +41,6 @@ namespace AssetManagementTestProject.PageObj;
 
 public class LoginPage : WebDriverAction
 {
-    private readonly string _usernameTextLocator = "//label[contains(@title, 'Username')]";
     private readonly string _tfUsername = "//input[contains(@id, 'username')]";
     private readonly string _tfPassword = "//input[contains(@id, 'password')]";
     private readonly string _btnLogin = "//button[contains(@type, 'submit')]";
@@ -50,11 +49,11 @@ public class LoginPage : WebDriverAction
     {
     }
 
-    public void Login(string userName, string password)
+    public void Login(string username, string password)
     {
-        SendKeys(tfUsername, userName);
-        SendKeys(tfPassword, password);
-        Click(btnLogin);
+        SendKeys(_tfUsername, username);
+        SendKeys(_tfPassword, password);
+        Click(_btnLogin);
     }
 }
 ```
