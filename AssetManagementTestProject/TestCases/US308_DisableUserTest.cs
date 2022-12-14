@@ -8,16 +8,6 @@ namespace AssetManagementTestProject.TestCases;
 public class US308_DisableUserTest : NUnitWebTestSetup
 {
     [Test]
-    public void TC01_AdminDisableUserWithNoValidAssignmentSuccessfully()
-    {
-        /*
-        - Login flow until clicking
-        - Check if user can be disabled with API (ReturnCanDisableUser method in API services)
-        - Disable user UI
-        - Search staffcode and take screenshot
-        */
-    }
-    [Test]
     public void TC02_AdminCanCancelDisableAction()
     {
         LoginPage?.Login(Constant.ADMIN_USERNAME_HN, Constant.ADMIN_PASSWORD);

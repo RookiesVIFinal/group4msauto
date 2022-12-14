@@ -28,8 +28,6 @@ public class ManageUserPage : WebDriverAction
     public readonly string BtnSortAdminType = "//div[(text()= 'Admin') and (@class='ant-select-item-option-content')]";
     public readonly string BtnSortStaffType = "//div[(text()= 'Staff') and (@class='ant-select-item-option-content')]";
     public readonly string BtnType = "//span[text()= 'Type' and @class='ant-table-column-title']";
-    public readonly string HeaderDetailedUser = "//h1[text()='Detail User Information']";
-    public readonly string CellsDetailedInfo = "//td[contains(@class, 'font-bold')]/following-sibling::*";
     #region SEARCH
     #endregion
     #region DISABLE
@@ -37,7 +35,6 @@ public class ManageUserPage : WebDriverAction
     public readonly string BtnDisableOnPopUp = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-primary ant-btn-dangerous mr-2')])";
     public readonly string BtnCancelDisable = "(//button[(@type = 'button') and (@class='ant-btn css-1wismvm ant-btn-default')])";
     public string HeaderDisableUser = "//h1[text()='Are you sure?']";
-    public string TextDisableUser = "//p[text()='Do you want to disable this user?']";
     #endregion
     #region GRID
     public UserDataFromUI? UserActualData;
