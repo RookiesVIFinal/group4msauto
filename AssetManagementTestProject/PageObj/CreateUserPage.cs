@@ -65,29 +65,12 @@ public class CreateUserPage : WebDriverAction
     public void SelectUserType(string userType)
     {
         FindElementByXpath(DropBarType).Click();
-        if (userType == Constant.ROLE_ADMIN)
-        {
-            OptionType = string.Format(OptionType, Constant.ROLE_ADMIN);
-            Click(OptionType);
-
-        }
-        else if (userType == Constant.ROLE_STAFF)
-        {
-            OptionType = string.Format(OptionType, Constant.ROLE_STAFF);
-            Click(OptionType);
-        }
+        OptionType = string.Format(OptionType, userType);
+        Click(OptionType);
     }
     public void SelectGender(string gender)
     {
-        if (gender == Constant.GENDER_MALE)
-        {
-            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
+            BtnGender = string.Format(BtnGender, gender);
             FindElementByXpath(BtnGender).Click();
-        }
-        else
-        {
-            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
-            FindElementByXpath(BtnGender).Click();
-        }
     }
 }

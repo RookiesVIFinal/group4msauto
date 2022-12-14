@@ -14,6 +14,8 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected Asserter.Asserter? Asserter;
     protected ChangePassword1stTimePage? ChangePw1stTime;
     protected ChangePasswordPage? ChangePassword;
+    protected CreateAssetPage? CreateAssetPage;
+    protected CreateNewCategoryPage? CreateNewCategoryPage;
     protected CreateUserPage? CreateUserPage;
     protected DetailedUserInfoPage? DetailedUserInfoPage;
     protected EditUserInfoPage? EditUserInfoPage;
@@ -22,6 +24,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected LoginPage? LoginPage;
     protected LogoutPopupPage? LogoutPopup;
     protected ManageUserPage? ManageUserPage; 
+    protected ManageAssetPage? ManageAssetPage;
     #endregion
     #region INIT DAO + DATA FROM UI
     protected CreateUserDAO.CreateUserResponse? NewUser;
@@ -30,6 +33,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
     protected UserDataFromUI? UserDataFromUI;
+    protected CreateNewCategory? CreateNewCategory;
     #endregion
     #region INIT API SERVICES
     protected AssetManagementAPIServices? APIService;
@@ -45,7 +49,10 @@ public class NUnitWebTestSetup : NUnitTestSetup
         /// Initialize header pages
         ChangePw1stTime = new ChangePassword1stTimePage();
         ChangePassword = new ChangePasswordPage();
+        CreateAssetPage = new CreateAssetPage();
         CreateUserPage = new CreateUserPage();
+        CreateNewCategoryPage = new CreateNewCategoryPage();
+        CreateNewCategory = new CreateNewCategory();
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();
@@ -54,6 +61,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
         Asserter = new Asserter.Asserter();
         MenuBarLeft = new LeftMenuPage();
         ManageUserPage = new ManageUserPage();
+        ManageAssetPage = new ManageAssetPage();
         UserDataFromUI = new UserDataFromUI();
         /// Create data with API for testing
         AuthorizationService = new AssetManagementAPIServices();
