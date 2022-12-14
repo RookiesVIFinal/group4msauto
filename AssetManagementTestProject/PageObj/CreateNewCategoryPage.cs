@@ -9,12 +9,7 @@ public class CreateNewCategoryPage : WebDriverAction
     public readonly string TfCategoryName = "//input[@id='name']";
     public readonly string TfCategoryPrefix = "//input[contains(@id, 'prefix')]";
     public readonly string BtnSaveNewCategory = "(//span[text()='Save'])[2]";
-    public readonly string BtnChangePw = "//a[contains(@href, '/change-password')]";
-    public readonly string BtnCancel = "//span[contains(text(), 'Cancel')]";
     public readonly string BtnClose = "//button[@aria-label='Close']";
-    public readonly string HeaderCreateNewCategory = "//h1[text()='Create New Category']";
-    public readonly string PathCreateNewCategory = "create-category";
-    public readonly string TextChangePwSuccessfully = "//p[text()='New Category is created successfully!']";
     public readonly string BtnCreateNewCategory = "//span[text()='Add New Category']";
     public readonly string BtnCloseAfterCreateSuccess = "//span[text()='Close']";
     #endregion

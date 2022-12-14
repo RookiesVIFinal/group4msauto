@@ -16,7 +16,6 @@ public class CreateAssetPage : WebDriverAction
     public readonly string TfSpecification = "//textarea[contains(@id, 'formCreateAsset_specification')]";
     public string BtnState = "//span[text()='{0}']";
     public string OptionCategory = "//div[text()='{0}']";
-    public readonly string ScrollBarCategories = "//div[@class='ant-select-item ant-select-item-option']";
     #endregion
     #region ERROR MESSAGES
     public readonly string ErrorMsgInvalidName = "//div[text()='Asset name length should be 6 - 50 characters']";
