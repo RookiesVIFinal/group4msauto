@@ -33,6 +33,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
     protected DisableUserDAO.DisableUserResponse? DisableUserResponse;
     protected ViewUserDAO.ViewDetailedUser? ActualDetailedUserInfoFromUI;
     protected UserDataFromUI? UserDataFromUI;
+    protected CreateNewCategory? CreateNewCategory;
     #endregion
     #region INIT API SERVICES
     protected AssetManagementAPIServices? APIService;
@@ -51,6 +52,7 @@ public class NUnitWebTestSetup : NUnitTestSetup
         CreateAssetPage = new CreateAssetPage();
         CreateUserPage = new CreateUserPage();
         CreateNewCategoryPage = new CreateNewCategoryPage();
+        CreateNewCategory = new CreateNewCategory();
         DriverBaseAction = new WebDriverAction();
         DriverBaseAction.GoToUrl(Constant.BASE_URL);
         LoginPage = new LoginPage();

@@ -16,6 +16,7 @@ public class CreateAssetPage : WebDriverAction
     public readonly string TfSpecification = "//textarea[contains(@id, 'formCreateAsset_specification')]";
     public string BtnState = "//span[text()='{0}']";
     public string OptionCategory = "//div[text()='{0}']";
+    public readonly string ScrollBarCategories = "//div[@class='ant-select-item ant-select-item-option']";
     #endregion
     #region ERROR MESSAGES
     public readonly string ErrorMsgInvalidName = "//div[text()='Asset name length should be 6 - 50 characters']";
@@ -37,7 +38,6 @@ public class CreateAssetPage : WebDriverAction
     }
     public void SendInvalidInfo(CreateAssetDAO.CreateAssetUI assetInfo)
     {
-        /// TODO: Fix keys
         SendKeys(TfName, assetInfo.Name);
         SelectCategory(assetInfo.Category);
         SendKeys(TfSpecification,assetInfo.Specification);
@@ -61,26 +61,18 @@ public class CreateAssetPage : WebDriverAction
     }
     public void SelectCategory(string category)
     {
-        /// TODO: Do a switch statement here
         FindElementByXpath(DropBarCategory).Click();
-        if (category == "Laptop")
-        {
-            OptionCategory = string.Format(OptionCategory, category);
-            Click(OptionCategory);
-        }
+        OptionCategory = string.Format(OptionCategory, category);
+        Click(OptionCategory);
     }
     public void SelectState(string state)
     {
-        /// TODO: Fix format
-        if (state == "Available")
-        {
-            BtnState = string.Format(BtnState, state);
-            FindElementByXpath(BtnState).Click();
-        }
-        else
-        {
-            BtnState = string.Format(BtnState, "Not available");
-            FindElementByXpath(BtnState).Click();
-        }
+        BtnState = string.Format(BtnState, state);
+        FindElementByXpath(BtnState).Click();
+    }
+    public string ReturnCategory(string category)
+    {
+        OptionCategory = string.Format(OptionCategory, category);
+        return OptionCategory;
     }
 }

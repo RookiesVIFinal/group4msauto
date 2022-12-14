@@ -2,6 +2,10 @@
 {
     public class CreateNewCategory
     {
+        public string? ValidCategoryName;
+        public string? ValidCategoryPrefix;
+        public string? InvalidCategoryname;
+        public string? InvalidCategoryPrefix;
         private static Random random = new Random();
         public string CreateNewValidCategoryName(int length)
         {

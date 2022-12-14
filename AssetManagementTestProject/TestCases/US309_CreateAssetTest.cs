@@ -56,7 +56,9 @@ public class US309_CreateAssetTest : NUnitWebTestSetup
         DriverBaseAction?.Click(ManageAssetPage.BtnCreateNewAsset);
         DriverBaseAction?.FindElementByXpath(CreateAssetPage.DropBarCategory).Click();
         DriverBaseAction?.Click(CreateNewCategoryPage.BtnCreateNewCategory);
-        CreateNewCategoryPage?.CreateNewCategory();
+        CreateNewCategory.ValidCategoryName = CreateNewCategory.CreateNewValidCategoryName(6);
+        CreateNewCategory.ValidCategoryPrefix = CreateNewCategory.CreateNewValidCategoryPrefix(6);
+        CreateNewCategoryPage?.CreateNewCategory(CreateNewCategory.ValidCategoryName,CreateNewCategory.ValidCategoryPrefix);
     }
     [Test]
     public void TC05_AdminCreateNewCategoryUnsuccessfully()
@@ -68,7 +70,9 @@ public class US309_CreateAssetTest : NUnitWebTestSetup
         DriverBaseAction?.Click(ManageAssetPage.BtnCreateNewAsset);
         DriverBaseAction?.FindElementByXpath(CreateAssetPage.DropBarCategory).Click();
         DriverBaseAction?.Click(CreateNewCategoryPage.BtnCreateNewCategory);
-        CreateNewCategoryPage?.SendInvalidInfo();
+        CreateNewCategory.InvalidCategoryname = CreateNewCategory.CreateNewValidCategoryName(1);
+        CreateNewCategory.InvalidCategoryPrefix = CreateNewCategory.CreateInvalidCategoryPrefix(1);
+        CreateNewCategoryPage?.SendInvalidInfo(CreateNewCategory.InvalidCategoryname, CreateNewCategory.InvalidCategoryPrefix );
         Asserter?.AssertElementIsDisplayed(CreateNewCategoryPage.ErrorMsgInvalidName);
         Asserter?.AssertElementIsDisplayed(CreateNewCategoryPage.ErrorMsgInvalidPrefixOnlyUpperCase);
         Asserter?.AssertElementIsDisplayed(CreateNewCategoryPage.ErrorMsgInvalidPrefixInvalidLength);

@@ -16,7 +16,9 @@ public class CreateNewCategoryPage : WebDriverAction
     public readonly string PathCreateNewCategory = "create-category";
     public readonly string TextChangePwSuccessfully = "//p[text()='New Category is created successfully!']";
     public readonly string BtnCreateNewCategory = "//span[text()='Add New Category']";
+    public readonly string BtnCloseAfterCreateSuccess = "//span[text()='Close']";
     #endregion
+    public readonly string MsgCreateCategorySuccess = "//p[text()='New Category is created successfully!']";
     #region ERROR MESSAGES
     public readonly string ErrorMsgInvalidName = "//div[text()='Category name length should be 6 - 50 characters!']";
     public readonly string ErrorMsgInvalidPrefixOnlyUpperCase = "//div[text()='Prefix should contain only uppercase alphabetic characters!']";
@@ -27,18 +29,18 @@ public class CreateNewCategoryPage : WebDriverAction
     public CreateNewCategoryPage() : base()
     {
     }
-    public void CreateNewCategory()
+    public void CreateNewCategory(string validName, string validPrefix)
     {
-        CreateNewCategory createNewCategory = new CreateNewCategory();
-        SendKeys(TfCategoryName, createNewCategory.CreateNewValidCategoryName(6));
-        SendKeys(TfCategoryPrefix, createNewCategory.CreateNewValidCategoryPrefix(6));
+        SendKeys(TfCategoryName, validName);
+        SendKeys(TfCategoryPrefix, validPrefix);
         Click(BtnSaveNewCategory);
+        WaitToBeVisible(MsgCreateCategorySuccess);
+        Click(BtnCloseAfterCreateSuccess);
     }
-    public void SendInvalidInfo()
+    public void SendInvalidInfo(string invalidName, string invalidPrefix)
     {
-        CreateNewCategory createNewCategory = new CreateNewCategory();
-        SendKeys(TfCategoryName, createNewCategory.CreateNewValidCategoryName(1));
-        SendKeys(TfCategoryPrefix, createNewCategory.CreateInvalidCategoryPrefix(1));
+        SendKeys(TfCategoryName, invalidName);
+        SendKeys(TfCategoryPrefix, invalidPrefix);
     }
 }
 
