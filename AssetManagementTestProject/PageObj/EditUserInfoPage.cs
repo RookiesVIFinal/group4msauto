@@ -53,30 +53,13 @@ public class EditUserInfoPage : WebDriverAction
     public void EditUserType(string userType)
     {
         FindElementByXpath(DropBarType).Click();
-        if (userType == Constant.ROLE_ADMIN)
-        {
-            OptionType = string.Format(OptionType, Constant.ROLE_ADMIN);
-            FindElementByXpath(OptionType).Click();
-
-        }
-        else if (userType == Constant.ROLE_STAFF)
-        {
-            OptionType = string.Format(OptionType, Constant.ROLE_STAFF);
-            FindElementByXpath(OptionType).Click();
-        }
+        OptionType = string.Format(OptionType, userType);
+        FindElementByXpath(OptionType).Click();
     }
     public void EditGender(string gender)
     {
-        if (gender == Constant.GENDER_MALE)
-        {
-            BtnGender = string.Format(BtnGender, Constant.GENDER_MALE);
-            FindElementByXpath(BtnGender).Click();
-        }
-        else
-        {
-            BtnGender = string.Format(BtnGender, Constant.GENDER_FEMALE);
-            FindElementByXpath(BtnGender).Click();
-        }
+        BtnGender = string.Format(BtnGender, gender);
+        FindElementByXpath(BtnGender).Click();
     }
 }
 

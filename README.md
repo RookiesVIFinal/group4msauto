@@ -44,20 +44,19 @@ namespace AssetManagementTestProject.PageObj;
 
 public class LoginPage : WebDriverAction
 {
-    private readonly string usernameTextLocator = "//label[contains(@title, 'Username')]"; // for testing
-    private readonly string tfUsername = "//input[contains(@id, 'username')]";
-    private readonly string tfPassword = "//input[contains(@id, 'password')]";
-    private readonly string btnLogin = "//button[contains(@type, 'submit')]";
+    private readonly string _tfUsername = "//input[contains(@id, 'username')]";
+    private readonly string _tfPassword = "//input[contains(@id, 'password')]";
+    private readonly string _btnLogin = "//button[contains(@type, 'submit')]";
 
     public LoginPage() : base()
     {
     }
 
-    public void Login(string userName, string password)
+    public void Login(string username, string password)
     {
-        SendKeys_(tfUsername, userName);
-        SendKeys_(tfPassword, password);
-        Click(btnLogin);
+        SendKeys(_tfUsername, username);
+        SendKeys(_tfPassword, password);
+        Click(_btnLogin);
     }
 }
 ```
