@@ -34,7 +34,7 @@ public class US303_LogoutTest : NUnitWebTestSetup
     [Test]
     public void TC03_AdminCannotGoBackToHomePageAfterLogOut()
     {
-        LoginPage?.Login(LoginTestData.STAFF_USERNAME, LoginTestData.STAFF_PASSWORD);
+        LoginPage?.Login(NewAdminUsername, NewAdminPassword);
         ChangePw1stTime?.ChangePwFirstTimeLogIn(LoginTestData.STAFF_PASSWORD);
         DriverBaseAction?.WaitToBeVisible(HomePage.HeaderMyAssignment);
         Asserter?.AssertElementIsDisplayed(HomePage.HeaderMyAssignment);
