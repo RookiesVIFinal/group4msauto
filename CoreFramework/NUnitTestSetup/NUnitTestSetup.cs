@@ -18,15 +18,14 @@ public class NUnitTestSetup
     [SetUp]
     public void SetUp()
     {
-        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, 
-            TestContext.CurrentContext.Test.Name);
+        HtmlReport.CreateNode(TestContext.CurrentContext.Test.ClassName, TestContext.CurrentContext.Test.Name);
         WebDriverManager.InitDriver("chrome");
     }
 
     [TearDown]
     public void TearDown()
     {
-        WebDriverManager.CloseDriver();
+
         TestStatus testStatus = TestContext.CurrentContext.Result.Outcome.Status;
         if (testStatus.Equals(TestStatus.Passed))
         {
@@ -36,6 +35,7 @@ public class NUnitTestSetup
         {
             HtmlReport.Fail("FAILED: Test errors: " + TestContext.CurrentContext.Result.Message, DriverBaseAction.TakeScreenShot());
         }
+        WebDriverManager.CloseDriver();
     }
     [OneTimeTearDown]
     public void OneTimeTearDown()
