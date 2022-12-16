@@ -37,8 +37,7 @@ public class WebDriverManager
     public static void InitDriver(string browser, int? width = null, int? height = null)
     {
 
-        IWebDriver newDriver = CreateLocalDriver
-            (browser, width, height);
+        IWebDriver newDriver = CreateLocalDriver(browser, width, height);
 
         if (newDriver == null)
             throw new Exception($"{browser} browser is not supported");

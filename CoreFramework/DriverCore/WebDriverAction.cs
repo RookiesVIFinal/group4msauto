@@ -234,7 +234,7 @@ public class WebDriverAction
             Clear(locator);
             SendKeys(locator, key);
             HtmlReport.Pass("Clearing previous input in [" + locator + "] and " +
-                "replacing it with [" + key + "] passed", TakeScreenShot());
+                "replacing it with [" + key + "] passed");
         }
         catch (Exception excep)
         {
@@ -251,7 +251,6 @@ public class WebDriverAction
             IJavaScriptExecutor jsDriver = (IJavaScriptExecutor)Driver;
             string highlightJavascript = "arguments[0].style.border='2px solid red'";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { e });
-            HtmlReport.Pass("Highlight element [" + e.ToString() + "] passed", TakeScreenShot());
             return e;
 
         }
@@ -375,13 +374,13 @@ public class WebDriverAction
 
         if (e == null)
         {
-            HtmlReport.Fail("Element is not displayed");
+            HtmlReport.Fail("Element is not displayed", TakeScreenShot());
             return false;
         }
         else
         {
             HighlightElem(e);
-            HtmlReport.Pass("Element [" + e.Text + "] is displayed", TakeScreenShot());
+            HtmlReport.Pass("Element [" + e.Text + "] is displayed");
             return true;
         }
     }
@@ -400,7 +399,7 @@ public class WebDriverAction
             else
             {
                 HighlightElem(e);
-                HtmlReport.Pass("Element [" + e.Text + "] is displayed", TakeScreenShot());
+                HtmlReport.Pass("Element [" + e.Text + "] is displayed");
                 result.Add(true);
             }
         }
@@ -428,8 +427,7 @@ public class WebDriverAction
         {
             string actualUrl = GetUrl();
             actualUrl.Should().Match(expectedUrl);
-            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches with expected Url [" + expectedUrl + "]", 
-                TakeScreenShot());
+            HtmlReport.Pass("Actual Url [" + actualUrl + "] matches with expected Url [" + expectedUrl + "]");
         }
         catch (Exception excep)
         {
