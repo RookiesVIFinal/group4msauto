@@ -15,8 +15,7 @@ public class APIRequestLog : IMarkup
     public string GetMarkup()
     {
         string log = $@"
-                    <p>Request url: {Request.Url}</p>
-                    <p>Request body: {Response.responseBody}</p>
+                    <p>Response body: {Response.responseBody}</p>
                     <p>Response status: {Response.responseStatusCode}</p>";
         return log;
     }
